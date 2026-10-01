@@ -1,0 +1,357 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Solahana palette — derived from the logo (navy letters + metallic gold ₹) */
+    --navy-900: #0F1F45;   /* logo navy: headings, dark bands */
+    --navy-700: #1A3170;   /* primary actions */
+    --royal-600: #2F5BC7;  /* links, highlights, active states */
+    --royal-50: #EEF2FB;
+    --gold-500: #C9A04F;   /* logo gold: accents only */
+    --gold-300: #E6C27A;
+    --gold-700: #A67C2E;
+
+    --brand-blue: var(--royal-600);
+    --brand-blue-dark: var(--navy-700);
+    --brand-blue-tint: var(--royal-50);
+    --ink: var(--navy-900);
+    --text-body: #475569;
+    --text-muted: #5B6B84;
+    --line: #E4E8F0;
+    --bg-primary: #FFFFFF;
+    --bg-alt: #F7F8FB;
+    --accent-gold: var(--gold-500);
+
+    /* Signature gradients */
+    --grad-brand: linear-gradient(135deg, #24408A 0%, #1A3170 50%, #122552 100%);
+    --grad-text: linear-gradient(90deg, #2F5BC7 0%, #24408A 60%, #1A3170 100%);
+    --grad-gold: linear-gradient(135deg, #EAD08F 0%, #C9A04F 55%, #A67C2E 100%);
+    --grad-ink: linear-gradient(160deg, #0B1734 0%, #132B5E 55%, #0B1734 100%);
+
+    /* legacy names kept so older components still resolve */
+    --bg-secondary: #F6F8FC;
+    --bg-dark: #F6F8FC;
+    --bg-navy: #FFFFFF;
+    --gold-light: var(--gold-300);
+    --gold-dark: #1846B0;
+    --gold-warm: var(--gold-500);
+    --text-primary: #0B1B3F;
+    --text-secondary: #475569;
+    --border-gold: #E3E9F3;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-family: 'Manrope', 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-serif-luxury {
+    font-family: 'Sora', 'Manrope', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    color: inherit;
+  }
+
+  p, .font-inter, .font-manrope {
+    font-family: 'Manrope', 'Inter', sans-serif;
+    line-height: 1.65;
+  }
+
+  button, label, input, select, textarea, .font-sora, .font-manrope-medium {
+    font-family: 'Manrope', 'Sora', sans-serif;
+    font-weight: 500;
+  }
+
+  /* Former cursive script lines: now a clean, confident blue sans line */
+  .font-serif-script, .font-alex-brush {
+    font-family: 'Sora', 'Manrope', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.025em;
+    color: var(--brand-blue);
+    background: var(--grad-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Custom Utilities & Components (class names kept for compatibility) */
+
+.gold-script-text {
+  font-family: 'Sora', 'Manrope', sans-serif;
+  font-weight: 700;
+  color: var(--brand-blue);
+  display: inline-block;
+}
+
+/* Highlight word inside headings: solid brand blue (no gradient) */
+.gold-gradient-text {
+  color: var(--brand-blue);
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  font-style: normal;
+}
+
+.gold-gradient-bg {
+  background: var(--grad-brand);
+}
+
+.text-gold-gradient {
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Dark premium band (used for closing sections + footer) */
+.bg-ink-band {
+  background: var(--grad-ink);
+  position: relative;
+  isolation: isolate;
+}
+.bg-ink-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(640px 340px at 88% 0%, rgba(47, 91, 199, 0.30), transparent 70%),
+    radial-gradient(520px 300px at 0% 100%, rgba(201, 160, 79, 0.16), transparent 70%);
+  pointer-events: none;
+}
+
+.gold-gradient-border {
+  border: 1px solid var(--line);
+}
+
+/* Primary CTA: solid blue pill */
+.gold-glow-button {
+  background: var(--grad-brand) !important;
+  color: #FFFFFF !important;
+  font-family: 'Manrope', 'Sora', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  letter-spacing: 0.01em !important;
+  border-radius: 9999px !important;
+  padding: 0.875rem 2rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.625rem !important;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 1px 2px rgba(11, 27, 63, 0.12), 0 8px 20px rgba(26, 49, 112, 0.26) !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  border: none !important;
+}
+
+.gold-glow-button:hover {
+  background: linear-gradient(135deg, #2B4C9E 0%, #203B85 50%, #172D66 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 2px 4px rgba(11, 27, 63, 0.12), 0 14px 28px rgba(26, 49, 112, 0.32) !important;
+  color: #FFFFFF !important;
+}
+
+.gold-glow-button:active {
+  transform: translateY(0px) scale(0.98) !important;
+  box-shadow: 0 4px 10px rgba(26, 49, 112, 0.22) !important;
+}
+
+.gold-glow-button:focus-visible {
+  outline: 3px solid rgba(26, 49, 112, 0.35) !important;
+  outline-offset: 2px !important;
+}
+
+.gold-glow-button:disabled {
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Secondary outline button */
+.btn-luxury-outline {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-luxury-outline:hover {
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+  background: var(--brand-blue-tint);
+}
+
+/* Cards: white, hairline border, soft neutral shadow */
+.glass-card-light,
+.glass-card {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(11, 27, 63, 0.04), 0 8px 24px rgba(11, 27, 63, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card-light:hover,
+.glass-card:hover {
+  border-color: #CBD6EE;
+  box-shadow: 0 1px 2px rgba(11, 27, 63, 0.04), 0 14px 32px rgba(11, 27, 63, 0.08);
+}
+
+.glass-card-subtle {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  transition: all 0.2s ease;
+}
+
+/* Range sliders */
+input[type="range"] {
+  accent-color: var(--brand-blue);
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--brand-blue);
+  box-shadow: 0 0 0 4px rgba(26, 49, 112, 0.15);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.input-focus-glow:focus {
+  border-color: var(--brand-blue) !important;
+  box-shadow: 0 0 0 3px rgba(26, 49, 112, 0.18) !important;
+  outline: none !important;
+}
+
+/* Small pill badge */
+.gold-badge {
+  background: var(--royal-50);
+  border: 1px solid transparent;
+}
+
+/* 3D Perspective */
+.perspective-1000 {
+  perspective: 1200px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F7F8FB;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(91, 107, 132, 0.35);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(91, 107, 132, 0.6);
+}
+
+/* Glowing Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 6s infinite ease-in-out;
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 4s infinite ease-in-out;
+}
+
+@keyframes floatDelayed {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float-delayed {
+  animation: floatDelayed 5s infinite ease-in-out 1.5s;
+}
+
+@keyframes orbitSpinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 40s linear infinite;
+}
+
+.animate-orbit-spin-30s {
+  transform-origin: 290px 290px;
+  transform-box: fill-box;
+  animation: orbitSpinSlow 30s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-orbit-spin-30s {
+    animation: none !important;
+  }
+}
+
+/* Roadmap connector: slow flowing dashes */
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+.animate-dash-flow {
+  animation: dashFlow 1.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-dash-flow {
+    animation: none;
+  }
+}
