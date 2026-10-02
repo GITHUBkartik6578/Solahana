@@ -66,6 +66,22 @@ export default function ScrollToTopAndSEO() {
       timer = window.setTimeout(attempt, 120);
       return () => window.clearTimeout(timer);
     }
+    // Any other "#section-id" link: land on that section once the page has rendered it
+    if (hash) {
+      let tries = 0;
+      let timer;
+      const attempt = () => {
+        const el = document.getElementById(hash.slice(1));
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+        if (tries++ < 30) timer = window.setTimeout(attempt, 50);
+      };
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      timer = window.setTimeout(attempt, 120);
+      return () => window.clearTimeout(timer);
+    }
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname, hash]);
 
