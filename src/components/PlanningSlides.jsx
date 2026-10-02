@@ -96,7 +96,7 @@ const fadeLeft = {
 // One slide of the hero carousel; same frame and copy alignment as the main hero slide
 export function PlanningSlide({ slide }) {
   return (
-    <div className="relative flex flex-col xl:flex-row xl:items-center xl:h-[clamp(470px,46vw,640px)] bg-[#F6F8FB]">
+    <div className="relative flex flex-col xl:flex-row xl:items-center xl:h-[clamp(460px,calc(100svh-124px),620px)] bg-[#F6F8FB]">
       <div className="order-2 xl:order-none relative flex justify-center xl:justify-end h-[230px] sm:h-[300px] xl:h-full xl:absolute xl:right-0 xl:top-0 xl:w-[52%]">
         {/* Illustrations keep their own box so the edge fade lands on the picture itself; scenic ones fill the half */}
         <Link to={slide.route} aria-label={slide.label} className={slide.fit === 'cover' ? 'absolute inset-0' : 'h-full max-w-full'}>

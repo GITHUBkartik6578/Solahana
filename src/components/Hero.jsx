@@ -83,7 +83,7 @@ function OrbitLine() {
 
 function MainSlide() {
   return (
-    <div className="relative flex flex-col xl:block xl:h-[clamp(470px,46vw,640px)] bg-[#FEFCF8] overflow-hidden">
+    <div className="relative flex flex-col xl:block xl:h-[clamp(460px,calc(100svh-124px),620px)] bg-[#FEFCF8] overflow-hidden">
       {/* Artwork: anchored right at the image's own aspect so the hotspots stay on the circles */}
       <div className="order-2 relative w-full overflow-hidden aspect-square sm:aspect-[16/10] xl:aspect-[1599/782] xl:absolute xl:right-0 xl:top-0 xl:h-full xl:w-auto">
         {/* Box at the artwork's own aspect, cropped like object-position 76% on small screens,
@@ -112,20 +112,13 @@ function MainSlide() {
 
       <div className="order-1 relative z-10 pointer-events-none max-w-[1320px] mx-auto w-full h-full px-4 sm:px-6 lg:px-8 pt-8 pb-4 xl:py-0 xl:flex xl:items-center">
         <div className="@container pointer-events-auto w-full xl:w-[42%] text-center xl:text-left">
-          <p className="font-sora text-[11px] sm:text-sm font-semibold tracking-[0.14em] text-[#C58A1B] uppercase leading-relaxed">
-            A Complete Financial Plan
-            <br />
-            For a Brighter Tomorrow
-          </p>
-
-          <h1
+                    <h1
             style={serif}
-            className="mt-4 text-[length:clamp(32px,10.4cqw,66px)] font-bold leading-[1.08] tracking-[-0.01em] text-[#0F1F45]"
+            className="text-[length:clamp(26px,7.4cqw,58px)] font-bold leading-[1.08] tracking-[-0.01em] text-[#0F1F45]"
           >
             <span className="block">Your Money</span>
             <span className="block">Deserves a Plan.</span>
-            <span className="block text-[#C9922E]">Not Just an</span>
-            <span className="block text-[#C9922E]">Investment.</span>
+            <span className="block whitespace-nowrap text-[#C9922E]">Not Just an Investment.</span>
           </h1>
           <p style={serif} className="mt-2 text-[length:clamp(20px,5.4cqw,34px)] font-semibold text-[#0F1F45]">
             Every Goal, One Plan.
@@ -181,7 +174,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative bg-white pt-20 xl:pt-24 pb-10"
+      className="relative bg-white pt-20 pb-11"
       onPointerEnter={(e) => e.pointerType !== 'touch' && setPaused(true)}
       onPointerLeave={(e) => e.pointerType !== 'touch' && setPaused(false)}
     >
