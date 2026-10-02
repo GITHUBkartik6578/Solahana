@@ -4,8 +4,6 @@ import BackgroundEffects from './components/BackgroundEffects';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import TrustStrip from './components/TrustStrip';
-import WhatIsFinancialPlanning from './components/WhatIsFinancialPlanning';
-import SolahanaServices from './components/SolahanaServices';
 import ClientStories from './components/ClientStories';
 import FAQSection from './components/FAQSection';
 import FinalCTA from './components/FinalCTA';
@@ -67,9 +65,7 @@ function HomePage({ onOpenSearch }) {
       {/* Full First Screen Hero Section */}
       <Hero onOpenSearch={onOpenSearch} />
       <TrustStrip />
-      <WhatIsFinancialPlanning />
       <StagePlanningSection onOpenSearch={onOpenSearch} />
-      <SolahanaServices />
       <ClientStories />
       <FAQSection />
     </>

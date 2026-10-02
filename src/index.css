@@ -355,3 +355,18 @@ input[type="range"]::-webkit-slider-thumb:hover {
     animation: none;
   }
 }
+
+/* Home hero: dashed orbit connector slowly travels round its ellipse (one lap = pathLength 1764) */
+@keyframes orbit-flow {
+  to {
+    stroke-dashoffset: -1764;
+  }
+}
+.orbit-flow {
+  animation: orbit-flow 60s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit-flow {
+    animation: none;
+  }
+}
