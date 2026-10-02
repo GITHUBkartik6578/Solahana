@@ -96,7 +96,7 @@ const fadeAll = {
 // One slide of the hero carousel; same frame and copy alignment as the main hero slide
 export function PlanningSlide({ slide }) {
   return (
-    <div className="relative flex flex-col xl:flex-row xl:items-center xl:h-[clamp(460px,calc(100svh-124px),620px)] bg-[#FBF9F5]">
+    <div className="relative flex flex-col xl:flex-row xl:items-center xl:h-[clamp(460px,calc(100svh-124px),620px)] bg-[#FEFCF8]">
       {/* Illustrations share one box (same size and spot, right edge in line with the navbar);
           scenic photos instead run full height to the right edge and melt into the slide on the left */}
       <div
