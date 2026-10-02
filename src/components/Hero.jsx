@@ -4,6 +4,7 @@ import { ArrowRight, Shield, Users, BarChart3 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import heroOrbit from '../assets/hero-orbit.webp';
+import heroMascot from '../assets/hero-mascot.webp';
 import { PlanningSlide, slides as planningSlides } from './PlanningSlides';
 
 const AUTOPLAY_MS = 4500;
@@ -96,6 +97,15 @@ function MainSlide() {
             draggable="false"
           />
           <OrbitLine />
+          {/* Mascot is its own cut-out layer (lifted from the artwork) so it can wobble gently */}
+          <img
+            src={heroMascot}
+            alt=""
+            aria-hidden="true"
+            style={{ left: `${(892.6 / IMG_W) * 100}%`, top: `${(247.3 / IMG_H) * 100}%`, width: `${(258.6 / IMG_W) * 100}%` }}
+            className="mascot-shake absolute select-none pointer-events-none"
+            draggable="false"
+          />
           {/* Click targets sit in the same box as the artwork so they line up on every screen size */}
           {hotspots.map((h) => (
             <Link

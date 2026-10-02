@@ -370,3 +370,34 @@ input[type="range"]::-webkit-slider-thumb:hover {
     animation: none;
   }
 }
+
+/* Home hero: the coin mascot gives a light, friendly wobble every few seconds */
+@keyframes mascot-shake {
+  0%, 60%, 100% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-4deg);
+  }
+  20% {
+    transform: rotate(3.5deg);
+  }
+  30% {
+    transform: rotate(-2.5deg);
+  }
+  40% {
+    transform: rotate(1.5deg);
+  }
+  50% {
+    transform: rotate(-0.5deg);
+  }
+}
+.mascot-shake {
+  transform-origin: 50% 92%;
+  animation: mascot-shake 3s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mascot-shake {
+    animation: none;
+  }
+}
