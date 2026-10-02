@@ -78,6 +78,12 @@ export const slides = [
   },
 ];
 
+// Scenic photos run edge to edge on the right and fade out softly on their left side
+const fadeLeft = {
+  WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 30%)',
+  maskImage: 'linear-gradient(to right, transparent 0%, black 30%)',
+};
+
 // Softens the illustration edges so they blend into the slide background (scenic photos are shown as a rounded card instead).
 const fadeAll = {
   WebkitMaskImage:
@@ -91,20 +97,29 @@ const fadeAll = {
 export function PlanningSlide({ slide }) {
   return (
     <div className="relative flex flex-col xl:flex-row xl:items-center xl:h-[clamp(460px,calc(100svh-124px),620px)] bg-[#FBF9F5]">
-      {/* Every slide's artwork sits in the same box (same size, same spot, right edge in line with the navbar) */}
-      <div className="order-2 xl:order-none relative flex justify-center h-[230px] sm:h-[300px] xl:h-[88%] xl:aspect-[1.2] xl:justify-end xl:absolute xl:top-1/2 xl:-translate-y-1/2 xl:right-[max(2rem,calc((100vw-82.5rem)/2+2rem))]">
+      {/* Illustrations share one box (same size and spot, right edge in line with the navbar);
+          scenic photos instead run full height to the right edge and melt into the slide on the left */}
+      <div
+        className={`order-2 xl:order-none relative flex justify-center h-[230px] sm:h-[300px] xl:justify-end xl:absolute ${
+          slide.fit === 'cover'
+            ? 'xl:right-0 xl:top-0 xl:h-full xl:w-[52%]'
+            : 'xl:h-[88%] xl:aspect-[1.2] xl:top-1/2 xl:-translate-y-1/2 xl:right-[max(2rem,calc((100vw-82.5rem)/2+2rem))]'
+        }`}
+      >
         <Link
           to={slide.route}
           aria-label={slide.label}
-          className={`relative block h-full ${slide.fit === 'cover' ? 'w-full overflow-hidden rounded-[2rem] shadow-[0_18px_50px_rgba(15,31,69,0.18)]' : 'max-w-full'}`}
+          className={`block ${slide.fit === 'cover' ? 'absolute inset-0' : 'relative h-full max-w-full'}`}
         >
           <img
             src={slide.image}
             alt={slide.alt}
             className={`select-none ${
-              slide.fit === 'cover' ? 'absolute inset-0 h-full w-full object-cover object-center' : 'h-full w-auto max-w-full'
+              slide.fit === 'cover'
+                ? 'absolute inset-0 h-full w-full object-cover object-center xl:object-right'
+                : 'h-full w-auto max-w-full'
             }`}
-            style={slide.fit === 'cover' ? undefined : fadeAll}
+            style={slide.fit === 'cover' ? fadeLeft : fadeAll}
             draggable="false"
           />
         </Link>
