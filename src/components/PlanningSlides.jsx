@@ -1,5 +1,15 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import {
+  ArrowRight,
+  TrendingUp,
+  BarChart3,
+  Coins,
+  Users,
+  ShieldCheck,
+  Armchair,
+  Home,
+  FileSearch,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import financialImg from '../assets/slides/financial.webp';
@@ -23,14 +33,30 @@ export const slides = [
   },
   {
     id: 'investment',
-    fit: 'contain',
+    fit: 'scene',
     label: 'Investment Planning',
     line1: 'Grow Your Wealth',
     line2: 'with Discipline.',
     body: 'A goal-based investment plan to help you build, grow and preserve your wealth across market cycles.',
     route: '/investments',
     image: investmentImg,
-    alt: 'Person reviewing investments with a rising growth chart and shield',
+    alt: 'Investor on a mountain top looking through a telescope at the city, steps marked plan, invest, grow, secure',
+    // Artwork is 920 x 720 (design px); circles sit on one arc around the telescope
+    scene: {
+      w: 920,
+      h: 720,
+      arc: { cx: 546, cy: 292, r: 226, from: 182, to: 382 },
+      nodes: [
+        { label: ['Tax'], icon: FileSearch, x: 320, y: 283, to: '/tax-planning' },
+        { label: ['Real Estate'], icon: Home, x: 343, y: 183, to: '/investments' },
+        { label: ['Mutual', 'Funds'], icon: TrendingUp, x: 416, y: 100, to: '/invest/mutual-funds' },
+        { label: ['Equity'], icon: BarChart3, x: 533, y: 66, to: '/invest/domestic-equity' },
+        { label: ['Bonds'], icon: Coins, x: 652, y: 100, to: '/invest/bonds' },
+        { label: ['PMS / AIF'], icon: Users, x: 740, y: 182, to: '/investments' },
+        { label: ['Insurance'], icon: ShieldCheck, x: 772, y: 280, to: '/risk-management' },
+        { label: ['Retirement'], icon: Armchair, x: 745, y: 371, to: '/calculators/retirement' },
+      ],
+    },
   },
   {
     id: 'retirement',
@@ -93,12 +119,71 @@ const fadeAll = {
     'linear-gradient(to right, transparent 0%, black 28%, black 80%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)',
   maskComposite: 'intersect',
 };
+// Photo with its eight investment circles redrawn as cream, clickable badges.
+// The box keeps the artwork's own aspect, so circles stay on the arc at every size.
+function SceneArt({ slide }) {
+  const { w, h, arc, nodes } = slide.scene;
+  const pt = (deg) => {
+    const a = (deg * Math.PI) / 180;
+    return [arc.cx + arc.r * Math.cos(a), arc.cy + arc.r * Math.sin(a)];
+  };
+  const [sx, sy] = pt(arc.from);
+  const [ex, ey] = pt(arc.to);
+  return (
+    <div
+      className="@container relative w-full xl:w-auto xl:h-full"
+      style={{ aspectRatio: `${w} / ${h}` }}
+    >
+      <img
+        src={slide.image}
+        alt={slide.alt}
+        className="absolute inset-0 h-full w-full select-none pointer-events-none"
+        style={fadeLeft}
+        draggable="false"
+      />
+      <svg viewBox={`0 0 ${w} ${h}`} className="absolute inset-0 h-full w-full pointer-events-none" aria-hidden="true">
+        <path
+          d={`M ${sx} ${sy} A ${arc.r} ${arc.r} 0 1 1 ${ex} ${ey}`}
+          fill="none"
+          stroke="#E2BE72"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          style={{ filter: 'drop-shadow(0 0 4px rgba(255,214,140,0.9))' }}
+        />
+      </svg>
+      {nodes.map(({ label, icon: Icon, x, y, to }) => (
+        <Link
+          key={label.join(' ')}
+          to={to}
+          title={label.join(' ')}
+          style={{ left: `${(x / w) * 100}%`, top: `${(y / h) * 100}%` }}
+          className="absolute flex w-[10.4%] aspect-square -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-[#FFFBF3] text-center ring-2 ring-[#E2BE72] shadow-[0_0_18px_rgba(255,214,140,0.75),0_6px_16px_rgba(15,31,69,0.18)] transition-transform duration-300 hover:scale-110"
+        >
+          <Icon className="h-[32%] w-[32%] text-[#0F1F45]" strokeWidth={1.8} />
+          <span className="mt-[4%] font-inter text-[length:clamp(8px,1.5cqw,13px)] font-semibold leading-[1.1] text-[#0F1F45]">
+            {label.map((l) => (
+              <span key={l} className="block">
+                {l}
+              </span>
+            ))}
+          </span>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 // One slide of the hero carousel; same frame and copy alignment as the main hero slide
 export function PlanningSlide({ slide }) {
   return (
     <div className="relative flex flex-col xl:flex-row xl:items-center xl:h-[clamp(460px,calc(100svh-124px),620px)] bg-[#FEFCF8]">
       {/* Illustrations share one box (same size and spot, right edge in line with the navbar);
           scenic photos instead run full height to the right edge and melt into the slide on the left */}
+      {slide.fit === 'scene' ? (
+        <div className="order-2 xl:order-none relative flex justify-end xl:absolute xl:right-0 xl:top-0 xl:h-full">
+          <SceneArt slide={slide} />
+        </div>
+      ) : (
       <div
         className={`order-2 xl:order-none relative flex justify-center h-[230px] sm:h-[300px] xl:justify-end xl:absolute ${
           slide.fit === 'cover'
@@ -124,9 +209,10 @@ export function PlanningSlide({ slide }) {
           />
         </Link>
       </div>
+      )}
 
-      <div className="order-1 xl:order-none relative z-10 max-w-[1320px] mx-auto w-full px-4 sm:px-6 lg:px-8 pt-8 pb-4 xl:py-0">
-        <div className="@container w-full xl:w-[42%] text-center xl:text-left">
+      <div className="order-1 xl:order-none relative z-10 pointer-events-none max-w-[1320px] mx-auto w-full px-4 sm:px-6 lg:px-8 pt-8 pb-4 xl:py-0">
+        <div className="@container pointer-events-auto w-full xl:w-[42%] text-center xl:text-left">
           <p className="font-sora text-[11px] sm:text-sm font-semibold tracking-[0.14em] text-[#C58A1B] uppercase leading-relaxed">
             {slide.label}
           </p>
