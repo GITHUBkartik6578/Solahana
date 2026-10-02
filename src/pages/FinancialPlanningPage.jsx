@@ -1,5 +1,6 @@
 import React from 'react';
 import PlanningHero from '../components/planning/PlanningHero';
+import PlanningCoverage from '../components/planning/PlanningCoverage';
 import HealthCheck from '../components/planning/HealthCheck';
 import IsThisYou from '../components/planning/IsThisYou';
 import { TwelveMonths, WhatYouGet, HonestFit } from '../components/planning/PlanningStory';
@@ -12,6 +13,9 @@ export default function FinancialPlanningPage({ onOpenSearch }) {
     <div className="relative z-10">
       {/* 1. Hero — start from where the reader is */}
       <PlanningHero onBookConsultation={onOpenSearch} />
+
+      {/* 1b. The eight areas a financial plan covers */}
+      <PlanningCoverage />
 
       {/* 2. Free self-check — gives value before asking for anything */}
       <HealthCheck />
