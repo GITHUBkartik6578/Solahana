@@ -1,44 +1,58 @@
 import React from 'react';
 import PlanningHero from '../components/planning/PlanningHero';
 import PlanningCoverage from '../components/planning/PlanningCoverage';
-import HealthCheck from '../components/planning/HealthCheck';
 import IsThisYou from '../components/planning/IsThisYou';
 import { TwelveMonths, WhatYouGet, HonestFit } from '../components/planning/PlanningStory';
 import PlanningJourney from '../components/planning/PlanningJourney';
 import FirstThirtyDays from '../components/planning/FirstThirtyDays';
 import PlanningFAQ from '../components/planning/PlanningFAQ';
+import {
+  WhatIsFinancialPlanning,
+  KeyElements,
+  WhyPlanningImportant,
+  FactorsAffectingPlanning,
+  PlanningProcessGuide,
+  InvestmentInstruments,
+  PortfolioRestructuring,
+  PlanningBenefitsGrid,
+  WhoIsFinancialPlanner,
+  WhySolahanaPlanning,
+} from '../components/planning/PlanningGuide';
 
 export default function FinancialPlanningPage({ onOpenSearch }) {
   return (
     <div className="relative z-10">
-      {/* 1. Hero — start from where the reader is */}
+      {/* Hero — start from where the reader is */}
       <PlanningHero onBookConsultation={onOpenSearch} />
 
-      {/* 1b. The eight areas a financial plan covers */}
+      {/* The basics: what it is, what it covers, what it's built on */}
+      <WhatIsFinancialPlanning />
       <PlanningCoverage />
+      <KeyElements />
 
-      {/* 2. Free self-check — gives value before asking for anything */}
-      <HealthCheck />
-
-      {/* 3. The sentence that sounds like you, and our answer to it */}
+      {/* Why it matters, and what shapes your plan */}
+      <WhyPlanningImportant />
       <IsThisYou />
+      <FactorsAffectingPlanning />
 
-      {/* 4. What actually changes in a year */}
-      <TwelveMonths />
-
-      {/* 5. Your plan, stage by stage */}
+      {/* How it works: process, roadmap, tools, restructuring */}
+      <PlanningProcessGuide />
       <PlanningJourney />
+      <InvestmentInstruments />
+      <PortfolioRestructuring />
 
-      {/* 6. What you walk away with */}
+      {/* What you gain */}
+      <PlanningBenefitsGrid />
+      <TwelveMonths />
       <WhatYouGet />
 
-      {/* 7. What the first two weeks look like */}
+      {/* Planning with us */}
+      <WhoIsFinancialPlanner />
+      <WhySolahanaPlanning />
       <FirstThirtyDays />
-
-      {/* 8. Who we're right for, and who we're not */}
       <HonestFit />
 
-      {/* 9. Questions people actually ask */}
+      {/* Questions people actually ask */}
       <PlanningFAQ />
     </div>
   );
