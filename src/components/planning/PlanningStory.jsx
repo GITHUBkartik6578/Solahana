@@ -68,7 +68,7 @@ export function TwelveMonths() {
 /* What you actually walk away with                             */
 /* ----------------------------------------------------------- */
 const DELIVERABLES = [
-  { icon: FileText, title: 'Your written plan', desc: 'Not advice you half-remember from a call. A document with actions, amounts and dates.' },
+  { icon: FileText, title: 'Your written plan', desc: 'Not tips you half-remember from a call. A document with actions, amounts and dates.' },
   { icon: Wallet, title: 'A cash-flow map', desc: 'Where your money goes each month, and the exact amount that can go towards goals.' },
   { icon: ShieldCheck, title: 'An insurance review', desc: 'Every policy you own, checked: keep, stop, or top up, with the reason written down.' },
   { icon: Target, title: 'A goal sheet', desc: 'Each goal with its own amount, date and monthly number, so nothing competes.' },

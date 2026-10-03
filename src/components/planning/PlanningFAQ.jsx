@@ -11,7 +11,7 @@ export default function PlanningFAQ() {
       a: 'Everything your money touches: cashflow, emergency fund, goals, investments, taxes, insurance and your will.',
     },
     {
-      q: 'How is SOLAHANA different from traditional financial advisors?',
+      q: 'How is SOLAHANA different from someone selling financial products?',
       a: "We start with your goals and only suggest products that fit them. You won't be pushed into buying anything.",
     },
     {
@@ -28,7 +28,7 @@ export default function PlanningFAQ() {
     },
     {
       q: 'How do I get started with SOLAHANA Financial Planning?',
-      a: "Tap 'Get My Plan' or 'Book a Free Call', and an advisor will call you for a short, free discovery chat.",
+      a: "Tap 'Get My Plan' or 'Book a Free Call', and a planner will call you for a short, free discovery chat.",
     },
   ];
 
