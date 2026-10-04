@@ -84,7 +84,7 @@ export default function PlanningHero({ onBookConsultation }) {
             {/* Fiduciary Assurance Note */}
             <p className="text-xs text-[#64748B] flex items-center gap-1.5 pt-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              Goal-based planning • Plain-language advice • Yearly reviews
+              Goal-based planning • Plain-language planning • Yearly reviews
             </p>
           </motion.div>
 

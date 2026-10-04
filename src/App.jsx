@@ -4,6 +4,7 @@ import BackgroundEffects from './components/BackgroundEffects';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import TrustStrip from './components/TrustStrip';
+import HealthCheck from './components/planning/HealthCheck';
 import ClientStories from './components/ClientStories';
 import FAQSection from './components/FAQSection';
 import FinalCTA from './components/FinalCTA';
@@ -65,6 +66,7 @@ function HomePage({ onOpenSearch }) {
       {/* Full First Screen Hero Section */}
       <Hero onOpenSearch={onOpenSearch} />
       <TrustStrip />
+      <HealthCheck />
       <StagePlanningSection onOpenSearch={onOpenSearch} />
       <ClientStories />
       <FAQSection />
@@ -89,7 +91,7 @@ function AppContent() {
       <BackgroundEffects />
 
       {/* Sticky Navbar */}
-      <Navbar onOpenSearch={() => setSearchOpen(true)} />
+      <Navbar />
 
       {/* Main Content Area */}
       <main className="relative z-10">
