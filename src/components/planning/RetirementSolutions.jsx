@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Flame, Wallet, FileCheck, ShieldPlus, ArrowUpRight } from 'lucide-react';
+import { Flame, Wallet, FileCheck, ShieldPlus } from 'lucide-react';
 
 export default function RetirementSolutions() {
   const solutions = [
@@ -48,40 +48,39 @@ export default function RetirementSolutions() {
         </div>
 
         {/* Solutions Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-5xl mx-auto">
           {solutions.map((sol, idx) => {
             const Icon = sol.icon;
             return (
               <motion.div
-                key={idx}
+                key={sol.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="p-7 sm:p-8 rounded-3xl bg-[#F7F8FB] border border-[#E4E8F0] hover:border-[#CBD6EE] hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(11,27,63,0.09)] shadow-sm hover:shadow-lg transition-all duration-300 text-left flex flex-col justify-between group"
+                className="group relative h-full overflow-hidden rounded-3xl bg-white border border-[#E4E8F0] p-7 sm:p-8 text-left shadow-[0_2px_8px_rgba(15,31,69,0.04),0_14px_34px_rgba(15,31,69,0.06)] hover:-translate-y-1 hover:border-[#CBD6EE] hover:shadow-[0_20px_44px_rgba(15,31,69,0.12)] transition-all duration-300"
               >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-white border border-[#2F5BC7]/40 text-[#2F5BC7] group-hover:bg-[#1A3170] group-hover:text-white flex items-center justify-center transition-colors shadow-xs">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <span className="text-[10px] uppercase font-mono font-semibold px-2.5 py-1 rounded-full bg-white border border-[#E4E8F0] text-[#2F5BC7]">
+                {/* accent bar */}
+                <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#1A3170] via-[#2F5BC7] to-[#C9A04F] opacity-80 group-hover:opacity-100 transition-opacity" />
+                <span className="absolute -right-3 -bottom-6 text-[96px] leading-none font-serif-luxury font-bold text-[#F1F4FA] select-none pointer-events-none">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+
+                <div className="relative flex items-start gap-5">
+                  <span className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1A3170] to-[#0F1F45] text-[#E6C27A] flex items-center justify-center shrink-0 shadow-[0_8px_20px_rgba(26,49,112,0.25)] group-hover:scale-105 transition-transform">
+                    <Icon className="w-6 h-6" strokeWidth={1.75} />
+                  </span>
+                  <div className="min-w-0">
+                    <span className="inline-block text-[10px] font-bold uppercase tracking-[0.14em] px-2.5 py-1 rounded-full bg-[#FDF3E2] text-[#B07A16]">
                       {sol.tag}
                     </span>
+                    <h3 className="mt-3 text-xl font-bold text-[#0F1F45] font-sora leading-snug">
+                      {sol.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-[#475569] leading-relaxed">
+                      {sol.desc}
+                    </p>
                   </div>
-
-                  <h3 className="text-xl font-serif-luxury font-bold text-[#0F1F45] group-hover:text-[#2F5BC7] transition-colors mb-2">
-                    {sol.title}
-                  </h3>
-
-                  <p className="text-sm text-[#475569] leading-relaxed">
-                    {sol.desc}
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-[#E4E8F0]/60 flex items-center justify-between text-xs font-semibold text-[#0F1F45] group-hover:text-[#2F5BC7] transition-colors">
-                  <span>Explore Strategy</span>
-                  <ArrowUpRight className="w-4 h-4 text-[#2F5BC7] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
               </motion.div>
             );

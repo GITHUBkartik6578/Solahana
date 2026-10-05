@@ -11,6 +11,7 @@ import RetirementJourney from '../planning/RetirementJourney';
 import RetirementSolutions from '../planning/RetirementSolutions';
 import RetirementBenefits from '../planning/RetirementBenefits';
 import RetirementFAQ from '../planning/RetirementFAQ';
+import { RetirementPartner, RetirementCantWait, RetirementScenarios, RetirementClosingCTA } from '../planning/RetirementGuide';
 
 export default function RetirementCalculator() {
   const location = useLocation();
@@ -86,8 +87,14 @@ export default function RetirementCalculator() {
         onRequestCallback={scrollToConsultation}
       />
 
+      {/* Your partner in building a retirement plan */}
+      <RetirementPartner />
+
       {/* 2. WHY RETIREMENT PLANNING MATTERS */}
       <WhyRetirementMatters />
+
+      {/* Why retirement planning can't wait */}
+      <RetirementCantWait />
 
       {/* 3. RETIREMENT PLANNING JOURNEY (GOLD ROADMAP) */}
       <RetirementJourney />
@@ -97,6 +104,9 @@ export default function RetirementCalculator() {
 
       {/* 5. RETIREMENT BENEFITS SECTION */}
       <RetirementBenefits />
+
+      {/* What a plan can do: illustrative numbers */}
+      <RetirementScenarios />
 
       {/* 6. FREQUENTLY ASKED QUESTIONS */}
       <RetirementFAQ />
@@ -414,6 +424,8 @@ export default function RetirementCalculator() {
         </div>
       </section>
 
+      {/* Closing call to action, leads into the booking form */}
+      <RetirementClosingCTA />
     </div>
   );
 }

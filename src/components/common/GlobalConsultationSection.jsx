@@ -168,7 +168,7 @@ export default function GlobalConsultationSection() {
             </h2>
 
             <p className="text-sm sm:text-base text-[#AEBBD3] leading-relaxed font-normal">
-              Tell us a little about yourself. An advisor will call, understand your situation and suggest clear next steps. No obligation.
+              Tell us a little about yourself. A planner will call, understand your situation and suggest clear next steps. No obligation.
             </p>
 
             {/* Key Fiduciary Features */}
@@ -237,7 +237,7 @@ export default function GlobalConsultationSection() {
                     Consultation Request Received!
                   </h4>
                   <p className="text-xs sm:text-sm text-[#475569] max-w-sm mx-auto leading-relaxed">
-                    Thank you, <strong>{formData.fullName}</strong>. A dedicated SOLAHANA financial advisor will contact you at <strong>+91 {formData.phone}</strong> during your selected slot (<strong>{formData.preferredTime}</strong>).
+                    Thank you, <strong>{formData.fullName}</strong>. A dedicated SOLAHANA financial planner will contact you at <strong>+91 {formData.phone}</strong> during your selected slot (<strong>{formData.preferredTime}</strong>).
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}

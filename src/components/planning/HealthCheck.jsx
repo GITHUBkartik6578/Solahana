@@ -103,7 +103,7 @@ export default function HealthCheck() {
   const q = QUESTIONS[Math.min(step, QUESTIONS.length - 1)];
 
   return (
-    <section className="relative py-16 sm:py-20 lg:py-24 bg-[#F7F8FB] border-y border-[#E4E8F0]">
+    <section id="health-check" className="relative scroll-mt-[80px] py-16 sm:py-20 lg:py-24 bg-[#F7F8FB] border-y border-[#E4E8F0]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E4E8F0] text-[11px] font-bold uppercase tracking-[0.16em] text-[#2F5BC7]">
@@ -203,7 +203,7 @@ export default function HealthCheck() {
                           <span className="w-5 h-5 mt-0.5 rounded-full bg-[#2F5BC7] text-white flex items-center justify-center shrink-0">
                             <Check className="w-3 h-3" strokeWidth={3.5} />
                           </span>
-                          <span className="text-sm text-[#0F1F45]">The basics are covered. An advisor can help you fine-tune the rest.</span>
+                          <span className="text-sm text-[#0F1F45]">The basics are covered. A planner can help you fine-tune the rest.</span>
                         </li>
                       )}
                     </ul>
@@ -220,7 +220,7 @@ export default function HealthCheck() {
                   </div>
 
                   <p className="mt-5 text-[11px] text-[#8A96AB] leading-relaxed">
-                    This is a general self-check, not financial advice. Your answers stay on your device — nothing is sent anywhere.
+                    This is a general self-check, not a personal financial plan. Your answers stay on your device — nothing is sent anywhere.
                   </p>
                 </motion.div>
               )}

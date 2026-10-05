@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Search, 
+  HeartPulse,
   ChevronDown, 
   Menu, 
   X, 
@@ -27,7 +27,7 @@ import { useAuth } from '../context/AuthContext';
 import { scrollToConsultation } from '../utils/consultation';
 import solahanaLogo from '../assets/solahana-logo.png';
 
-export default function Navbar({ onOpenSearch }) {
+export default function Navbar() {
   const { user, logout, openAuthModal } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -59,6 +59,14 @@ export default function Navbar({ onOpenSearch }) {
     if (e) e.preventDefault();
     setMobileMenuOpen(false);
     setActiveDropdown(null);
+
+    // Money health check lives on the home page: scroll to it, or go there first
+    if (targetPath === 'health-check') {
+      const el = pathname === '/' && document.getElementById('health-check');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      else navigate('/#health-check');
+      return;
+    }
 
     // Booking: go straight to the consultation form (on this page if it's here)
     if (targetPath === 'contact') {
@@ -422,16 +430,6 @@ export default function Navbar({ onOpenSearch }) {
               </div>
             ) : (
               <>
-                {/* Search Icon Button */}
-                <button
-                  onClick={onOpenSearch}
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-[#2F5BC7]/30 hover:border-[#2F5BC7] text-[#0F1F45] hover:text-[#2F5BC7] shadow-sm flex items-center justify-center transition-all cursor-pointer hover:scale-105 shrink-0"
-                  title="Search financial goals, tools & blogs"
-                  aria-label="Search"
-                >
-                  <Search className="w-4 h-4" />
-                </button>
-
                 {/* Profile / Login Icon Button */}
                 {user ? (
                   <button
@@ -453,12 +451,23 @@ export default function Navbar({ onOpenSearch }) {
                   </button>
                 )}
 
-                {/* Primary Gold CTA Button (Pinned far right with 20-24px breathing space from profile icon) */}
+                {/* Primary CTA: free money health check on the home page */}
                 <button
-                  onClick={(e) => handleNavClick(e, 'contact')}
-                  className="gold-glow-button ml-5 lg:ml-5.5 xl:ml-6 px-4.5 lg:px-5 py-2.5 rounded-full text-xs font-bold text-white tracking-wide flex items-center space-x-2 group cursor-pointer shadow-md whitespace-nowrap shrink-0 hover:scale-[1.02] transition-transform"
+                  onClick={(e) => handleNavClick(e, 'health-check')}
+                  style={{ background: 'var(--grad-brand)' }}
+                  className="ml-5 lg:ml-5.5 xl:ml-6 group relative flex items-center gap-3 rounded-full pl-3 pr-5 py-1.5 text-left text-white shadow-[0_8px_22px_rgba(26,49,112,0.32)] whitespace-nowrap shrink-0 cursor-pointer transition-transform hover:scale-[1.03]"
                 >
-                  <span className="whitespace-nowrap">Book a Free Call</span>
+                  <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-white/15 ring-1 ring-white/25">
+                    <HeartPulse className="w-4 h-4 text-[#F1C877]" />
+                    <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+                      <span className="absolute inline-flex h-full w-full rounded-full bg-[#F1C877] opacity-75 animate-ping" />
+                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#F1C877]" />
+                    </span>
+                  </span>
+                  <span className="flex flex-col leading-tight">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#F1C877]">Free · 2 min · No sign-up</span>
+                    <span className="text-[13px] font-bold">Is your money healthy? Check now</span>
+                  </span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform shrink-0" />
                 </button>
               </>
@@ -468,15 +477,6 @@ export default function Navbar({ onOpenSearch }) {
 
           {/* Mobile Hamburger Button */}
           <div className="flex items-center space-x-2 lg:hidden">
-            {!isAdminRoute && (
-              <button
-                onClick={onOpenSearch}
-                className="w-9 h-9 rounded-full bg-white border border-[#2F5BC7]/30 text-[#2F5BC7] flex items-center justify-center"
-              >
-                <Search className="w-4 h-4" />
-              </button>
-            )}
-            
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="w-10 h-10 rounded-full bg-white border border-[#2F5BC7]/30 text-[#0F1F45] flex items-center justify-center shadow-sm"
@@ -655,11 +655,16 @@ export default function Navbar({ onOpenSearch }) {
                 )}
 
                 <button
-                  onClick={(e) => handleNavClick(e, 'contact')}
-                  className="w-full gold-glow-button text-center py-3 rounded-full text-xs font-bold text-white flex items-center justify-center gap-2"
+                  onClick={(e) => handleNavClick(e, 'health-check')}
+                  style={{ background: 'var(--grad-brand)' }}
+                  className="w-full rounded-full py-2.5 px-4 text-white flex items-center justify-center gap-3 shadow-md cursor-pointer"
                 >
-                  <span>Book a Free Call</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <HeartPulse className="w-5 h-5 text-[#F1C877] shrink-0" />
+                  <span className="flex flex-col items-start text-left leading-tight">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#F1C877]">Free · 2 min · No sign-up</span>
+                    <span className="text-[13px] font-bold">Is your money healthy? Check now</span>
+                  </span>
+                  <ArrowRight className="w-4 h-4 shrink-0" />
                 </button>
               </div>
             </motion.div>
