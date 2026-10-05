@@ -222,7 +222,14 @@ export default function Footer() {
 
       {/* Oversized brand wordmark */}
       <div aria-hidden="true" className="relative select-none pointer-events-none -mb-[3.2vw]">
-        <p className="text-center font-serif-luxury font-extrabold leading-[0.8] tracking-[-0.04em] text-[18vw] lg:text-[16vw] bg-gradient-to-b from-[#1A3170]/[0.13] via-[#1A3170]/[0.06] to-transparent bg-clip-text text-transparent">
+        <p
+          className="text-center font-serif-luxury font-extrabold leading-[0.8] tracking-[-0.04em] text-[18vw] lg:text-[16vw] bg-clip-text text-transparent [-webkit-background-clip:text] [mask-image:linear-gradient(to_bottom,black_0%,black_35%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_35%,transparent_100%)]"
+          style={{
+            // left half warm gold, right half light blue, meeting in a soft blend at the middle
+            backgroundImage:
+              'linear-gradient(to right, rgba(201,146,46,0.30) 0%, rgba(201,146,46,0.26) 44%, rgba(120,160,225,0.26) 56%, rgba(120,160,225,0.30) 100%)',
+          }}
+        >
           SOLAHANA
         </p>
       </div>
