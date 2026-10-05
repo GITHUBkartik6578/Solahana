@@ -17,6 +17,7 @@ import calculationRoutes from './routes/calculationRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
 import newsletterRoutes from './routes/newsletterRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import healthCheckRoutes from './routes/healthCheckRoutes.js';
 
 dotenv.config();
 
@@ -108,6 +109,7 @@ const onlyPost = (limiterFn) => (req, res, next) => (req.method === 'POST' ? lim
 app.use('/api/auth/login', authLimiter);
 app.use('/api/auth/register', authLimiter);
 app.use('/api/consultations', onlyPost(publicWriteLimiter));
+app.use('/api/health-check', (req, res, next) => (['POST', 'PATCH'].includes(req.method) ? publicWriteLimiter(req, res, next) : next()));
 app.use('/api/newsletter', onlyPost(publicWriteLimiter));
 app.use('/api/newsletters', onlyPost(publicWriteLimiter));
 
@@ -132,6 +134,7 @@ app.use('/api/blogs', blogRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/newsletters', newsletterRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/health-check', healthCheckRoutes);
 
 // 7. 404 & Global Error Middleware
 app.use(notFound);

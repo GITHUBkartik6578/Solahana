@@ -1,7 +1,12 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ArrowLeft, RotateCcw, Check, AlertTriangle } from 'lucide-react';
+import { ArrowRight, ArrowLeft, RotateCcw, Check, AlertTriangle, Loader2, Phone, User } from 'lucide-react';
 import { scrollToConsultation } from '../../utils/consultation';
+import healthCheckService from '../../services/healthCheckService';
+
+// Accepts "98765 43210", "+91 98765-43210" or "098765 43210" and returns the bare 10 digits
+const cleanPhone = (value) => String(value || '').replace(/[\s\-()]/g, '').replace(/^(\+?91|0)(?=[6-9][0-9]{9}$)/, '');
+const PHONE_OK = /^[6-9][0-9]{9}$/;
 
 /**
  * A short self-check. It is deliberately about habits and cover, never about
@@ -85,9 +90,15 @@ const verdictFor = (pct) => {
 };
 
 export default function HealthCheck() {
+  // "intro" collects name + phone first; "questions" is the test itself
+  const [stage, setStage] = useState('intro');
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
-  const done = step >= QUESTIONS.length;
+  const [form, setForm] = useState({ fullName: '', phone: '' });
+  const [formError, setFormError] = useState('');
+  const [starting, setStarting] = useState(false);
+  const attempt = useRef(null); // { id, token } from the backend
+  const done = stage === 'questions' && step >= QUESTIONS.length;
 
   const score = useMemo(() => Object.values(answers).reduce((a, b) => a + b, 0), [answers]);
   const pct = Math.round((score / MAX) * 100);
@@ -99,8 +110,51 @@ export default function HealthCheck() {
     window.setTimeout(() => setStep((s) => s + 1), 180);
   };
 
-  const reset = () => { setAnswers({}); setStep(0); };
+  // Retaking the check opens a fresh attempt, so the name/number stay filled in for convenience
+  const reset = () => { setAnswers({}); setStep(0); attempt.current = null; setFormError(''); setStage('intro'); };
   const q = QUESTIONS[Math.min(step, QUESTIONS.length - 1)];
+
+  const handleStart = async (e) => {
+    e.preventDefault();
+    const fullName = form.fullName.trim();
+    const phone = cleanPhone(form.phone);
+    if (fullName.length < 2) return setFormError('Please enter your name.');
+    if (!PHONE_OK.test(phone)) return setFormError('Please enter a valid 10-digit mobile number.');
+
+    setFormError('');
+    setStarting(true);
+    try {
+      attempt.current = await healthCheckService.start({ fullName, phone });
+      setStage('questions');
+    } catch (err) {
+      setFormError(err.response?.data?.message || 'We could not save your details just now. Please check your connection and try again.');
+    } finally {
+      setStarting(false);
+    }
+  };
+
+  // When the last answer is in, store the answers + score against this attempt (the lead itself is already saved)
+  useEffect(() => {
+    if (!done || !attempt.current) return;
+    const { id, token } = attempt.current;
+    attempt.current = null; // send once
+    healthCheckService
+      .complete({
+        id,
+        token,
+        answers: QUESTIONS.map((item) => {
+          const score = answers[item.id] ?? 0;
+          return {
+            questionId: item.id,
+            area: item.area,
+            question: item.q,
+            answer: item.options.find((o) => o.score === score)?.label || '',
+            score,
+          };
+        }),
+      })
+      .catch(() => {});
+  }, [done, answers]);
 
   return (
     <section id="health-check" className="relative scroll-mt-[80px] py-16 sm:py-20 lg:py-24 bg-[#F7F8FB] border-y border-[#E4E8F0]">
@@ -129,7 +183,97 @@ export default function HealthCheck() {
 
           <div className="p-6 sm:p-9">
             <AnimatePresence mode="wait">
-              {!done ? (
+              {stage === 'intro' ? (
+                <motion.form
+                  key="intro"
+                  onSubmit={handleStart}
+                  noValidate
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, x: -16 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#2F5BC7]">Before we begin</span>
+                  <h3 className="mt-4 text-[22px] sm:text-[26px] font-serif-luxury font-bold text-[#0F1F45] leading-snug">
+                    Tell us who this check is for
+                  </h3>
+                  <p className="mt-2 text-[15px] text-[#475569] leading-relaxed">
+                    Add your name and mobile number to start. We&apos;ll use them only to share your result and, if you want one, a free call.
+                  </p>
+
+                  <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="hc-name" className="block text-sm font-semibold text-[#0F1F45]">Your name</label>
+                      <div className="relative mt-2">
+                        <User className="w-4 h-4 text-[#8A96AB] absolute left-4 top-1/2 -translate-y-1/2" />
+                        <input
+                          id="hc-name"
+                          type="text"
+                          autoComplete="name"
+                          value={form.fullName}
+                          onChange={(e) => { setForm((f) => ({ ...f, fullName: e.target.value })); if (formError) setFormError(''); }}
+                          placeholder="e.g. Priya Sharma"
+                          maxLength={80}
+                          className="w-full rounded-xl border border-[#E4E8F0] bg-[#F7F8FB] pl-10 pr-4 py-3.5 text-[15px] text-[#0F1F45] placeholder-[#A7B1C2] focus:outline-none focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/25"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label htmlFor="hc-phone" className="block text-sm font-semibold text-[#0F1F45]">Mobile number</label>
+                      <div className="relative mt-2">
+                        <Phone className="w-4 h-4 text-[#8A96AB] absolute left-4 top-1/2 -translate-y-1/2" />
+                        <input
+                          id="hc-phone"
+                          type="tel"
+                          inputMode="numeric"
+                          autoComplete="tel-national"
+                          value={form.phone}
+                          onChange={(e) => { setForm((f) => ({ ...f, phone: e.target.value.replace(/[^\d+\s-]/g, '') })); if (formError) setFormError(''); }}
+                          placeholder="10-digit mobile number"
+                          maxLength={16}
+                          className="w-full rounded-xl border border-[#E4E8F0] bg-[#F7F8FB] pl-10 pr-4 py-3.5 text-[15px] text-[#0F1F45] placeholder-[#A7B1C2] focus:outline-none focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/25"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <AnimatePresence>
+                    {formError && (
+                      <motion.p
+                        role="alert"
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        className="mt-4 flex items-start gap-2 text-sm text-red-600"
+                      >
+                        <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />
+                        <span>{formError}</span>
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+
+                  <button
+                    type="submit"
+                    disabled={starting}
+                    className="mt-7 inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#0F1F45] px-8 py-3.5 text-sm sm:text-base font-semibold text-white shadow-[0_10px_26px_rgba(15,31,69,0.3)] hover:shadow-[0_14px_34px_rgba(15,31,69,0.42)] transition-all disabled:opacity-60 cursor-pointer"
+                  >
+                    {starting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Saving…</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Start my health check</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </>
+                    )}
+                  </button>
+                  <p className="mt-4 text-[11px] text-[#8A96AB] leading-relaxed">
+                    No account or password needed. We don&apos;t share your details with anyone else.
+                  </p>
+                </motion.form>
+              ) : !done ? (
                 <motion.div key={q.id} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.25 }}>
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#2F5BC7]">{q.area}</span>
@@ -220,7 +364,7 @@ export default function HealthCheck() {
                   </div>
 
                   <p className="mt-5 text-[11px] text-[#8A96AB] leading-relaxed">
-                    This is a general self-check, not a personal financial plan. Your answers stay on your device — nothing is sent anywhere.
+                    This is a general self-check, not a personal financial plan. Your name, number and answers are saved with us so we can follow up if you ask us to.
                   </p>
                 </motion.div>
               )}
