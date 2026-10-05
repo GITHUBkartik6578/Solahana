@@ -15,6 +15,7 @@ import {
   ArrowLeft,
   PieChart,
   Percent,
+  Hourglass,
   Layers,
   CheckCircle2,
   X,
@@ -94,9 +95,18 @@ export const CALCULATOR_META = [
     badge: 'Economics',
     category: 'Planning',
   },
+  {
+    id: 'life',
+    type: 'LIFE',
+    path: '/calculators/life',
+    title: 'Human Life Calculator',
+    shortDesc: 'See your exact age, weeks lived and a gentle statistical estimate of the time ahead.',
+    icon: Hourglass,
+    badge: 'Life Planning',
+    category: 'Planning',
+  },
 ];
-
-export default function CalculatorLayout({ title, subtitle, icon: HeaderIcon, onReset, getSavePayload, children }) {
+export default function CalculatorLayout({ title, subtitle, icon: HeaderIcon, onReset, getSavePayload, hideSave = false, children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, openAuthModal } = useAuth();
@@ -327,6 +337,8 @@ export default function CalculatorLayout({ title, subtitle, icon: HeaderIcon, on
                 </button>
               )}
 
+              {!hideSave && (
+                <>
               <button
                 onClick={handleInitiateSave}
                 className="px-4 py-2 rounded-xl gold-glow-button text-xs font-bold text-[#0F1F45] flex items-center gap-1.5 cursor-pointer shadow-lg"
@@ -342,6 +354,8 @@ export default function CalculatorLayout({ title, subtitle, icon: HeaderIcon, on
               >
                 <Share2 className="w-4 h-4 text-[#5A7FD6]" />
               </button>
+                </>
+              )}
             </div>
           </div>
         </div>

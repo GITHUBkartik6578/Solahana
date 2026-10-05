@@ -124,10 +124,9 @@ function MainSlide() {
         <div className="@container pointer-events-auto w-full xl:w-[42%] text-center xl:text-left">
                     <h1
             style={serif}
-            className="text-[length:clamp(26px,7.4cqw,58px)] font-bold leading-[1.08] tracking-[-0.01em] text-[#0F1F45]"
+            className="text-[length:clamp(22px,6cqw,50px)] font-bold leading-[1.1] tracking-[-0.01em] text-[#0F1F45]"
           >
-            <span className="block">Your Money</span>
-            <span className="block">Deserves a Plan.</span>
+            <span className="block whitespace-nowrap">Your Money Deserves a Plan.</span>
             <span className="block whitespace-nowrap text-[#C9922E]">Not Just an Investment.</span>
           </h1>
           <p style={serif} className="mt-2 text-[length:clamp(20px,5.4cqw,34px)] font-semibold text-[#0F1F45]">

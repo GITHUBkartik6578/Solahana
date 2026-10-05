@@ -42,6 +42,7 @@ import GoalPlanner from './components/calculators/GoalPlanner';
 import LumpsumCalculator from './components/calculators/LumpsumCalculator';
 import FdCalculator from './components/calculators/FdCalculator';
 import InflationCalculator from './components/calculators/InflationCalculator';
+import LifeCalculator from './components/calculators/LifeCalculator';
 import SavedCalculationsPage from './pages/calculators/SavedCalculationsPage';
 
 // Blog Module Imports
@@ -127,6 +128,7 @@ function AppContent() {
           <Route path="/calculators/lumpsum" element={<LumpsumCalculator />} />
           <Route path="/calculators/fd" element={<FdCalculator />} />
           <Route path="/calculators/inflation" element={<InflationCalculator />} />
+          <Route path="/calculators/life" element={<LifeCalculator />} />
 
           {/* Financial Blog CMS Routes */}
           <Route path="/blogs" element={<BlogsLandingPage />} />
