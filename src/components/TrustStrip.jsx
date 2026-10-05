@@ -78,7 +78,7 @@ export default function TrustStrip() {
           className="max-w-2xl mx-auto text-center mb-12 sm:mb-14"
         >
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EEF2FB] text-[11px] font-bold uppercase tracking-[0.16em] text-[#2F5BC7]">
-            <Sparkles className="w-3.5 h-3.5 text-[#C9A04F]" /> What we do
+            <Sparkles className="w-3.5 h-3.5 text-[#C9A04F]" /> Planning
           </span>
           <h2 className="mt-5 text-[30px] sm:text-[40px] font-serif-luxury font-bold text-[#0F1F45] leading-tight [text-wrap:balance]">
             Everything your money needs, <span className="gold-gradient-text">in one plan.</span>

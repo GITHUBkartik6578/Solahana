@@ -120,7 +120,7 @@ function MainSlide() {
         </div>
       </div>
 
-      <div className="order-1 relative z-10 pointer-events-none max-w-[1320px] mx-auto w-full h-full px-4 sm:px-6 lg:px-8 pt-8 pb-4 xl:py-0 xl:flex xl:items-center">
+      <div className="order-1 relative z-10 pointer-events-none max-w-[1320px] mx-auto w-full h-full px-4 sm:px-6 lg:px-8 pt-8 pb-4 xl:pt-24 xl:pb-0 xl:flex xl:items-center">
         <div className="@container pointer-events-auto w-full xl:w-[42%] text-center xl:text-left">
                     <h1
             style={serif}
@@ -129,32 +129,40 @@ function MainSlide() {
             <span className="block whitespace-nowrap">Your Money Deserves a Plan.</span>
             <span className="block whitespace-nowrap text-[#C9922E]">Not Just an Investment.</span>
           </h1>
-          <p style={serif} className="mt-2 text-[length:clamp(20px,5.4cqw,34px)] font-semibold text-[#0F1F45]">
-            Every Goal, One Plan.
-          </p>
+          <div className="mt-6 flex flex-wrap items-center justify-center xl:justify-start gap-3">
+            <Link
+              to="/contact"
+              className="group inline-flex items-center gap-3 rounded-full bg-[#0F1F45] px-8 py-3.5 text-sm sm:text-base font-medium text-white shadow-[0_10px_30px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_15px_40px_rgba(15,31,69,0.45)]"
+            >
+              <span>Get Started</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+            </Link>
 
-          <p className="mt-3 max-w-[520px] mx-auto xl:mx-0 text-sm sm:text-[17px] text-[#55607A] font-inter leading-relaxed">
-            From today&apos;s needs to tomorrow&apos;s dreams,
-            <br className="hidden sm:block" /> we help you plan, protect, invest and retire with confidence.
-          </p>
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById('health-check');
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              className="group inline-flex items-center gap-2.5 rounded-full border border-[#C9922E]/50 bg-white/80 px-5 py-3 text-sm font-semibold text-[#0F1F45] shadow-[0_6px_18px_rgba(201,146,46,0.18)] transition-all hover:border-[#C9922E] hover:bg-white cursor-pointer"
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C9922E] opacity-60" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#C9922E]" />
+              </span>
+              <span>Check your financial health now</span>
+            </button>
+          </div>
 
-          <Link
-            to="/contact"
-            className="group mt-6 inline-flex items-center gap-3 rounded-full bg-[#0F1F45] px-9 py-4 text-sm sm:text-base font-medium text-white shadow-[0_10px_30px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_15px_40px_rgba(15,31,69,0.45)]"
-          >
-            <span>Start Your Financial Plan</span>
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-          </Link>
-
-          <div className="mt-8 flex flex-wrap items-center justify-center xl:justify-start gap-x-5 gap-y-4">
+          <div className="mt-6 flex flex-wrap items-center justify-center xl:justify-start gap-x-4 gap-y-3">
             {trustPoints.map(({ icon: Icon, lines }, i) => (
               <React.Fragment key={lines[0]}>
-                {i > 0 && <span className="hidden sm:block h-10 w-px bg-[#C58A1B]/35" />}
-                <div className="flex items-center gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-b from-[#F3D58E] to-[#C08A2E] ring-2 ring-[#F6E3B4] shadow-[0_4px_12px_rgba(192,138,46,0.35)]">
-                    <Icon className="h-5 w-5 text-white" strokeWidth={2} fill="rgba(255,255,255,0.25)" />
+                {i > 0 && <span className="hidden sm:block h-7 w-px bg-[#C58A1B]/35" />}
+                <div className="flex items-center gap-2">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-b from-[#F3D58E] to-[#C08A2E] ring-2 ring-[#F6E3B4] shadow-[0_4px_12px_rgba(192,138,46,0.35)]">
+                    <Icon className="h-4 w-4 text-white" strokeWidth={2} fill="rgba(255,255,255,0.25)" />
                   </span>
-                  <span className="text-xs sm:text-sm font-medium leading-tight text-[#0F1F45] font-inter text-left">
+                  <span className="text-[11px] sm:text-xs font-medium leading-tight text-[#0F1F45] font-inter text-left">
                     {lines[0]}
                     <br />
                     {lines[1]}
@@ -199,7 +207,7 @@ export default function Hero() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 rounded-full bg-white/85 px-3.5 py-2 shadow-md backdrop-blur border border-[#2F5BC7]/20">
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3.5 py-2">
         {labels.map((label, i) => (
           <button
             key={label}
