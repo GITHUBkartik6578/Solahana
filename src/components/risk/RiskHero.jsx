@@ -40,9 +40,15 @@ export default function RiskHero({ onStartRiskPlanning, onRequestCallback }) {
               Risk Management
             </h1>
 
+            <h2 className="text-[22px] sm:text-[26px] lg:text-[30px] font-serif-luxury font-bold text-[#0F1F45] leading-[1.2] tracking-tight [text-wrap:balance]">
+              Protect the ones
+              <br />
+              <span className="gold-gradient-text" style={{ display: 'inline' }}>who matter most.</span>
+            </h2>
+
             {/* Short 2-line Description */}
             <p className="text-base sm:text-lg text-[#475569] leading-relaxed max-w-xl font-sans">
-              Protect your family's future, income, and accumulated wealth against unexpected life events with tailored term, health, and emergency planning.
+              The right cover for your family, so life’s surprises never become financial setbacks.
             </p>
 
             {/* Key Bullets */}

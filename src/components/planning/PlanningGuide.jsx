@@ -92,8 +92,8 @@ const DEFINITION_POINTS = [
 export function WhatIsFinancialPlanning() {
   return (
     <section className="relative py-14 sm:py-16 lg:py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-        <motion.div {...rise()}>
+      <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
+        <motion.div {...rise()} className="flex flex-col justify-center">
           <SectionHead
             align="left"
             eyebrow="What is financial planning?"
@@ -121,7 +121,7 @@ export function WhatIsFinancialPlanning() {
         </motion.div>
 
         {/* Visual: today → plan → tomorrow */}
-        <motion.div {...rise(1)} className="rounded-3xl bg-[#F7F8FB] border border-[#E4E8F0] p-6 sm:p-8">
+        <motion.div {...rise(1)} className="flex flex-col justify-between rounded-3xl bg-[#F7F8FB] border border-[#E4E8F0] p-6 sm:p-8 lg:max-w-[560px] lg:w-full lg:justify-self-end">
           {[
             { tag: 'Where you are', title: 'Today', items: ['Salary & savings', 'Loans & EMIs', 'Policies you hold'], tone: 'muted' },
             { tag: 'The bridge', title: 'Your plan', items: ['Monthly amounts', 'Right cover', 'Tax-smart choices'], tone: 'brand' },
@@ -129,7 +129,7 @@ export function WhatIsFinancialPlanning() {
           ].map((b, i, arr) => (
             <React.Fragment key={b.title}>
               <div
-                className={`rounded-2xl p-5 ${
+                className={`flex-1 flex flex-col justify-center rounded-2xl p-5 sm:p-6 ${
                   b.tone === 'brand'
                     ? 'bg-[#1A3170] text-white shadow-[0_14px_34px_rgba(26,49,112,0.25)]'
                     : 'bg-white border border-[#E4E8F0]'

@@ -33,9 +33,15 @@ export default function EstateHero({ onStartEstatePlanning, onRequestCallback })
               Estate Planning
             </h1>
 
+            <h2 className="text-[22px] sm:text-[26px] lg:text-[30px] font-serif-luxury font-bold text-[#0F1F45] leading-[1.2] tracking-tight [text-wrap:balance]">
+              Your values.
+              <br />
+              <span className="gold-gradient-text" style={{ display: 'inline' }}>Your legacy.</span>
+            </h2>
+
             {/* Short 2-line Description */}
             <p className="text-base sm:text-lg text-[#475569] leading-relaxed max-w-xl font-sans">
-              Formulate a seamless estate, Will, and private family trust strategy to transfer wealth without legal friction or family disputes.
+              A clear Will and family trust, so your wealth passes on without disputes.
             </p>
 
             {/* Key Bullets */}

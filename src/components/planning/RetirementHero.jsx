@@ -40,9 +40,15 @@ export default function RetirementHero({ onStartPlanning, onRequestCallback }) {
               Retirement Planning
             </h1>
 
+            <h2 className="text-[22px] sm:text-[26px] lg:text-[30px] font-serif-luxury font-bold text-[#0F1F45] leading-[1.2] tracking-tight [text-wrap:balance]">
+              Start small today.
+              <br />
+              <span className="gold-gradient-text" style={{ display: 'inline' }}>Retire free tomorrow.</span>
+            </h2>
+
             {/* Short 2-line Description */}
             <p className="text-base sm:text-lg text-[#475569] leading-relaxed max-w-xl font-sans">
-              Formulate a personalized retirement strategy with inflation protection, systematic withdrawal plans (SWP), and tax-optimized wealth longevity.
+              Whether you’re 25 or 55, your retirement can look exactly like this.
             </p>
 
             {/* Key Highlights Bullets */}

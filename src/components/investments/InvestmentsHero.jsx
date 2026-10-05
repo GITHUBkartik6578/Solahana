@@ -41,9 +41,15 @@ export default function InvestmentsHero({ onStartPlanning, onRequestCallback }) 
               Investment Planning
             </h1>
 
+            <h2 className="text-[22px] sm:text-[26px] lg:text-[30px] font-serif-luxury font-bold text-[#0F1F45] leading-[1.2] tracking-tight [text-wrap:balance]">
+              See further.
+              <br />
+              <span className="gold-gradient-text" style={{ display: 'inline' }}>Invest smarter.</span>
+            </h2>
+
             {/* Short 2-line Description */}
             <p className="text-base sm:text-lg text-[#475569] leading-relaxed max-w-xl font-sans">
-              Build a disciplined, zero-commission multi-asset investment portfolio tailored to your family milestones, risk profile, and wealth targets.
+              One portfolio across every asset, built around your family’s goals.
             </p>
 
             {/* Key Bullets */}

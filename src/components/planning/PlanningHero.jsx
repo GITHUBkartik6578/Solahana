@@ -26,16 +26,19 @@ export default function PlanningHero({ onBookConsultation }) {
             className="lg:col-span-6 text-left space-y-6"
           >
             {/* Page Title */}
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#2F5BC7]">Financial Planning</p>
-
-            <h1 className="text-[34px] sm:text-[42px] lg:text-[50px] font-serif-luxury font-bold text-[#0F1F45] leading-[1.12] tracking-tight [text-wrap:balance]">
-              You’re doing fine.
-              <span className="block gold-gradient-text">You just can’t see the whole picture.</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-bold text-[#0F1F45] leading-tight tracking-tight">
+              Financial Planning
             </h1>
+
+            <h2 className="text-[22px] sm:text-[26px] lg:text-[30px] font-serif-luxury font-bold text-[#0F1F45] leading-[1.2] tracking-tight [text-wrap:balance]">
+              Your money, finally
+              <br />
+              <span className="gold-gradient-text" style={{ display: 'inline' }}>in one clear plan.</span>
+            </h2>
 
             {/* Short 2-line Description */}
             <p className="text-base sm:text-lg text-[#475569] leading-relaxed max-w-xl font-sans">
-              Salary, savings, loans, insurance, taxes and goals sit in six different places. We bring them together into one plan, so you can finally see where you stand and what happens next.
+              Solahana brings salary, savings, tax and goals together so you see what happens next.
             </p>
 
             {/* Key Bullets */}
