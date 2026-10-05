@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, PhoneCall, ShieldCheck } from 'lucide-react';
-import FinancialPlanningHeroIllustration from '../illustrations/FinancialPlanningHeroIllustration';
+import heroArt from '../../assets/planning-hero.webp';
 
 export default function PlanningHero({ onBookConsultation }) {
   const scrollToConsultation = () => {
@@ -14,13 +14,9 @@ export default function PlanningHero({ onBookConsultation }) {
   };
 
   return (
-    <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 bg-gradient-to-b from-[#F7F8FB] via-[#FFFFFF] to-[#F7F8FB] overflow-hidden">
-      {/* Background Gold Ambient Glow */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#2F5BC7]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-10 w-80 h-80 bg-[#E4E8F0]/20 rounded-full blur-2xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+    <section className="relative pt-28 pb-14 sm:pt-32 sm:pb-20 bg-white overflow-hidden">
+      <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           
           {/* Left Column: Text Content */}
           <motion.div
@@ -93,9 +89,14 @@ export default function PlanningHero({ onBookConsultation }) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-6 flex justify-center"
+            className="lg:col-span-6 flex justify-center lg:justify-end"
           >
-            <FinancialPlanningHeroIllustration />
+            <img
+              src={heroArt}
+              alt="Person planning their finances on a laptop, surrounded by goals: home, education, retirement, insurance and savings"
+              className="w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[560px] h-auto select-none pointer-events-none"
+              draggable="false"
+            />
           </motion.div>
 
         </div>

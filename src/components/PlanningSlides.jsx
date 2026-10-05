@@ -142,7 +142,7 @@ const fadeLeft = {
 };
 
 // Softens the illustration edges so they blend into the slide background (scenic photos are shown as a rounded card instead).
-const fadeAll = {
+export const fadeAll = {
   WebkitMaskImage:
     'linear-gradient(to right, transparent 0%, black 28%, black 80%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)',
   WebkitMaskComposite: 'source-in',
@@ -152,7 +152,7 @@ const fadeAll = {
 };
 // Photo with its eight investment circles redrawn as cream, clickable badges.
 // The box keeps the artwork's own aspect, so circles stay on the arc at every size.
-function SceneArt({ slide }) {
+export function SceneArt({ slide }) {
   const { w, h, arc, nodes, size = 9.4, fade } = slide.scene;
   const pt = (deg) => {
     const a = (deg * Math.PI) / 180;
