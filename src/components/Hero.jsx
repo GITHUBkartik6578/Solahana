@@ -88,13 +88,13 @@ function MainSlide() {
     <div className="bg-[#FEFDF9] overflow-hidden">
       {/* ONE container, ONE grid: left copy and right artwork are siblings, both centred on the same axis */}
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-6 py-8 xl:grid-cols-2 xl:items-center xl:gap-10 xl:py-0 xl:h-[clamp(460px,calc(100svh-124px),620px)]">
-      <div className="w-full text-center xl:text-left">
+      <div className="@container w-full text-center xl:text-left">
                   <h1
           style={serif}
-          className="text-[length:clamp(32px,8.5vw,48px)] xl:text-[length:clamp(48px,4.8vw,68px)] font-bold leading-[1.1] tracking-[-0.01em] text-[#0F1F45] [text-wrap:balance]"
+          className="text-[length:clamp(20px,6.6cqw,64px)] font-bold leading-[1.12] tracking-[-0.01em] text-[#0F1F45]"
         >
-          <span className="block">Your Money Deserves a Plan.</span>
-          <span className="block text-[#C9922E]">Not Just an Investment.</span>
+          <span className="block whitespace-nowrap">Your Money Deserves a Plan.</span>
+          <span className="block whitespace-nowrap text-[#C9922E]">Not Just an Investment.</span>
         </h1>
         <div className="mt-8 flex flex-wrap items-center justify-center xl:justify-start gap-4">
           <Link
