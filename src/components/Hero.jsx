@@ -96,13 +96,13 @@ function MainSlide() {
           <span className="block whitespace-nowrap">Your Money Deserves a Plan.</span>
           <span className="block whitespace-nowrap text-[#C9922E]">Not Just an Investment.</span>
         </h1>
-        <div className="mt-8 flex flex-wrap items-center justify-center xl:justify-start gap-4">
+        <div className="mt-7 flex flex-wrap items-center justify-center xl:justify-start gap-3">
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-3 rounded-full bg-[#0F1F45] px-7 sm:px-9 py-4 sm:py-[18px] text-base sm:text-lg font-medium text-white shadow-[0_10px_30px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_15px_40px_rgba(15,31,69,0.45)]"
+            className="group inline-flex items-center gap-2.5 rounded-full bg-[#0F1F45] px-6 sm:px-7 py-3 sm:py-3.5 text-sm sm:text-base font-medium text-white shadow-[0_10px_30px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_15px_40px_rgba(15,31,69,0.45)]"
           >
             <span>Get Started</span>
-            <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1.5" />
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
           </Link>
 
           <button
@@ -111,7 +111,7 @@ function MainSlide() {
               const el = document.getElementById('health-check');
               if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }}
-            className="group inline-flex items-center gap-2.5 rounded-full border border-[#C9922E]/50 bg-white/80 px-5 sm:px-9 py-4 sm:py-[18px] text-sm sm:text-lg font-semibold text-[#0F1F45] shadow-[0_6px_18px_rgba(201,146,46,0.18)] transition-all hover:border-[#C9922E] hover:bg-white cursor-pointer"
+            className="group inline-flex items-center gap-2.5 rounded-full border border-[#C9922E]/50 bg-white/80 px-4 sm:px-6 py-3 sm:py-3.5 text-[13px] sm:text-[15px] font-semibold text-[#0F1F45] shadow-[0_6px_18px_rgba(201,146,46,0.18)] transition-all hover:border-[#C9922E] hover:bg-white cursor-pointer"
           >
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C9922E] opacity-60" />
@@ -121,15 +121,15 @@ function MainSlide() {
           </button>
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center xl:justify-start gap-x-7 gap-y-5">
+        <div className="mt-6 flex flex-wrap items-center justify-center xl:justify-start gap-x-5 gap-y-3">
           {trustPoints.map(({ icon: Icon, lines }, i) => (
             <React.Fragment key={lines[0]}>
-              {i > 0 && <span className="hidden sm:block h-10 w-px bg-[#C58A1B]/35" />}
-              <div className="flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-b from-[#F3D58E] to-[#C08A2E] ring-2 ring-[#F6E3B4] shadow-[0_4px_12px_rgba(192,138,46,0.35)]">
-                  <Icon className="h-5 w-5 text-white" strokeWidth={2} fill="rgba(255,255,255,0.25)" />
+              {i > 0 && <span className="hidden sm:block h-8 w-px bg-[#C58A1B]/35" />}
+              <div className="flex items-center gap-2.5">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-b from-[#F3D58E] to-[#C08A2E] ring-2 ring-[#F6E3B4] shadow-[0_4px_12px_rgba(192,138,46,0.35)]">
+                  <Icon className="h-4 w-4 text-white" strokeWidth={2} fill="rgba(255,255,255,0.25)" />
                 </span>
-                <span className="text-base font-medium leading-tight text-[#0F1F45] font-inter text-left">
+                <span className="text-[13px] sm:text-sm font-medium leading-tight text-[#0F1F45] font-inter text-left">
                   {lines[0]}
                   <br />
                   {lines[1]}
