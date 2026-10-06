@@ -60,7 +60,7 @@ const NETWORK = [
 const ABOUT = [
   { name: 'Our Approach', icon: Settings, key: 'about' },
   { name: 'Our Process', icon: Cog, key: 'our-process' },
-  { name: 'CWM Expertise', icon: Award, key: 'about' },
+  { name: 'Our Experts', icon: Award, key: 'our-experts' },
   { name: 'Knowledge Centre', icon: BookOpen, key: 'blogs' },
   { name: 'Contact Us', icon: Phone, key: 'contact' },
 ];
@@ -82,6 +82,7 @@ const pathMap = {
   about: '/about',
   'who-we-serve': '/who-we-serve',
   'our-process': '/our-process',
+  'our-experts': '/our-experts',
   'financial-planning': '/financial-planning',
   goals: '/goals',
   investments: '/investments',

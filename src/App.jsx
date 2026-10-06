@@ -20,6 +20,7 @@ import RiskManagementPage from './pages/RiskManagementPage';
 import EstatePlanningPage from './pages/EstatePlanningPage';
 import WhoWeServePage from './pages/WhoWeServePage';
 import OurProcessPage from './pages/OurProcessPage';
+import OurExpertsPage from './pages/OurExpertsPage';
 import { CalculatorsPage } from './pages/CalculatorsPage';
 import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
@@ -102,6 +103,7 @@ function AppContent() {
           <Route path="/about" element={<AboutPage onOpenSearch={() => setSearchOpen(true)} />} />
           <Route path="/who-we-serve" element={<WhoWeServePage />} />
           <Route path="/our-process" element={<OurProcessPage />} />
+          <Route path="/our-experts" element={<OurExpertsPage />} />
           <Route path="/financial-planning" element={<FinancialPlanningPage onOpenSearch={() => setSearchOpen(true)} />} />
           <Route path="/goals" element={<GoalsPlanningPage onOpenSearch={() => setSearchOpen(true)} />} />
           <Route path="/investments" element={<InvestmentsPage onOpenSearch={() => setSearchOpen(true)} />} />

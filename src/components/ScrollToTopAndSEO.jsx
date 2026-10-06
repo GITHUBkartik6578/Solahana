@@ -6,6 +6,7 @@ const ROUTE_TITLES = {
   '/': 'SOLAHANA — Fiduciary Wealth Management & Financial Planning',
   '/about': 'About Us — SOLAHANA Financial Planning',
   '/who-we-serve': 'Who We Serve — SOLAHANA Financial Planning',
+  '/our-experts': 'Our Experts — SOLAHANA Financial Planning',
   '/our-process': 'Our Process — SOLAHANA Financial Planning',
   '/financial-planning': 'Financial Planning Services — SOLAHANA',
   '/goals': 'Life Goal Roadmap — SOLAHANA',

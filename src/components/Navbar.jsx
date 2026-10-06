@@ -78,6 +78,7 @@ export default function Navbar() {
       'about': '/about',
       'who-we-serve': '/who-we-serve',
       'our-process': '/our-process',
+      'our-experts': '/our-experts',
       'planning': '/financial-planning',
       'solutions': '/financial-planning',
       'services': '/financial-planning',
@@ -175,7 +176,7 @@ export default function Navbar() {
 
           {/* ========================================================= */}
           {/* CENTER-RIGHT: FINTOO-STYLE NAVIGATION LINKS               */}
-          {/* ORDER: Planning ▼ | Invest ▼ | Who We Serve | Our Process | About Us */}
+          {/* ORDER: Planning ▼ | Invest ▼ | Who We Serve | Our Experts | Our Process | About Us */}
           {/* ========================================================= */}
           {isAdminRoute ? (
             <div className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full bg-[#2F5BC7]/10 border border-[#2F5BC7]/30 text-xs font-bold text-[#1A3170] whitespace-nowrap ml-auto mr-4">
@@ -307,6 +308,18 @@ export default function Navbar() {
               >
                 <span className="whitespace-nowrap">Who We Serve</span>
                 {pathname === '/who-we-serve' && (
+                  <motion.div layoutId="activeUnderline" className="absolute bottom-0 left-3 right-3 h-[2.5px] bg-[#1A3170] rounded-full" />
+                )}
+              </button>
+
+              <button
+                onClick={(e) => handleNavClick(e, 'our-experts')}
+                className={`px-3 py-2 rounded-lg transition-all relative whitespace-nowrap ${
+                  pathname === '/our-experts' ? 'text-[#2F5BC7] font-bold' : 'hover:text-[#2F5BC7]'
+                }`}
+              >
+                <span className="whitespace-nowrap">Our Experts</span>
+                {pathname === '/our-experts' && (
                   <motion.div layoutId="activeUnderline" className="absolute bottom-0 left-3 right-3 h-[2.5px] bg-[#1A3170] rounded-full" />
                 )}
               </button>
@@ -541,6 +554,13 @@ export default function Navbar() {
                     className="text-left py-2.5 px-3 rounded-xl hover:bg-[#F7F8FB] hover:text-[#2F5BC7] transition-colors"
                   >
                     Who We Serve
+                  </button>
+
+                  <button
+                    onClick={(e) => handleNavClick(e, 'our-experts')}
+                    className="text-left py-2.5 px-3 rounded-xl hover:bg-[#F7F8FB] hover:text-[#2F5BC7] transition-colors"
+                  >
+                    Our Experts
                   </button>
 
                   <button
