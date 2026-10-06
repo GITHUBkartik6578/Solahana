@@ -58,6 +58,7 @@ import InternationalEquityPage from './pages/invest/InternationalEquityPage';
 import IpoPage from './pages/invest/IpoPage';
 
 import LifeStagesSection from './components/LifeStagesSection';
+import InvestSolutions from './components/InvestSolutions';
 
 
 
@@ -67,6 +68,7 @@ function HomePage({ onOpenSearch }) {
       {/* Full First Screen Hero Section */}
       <Hero onOpenSearch={onOpenSearch} />
       <TrustStrip />
+      <InvestSolutions />
       <HealthCheck />
       <LifeStagesSection />
       <ClientStories />
