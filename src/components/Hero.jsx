@@ -111,11 +111,11 @@ function MainSlide() {
               const el = document.getElementById('health-check');
               if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }}
-            className="group inline-flex items-center gap-2.5 rounded-full border border-[#C9922E]/50 bg-white/80 px-4 sm:px-6 py-3 sm:py-3.5 text-[13px] sm:text-[15px] font-semibold text-[#0F1F45] shadow-[0_6px_18px_rgba(201,146,46,0.18)] transition-all hover:border-[#C9922E] hover:bg-white cursor-pointer"
+            className="group inline-flex items-center gap-2 rounded-full border border-[#C9922E]/50 bg-white/80 px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-[13px] font-semibold text-[#0F1F45] shadow-[0_6px_18px_rgba(201,146,46,0.18)] transition-all hover:border-[#C9922E] hover:bg-white cursor-pointer"
           >
-            <span className="relative flex h-2.5 w-2.5">
+            <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C9922E] opacity-60" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#C9922E]" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#C9922E]" />
             </span>
             <span>Check your financial health now</span>
           </button>
