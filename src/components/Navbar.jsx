@@ -176,7 +176,7 @@ export default function Navbar() {
 
           {/* ========================================================= */}
           {/* CENTER-RIGHT: FINTOO-STYLE NAVIGATION LINKS               */}
-          {/* ORDER: Planning ▼ | Invest ▼ | Pricing | Resources ▼ | Contact Us | About Us */}
+          {/* ORDER: Planning ▼ | Invest ▼ | Pricing | Who We Serve | Our Process | About Us */}
           {/* ========================================================= */}
           {isAdminRoute ? (
             <div className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full bg-[#2F5BC7]/10 border border-[#2F5BC7]/30 text-xs font-bold text-[#1A3170] whitespace-nowrap ml-auto mr-4">
@@ -305,59 +305,6 @@ export default function Navbar() {
                   <motion.div layoutId="activeUnderline" className="absolute bottom-0 left-3 right-3 h-[2.5px] bg-[#1A3170] rounded-full" />
                 )}
               </button>
-
-              {/* 4. Resources (With Dropdown) */}
-              <div 
-                className="relative"
-                onMouseEnter={() => handleMouseEnterDropdown('resources')}
-                onMouseLeave={handleMouseLeaveDropdown}
-              >
-                <button
-                  onClick={(e) => handleNavClick(e, 'resources')}
-                  className={`px-3 py-2 rounded-lg transition-all flex items-center gap-1 relative whitespace-nowrap ${
-                    pathname.startsWith('/blogs') || pathname.startsWith('/calculators')
-                      ? 'text-[#2F5BC7]'
-                      : 'hover:text-[#2F5BC7]'
-                  }`}
-                >
-                  <span className="whitespace-nowrap">Resources</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === 'resources' ? 'rotate-180 text-[#2F5BC7]' : ''}`} />
-                  {(pathname.startsWith('/blogs') || pathname.startsWith('/calculators')) && (
-                    <motion.div layoutId="activeUnderline" className="absolute bottom-0 left-3 right-3 h-[2.5px] bg-[#1A3170] rounded-full" />
-                  )}
-                </button>
-
-                <AnimatePresence>
-                  {activeDropdown === 'resources' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl border border-[#2F5BC7]/30 shadow-xl p-3 z-50 space-y-1"
-                    >
-                      {dropdownData.resources.map((item) => {
-                        const Icon = item.icon;
-                        return (
-                          <button
-                            key={item.title}
-                            onClick={(e) => handleNavClick(e, item.path)}
-                            className="w-full text-left p-2.5 rounded-xl hover:bg-[#F7F8FB] transition-colors flex items-start gap-3 group cursor-pointer"
-                          >
-                            <div className="p-2 rounded-lg bg-[#2F5BC7]/10 text-[#2F5BC7] group-hover:bg-[#1A3170] group-hover:text-white transition-colors shrink-0">
-                              <Icon className="w-4 h-4" />
-                            </div>
-                            <div>
-                              <div className="text-xs font-bold text-[#0F1F45] group-hover:text-[#2F5BC7] transition-colors">{item.title}</div>
-                              <div className="text-[11px] text-[#64748B] leading-snug">{item.desc}</div>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
 
               {/* Who We Serve / Our Process */}
               <button
@@ -604,12 +551,6 @@ export default function Navbar() {
                     Pricing
                   </button>
 
-                  <button
-                    onClick={(e) => handleNavClick(e, 'resources')}
-                    className="text-left py-2.5 px-3 rounded-xl hover:bg-[#F7F8FB] hover:text-[#2F5BC7] transition-colors"
-                  >
-                    Resources & Calculators
-                  </button>
 
                   <button
                     onClick={(e) => handleNavClick(e, 'who-we-serve')}
