@@ -59,6 +59,7 @@ import IpoPage from './pages/invest/IpoPage';
 
 import LifeStagesSection from './components/LifeStagesSection';
 import InvestSolutions from './components/InvestSolutions';
+import TaxLegacySection from './components/TaxLegacySection';
 
 
 
@@ -69,6 +70,7 @@ function HomePage({ onOpenSearch }) {
       <Hero onOpenSearch={onOpenSearch} />
       <TrustStrip />
       <InvestSolutions />
+      <TaxLegacySection />
       <HealthCheck />
       <LifeStagesSection />
       <ClientStories />
