@@ -131,7 +131,7 @@ export default function GlobalConsultationSection() {
   };
 
   return (
-    <section id="global-consultation-section" className="relative py-10 sm:py-14 lg:py-16 bg-ink-band overflow-x-hidden font-inter">
+    <section id="global-consultation-section" className="relative py-10 sm:py-12 lg:py-8 bg-ink-band overflow-x-hidden font-inter">
       {/* Background Subtle Luxury Accents */}
       {/* faint grid texture for depth */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.07] bg-[linear-gradient(rgba(255,255,255,0.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.6)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
@@ -143,7 +143,7 @@ export default function GlobalConsultationSection() {
             both columns anchored to the same top line so the shorter copy
             column never gets vertically centered against the much taller
             form and "cut" the visual rhythm. */}
-        <div className="grid grid-cols-1 lg:grid-cols-[0.382fr_0.618fr] gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.382fr_0.618fr] gap-8 lg:gap-12 items-center">
           
           {/* ========================================================= */}
           {/* LEFT COLUMN: HEADLINE, CONCISE COPY & FIDUCIARY HIGHLIGHTS */}
@@ -153,7 +153,7 @@ export default function GlobalConsultationSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-6 text-left lg:sticky lg:top-24 lg:self-start"
+            className="space-y-5 text-left"
           >
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-semibold uppercase tracking-widest text-[#E6C27A]">
               <Sparkles className="w-3.5 h-3.5 text-[#E6C27A]" />
@@ -172,7 +172,7 @@ export default function GlobalConsultationSection() {
             </p>
 
             {/* Key Fiduciary Features */}
-            <div className="pt-2 space-y-3.5">
+            <div className="pt-1 space-y-2.5">
               {[
                 { title: 'Private & Confidential', desc: 'Your details are used only to plan your call.', icon: ShieldCheck },
                 { title: 'A Plan Made for You', desc: 'Goals, tax, insurance and investments, looked at together.', icon: TrendingUp },
@@ -180,7 +180,7 @@ export default function GlobalConsultationSection() {
               ].map((item, idx) => {
                 const Icon = item.icon;
                 return (
-                  <div key={idx} className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/[0.05] border border-white/10">
+                  <div key={idx} className="flex items-start gap-3.5 p-3 rounded-2xl bg-white/[0.05] border border-white/10">
                     <div className="p-2 rounded-xl bg-[#C9A04F]/15 text-[#E6C27A] ring-1 ring-[#C9A04F]/30 shrink-0 mt-0.5">
                       <Icon className="w-4.5 h-4.5" />
                     </div>
@@ -204,22 +204,22 @@ export default function GlobalConsultationSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="min-w-0"
           >
-            <div className="bg-white rounded-3xl p-5 sm:p-6 lg:p-7 border border-white/60 shadow-[0_30px_80px_rgba(3,10,30,0.45)] relative overflow-hidden max-w-[440px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <div className="bg-white rounded-3xl p-5 sm:p-6 border border-white/60 shadow-[0_30px_80px_rgba(3,10,30,0.45)] relative overflow-hidden max-w-[600px] w-full mx-auto lg:mx-0 lg:ml-auto">
 
               {/* Subtle Top Accent Bar */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#E6C27A] via-[#C9A04F] to-[#A67C2E]" />
 
               {/* Prominent SOLAHANA Logo Header */}
-              <div className="text-center mb-4">
+              <div className="text-center mb-3">
                 <img
                   src={solahanaLogo}
                   alt="SOLAHANA"
-                  className="h-10 sm:h-11 w-auto mx-auto object-contain mb-2.5"
+                  className="h-8 w-auto mx-auto object-contain mb-1"
                 />
                 <h3 className="font-serif-luxury text-lg sm:text-xl font-bold text-[#0F1F45]">
                   Book Free Consultation
                 </h3>
-                <p className="text-xs text-[#64748B] mt-1">
+                <p className="text-[11px] sm:text-xs text-[#64748B] mt-0.5">
                   Takes less than a minute. We'll call you at the time you choose.
                 </p>
               </div>
@@ -241,16 +241,16 @@ export default function GlobalConsultationSection() {
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="mt-4 px-6 py-2.5 rounded-full border border-[#2F5BC7] text-xs font-bold text-[#1A3170] hover:bg-[#1A3170] hover:text-white transition-all cursor-pointer"
+                    className="mt-4 px-6 py-2 rounded-full border border-[#2F5BC7] text-xs font-bold text-[#1A3170] hover:bg-[#1A3170] hover:text-white transition-all cursor-pointer"
                   >
                     Submit Another Request
                   </button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-3.5 text-left">
+                <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-2.5 text-left">
                   
                   {errorMsg && (
-                    <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs flex items-center gap-2">
+                    <div className="sm:col-span-2 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs flex items-center gap-2">
                       <AlertCircle className="w-4 h-4 shrink-0 text-red-500" />
                       <span>{errorMsg}</span>
                     </div>
@@ -258,7 +258,7 @@ export default function GlobalConsultationSection() {
 
                   {/* 1. Full Name */}
                   <div>
-                    <label className="block text-xs font-semibold text-[#0F1F45] mb-1.5">
+                    <label className="block text-xs font-semibold text-[#0F1F45] mb-1">
                       Full Name *
                     </label>
                     <div className="relative">
@@ -270,14 +270,14 @@ export default function GlobalConsultationSection() {
                         placeholder="e.g. Ananya Sharma"
                         value={formData.fullName}
                         onChange={handleChange}
-                        className="w-full px-3.5 py-2.5 pl-10 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] transition-all"
+                        className="w-full px-3.5 py-2 pl-10 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] transition-all"
                       />
                     </div>
                   </div>
 
                   {/* 2. Mobile Number (+91) */}
                   <div>
-                    <div className="flex items-center justify-between mb-1.5">
+                    <div className="flex items-center justify-between mb-1">
                       <label className="text-xs font-semibold text-[#0F1F45]">
                         Mobile Number *
                       </label>
@@ -301,7 +301,7 @@ export default function GlobalConsultationSection() {
                         value={formData.phone}
                         onChange={handlePhoneChange}
                         onBlur={() => setPhoneTouched(true)}
-                        className={`w-full px-3.5 py-2.5 pl-16 rounded-xl text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] transition-all border ${
+                        className={`w-full px-3.5 py-2 pl-16 rounded-xl text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] transition-all border ${
                           phoneTouched
                             ? isPhoneValid
                               ? 'border-emerald-500 focus:ring-2 focus:ring-emerald-500/20'
@@ -314,7 +314,7 @@ export default function GlobalConsultationSection() {
 
                   {/* 3. Email Address */}
                   <div>
-                    <label className="block text-xs font-semibold text-[#0F1F45] mb-1.5">
+                    <label className="block text-xs font-semibold text-[#0F1F45] mb-1">
                       Email Address *
                     </label>
                     <div className="relative">
@@ -326,15 +326,14 @@ export default function GlobalConsultationSection() {
                         placeholder="ananya@example.com"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-3.5 py-2.5 pl-10 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] transition-all"
+                        className="w-full px-3.5 py-2 pl-10 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] transition-all"
                       />
                     </div>
                   </div>
 
                   {/* 4. City & Planning Interest */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                     <div>
-                      <label className="block text-xs font-semibold text-[#0F1F45] mb-1.5">
+                      <label className="block text-xs font-semibold text-[#0F1F45] mb-1">
                         City *
                       </label>
                       <div className="relative">
@@ -346,20 +345,20 @@ export default function GlobalConsultationSection() {
                           placeholder="e.g. Mumbai"
                           value={formData.city}
                           onChange={handleChange}
-                          className="w-full px-3.5 py-2.5 pl-10 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] transition-all"
+                          className="w-full px-3.5 py-2 pl-10 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] transition-all"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-[#0F1F45] mb-1.5">
+                      <label className="block text-xs font-semibold text-[#0F1F45] mb-1">
                         Planning Interest *
                       </label>
                       <select
                         name="goal"
                         value={formData.goal}
                         onChange={handleChange}
-                        className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] cursor-pointer transition-all"
+                        className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] cursor-pointer transition-all"
                       >
                         {planningInterests.map(interest => (
                           <option key={interest} value={interest}>
@@ -368,11 +367,10 @@ export default function GlobalConsultationSection() {
                         ))}
                       </select>
                     </div>
-                  </div>
 
                   {/* 5. Preferred Callback Time */}
                   <div>
-                    <label className="block text-xs font-semibold text-[#0F1F45] mb-1.5 flex items-center gap-1.5">
+                    <label className="block text-xs font-semibold text-[#0F1F45] mb-1 flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5 text-[#2F5BC7]" />
                       <span>Preferred Callback Time</span>
                     </label>
@@ -380,7 +378,7 @@ export default function GlobalConsultationSection() {
                       name="preferredTime"
                       value={formData.preferredTime}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] cursor-pointer transition-all"
+                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] cursor-pointer transition-all"
                     >
                       {timeSlots.map(slot => (
                         <option key={slot} value={slot}>
@@ -391,22 +389,22 @@ export default function GlobalConsultationSection() {
                   </div>
 
                   {/* 6. Message (Optional) */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#0F1F45] mb-1.5">
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-semibold text-[#0F1F45] mb-1">
                       Message (Optional)
                     </label>
                     <textarea
                       name="message"
-                      rows={2}
+                      rows={1}
                       placeholder="Specify any questions regarding retirement, SIP, tax or investments..."
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] resize-none transition-all"
+                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] resize-none transition-all"
                     />
                   </div>
 
                   {/* Checkboxes */}
-                  <div className="space-y-2 pt-1 text-[11px] text-[#475569]">
+                  <div className="sm:col-span-2 flex flex-wrap gap-x-5 gap-y-1.5 text-[11px] text-[#475569]">
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="checkbox"
@@ -433,11 +431,11 @@ export default function GlobalConsultationSection() {
                   </div>
 
                   {/* Single Strong CTA Button */}
-                  <div className="pt-2">
+                  <div className="sm:col-span-2 pt-1">
                     <button
                       type="submit"
                       disabled={loading}
-                      className="gold-glow-button w-full py-3.5 rounded-full text-white font-bold text-sm sm:text-base tracking-wide flex items-center justify-center space-x-2 cursor-pointer shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
+                      className="gold-glow-button w-full py-3 rounded-full text-white font-bold text-sm sm:text-base tracking-wide flex items-center justify-center space-x-2 cursor-pointer shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
                     >
                       {loading ? (
                         <Loader2 className="w-4.5 h-4.5 animate-spin text-white" />
@@ -446,7 +444,7 @@ export default function GlobalConsultationSection() {
                       )}
                       <span>{loading ? 'Submitting Details...' : 'Book Free Consultation'}</span>
                     </button>
-                    <p className="text-[11px] text-center text-[#64748B] mt-2.5 flex items-center justify-center gap-1">
+                    <p className="text-[11px] text-center text-[#64748B] mt-2 flex items-center justify-center gap-1">
                       <Lock className="w-3.5 h-3.5 text-[#2F5BC7]" />
                       <span>Your details stay private. No spam.</span>
                     </p>
