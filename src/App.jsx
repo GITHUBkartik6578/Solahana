@@ -6,7 +6,6 @@ import Hero from './components/Hero';
 import TrustStrip from './components/TrustStrip';
 import HealthCheck from './components/planning/HealthCheck';
 import ClientStories from './components/ClientStories';
-import FAQSection from './components/FAQSection';
 import FinalCTA from './components/FinalCTA';
 import GlobalConsultationSection from './components/common/GlobalConsultationSection';
 import SolahanaChat from './components/chat/SolahanaChat';
@@ -73,7 +72,6 @@ function HomePage({ onOpenSearch }) {
       <HealthCheck />
       <LifeStagesSection />
       <ClientStories />
-      <FAQSection />
     </>
   );
 }
