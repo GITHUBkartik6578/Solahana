@@ -17,9 +17,8 @@ import {
   Sparkles,
   Award,
   Scroll,
-  BarChart3,
+  Briefcase,
   Landmark,
-  Rocket,
   Globe
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -124,11 +123,12 @@ export default function Navbar() {
       { title: 'Estate Planning', path: '/estate-planning', desc: 'Legacy, Will & Private Family Trust succession', icon: Scroll },
     ],
     invest: [
-      { title: 'Mutual Funds', path: '/invest/mutual-funds', desc: 'Direct SIP & Lumpsum equity/debt schemes', icon: TrendingUp },
-      { title: 'Bonds', path: '/invest/bonds', desc: 'High-yield government & corporate bonds', icon: Landmark },
-      { title: 'Domestic Equity', path: '/invest/domestic-equity', desc: 'Curated Indian equity model portfolios', icon: BarChart3 },
-      { title: 'International Equity', path: '/invest/international-equity', desc: 'Global stock portfolios & US equity exposure', icon: Globe },
-      { title: 'IPO', path: '/invest/ipo', desc: 'Early bidding in high-growth listings', icon: Rocket },
+      { title: 'Mutual Funds & SIPs', path: '/invest/mutual-funds', desc: 'Goal-based wealth creation, liquid funds, and core equity/debt allocations.', icon: TrendingUp },
+      { title: 'PMS, AIF & SIF', sub: 'Alternative & Strategic Funds', path: '/investments', desc: 'High-alpha portfolio management services and institutional alternative funds.', icon: Briefcase },
+      { title: 'Real Estate, REITs & Fractional Ownership', path: '/investments', desc: 'Commercial real estate investments, REITs (Real Estate Investment Trusts), and high-yield fractional ownership opportunities.', icon: Building2 },
+      { title: 'Bonds, NCDs & Fixed Income', path: '/invest/bonds', desc: 'Tax-free bonds, high-yield corporate bonds, and fixed deposits for secure cash flows.', icon: Landmark },
+      { title: 'Equities, International Investing & IPOs', sub: 'Via Authorized Partners', path: '/invest/domestic-equity', desc: 'Direct domestic equity mandates, global markets exposure, and primary market issuances.', icon: Globe },
+      { title: 'Insurance & Risk Solutions', sub: 'Life, Health, General & Keyman Insurance', path: '/risk-management', desc: 'Comprehensive family risk management and liability protection.', icon: ShieldCheck },
     ],
     resources: [
       { title: 'Financial Calculators', path: '/calculators', desc: 'SIP, Retirement & Tax calculators', icon: Calculator },
@@ -241,7 +241,7 @@ export default function Navbar() {
                 </AnimatePresence>
               </div>
 
-              {/* 2. Invest (Clean Compact Dropdown: Icon + Name Only) */}
+              {/* 2. Invest (Family Office product & asset suite) */}
               <div 
                 className="relative"
                 onMouseEnter={() => handleMouseEnterDropdown('invest')}
@@ -268,25 +268,32 @@ export default function Navbar() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className="absolute top-full left-0 mt-2 w-56 sm:w-60 bg-white rounded-2xl border border-[#2F5BC7]/30 shadow-xl p-2 z-50 space-y-1"
+                      className="absolute top-full left-0 mt-2 w-[640px] max-w-[calc(100vw-2rem)] whitespace-normal bg-white rounded-2xl border border-[#2F5BC7]/30 shadow-xl p-3 z-50"
                     >
-                      {dropdownData.invest.map((item) => {
-                        const Icon = item.icon;
-                        return (
-                          <button
-                            key={item.title}
-                            onClick={(e) => handleNavClick(e, item.path)}
-                            className="w-full text-left px-3 py-2.5 rounded-xl hover:bg-[#F7F8FB] transition-colors flex items-center gap-3 group cursor-pointer"
-                          >
-                            <div className="p-1.5 rounded-lg bg-[#2F5BC7]/10 text-[#2F5BC7] group-hover:bg-[#1A3170] group-hover:text-white transition-colors shrink-0">
-                              <Icon className="w-4 h-4" />
-                            </div>
-                            <span className="text-xs font-bold text-[#0F1F45] group-hover:text-[#2F5BC7] transition-colors whitespace-nowrap">
-                              {item.title}
-                            </span>
-                          </button>
-                        );
-                      })}
+                      <p className="px-3 pb-2 pt-1 text-[10.5px] font-bold uppercase tracking-[0.18em] text-[#9A7220]">
+                        Complete Family Office Product &amp; Asset Suite
+                      </p>
+                      <div className="grid grid-cols-2 gap-1">
+                        {dropdownData.invest.map((item) => {
+                          const Icon = item.icon;
+                          return (
+                            <button
+                              key={item.title}
+                              onClick={(e) => handleNavClick(e, item.path)}
+                              className="w-full text-left p-2.5 rounded-xl hover:bg-[#F7F8FB] transition-colors flex items-start gap-3 group cursor-pointer"
+                            >
+                              <div className="p-2 rounded-lg bg-[#2F5BC7]/10 text-[#2F5BC7] group-hover:bg-[#1A3170] group-hover:text-white transition-colors shrink-0">
+                                <Icon className="w-4 h-4" />
+                              </div>
+                              <div>
+                                <div className="text-xs font-bold leading-snug text-[#0F1F45] group-hover:text-[#2F5BC7] transition-colors">{item.title}</div>
+                                {item.sub && <div className="text-[10.5px] font-semibold leading-snug text-[#B8862B]">({item.sub})</div>}
+                                <div className="mt-0.5 text-[11px] text-[#64748B] leading-snug">{item.desc}</div>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -484,7 +491,7 @@ export default function Navbar() {
                                 onClick={(e) => handleNavClick(e, item.path)}
                                 className="w-full text-left py-2 px-3 rounded-lg hover:bg-[#F7F8FB] text-xs font-semibold text-[#475569] hover:text-[#2F5BC7] flex items-center gap-2.5 transition-colors"
                               >
-                                <Icon className="w-3.5 h-3.5 text-[#2F5BC7]" />
+                                <Icon className="w-3.5 h-3.5 shrink-0 text-[#2F5BC7]" />
                                 <span>{item.title}</span>
                               </button>
                             );
@@ -520,7 +527,7 @@ export default function Navbar() {
                                 onClick={(e) => handleNavClick(e, item.path)}
                                 className="w-full text-left py-2 px-3 rounded-lg hover:bg-[#F7F8FB] text-xs font-semibold text-[#475569] hover:text-[#2F5BC7] flex items-center gap-2.5 transition-colors"
                               >
-                                <Icon className="w-3.5 h-3.5 text-[#2F5BC7]" />
+                                <Icon className="w-3.5 h-3.5 shrink-0 text-[#2F5BC7]" />
                                 <span>{item.title}</span>
                               </button>
                             );
