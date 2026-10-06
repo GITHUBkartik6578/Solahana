@@ -93,7 +93,7 @@ export default function TrustStrip() {
         </motion.div>
 
         {/* 4 x 2 service cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-3 lg:max-w-[40%] lg:mx-auto lg:min-w-[520px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {SERVICES.map(({ title, art, desc, link }, idx) => (
             <motion.div
               key={title.join(' ')}
@@ -103,9 +103,9 @@ export default function TrustStrip() {
               transition={{ duration: 0.45, delay: (idx % 4) * 0.06 }}
               className="h-full"
             >
-              <article className="group flex h-full flex-col overflow-hidden rounded-[22px] lg:rounded-[10px] bg-[#FBF8F3] border border-[#EDE6D8] shadow-[0_14px_36px_rgba(15,31,69,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_26px_54px_rgba(15,31,69,0.2)]">
+              <article className="group flex h-full flex-col overflow-hidden rounded-[22px] bg-[#FBF8F3] border border-[#EDE6D8] shadow-[0_14px_36px_rgba(15,31,69,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_26px_54px_rgba(15,31,69,0.2)]">
                 {/* Illustration with its number */}
-                <Link to={link} tabIndex={-1} aria-hidden="true" className="relative block aspect-[4/5] sm:aspect-[2/3] w-full">
+                <Link to={link} tabIndex={-1} aria-hidden="true" className="relative block aspect-[7/10] w-full">
                   <img
                     src={art}
                     alt=""
@@ -113,31 +113,31 @@ export default function TrustStrip() {
                     className="absolute inset-0 h-full w-full object-cover object-bottom"
                     draggable="false"
                   />
-                  <span className="absolute left-5 top-4 lg:left-2 lg:top-1.5 font-serif-luxury text-[28px] lg:text-[11px] leading-none text-[#F1D9A3]">
+                  <span className="absolute left-5 top-4 font-serif-luxury text-[28px] leading-none text-[#F1D9A3]">
                     {String(idx + 1).padStart(2, '0')}
                     <span className="mt-2 block h-px w-6 bg-[#F1D9A3]/80" />
                   </span>
                 </Link>
 
                 {/* Copy */}
-                <div className="flex flex-1 flex-col px-6 pb-6 pt-1 lg:px-2.5 lg:pb-2.5 lg:pt-0 text-left">
+                <div className="flex flex-1 flex-col px-6 pb-6 pt-1 text-left">
                   <h3
                     style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                    className="text-[24px] lg:text-[10.5px] font-bold leading-[1.15] text-[#0F1F45]"
+                    className="text-[22px] font-bold leading-[1.15] text-[#0F1F45]"
                   >
                     {title[0]}
                     <br />
                     {title[1]}
                   </h3>
-                  <span className="mt-4 lg:mt-1.5 h-[2px] w-9 lg:w-4 rounded-full bg-[#C9922E]" />
-                  <p className="mt-4 lg:mt-1.5 text-[15px] lg:text-[8px] leading-relaxed text-[#475569]">{desc}</p>
-                  <div className="mt-auto pt-6 lg:pt-2">
+                  <span className="mt-4 h-[2px] w-9 rounded-full bg-[#C9922E]" />
+                  <p className="mt-4 text-[14.5px] leading-relaxed text-[#475569]">{desc}</p>
+                  <div className="mt-auto pt-6">
                     <Link
                       to={link}
-                      className="inline-flex w-fit items-center justify-center gap-1.5 rounded-full bg-[#0F1F45] px-7 py-3 lg:px-2.5 lg:py-1 text-sm lg:text-[8px] font-semibold text-white shadow-[0_8px_20px_rgba(15,31,69,0.25)] transition-all hover:shadow-[0_12px_28px_rgba(15,31,69,0.38)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2F5BC7]/30"
+                      className="inline-flex w-fit items-center justify-center gap-1.5 rounded-full bg-[#0F1F45] px-7 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(15,31,69,0.25)] transition-all hover:shadow-[0_12px_28px_rgba(15,31,69,0.38)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2F5BC7]/30"
                     >
                       Explore
-                      <ArrowRight className="h-4 w-4 lg:h-2 lg:w-2 transition-transform duration-300 group-hover:translate-x-1" />
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </Link>
                   </div>
                 </div>
