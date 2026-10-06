@@ -155,7 +155,21 @@ export default function Footer() {
       </svg>
       <div className="absolute -bottom-40 -left-32 w-[520px] h-[520px] rounded-full bg-[#2F5BC7]/[0.05] blur-[110px] pointer-events-none" />
 
-      <div className="relative max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16">
+      {/* Oversized brand wordmark: sits behind the footer content, so it adds depth without adding height */}
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-[2%] flex justify-center select-none pointer-events-none">
+        <p
+          className="font-serif-luxury font-extrabold leading-[0.8] tracking-[-0.04em] text-[17vw] whitespace-nowrap bg-clip-text text-transparent [-webkit-background-clip:text] [mask-image:linear-gradient(to_bottom,transparent_0%,black_30%,black_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_30%,black_100%)]"
+          style={{
+            // left half warm gold, right half light blue, meeting in a soft blend at the middle
+            backgroundImage:
+              'linear-gradient(to right, rgba(201,146,46,0.22) 0%, rgba(201,146,46,0.20) 44%, rgba(120,160,225,0.20) 56%, rgba(120,160,225,0.22) 100%)',
+          }}
+        >
+          SOLAHANA
+        </p>
+      </div>
+
+      <div className="relative z-10 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-[1.3fr_1fr_0.95fr_1.1fr_1fr] gap-10 xl:gap-0">
           {/* Brand */}
           <div className="sm:col-span-2 xl:col-span-1 xl:pr-8">
@@ -263,19 +277,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Oversized brand wordmark */}
-      <div aria-hidden="true" className="relative select-none pointer-events-none -mb-[3.2vw]">
-        <p
-          className="text-center font-serif-luxury font-extrabold leading-[0.8] tracking-[-0.04em] text-[18vw] lg:text-[16vw] bg-clip-text text-transparent [-webkit-background-clip:text] [mask-image:linear-gradient(to_bottom,black_0%,black_35%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_35%,transparent_100%)]"
-          style={{
-            // left half warm gold, right half light blue, meeting in a soft blend at the middle
-            backgroundImage:
-              'linear-gradient(to right, rgba(201,146,46,0.30) 0%, rgba(201,146,46,0.26) 44%, rgba(120,160,225,0.26) 56%, rgba(120,160,225,0.30) 100%)',
-          }}
-        >
-          SOLAHANA
-        </p>
-      </div>
     </footer>
   );
 }
