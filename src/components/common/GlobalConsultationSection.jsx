@@ -131,10 +131,10 @@ export default function GlobalConsultationSection() {
   };
 
   return (
-    <section id="global-consultation-section" className="relative py-10 sm:py-12 lg:py-8 bg-ink-band overflow-x-hidden font-inter">
+    <section id="global-consultation-section" className="relative py-10 sm:py-12 lg:py-8 bg-gradient-to-b from-[#F3F6FC] via-[#EAF0FA] to-[#F7F1E3] overflow-x-hidden font-inter">
       {/* Background Subtle Luxury Accents */}
       {/* faint grid texture for depth */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.07] bg-[linear-gradient(rgba(255,255,255,0.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.6)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+      <div className="absolute inset-0 pointer-events-none opacity-[0.08] bg-[linear-gradient(rgba(15,31,69,0.7)_1px,transparent_1px),linear-gradient(90deg,rgba(15,31,69,0.7)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Golden-ratio split: 0.382fr (≈38.2%) : 0.618fr (≈61.8%) so the
@@ -155,19 +155,19 @@ export default function GlobalConsultationSection() {
             transition={{ duration: 0.6 }}
             className="space-y-5 text-left"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-semibold uppercase tracking-widest text-[#E6C27A]">
-              <Sparkles className="w-3.5 h-3.5 text-[#E6C27A]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#C9922E]/40 text-[11px] font-semibold uppercase tracking-widest text-[#9A7220] shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-[#C9922E]" />
               <span>SOLAHANA PLANNING</span>
             </div>
 
-            <h2 className="font-serif-luxury text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight">
+            <h2 className="font-serif-luxury text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F1F45] leading-tight tracking-tight">
               Schedule Your Free{' '}
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#EAD08F] via-[#D9B66A] to-[#C9A04F] font-serif-luxury">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#C9922E] via-[#B8862B] to-[#9A7220] font-serif-luxury">
                 Wealth Consultation
               </span>
             </h2>
 
-            <p className="text-sm sm:text-base text-[#AEBBD3] leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-[#475569] leading-relaxed font-normal">
               Tell us a little about yourself. A planner will call, understand your situation and suggest clear next steps. No obligation.
             </p>
 
@@ -180,13 +180,13 @@ export default function GlobalConsultationSection() {
               ].map((item, idx) => {
                 const Icon = item.icon;
                 return (
-                  <div key={idx} className="flex items-start gap-3.5 p-3 rounded-2xl bg-white/[0.05] border border-white/10">
-                    <div className="p-2 rounded-xl bg-[#C9A04F]/15 text-[#E6C27A] ring-1 ring-[#C9A04F]/30 shrink-0 mt-0.5">
+                  <div key={idx} className="flex items-start gap-3.5 p-3 rounded-2xl bg-white border border-[#E7DFCF] shadow-[0_6px_16px_rgba(15,31,69,0.06)]">
+                    <div className="p-2 rounded-xl bg-[#C9922E]/12 text-[#B8862B] ring-1 ring-[#C9922E]/35 shrink-0 mt-0.5">
                       <Icon className="w-4.5 h-4.5" />
                     </div>
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white">{item.title}</h4>
-                      <p className="text-[11px] sm:text-xs text-[#AEBBD3] mt-0.5">{item.desc}</p>
+                      <h4 className="text-xs sm:text-sm font-bold text-[#0F1F45]">{item.title}</h4>
+                      <p className="text-[11px] sm:text-xs text-[#475569] mt-0.5">{item.desc}</p>
                     </div>
                   </div>
                 );
@@ -204,7 +204,7 @@ export default function GlobalConsultationSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="min-w-0"
           >
-            <div className="bg-white rounded-3xl p-5 sm:p-6 border border-white/60 shadow-[0_30px_80px_rgba(3,10,30,0.45)] relative overflow-hidden max-w-[600px] w-full mx-auto lg:mx-0 lg:ml-auto">
+            <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#D9E2F3] shadow-[0_24px_60px_rgba(15,31,69,0.16)] relative overflow-hidden max-w-[600px] w-full mx-auto lg:mx-0 lg:ml-auto">
 
               {/* Subtle Top Accent Bar */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#E6C27A] via-[#C9A04F] to-[#A67C2E]" />
