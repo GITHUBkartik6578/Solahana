@@ -89,23 +89,6 @@ export default function TaxLegacySection() {
       `}</style>
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         <div className="relative xl:h-[650px]">
-          {/* gold climbing line behind the steps (desktop) */}
-          <svg
-            className="pointer-events-none absolute inset-0 hidden h-full w-full xl:block"
-            viewBox="0 0 1000 650"
-            preserveAspectRatio="none"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M 95 362 C 170 358, 230 325, 300 308 S 430 272, 505 254 S 640 218, 710 200 S 850 160, 915 146"
-              stroke="#C9922E"
-              strokeOpacity="0.75"
-              strokeWidth="1.6"
-              vectorEffect="non-scaling-stroke"
-            />
-          </svg>
-
           {/* heading */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
