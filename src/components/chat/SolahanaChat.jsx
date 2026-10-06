@@ -43,7 +43,7 @@ const ANSWERS = {
   },
   pricing: {
     text: 'Fees depend on what you need. After a free intro call, you get a clear quote before you commit to anything.',
-    chips: [{ label: 'View pricing', to: '/pricing' }, { label: 'Book a free call', intent: 'book' }],
+    chips: [{ label: 'Book a free call', intent: 'book' }, { label: 'Talk to a person', intent: 'human' }],
   },
   who: {
     text: 'Salaried professionals, business owners, families, NRIs, young professionals and retirees. Most people are a mix, and we start from where you are today.',

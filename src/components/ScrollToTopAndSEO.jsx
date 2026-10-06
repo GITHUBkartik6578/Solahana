@@ -13,7 +13,6 @@ const ROUTE_TITLES = {
   '/tax-planning': 'Tax Optimization & Harvesting — SOLAHANA',
   '/risk-management': 'Risk & Insurance Planning — SOLAHANA',
   '/estate-planning': 'Estate & Succession Planning — SOLAHANA',
-  '/pricing': 'Planning Fees & Pricing — SOLAHANA',
   '/calculators': 'Financial Calculators Suite — SOLAHANA Desk',
   '/calculators/sip': 'SIP Calculator — SOLAHANA',
   '/calculators/emi': 'EMI Calculator — SOLAHANA',

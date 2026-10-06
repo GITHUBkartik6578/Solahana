@@ -86,7 +86,6 @@ export default function Navbar() {
       'calculators': '/calculators',
       'investments': '/investments',
       'tax-planning': '/tax-planning',
-      'pricing': '/pricing',
       'contact': '/about',
       'dashboard': '/dashboard',
       'admin': '/admin/dashboard',
@@ -176,7 +175,7 @@ export default function Navbar() {
 
           {/* ========================================================= */}
           {/* CENTER-RIGHT: FINTOO-STYLE NAVIGATION LINKS               */}
-          {/* ORDER: Planning ▼ | Invest ▼ | Pricing | Who We Serve | Our Process | About Us */}
+          {/* ORDER: Planning ▼ | Invest ▼ | Who We Serve | Our Process | About Us */}
           {/* ========================================================= */}
           {isAdminRoute ? (
             <div className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full bg-[#2F5BC7]/10 border border-[#2F5BC7]/30 text-xs font-bold text-[#1A3170] whitespace-nowrap ml-auto mr-4">
@@ -292,19 +291,6 @@ export default function Navbar() {
                   )}
                 </AnimatePresence>
               </div>
-
-              {/* 3. Pricing */}
-              <button
-                onClick={(e) => handleNavClick(e, 'pricing')}
-                className={`px-3 py-2 rounded-lg transition-all relative whitespace-nowrap ${
-                  pathname === '/pricing' ? 'text-[#2F5BC7] font-bold' : 'hover:text-[#2F5BC7]'
-                }`}
-              >
-                <span className="whitespace-nowrap">Pricing</span>
-                {pathname === '/pricing' && (
-                  <motion.div layoutId="activeUnderline" className="absolute bottom-0 left-3 right-3 h-[2.5px] bg-[#1A3170] rounded-full" />
-                )}
-              </button>
 
               {/* Who We Serve / Our Process */}
               <button
@@ -543,14 +529,6 @@ export default function Navbar() {
                       )}
                     </AnimatePresence>
                   </div>
-
-                  <button
-                    onClick={(e) => handleNavClick(e, 'pricing')}
-                    className="text-left py-2.5 px-3 rounded-xl hover:bg-[#F7F8FB] hover:text-[#2F5BC7] transition-colors"
-                  >
-                    Pricing
-                  </button>
-
 
                   <button
                     onClick={(e) => handleNavClick(e, 'who-we-serve')}

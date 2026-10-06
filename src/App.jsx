@@ -19,7 +19,6 @@ import InvestmentsPage from './pages/InvestmentsPage';
 import TaxPlanningPage from './pages/TaxPlanningPage';
 import RiskManagementPage from './pages/RiskManagementPage';
 import EstatePlanningPage from './pages/EstatePlanningPage';
-import PricingPage from './pages/PricingPage';
 import WhoWeServePage from './pages/WhoWeServePage';
 import OurProcessPage from './pages/OurProcessPage';
 import { CalculatorsPage } from './pages/CalculatorsPage';
@@ -122,7 +121,6 @@ function AppContent() {
           <Route path="/risk-management" element={<RiskManagementPage onOpenSearch={() => setSearchOpen(true)} />} />
           <Route path="/estate-planning" element={<EstatePlanningPage onOpenSearch={() => setSearchOpen(true)} />} />
 
-          <Route path="/pricing" element={<PricingPage onOpenSearch={() => setSearchOpen(true)} />} />
           {/* Financial Calculators Suite Routes */}
           <Route path="/calculators" element={<CalculatorsLandingPage />} />
           <Route path="/calculators/sip" element={<SipCalculator />} />
