@@ -260,40 +260,39 @@ export default function Navbar() {
                   )}
                 </button>
 
-                {/* Clean Compact SOLAHANA Invest Dropdown */}
+                {/* Invest dropdown: same one-by-one list as Planning */}
                 <AnimatePresence>
                   {activeDropdown === 'invest' && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className="absolute top-full left-0 mt-2 w-[640px] max-w-[calc(100vw-2rem)] whitespace-normal bg-white rounded-2xl border border-[#2F5BC7]/30 shadow-xl p-3 z-50"
+                      transition={{ duration: 0.25, ease: 'easeOut' }}
+                      className="absolute top-full left-0 mt-2 w-[360px] whitespace-normal bg-white rounded-2xl border border-[#2F5BC7]/30 shadow-xl p-3 z-50 space-y-1"
                     >
-                      <p className="px-3 pb-2 pt-1 text-[10.5px] font-bold uppercase tracking-[0.18em] text-[#9A7220]">
-                        Complete Family Office Product &amp; Asset Suite
-                      </p>
-                      <div className="grid grid-cols-2 gap-1">
-                        {dropdownData.invest.map((item) => {
-                          const Icon = item.icon;
-                          return (
-                            <button
-                              key={item.title}
-                              onClick={(e) => handleNavClick(e, item.path)}
-                              className="w-full text-left p-2.5 rounded-xl hover:bg-[#F7F8FB] transition-colors flex items-start gap-3 group cursor-pointer"
-                            >
-                              <div className="p-2 rounded-lg bg-[#2F5BC7]/10 text-[#2F5BC7] group-hover:bg-[#1A3170] group-hover:text-white transition-colors shrink-0">
-                                <Icon className="w-4 h-4" />
+                      {dropdownData.invest.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <button
+                            key={item.title}
+                            onClick={(e) => handleNavClick(e, item.path)}
+                            className="w-full text-left p-2.5 rounded-xl hover:bg-[#F7F8FB] transition-colors flex items-start gap-3 group cursor-pointer"
+                          >
+                            <div className="p-2 rounded-lg bg-[#2F5BC7]/10 text-[#2F5BC7] group-hover:bg-[#1A3170] group-hover:text-white transition-colors shrink-0">
+                              <Icon className="w-4.5 h-4.5" />
+                            </div>
+                            <div>
+                              <div className="text-xs font-bold text-[#0F1F45] group-hover:text-[#2F5BC7] transition-colors">
+                                {item.title}
+                                {item.sub && <span className="ml-1 text-[10.5px] font-semibold text-[#B8862B]">({item.sub})</span>}
                               </div>
-                              <div>
-                                <div className="text-xs font-bold leading-snug text-[#0F1F45] group-hover:text-[#2F5BC7] transition-colors">{item.title}</div>
-                                {item.sub && <div className="text-[10.5px] font-semibold leading-snug text-[#B8862B]">({item.sub})</div>}
-                                <div className="mt-0.5 text-[11px] text-[#64748B] leading-snug">{item.desc}</div>
+                              <div className="text-[11px] text-[#64748B] leading-snug mt-0.5">
+                                {item.desc}
                               </div>
-                            </button>
-                          );
-                        })}
-                      </div>
+                            </div>
+                          </button>
+                        );
+                      })}
                     </motion.div>
                   )}
                 </AnimatePresence>
