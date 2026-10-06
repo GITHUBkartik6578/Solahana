@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, BarChart3, Users, Home, Coins, Umbrella, HeartPulse } from 'lucide-react';
@@ -11,6 +11,7 @@ import stage5 from '../assets/stages/05.webp';
 import stage6 from '../assets/stages/06.webp';
 import stage7 from '../assets/stages/07.webp';
 import stage8 from '../assets/stages/08.webp';
+import LifeJourneyWalker from './LifeJourneyWalker';
 
 const serif = { fontFamily: "'Playfair Display', Georgia, serif" };
 
@@ -81,6 +82,30 @@ const STAGES = [
   },
 ];
 
+// age range of each card, used by the walker under the cards
+const WALK_STAGES = [
+  { from: 18, to: 23 },
+  { from: 24, to: 28 },
+  { from: 29, to: 35 },
+  { from: 36, to: 40 },
+  { from: 41, to: 50 },
+  { from: 51, to: 55 },
+  { from: 56, to: 65 },
+  { from: 68, to: 68, open: true },
+];
+
+function useIsXL() {
+  const q = '(min-width: 1280px)';
+  const [on, setOn] = useState(() => typeof window !== 'undefined' && window.matchMedia(q).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(q);
+    const fn = (e) => setOn(e.matches);
+    mq.addEventListener('change', fn);
+    return () => mq.removeEventListener('change', fn);
+  }, []);
+  return on;
+}
+
 // Each step sits this much higher than the one before it (desktop staircase)
 const STEP = 34;
 
@@ -97,7 +122,7 @@ function StageCard({ stage, index }) {
     >
       <Link
         to={stage.to}
-        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#E7DFCF] bg-[#FEFDF9] shadow-[0_12px_30px_rgba(15,31,69,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_44px_rgba(15,31,69,0.2)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2F5BC7]/25"
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl xl:min-h-[362px] border border-[#E7DFCF] bg-[#FEFDF9] shadow-[0_12px_30px_rgba(15,31,69,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_44px_rgba(15,31,69,0.2)] data-[active=true]:-translate-y-1.5 data-[active=true]:border-[#C9922E] data-[active=true]:shadow-[0_18px_40px_rgba(201,146,46,0.35)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2F5BC7]/25"
       >
         {/* photo + number badge */}
         <div className="relative h-[104px] w-full overflow-hidden bg-[#F1E9D8]">
@@ -129,6 +154,9 @@ function StageCard({ stage, index }) {
 }
 
 export default function LifeStagesSection() {
+  const isXL = useIsXL();
+  const wrapRef = useRef(null);
+  const gridRef = useRef(null);
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-white via-[#FBF8F3] to-white py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
@@ -154,24 +182,15 @@ export default function LifeStagesSection() {
         </motion.div>
 
         {/* Staircase (desktop) / grid (smaller screens) */}
-        <div className="relative mt-10 xl:-mt-32">
-          {/* navy ribbon under the steps */}
-          <svg
-            className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[58%] w-full xl:block"
-            viewBox="0 0 1000 200"
-            preserveAspectRatio="none"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path d="M0 200 C 300 190, 650 130, 1000 20 L1000 44 C 650 150, 300 214, 0 214 Z" fill="#0F1F45" fillOpacity="0.9" />
-            <path d="M0 200 C 300 190, 650 130, 1000 20" stroke="#C9922E" strokeWidth="2.5" vectorEffect="non-scaling-stroke" />
-          </svg>
-
-          <div className="relative grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-8 xl:items-start xl:gap-3.5 xl:pb-12">
+        <div ref={wrapRef} className="relative mt-10 xl:-mt-32">
+          <div ref={gridRef} className="relative grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-8 xl:items-start xl:gap-3.5">
             {STAGES.map((stage, i) => (
               <StageCard key={stage.age} stage={stage} index={i} />
             ))}
           </div>
+
+          {/* a person walks along the ribbon and ages with the cards (desktop staircase) */}
+          {isXL && <LifeJourneyWalker stages={WALK_STAGES} wrapRef={wrapRef} gridRef={gridRef} />}
         </div>
 
         <motion.div
