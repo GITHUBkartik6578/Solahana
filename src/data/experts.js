@@ -1,4 +1,5 @@
 import amitPandey from '../assets/expert-amit-pandey.webp';
+import amitPandeyAvatar from '../assets/expert-amit-pandey-avatar.webp';
 
 // One entry per expert. Add the next expert here and the "Our Experts" page lists them automatically.
 // Only put facts the owner has confirmed.
@@ -8,6 +9,10 @@ export const EXPERTS = [
     name: 'Amit R. Pandey',
     credential: 'Chartered Wealth Manager (CWM®)',
     photo: amitPandey,
+    avatar: amitPandeyAvatar,
+    years: 25,
+    location: 'Mumbai',
+    role: 'Chartered Wealth Manager',
     photoAlt: 'Amit R. Pandey, Chartered Wealth Manager (CWM)',
     headline: 'MBA | Ex-Banker | 25+ Years of Experience in Financial Services',
     summary:
