@@ -79,7 +79,7 @@ Check every UI change in the browser at **1366, 1440, 1920 and 390 px** wide: al
 ## Git State
 
 - Current branch: `main`
-- Latest commit: `451d6d1` "Footer: dark navy and gold theme with Calculators button; tighter height; add project summary"
+- Latest commit: see `git log -1` (home now uses LifeStagesSection instead of StagePlanningSection)
 - Uncommitted changes: none before this file was added (this file and any later edits are uncommitted until the owner says "push")
 - Last push: `451d6d1` to https://github.com/GITHUBkartik6578/Solahana
 - Rules: never push unless the owner says "push kardo"; run `git fetch` and check `HEAD..origin/main` first (another contributor, `mohammed-hanzala`, also pushes). Commit trailer: `Co-Authored-By: Claude ... <noreply@anthropic.com>`. `.env` is git-ignored.

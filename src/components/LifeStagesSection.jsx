@@ -1,0 +1,200 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowRight, BookOpen, BarChart3, Users, Home, Coins, Umbrella, HeartPulse } from 'lucide-react';
+
+import stage1 from '../assets/stages/01.webp';
+import stage2 from '../assets/stages/02.webp';
+import stage3 from '../assets/stages/03.webp';
+import stage4 from '../assets/stages/04.webp';
+import stage5 from '../assets/stages/05.webp';
+import stage6 from '../assets/stages/06.webp';
+import stage7 from '../assets/stages/07.webp';
+import stage8 from '../assets/stages/08.webp';
+
+const serif = { fontFamily: "'Playfair Display', Georgia, serif" };
+
+const STAGES = [
+  {
+    age: 'Age 18–23',
+    title: 'Education & Foundation',
+    focus: 'Building financial literacy, early habit building, and setting up the right foundational financial systems.',
+    icon: BookOpen,
+    photo: stage1,
+    to: '/goals',
+  },
+  {
+    age: 'Age 24–28',
+    title: 'Career Acceleration & First Salary',
+    focus: 'Managing first inflows, emergency funds, initiating systematic SIPs, and foundational risk cover.',
+    icon: BarChart3,
+    photo: stage2,
+    to: '/financial-planning',
+  },
+  {
+    age: 'Age 29–35',
+    title: 'Marriage & Family Milestones',
+    focus: 'Joint goal planning, lifestyle asset acquisition, housing, and expanding family protection plans.',
+    icon: Users,
+    photo: stage3,
+    to: '/goals',
+  },
+  {
+    age: 'Age 36–40',
+    title: 'Property & Asset Expansion',
+    focus: 'Real estate acquisition, core portfolio scaling, and children’s education corpus setup.',
+    icon: Home,
+    photo: stage4,
+    to: '/investments',
+  },
+  {
+    age: 'Age 41–50',
+    title: 'Core Wealth & Portfolio Scaling',
+    focus: 'High-alpha allocations via PMS/AIF, business scaling support, and multi-asset diversification.',
+    icon: Coins,
+    photo: stage5,
+    to: '/investments',
+  },
+  {
+    age: 'Age 51–55',
+    title: 'Retirement & Income Structuring',
+    focus: 'Consolidating corpus, shifting toward secure cash-flow assets, and tax optimization.',
+    icon: Umbrella,
+    photo: stage6,
+    to: '/calculators/retirement',
+  },
+  {
+    age: 'Age 56–65',
+    title: 'Health Protection & Preservation',
+    focus: 'Comprehensive healthcare coverage, capital preservation, and risk mitigation.',
+    icon: HeartPulse,
+    photo: stage7,
+    to: '/risk-management',
+  },
+  {
+    age: 'Age 68+',
+    title: 'Estate & Succession Planning',
+    focus: 'Wealth transfer frameworks, wills, trusts, and seamless legacy transition for the next generation.',
+    icon: Users,
+    photo: stage8,
+    to: '/estate-planning',
+  },
+];
+
+// Each step sits this much higher than the one before it (desktop staircase)
+const STEP = 34;
+
+function StageCard({ stage, index }) {
+  const Icon = stage.icon;
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.45, delay: index * 0.06 }}
+      className="xl:mt-[var(--lift)]"
+      style={{ '--lift': `${(STAGES.length - 1 - index) * STEP}px` }}
+    >
+      <Link
+        to={stage.to}
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#E7DFCF] bg-[#FEFDF9] shadow-[0_12px_30px_rgba(15,31,69,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_44px_rgba(15,31,69,0.2)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2F5BC7]/25"
+      >
+        {/* photo + number badge */}
+        <div className="relative h-[104px] w-full overflow-hidden bg-[#F1E9D8]">
+          <img src={stage.photo} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" draggable="false" />
+          <span
+            style={serif}
+            className="absolute left-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-[#0F1F45] text-[13px] font-bold text-[#F1D9A3] ring-2 ring-[#C9922E] shadow-[0_4px_10px_rgba(15,31,69,0.35)]"
+          >
+            {String(index + 1).padStart(2, '0')}
+          </span>
+        </div>
+
+        <div className="flex flex-1 flex-col px-3.5 pb-4 pt-3 text-left">
+          <p style={serif} className="text-[17px] font-bold leading-none text-[#0F1F45]">
+            {stage.age}
+          </p>
+          <h3 style={serif} className="mt-2 text-[14px] font-bold leading-[1.2] text-[#0F1F45]">
+            {stage.title}
+          </h3>
+          <Icon className="mt-3 h-5 w-5 text-[#C9922E]" strokeWidth={1.6} />
+          <p className="mt-2 text-[11.5px] leading-snug text-[#475569]">
+            <span className="font-bold text-[#0F1F45]">Focus: </span>
+            {stage.focus}
+          </p>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
+export default function LifeStagesSection() {
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-b from-white via-[#FBF8F3] to-white py-16 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-xl xl:max-w-[470px] text-center xl:text-left mx-auto xl:mx-0"
+        >
+          <span className="inline-flex items-center gap-3 font-sora text-[12px] sm:text-[13px] font-bold uppercase tracking-[0.28em] text-[#9A7220]">
+            <span className="h-px w-8 bg-[#C9922E]/60" />
+            A plan for every stage of life
+          </span>
+          <h2 style={serif} className="mt-5 text-[34px] sm:text-[44px] lg:text-[52px] font-bold leading-[1.08] tracking-tight text-[#0F1F45]">
+            From Today
+            <span className="block text-[#B8862B]">to Generations</span>
+          </h2>
+          <p className="mt-5 text-base sm:text-lg leading-relaxed text-[#475569]">
+            Comprehensive financial planning across every stage of life — building security, wealth and legacy for you and your family.
+          </p>
+        </motion.div>
+
+        {/* Staircase (desktop) / grid (smaller screens) */}
+        <div className="relative mt-10 xl:-mt-32">
+          {/* navy ribbon under the steps */}
+          <svg
+            className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[58%] w-full xl:block"
+            viewBox="0 0 1000 200"
+            preserveAspectRatio="none"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d="M0 200 C 300 190, 650 130, 1000 20 L1000 44 C 650 150, 300 214, 0 214 Z" fill="#0F1F45" fillOpacity="0.9" />
+            <path d="M0 200 C 300 190, 650 130, 1000 20" stroke="#C9922E" strokeWidth="2.5" vectorEffect="non-scaling-stroke" />
+          </svg>
+
+          <div className="relative grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-8 xl:items-start xl:gap-3.5 xl:pb-12">
+            {STAGES.map((stage, i) => (
+              <StageCard key={stage.age} stage={stage} index={i} />
+            ))}
+          </div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-10 flex flex-col items-center justify-between gap-5 sm:flex-row"
+        >
+          <p className="text-center text-xs font-semibold uppercase leading-relaxed tracking-[0.22em] text-[#64748B] sm:text-left">
+            Different stages. One financial partner.
+            <br />
+            For a brighter tomorrow.
+          </p>
+          <Link
+            to="/contact"
+            className="group inline-flex items-center gap-2.5 rounded-full bg-[#0F1F45] px-7 py-3 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_14px_34px_rgba(15,31,69,0.42)]"
+          >
+            Plan my stage
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

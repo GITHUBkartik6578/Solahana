@@ -57,7 +57,7 @@ import DomesticEquityPage from './pages/invest/DomesticEquityPage';
 import InternationalEquityPage from './pages/invest/InternationalEquityPage';
 import IpoPage from './pages/invest/IpoPage';
 
-import StagePlanningSection from './components/StagePlanningSection';
+import LifeStagesSection from './components/LifeStagesSection';
 
 
 
@@ -68,7 +68,7 @@ function HomePage({ onOpenSearch }) {
       <Hero onOpenSearch={onOpenSearch} />
       <TrustStrip />
       <HealthCheck />
-      <StagePlanningSection onOpenSearch={onOpenSearch} />
+      <LifeStagesSection />
       <ClientStories />
       <FAQSection />
     </>
