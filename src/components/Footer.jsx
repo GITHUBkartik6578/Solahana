@@ -123,18 +123,18 @@ export default function Footer() {
       </>
     );
     return item.key ? (
-      <button onClick={() => go(item.key)} className="flex items-center gap-2.5 text-left text-[14px] text-[#D4DCEC] hover:text-[#E2B24E] transition-colors cursor-pointer">
+      <button onClick={() => go(item.key)} className="flex items-center gap-2.5 text-left text-[13.5px] text-[#D4DCEC] hover:text-[#E2B24E] transition-colors cursor-pointer">
         {inner}
       </button>
     ) : (
-      <div className="flex items-center gap-2.5 text-[14px] text-[#D4DCEC]">{inner}</div>
+      <div className="flex items-center gap-2.5 text-[13.5px] text-[#D4DCEC]">{inner}</div>
     );
   };
 
   const Column = ({ title, items, children }) => (
     <div>
       <ColumnTitle>{title}</ColumnTitle>
-      <ul className="mt-4 space-y-2.5">
+      <ul className="mt-3 space-y-2">
         {items.map((item) => (
           <li key={item.name}>
             <IconRow item={item} />
@@ -170,8 +170,8 @@ export default function Footer() {
         </p>
       </div>
 
-      <div className="relative z-10 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-9 sm:pt-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-[1.3fr_1fr_0.95fr_1.1fr_1fr] gap-10 xl:gap-0">
+      <div className="relative z-10 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-7 sm:pt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-[1.25fr_0.95fr_0.9fr_1.3fr_0.95fr] gap-10 xl:gap-0">
           {/* Brand */}
           <div className="sm:col-span-2 xl:col-span-1 xl:pr-8">
             <button onClick={() => go('home')} className="group block cursor-pointer" title="SOLAHANA Home" aria-label="SOLAHANA Home">
@@ -181,7 +181,7 @@ export default function Footer() {
             </button>
             <p className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.3em] text-[#AEBBD3]">Financial Planning Platform</p>
 
-            <p style={serif} className="mt-3.5 text-[22px] font-bold leading-[1.16] text-white">
+            <p style={serif} className="mt-3 text-[20px] font-bold leading-[1.14] text-white">
               Plan with <span className="text-[#E2B24E]">Clarity.</span>
               <br />
               Build with <span className="text-[#E2B24E]">Purpose.</span>
@@ -190,12 +190,12 @@ export default function Footer() {
             </p>
             <span className="mt-3 block h-[2px] w-10 rounded-full bg-[#E2B24E]" />
 
-            <p className="mt-3 text-[13.5px] text-[#C8D2E6] leading-relaxed max-w-sm">
+            <p className="mt-2.5 text-[12.5px] text-[#C8D2E6] leading-relaxed max-w-sm">
               Solahana is a financial planning platform that helps individuals, families, professionals, business owners and HNIs create a comprehensive financial plan with the
               expertise of Chartered Wealth Managers (CWM).
             </p>
 
-            <div className="mt-4 flex items-center gap-2.5">
+            <div className="mt-3 flex items-center gap-2.5">
               {SOCIAL.map((item) => (
                 <a key={item.title} href={item.href} target="_blank" rel="noopener noreferrer" title={item.title} aria-label={item.title} className={roundBtn}>
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -218,7 +218,7 @@ export default function Footer() {
           </div>
           <div className="xl:border-l xl:border-white/15 xl:px-6">
             <Column title="Our Professional Network" items={NETWORK}>
-              <p className="mt-3.5 text-[12px] leading-relaxed text-[#AEBBD3]">
+              <p className="mt-3 text-[11px] leading-snug text-[#AEBBD3]">
                 We work with a network of trusted professionals and product partners, as per their respective terms and conditions, to help you implement your financial plan.
               </p>
             </Column>
@@ -227,14 +227,14 @@ export default function Footer() {
             <Column title="About Solahana" items={ABOUT}>
               <button
                 onClick={() => go('contact')}
-                className="group mt-5 inline-flex w-full items-center justify-between gap-3 rounded-xl bg-gradient-to-br from-[#EAD08F] via-[#C9A04F] to-[#A67C2E] px-4 py-2.5 text-sm font-bold text-[#0F1F45] shadow-[0_10px_24px_rgba(166,124,46,0.3)] hover:brightness-105 transition cursor-pointer"
+                className="group mt-4 inline-flex w-full items-center justify-between gap-3 rounded-xl bg-gradient-to-br from-[#EAD08F] via-[#C9A04F] to-[#A67C2E] px-4 py-2 text-sm font-bold text-[#0F1F45] shadow-[0_10px_24px_rgba(166,124,46,0.3)] hover:brightness-105 transition cursor-pointer"
               >
                 <span>Start Your Financial Plan</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               <button
                 onClick={() => go('calculators')}
-                className="group mt-2.5 inline-flex w-full items-center justify-between gap-3 rounded-xl border border-[#E2B24E]/70 px-4 py-2.5 text-sm font-bold text-[#E2B24E] hover:bg-[#E2B24E] hover:text-[#0F1F45] transition cursor-pointer"
+                className="group mt-2 inline-flex w-full items-center justify-between gap-3 rounded-xl border border-[#E2B24E]/70 px-4 py-2 text-sm font-bold text-[#E2B24E] hover:bg-[#E2B24E] hover:text-[#0F1F45] transition cursor-pointer"
               >
                 <span className="inline-flex items-center gap-2.5">
                   <Calculator className="w-4 h-4" />
@@ -247,15 +247,15 @@ export default function Footer() {
         </div>
 
         {/* Important information strip */}
-        <div className="mt-7 h-px bg-gradient-to-r from-transparent via-[#E2B24E]/50 to-transparent" />
-        <div className="py-4 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 items-center">
+        <div className="mt-5 h-px bg-gradient-to-r from-transparent via-[#E2B24E]/50 to-transparent" />
+        <div className="py-3 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 items-center">
           <div className="flex items-start gap-4">
             <Shield className="w-7 h-7 shrink-0 text-[#E2B24E]" strokeWidth={1.4} />
             <div>
               <h4 style={serif} className="text-base font-bold text-white">
                 Important Information
               </h4>
-              <p className="mt-1 text-[12px] leading-relaxed text-[#AEBBD3]">
+              <p className="mt-0.5 text-[11.5px] leading-snug text-[#AEBBD3]">
                 Solahana provides financial planning services with the expertise of qualified Chartered Wealth Managers (CWM). We work with regulated product partners, including
                 Mutual Fund Distributors, Insurance Partners, Loan Providers, CA &amp; Tax Professionals, Legal Experts and other professionals, as per their respective terms and
                 conditions. Investment products are subject to market risks. Please consider your financial objectives, risk profile and circumstances before making any financial
@@ -275,7 +275,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-        <div className="py-3.5 flex flex-col md:flex-row items-center justify-between gap-4 text-[12.5px] text-[#AEBBD3]">
+        <div className="py-2.5 flex flex-col md:flex-row items-center justify-between gap-4 text-[12.5px] text-[#AEBBD3]">
           <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2" aria-label="Legal">
             {LEGAL.map((l, i) => (
               <React.Fragment key={l.name}>
