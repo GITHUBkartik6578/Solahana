@@ -91,10 +91,11 @@ const pathMap = {
   'risk-management': '/risk-management',
   'estate-planning': '/estate-planning',
   retirement: '/calculators/retirement',
+  calculators: '/calculators',
 };
 
 const roundBtn =
-  'w-11 h-11 rounded-full border border-[#C9922E]/60 bg-white flex items-center justify-center text-[#C9922E] hover:bg-[#1A3170] hover:text-[#E6C27A] hover:border-[#1A3170] hover:-translate-y-0.5 transition-all';
+  'w-9 h-9 rounded-full border border-[#E2B24E]/70 flex items-center justify-center text-[#E2B24E] hover:bg-[#E2B24E] hover:text-[#0F1F45] hover:-translate-y-0.5 transition-all';
 
 export default function Footer() {
   const navigate = useNavigate();
@@ -106,10 +107,10 @@ export default function Footer() {
 
   const ColumnTitle = ({ children }) => (
     <>
-      <h3 style={serif} className="text-[18px] font-bold leading-tight text-[#0F1F45]">
+      <h3 style={serif} className="text-[17px] font-bold leading-tight text-white">
         {children}
       </h3>
-      <span className="mt-3 block h-[2px] w-9 rounded-full bg-[#C9922E]" />
+      <span className="mt-2.5 block h-[2px] w-9 rounded-full bg-[#E2B24E]" />
     </>
   );
 
@@ -117,23 +118,23 @@ export default function Footer() {
     const Icon = item.icon;
     const inner = (
       <>
-        <Icon className="w-[18px] h-[18px] shrink-0 text-[#C9922E]" strokeWidth={1.6} />
+        <Icon className="w-[18px] h-[18px] shrink-0 text-[#E2B24E]" strokeWidth={1.6} />
         <span>{item.name}</span>
       </>
     );
     return item.key ? (
-      <button onClick={() => go(item.key)} className="flex items-center gap-2.5 text-left text-[14.5px] text-[#475569] hover:text-[#1A3170] transition-colors cursor-pointer">
+      <button onClick={() => go(item.key)} className="flex items-center gap-2.5 text-left text-[14px] text-[#D4DCEC] hover:text-[#E2B24E] transition-colors cursor-pointer">
         {inner}
       </button>
     ) : (
-      <div className="flex items-center gap-2.5 text-[14.5px] text-[#475569]">{inner}</div>
+      <div className="flex items-center gap-2.5 text-[14px] text-[#D4DCEC]">{inner}</div>
     );
   };
 
   const Column = ({ title, items, children }) => (
     <div>
       <ColumnTitle>{title}</ColumnTitle>
-      <ul className="mt-6 space-y-3.5">
+      <ul className="mt-4 space-y-2.5">
         {items.map((item) => (
           <li key={item.name}>
             <IconRow item={item} />
@@ -145,15 +146,15 @@ export default function Footer() {
   );
 
   return (
-    <footer className="relative z-20 overflow-hidden bg-gradient-to-b from-white via-[#FAFBFD] to-[#F1F4FA] font-inter">
+    <footer className="relative z-20 overflow-hidden bg-gradient-to-b from-[#0C1C42] via-[#0A1836] to-[#07122B] text-white font-inter">
       {/* gold hairline + logo-ring motif */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C9A04F]/60 to-transparent" />
       <svg className="absolute -top-40 -right-40 w-[560px] h-[560px] pointer-events-none" viewBox="0 0 560 560" fill="none" aria-hidden="true">
         {[110, 160, 210, 260].map((r, i) => (
-          <circle key={r} cx="280" cy="280" r={r} stroke="#C9A04F" strokeOpacity={0.16 - i * 0.03} strokeWidth="1.5" />
+          <circle key={r} cx="280" cy="280" r={r} stroke="#C9A04F" strokeOpacity={0.3 - i * 0.06} strokeWidth="1.5" />
         ))}
       </svg>
-      <div className="absolute -bottom-40 -left-32 w-[520px] h-[520px] rounded-full bg-[#2F5BC7]/[0.05] blur-[110px] pointer-events-none" />
+      <div className="absolute -bottom-40 -left-32 w-[520px] h-[520px] rounded-full bg-[#2F5BC7]/[0.18] blur-[120px] pointer-events-none" />
 
       {/* Oversized brand wordmark: sits behind the footer content, so it adds depth without adding height */}
       <div aria-hidden="true" className="absolute inset-x-0 bottom-[2%] flex justify-center select-none pointer-events-none">
@@ -162,71 +163,83 @@ export default function Footer() {
           style={{
             // left half warm gold, right half light blue, meeting in a soft blend at the middle
             backgroundImage:
-              'linear-gradient(to right, rgba(201,146,46,0.22) 0%, rgba(201,146,46,0.20) 44%, rgba(120,160,225,0.20) 56%, rgba(120,160,225,0.22) 100%)',
+              'linear-gradient(to right, rgba(226,178,78,0.34) 0%, rgba(226,178,78,0.30) 44%, rgba(120,165,235,0.30) 56%, rgba(120,165,235,0.34) 100%)',
           }}
         >
           SOLAHANA
         </p>
       </div>
 
-      <div className="relative z-10 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16">
+      <div className="relative z-10 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-9 sm:pt-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-[1.3fr_1fr_0.95fr_1.1fr_1fr] gap-10 xl:gap-0">
           {/* Brand */}
           <div className="sm:col-span-2 xl:col-span-1 xl:pr-8">
             <button onClick={() => go('home')} className="group block cursor-pointer" title="SOLAHANA Home" aria-label="SOLAHANA Home">
-              <img src={solahanaLogo} alt="SOLAHANA" className="h-12 sm:h-14 w-auto object-contain transition-transform group-hover:scale-[1.02]" />
+              <span className="inline-block rounded-2xl bg-[#FEFDF9] px-3 py-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.3)] ring-1 ring-[#E2B24E]/40">
+                <img src={solahanaLogo} alt="SOLAHANA" className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-[1.02]" />
+              </span>
             </button>
-            <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.3em] text-[#5B6B84]">Financial Planning Platform</p>
+            <p className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.3em] text-[#AEBBD3]">Financial Planning Platform</p>
 
-            <p style={serif} className="mt-6 text-[26px] font-bold leading-[1.18] text-[#0F1F45]">
-              Plan with <span className="text-[#C9922E]">Clarity.</span>
+            <p style={serif} className="mt-3.5 text-[22px] font-bold leading-[1.16] text-white">
+              Plan with <span className="text-[#E2B24E]">Clarity.</span>
               <br />
-              Build with <span className="text-[#C9922E]">Purpose.</span>
+              Build with <span className="text-[#E2B24E]">Purpose.</span>
               <br />
-              Live with <span className="text-[#C9922E]">Confidence.</span>
+              Live with <span className="text-[#E2B24E]">Confidence.</span>
             </p>
-            <span className="mt-5 block h-[2px] w-12 rounded-full bg-[#C9922E]" />
+            <span className="mt-3 block h-[2px] w-10 rounded-full bg-[#E2B24E]" />
 
-            <p className="mt-5 text-[15px] text-[#475569] leading-relaxed max-w-sm">
+            <p className="mt-3 text-[13.5px] text-[#C8D2E6] leading-relaxed max-w-sm">
               Solahana is a financial planning platform that helps individuals, families, professionals, business owners and HNIs create a comprehensive financial plan with the
               expertise of Chartered Wealth Managers (CWM).
             </p>
 
-            <div className="mt-6 flex items-center gap-3">
+            <div className="mt-4 flex items-center gap-2.5">
               {SOCIAL.map((item) => (
                 <a key={item.title} href={item.href} target="_blank" rel="noopener noreferrer" title={item.title} aria-label={item.title} className={roundBtn}>
-                  <svg className="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                     <path d={item.path} />
                   </svg>
                 </a>
               ))}
               <a href="mailto:info@solahana.com" title="Email us" aria-label="Email us" className={roundBtn}>
-                <Mail className="w-[18px] h-[18px]" />
+                <Mail className="w-4 h-4" />
               </a>
             </div>
           </div>
 
           {/* Link columns, separated by a hairline on desktop */}
-          <div className="xl:border-l xl:border-[#DCE3F0] xl:px-6">
+          <div className="xl:border-l xl:border-white/15 xl:px-6">
             <Column title="Our Planning Services" items={SERVICES} />
           </div>
-          <div className="xl:border-l xl:border-[#DCE3F0] xl:px-6">
+          <div className="xl:border-l xl:border-white/15 xl:px-6">
             <Column title="Who We Serve" items={WHO} />
           </div>
-          <div className="xl:border-l xl:border-[#DCE3F0] xl:px-6">
+          <div className="xl:border-l xl:border-white/15 xl:px-6">
             <Column title="Our Professional Network" items={NETWORK}>
-              <p className="mt-6 text-[13px] leading-relaxed text-[#64748B]">
+              <p className="mt-3.5 text-[12px] leading-relaxed text-[#AEBBD3]">
                 We work with a network of trusted professionals and product partners, as per their respective terms and conditions, to help you implement your financial plan.
               </p>
             </Column>
           </div>
-          <div className="xl:border-l xl:border-[#DCE3F0] xl:pl-6">
+          <div className="xl:border-l xl:border-white/15 xl:pl-6">
             <Column title="About Solahana" items={ABOUT}>
               <button
                 onClick={() => go('contact')}
-                className="group mt-8 inline-flex w-full items-center justify-between gap-3 rounded-xl bg-gradient-to-br from-[#EAD08F] via-[#C9A04F] to-[#A67C2E] px-5 py-3.5 text-sm font-bold text-[#0F1F45] shadow-[0_10px_24px_rgba(166,124,46,0.3)] hover:brightness-105 transition cursor-pointer"
+                className="group mt-5 inline-flex w-full items-center justify-between gap-3 rounded-xl bg-gradient-to-br from-[#EAD08F] via-[#C9A04F] to-[#A67C2E] px-4 py-2.5 text-sm font-bold text-[#0F1F45] shadow-[0_10px_24px_rgba(166,124,46,0.3)] hover:brightness-105 transition cursor-pointer"
               >
                 <span>Start Your Financial Plan</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
+              <button
+                onClick={() => go('calculators')}
+                className="group mt-2.5 inline-flex w-full items-center justify-between gap-3 rounded-xl border border-[#E2B24E]/70 px-4 py-2.5 text-sm font-bold text-[#E2B24E] hover:bg-[#E2B24E] hover:text-[#0F1F45] transition cursor-pointer"
+              >
+                <span className="inline-flex items-center gap-2.5">
+                  <Calculator className="w-4 h-4" />
+                  Calculators
+                </span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
             </Column>
@@ -234,15 +247,15 @@ export default function Footer() {
         </div>
 
         {/* Important information strip */}
-        <div className="mt-12 h-px bg-gradient-to-r from-transparent via-[#C9922E]/50 to-transparent" />
-        <div className="py-7 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 items-center">
+        <div className="mt-7 h-px bg-gradient-to-r from-transparent via-[#E2B24E]/50 to-transparent" />
+        <div className="py-4 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 items-center">
           <div className="flex items-start gap-4">
-            <Shield className="w-9 h-9 shrink-0 text-[#C9922E]" strokeWidth={1.4} />
+            <Shield className="w-7 h-7 shrink-0 text-[#E2B24E]" strokeWidth={1.4} />
             <div>
-              <h4 style={serif} className="text-lg font-bold text-[#0F1F45]">
+              <h4 style={serif} className="text-base font-bold text-white">
                 Important Information
               </h4>
-              <p className="mt-1.5 text-[13px] leading-relaxed text-[#64748B]">
+              <p className="mt-1 text-[12px] leading-relaxed text-[#AEBBD3]">
                 Solahana provides financial planning services with the expertise of qualified Chartered Wealth Managers (CWM). We work with regulated product partners, including
                 Mutual Fund Distributors, Insurance Partners, Loan Providers, CA &amp; Tax Professionals, Legal Experts and other professionals, as per their respective terms and
                 conditions. Investment products are subject to market risks. Please consider your financial objectives, risk profile and circumstances before making any financial
@@ -250,9 +263,9 @@ export default function Footer() {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-4 lg:border-l lg:border-[#DCE3F0] lg:pl-10">
-            <Leaf className="w-9 h-9 shrink-0 text-[#C9922E]" strokeWidth={1.4} />
-            <p style={serif} className="text-[17px] leading-snug text-[#0F1F45]">
+          <div className="flex items-center gap-4 lg:border-l lg:border-white/15 lg:pl-10">
+            <Leaf className="w-7 h-7 shrink-0 text-[#E2B24E]" strokeWidth={1.4} />
+            <p style={serif} className="text-[15px] leading-snug text-white">
               Professional Planning.
               <br />
               A Brighter Financial Future.
@@ -261,13 +274,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="h-px bg-gradient-to-r from-transparent via-[#CBD6EE] to-transparent" />
-        <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-[13px] text-[#5B6B84]">
+        <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <div className="py-3.5 flex flex-col md:flex-row items-center justify-between gap-4 text-[12.5px] text-[#AEBBD3]">
           <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2" aria-label="Legal">
             {LEGAL.map((l, i) => (
               <React.Fragment key={l.name}>
-                {i > 0 && <span className="text-[#C9922E]/50">|</span>}
-                <button onClick={() => go(l.key)} className="hover:text-[#1A3170] transition-colors cursor-pointer">
+                {i > 0 && <span className="text-[#E2B24E]/50">|</span>}
+                <button onClick={() => go(l.key)} className="hover:text-[#E2B24E] transition-colors cursor-pointer">
                   {l.name}
                 </button>
               </React.Fragment>
