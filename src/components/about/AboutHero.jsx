@@ -36,12 +36,12 @@ export default function AboutHero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7 }}
-          className="relative h-[300px] overflow-hidden sm:h-[380px] lg:row-span-1 lg:h-full lg:aspect-[1331/1459]"
+          className="relative h-[300px] overflow-hidden sm:h-[380px] lg:row-span-1 lg:h-full lg:aspect-[1500/1459]"
         >
           <img
             src={aboutPhoto}
             alt="Amit R. Pandey, Chartered Wealth Manager (CWM), at his desk"
-            width="1331"
+            width="1500"
             height="1459"
             className="h-full w-full object-cover object-[60%_20%]"
             draggable="false"
