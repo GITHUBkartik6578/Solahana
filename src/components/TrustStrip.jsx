@@ -105,12 +105,21 @@ export default function TrustStrip() {
             >
               <article className="group flex h-full flex-col overflow-hidden rounded-[22px] bg-[#FBF8F3] border border-[#EDE6D8] shadow-[0_14px_36px_rgba(15,31,69,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_26px_54px_rgba(15,31,69,0.2)]">
                 {/* Illustration with its number */}
-                <Link to={link} tabIndex={-1} aria-hidden="true" className="relative block aspect-[7/10] w-full">
+                <Link to={link} tabIndex={-1} aria-hidden="true" className="relative block h-[230px] w-full overflow-hidden bg-[#0F1F45]">
+                  {/* soft backdrop: the same art, enlarged and blurred, so the sides blend in */}
                   <img
                     src={art}
                     alt=""
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover object-bottom"
+                    className="absolute inset-0 h-full w-full scale-150 object-cover object-bottom blur-xl"
+                    draggable="false"
+                  />
+                  {/* the artwork itself, scaled so the whole object fits a short card */}
+                  <img
+                    src={art}
+                    alt=""
+                    loading="lazy"
+                    className="absolute bottom-0 left-1/2 h-[142%] w-auto max-w-none -translate-x-1/2 [mask-image:linear-gradient(to_right,transparent_0%,black_22%,black_78%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_22%,black_78%,transparent_100%)]"
                     draggable="false"
                   />
                   <span className="absolute left-5 top-4 font-serif-luxury text-[28px] leading-none text-[#F1D9A3]">
@@ -120,21 +129,21 @@ export default function TrustStrip() {
                 </Link>
 
                 {/* Copy */}
-                <div className="flex flex-1 flex-col px-6 pb-6 pt-1 text-left">
+                <div className="flex flex-1 flex-col px-5 pb-5 pt-0 text-left">
                   <h3
                     style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                    className="text-[22px] font-bold leading-[1.15] text-[#0F1F45]"
+                    className="text-[20px] font-bold leading-[1.15] text-[#0F1F45]"
                   >
                     {title[0]}
                     <br />
                     {title[1]}
                   </h3>
-                  <span className="mt-4 h-[2px] w-9 rounded-full bg-[#C9922E]" />
-                  <p className="mt-4 text-[14.5px] leading-relaxed text-[#475569]">{desc}</p>
-                  <div className="mt-auto pt-6">
+                  <span className="mt-3 h-[2px] w-9 rounded-full bg-[#C9922E]" />
+                  <p className="mt-3 text-[14px] leading-relaxed text-[#475569]">{desc}</p>
+                  <div className="mt-auto pt-4">
                     <Link
                       to={link}
-                      className="inline-flex w-fit items-center justify-center gap-1.5 rounded-full bg-[#0F1F45] px-7 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(15,31,69,0.25)] transition-all hover:shadow-[0_12px_28px_rgba(15,31,69,0.38)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2F5BC7]/30"
+                      className="inline-flex w-fit items-center justify-center gap-1.5 rounded-full bg-[#0F1F45] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(15,31,69,0.25)] transition-all hover:shadow-[0_12px_28px_rgba(15,31,69,0.38)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2F5BC7]/30"
                     >
                       Explore
                       <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
