@@ -224,12 +224,12 @@ function Stewardship({ cfg }) {
                 key={c.title}
                 {...fade}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="overflow-hidden rounded-2xl border border-[#E7DFCF] bg-white shadow-[0_12px_30px_rgba(15,31,69,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(15,31,69,0.14)]"
+                className="flex flex-col overflow-hidden rounded-2xl border border-[#E7DFCF] bg-white shadow-[0_12px_30px_rgba(15,31,69,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(15,31,69,0.14)]"
               >
                 <div className="relative h-[150px] overflow-hidden bg-[#0A1836]">
                   <img src={art(cfg, `s${i}`)} alt="" loading="lazy" draggable="false" className="h-full w-full object-cover" />
                 </div>
-                <div className={`p-6 ${cfg.stewardDark ? 'bg-[#0F1F45]' : ''}`}>
+                <div className={`flex-1 p-6 ${cfg.stewardDark ? 'bg-[#0F1F45]' : ''}`}>
                   <h3 style={serif} className={`text-[18px] font-bold leading-tight ${cfg.stewardDark ? 'text-white' : 'text-[#0F1F45]'}`}>{c.title}</h3>
                   <p className={`mt-2 text-[13.5px] leading-relaxed ${cfg.stewardDark ? 'text-slate-300' : 'text-[#475569]'}`}>{c.desc}</p>
                 </div>

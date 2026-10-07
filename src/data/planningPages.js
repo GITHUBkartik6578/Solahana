@@ -14,8 +14,8 @@ const REGULATED = { icon: Handshake, label: 'Seamless Execution via Regulated Pa
 export const RETIREMENT_PAGE = {
   id: 'retirement',
   art: 'retire',
-  heroAspect: 736 / 824,
-  taglineBox: { x: 0.58, y: 0.72, w: 0.4, align: 'right' },
+  heroAspect: 1000 / 1152,
+  taglineBox: null, // the new retirement hero already has a clean tagline in the photo
   stewardDark: true,
   goal: 'Retirement Planning',
   calculatorId: 'retirement-calculator',
