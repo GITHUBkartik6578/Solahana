@@ -9,8 +9,7 @@ const ART = import.meta.glob('../../assets/planning/*.webp', { eager: true, impo
 const art = (cfg, name) => ART[`../../assets/planning/${cfg.art}-${name}.webp`];
 const artFile = (file) => ART[`../../assets/planning/${file}.webp`];
 const heroSrc = (cfg) => (cfg.heroFile ? artFile(cfg.heroFile) : art(cfg, 'hero'));
-// one sharp, clean photo behind every closing banner
-const ctaSrc = () => artFile('fp-hero-clean');
+const ctaSrc = (cfg) => (cfg.ctaFile ? artFile(cfg.ctaFile) : art(cfg, 'cta'));
 
 const serif = { fontFamily: "'Playfair Display', Georgia, serif" };
 
@@ -289,8 +288,9 @@ function Cta({ cfg }) {
     <section className="bg-[#F7F8FB] pb-16 pt-4 sm:pb-20">
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         <motion.div {...fade} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#1A3170] px-7 py-12 sm:px-12 sm:py-14">
+          <img src={ctaSrc(cfg)} alt="" aria-hidden="true" loading="lazy" draggable="false" className="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[62%] object-cover opacity-95 [mask-image:linear-gradient(to_right,transparent,black_30%)] lg:block" />
           <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-[#C9922E]/25 blur-[90px]" />
-          <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.55fr)_minmax(0,0.8fr)]">
+          <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
             <div>
               <Eyebrow light>{c.eyebrow}</Eyebrow>
               <h2 style={serif} className="[text-wrap:balance] mt-4 text-[28px] font-semibold leading-[1.12] text-[#E2B24E] sm:text-[40px]">
@@ -305,10 +305,6 @@ function Cta({ cfg }) {
                 {c.button}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
-            </div>
-            <div className="relative hidden self-stretch overflow-hidden rounded-2xl ring-1 ring-[#E2B24E]/30 lg:block">
-              <img src={ctaSrc(cfg)} alt="" aria-hidden="true" loading="lazy" draggable="false" className="absolute inset-0 h-full w-full object-cover object-[58%_18%]" />
-              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#0A1836]/50 to-transparent" />
             </div>
             <ul className="rounded-2xl border border-white/10 bg-[#0A1836]/90 p-5 backdrop-blur-sm sm:p-6">
               {c.benefits.map((b) => {
