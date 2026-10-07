@@ -7,17 +7,24 @@ import {
   Coins, BarChart3, Sprout, FileText, Compass, Search, PencilRuler, Presentation, Rocket, Eye,
 } from 'lucide-react';
 
-import heroPhoto from '../assets/about-photo.webp';
-import compassArt from '../assets/services/financial.webp';
-import investArt from '../assets/services/investment.webp';
-import retireArt from '../assets/services/retirement.webp';
-import riskArt from '../assets/services/risk.webp';
-import taxArt from '../assets/services/tax.webp';
-import estateArt from '../assets/services/estate.webp';
-import cashArt from '../assets/services/cashflow.webp';
-import growthArt from '../assets/stages/05.webp';
-import legacyArt from '../assets/stages/08.webp';
-import umbrellaArt from '../assets/stages/06.webp';
+// Photos cropped from the owner's Financial Planning design and upscaled (src/assets/planning/fp-*.webp)
+import heroPhoto from '../assets/planning/fp-hero.webp';
+import archFinancial from '../assets/planning/fp-a0.webp';
+import archInvest from '../assets/planning/fp-a1.webp';
+import archRetire from '../assets/planning/fp-a2.webp';
+import archRisk from '../assets/planning/fp-a3.webp';
+import archTax from '../assets/planning/fp-a4.webp';
+import archEstate from '../assets/planning/fp-a5.webp';
+import foGovernance from '../assets/planning/fp-f0.webp';
+import foGenerations from '../assets/planning/fp-f1.webp';
+import foBusiness from '../assets/planning/fp-f2.webp';
+import foConstitution from '../assets/planning/fp-f3.webp';
+import capLiquidity from '../assets/planning/fp-c0.webp';
+import capCore from '../assets/planning/fp-c1.webp';
+import capGrowth from '../assets/planning/fp-c2.webp';
+import capLegacy from '../assets/planning/fp-c3.webp';
+import umbrellaArt from '../assets/planning/fp-risk.webp';
+import ctaArt from '../assets/planning/fp-cta.webp';
 import { openConsultation } from '../data/whoWeServe';
 
 const serif = { fontFamily: "'Playfair Display', Georgia, serif" };
@@ -52,19 +59,19 @@ const WEALTH_NODES = [
 ];
 
 const ARCHITECTURE = [
-  { title: 'Financial Planning', desc: 'A complete view of your current position and future goals.', art: compassArt, to: '/goals' },
-  { title: 'Investment Planning', desc: 'Portfolio strategies aligned to your objectives and risk capacity.', art: investArt, to: '/investments' },
-  { title: 'Retirement & Cash Flow Planning', desc: 'Inflation-adjusted planning for financial independence.', art: retireArt, to: '/calculators/retirement' },
-  { title: 'Risk Planning', desc: 'Protecting your family and wealth from uncertainties.', art: riskArt, to: '/risk-management' },
-  { title: 'Tax Planning', desc: 'Strategic tax optimisation for today and your legacy.', art: taxArt, to: '/tax-planning' },
-  { title: 'Estate & Succession Planning', desc: 'Securing and transferring wealth across generations.', art: estateArt, to: '/estate-planning' },
+  { title: 'Financial Planning', desc: 'A complete view of your current position and future goals.', art: archFinancial, to: '/goals' },
+  { title: 'Investment Planning', desc: 'Portfolio strategies aligned to your objectives and risk capacity.', art: archInvest, to: '/investments' },
+  { title: 'Retirement & Cash Flow Planning', desc: 'Inflation-adjusted planning for financial independence.', art: archRetire, to: '/calculators/retirement' },
+  { title: 'Risk Planning', desc: 'Protecting your family and wealth from uncertainties.', art: archRisk, to: '/risk-management' },
+  { title: 'Tax Planning', desc: 'Strategic tax optimisation for today and your legacy.', art: archTax, to: '/tax-planning' },
+  { title: 'Estate & Succession Planning', desc: 'Securing and transferring wealth across generations.', art: archEstate, to: '/estate-planning' },
 ];
 
 const FAMILY_OFFICE = [
-  { title: 'Family Governance', desc: 'Defining how financial decisions are made across generations.', icon: Landmark },
-  { title: 'Intergenerational Wealth', desc: 'Preparing assets, responsibility and financial education for the next generation.', icon: GraduationCap },
-  { title: 'Business – Personal Wealth Integration', desc: 'Aligning entrepreneurial cash flows with personal wealth objectives.', icon: Building2 },
-  { title: 'Family Constitution & Succession Framework', desc: 'Creating clarity around ownership, succession and continuity.', icon: Scale },
+  { title: 'Family Governance', desc: 'Defining how financial decisions are made across generations.', photo: foGovernance, icon: Landmark },
+  { title: 'Intergenerational Wealth', desc: 'Preparing assets, responsibility and financial education for the next generation.', photo: foGenerations, icon: GraduationCap },
+  { title: 'Business – Personal Wealth Integration', desc: 'Aligning entrepreneurial cash flows with personal wealth objectives.', photo: foBusiness, icon: Building2 },
+  { title: 'Family Constitution & Succession Framework', desc: 'Creating clarity around ownership, succession and continuity.', photo: foConstitution, icon: Scale },
 ];
 
 const CASH_FLOW = [
@@ -79,10 +86,10 @@ const CASH_FLOW = [
 ];
 
 const CAPITAL = [
-  { title: 'Liquidity Capital', desc: 'For immediate and near-term requirements.', art: cashArt },
-  { title: 'Core Wealth', desc: 'Long-term diversified wealth creation.', art: growthArt },
-  { title: 'Growth Capital', desc: 'Higher growth opportunities aligned to your risk appetite.', art: investArt },
-  { title: 'Legacy Capital', desc: 'Capital designed for future generations.', art: legacyArt },
+  { title: 'Liquidity Capital', desc: 'For immediate and near-term requirements.', art: capLiquidity },
+  { title: 'Core Wealth', desc: 'Long-term diversified wealth creation.', art: capCore },
+  { title: 'Growth Capital', desc: 'Higher growth opportunities aligned to your risk appetite.', art: capGrowth },
+  { title: 'Legacy Capital', desc: 'Capital designed for future generations.', art: capLegacy },
 ];
 
 const PROTECTION = [
@@ -140,8 +147,8 @@ function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]">
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 top-10 h-[480px] w-[480px] rounded-full bg-[#C9922E]/15 blur-[120px]" />
-      <div className="relative mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:min-h-[clamp(500px,calc(100svh-80px),680px)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-4 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="py-10 lg:py-12">
+      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:min-h-[clamp(500px,calc(100svh-80px),680px)] lg:px-8">
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:max-w-[50%] lg:py-12">
           <Eyebrow light>Financial Planning</Eyebrow>
           <h1 style={serif} className="mt-5 text-[38px] font-bold leading-[1.08] tracking-tight text-white sm:text-[50px] lg:text-[clamp(40px,3.9vw,56px)]">
             Architecting Wealth.
@@ -184,18 +191,18 @@ function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="relative mx-auto h-[360px] w-full max-w-[560px] self-end sm:h-[440px] lg:h-full lg:max-h-[680px] lg:max-w-none"
+          className="relative mx-auto h-[340px] w-full max-w-[560px] overflow-hidden sm:h-[440px] lg:absolute lg:bottom-0 lg:right-0 lg:top-[80px] lg:h-auto lg:w-[54%] lg:max-w-none"
         >
           <img
             src={heroPhoto}
             alt="Amit R. Pandey, Chartered Wealth Manager"
             draggable="false"
-            className="absolute inset-0 h-full w-full object-cover object-[60%_20%] [mask-image:linear-gradient(to_right,transparent,black_22%,black_100%)] lg:[mask-image:linear-gradient(to_right,transparent,black_28%)]"
+            className="absolute inset-0 h-full w-full object-cover object-[30%_35%] lg:inset-auto lg:right-0 lg:top-0 lg:h-full lg:w-auto lg:max-w-none [mask-image:linear-gradient(to_right,transparent,black_8%)]"
           />
-          <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#0F1F45] to-transparent" />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-[#0F1F45] to-transparent lg:hidden" />
         </motion.div>
       </div>
     </section>
@@ -312,13 +319,18 @@ function FamilyOffice() {
                 key={c.title}
                 {...fade}
                 transition={{ duration: 0.5, delay: i * 0.07 }}
-                className="rounded-2xl border border-[#E7DFCF] bg-white p-6 shadow-[0_12px_30px_rgba(15,31,69,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(15,31,69,0.14)]"
+                className="overflow-hidden rounded-2xl border border-[#E7DFCF] bg-white shadow-[0_12px_30px_rgba(15,31,69,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(15,31,69,0.14)]"
               >
-                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1A3170] to-[#0F1F45] text-[#E2B24E]">
-                  <Icon className="h-6 w-6" strokeWidth={1.6} />
-                </span>
-                <h3 style={serif} className="mt-5 text-[18px] font-bold leading-tight text-[#0F1F45]">{c.title}</h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-[#475569]">{c.desc}</p>
+                <div className="relative h-[150px] overflow-hidden bg-[#0A1836]">
+                  <img src={c.photo} alt="" loading="lazy" draggable="false" className="h-full w-full object-cover" />
+                  <span className="absolute bottom-3 left-4 flex h-10 w-10 items-center justify-center rounded-full border border-[#E2B24E]/70 bg-[#0F1F45]/85 text-[#E2B24E]">
+                    <Icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
+                  </span>
+                </div>
+                <div className="p-6">
+                  <h3 style={serif} className="text-[18px] font-bold leading-tight text-[#0F1F45]">{c.title}</h3>
+                  <p className="mt-2 text-[14px] leading-relaxed text-[#475569]">{c.desc}</p>
+                </div>
               </motion.div>
             );
           })}
@@ -407,8 +419,8 @@ function RiskAndTax() {
     <section className="bg-[#F7F8FB] py-16 sm:py-20">
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-6 px-4 sm:px-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:px-8">
         <motion.div {...fade} className="relative overflow-hidden rounded-3xl bg-[#0A1836] p-7 sm:p-10">
-          <img src={umbrellaArt} alt="" loading="lazy" draggable="false" className="absolute inset-0 h-full w-full object-cover opacity-45" />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#0A1836] via-[#0A1836]/85 to-[#0A1836]/20" />
+          <img src={umbrellaArt} alt="" loading="lazy" draggable="false" className="absolute inset-y-0 right-0 h-full w-[70%] object-cover" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#0A1836] via-[#0A1836]/80 to-transparent" />
           <div className="relative">
             <Eyebrow light>Risk &amp; Protection</Eyebrow>
             <h2 style={serif} className="mt-4 max-w-md text-[28px] font-bold leading-[1.15] text-white sm:text-[36px]">Protect the Architecture Before You Grow It.</h2>
@@ -499,6 +511,7 @@ function ClosingCta() {
     <section className="bg-[#F7F8FB] pb-16 pt-4 sm:pb-20">
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         <motion.div {...fade} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#1A3170] px-7 py-12 sm:px-12 sm:py-14">
+          <img src={ctaArt} alt="" aria-hidden="true" loading="lazy" draggable="false" className="pointer-events-none absolute inset-y-0 right-0 h-full w-full object-cover opacity-90 sm:w-[70%] [mask-image:linear-gradient(to_right,transparent,black_40%)]" />
           <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-[#C9922E]/25 blur-[90px]" />
           <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
