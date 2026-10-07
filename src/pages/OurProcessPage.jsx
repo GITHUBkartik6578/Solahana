@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Phone, Route } from 'lucide-react';
+import { ArrowRight, Check, Phone, Route, Users, SearchCheck, FileText, RefreshCw } from 'lucide-react';
 import ProcessJourney from '../components/our-process/ProcessJourney';
 import PrepChecklist from '../components/our-process/PrepChecklist';
 import ProcessFaq from '../components/our-process/ProcessFaq';
@@ -11,36 +11,48 @@ import { openConsultation } from '../data/whoWeServe';
 const EASE = [0.22, 1, 0.36, 1];
 const BOOK = { goal: 'Financial Planning', message: 'I’d like to book the free intro conversation.' };
 
-/** The five step images, fanned like cards in a hand. */
-function Fan({ reduceMotion }) {
-  const mid = (STEPS.length - 1) / 2;
+const STEP_ICONS = [Phone, Users, SearchCheck, FileText, RefreshCw];
+
+/** The five steps as a connected, clickable path (replaces the photo fan). */
+function StepsPath({ reduceMotion }) {
+  const go = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   return (
-    <div aria-hidden="true" className="relative mx-auto hidden h-[360px] w-full max-w-[420px] lg:block">
-      <span className="absolute inset-x-[2%] bottom-[4%] top-[18%] rounded-[50%] bg-[radial-gradient(closest-side,rgba(230,194,122,0.5),rgba(230,194,122,0.1)_70%,transparent)]" />
-      {STEPS.map((s, i) => {
-        const d = i - mid;
-        return (
-          <motion.div
-            key={s.id}
-            initial={reduceMotion ? false : { opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 + i * 0.07, ease: EASE }}
-            style={{ left: `${i * 17.5}%`, zIndex: 10 - Math.round(Math.abs(d) * 2) }}
-            className="absolute top-[4%] h-[300px] w-[26%]"
-          >
-            {/* static tilt so it also holds without JS animation */}
-            <div
-              style={{ transform: `translateY(${Math.abs(d) * 14}px) rotate(${d * 7}deg)`, transformOrigin: '50% 100%' }}
-              className="relative h-full w-full overflow-hidden rounded-2xl border border-[#E6C27A]/60 shadow-[0_18px_34px_rgba(15,31,69,0.28)]"
+    <div className="relative mx-auto hidden w-full max-w-[470px] lg:block">
+      <span aria-hidden="true" className="pointer-events-none absolute -inset-6 rounded-[40px] bg-[radial-gradient(closest-side,rgba(230,194,122,0.35),transparent)]" />
+      <ol className="relative space-y-3">
+        <span aria-hidden="true" className="absolute bottom-6 left-[41px] top-6 w-[2px] rounded-full bg-gradient-to-b from-[#E6C27A] via-[#C9922E] to-[#E6C27A]/30" />
+        {STEPS.map((s, i) => {
+          const Icon = STEP_ICONS[i % STEP_ICONS.length];
+          return (
+            <motion.li
+              key={s.id}
+              initial={reduceMotion ? false : { opacity: 0, x: 28 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 + i * 0.1, ease: EASE }}
+              style={{ marginLeft: `${i * 14}px` }}
+              className="relative"
             >
-              <img src={s.art} alt="" draggable={false} className="h-full w-full object-cover object-[center_72%]" />
-              <span className="absolute left-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#0F1F45]/60 font-serif-luxury text-[13px] font-bold text-[#E6C27A] backdrop-blur-sm">
-                {i + 1}
-              </span>
-            </div>
-          </motion.div>
-        );
-      })}
+              <button
+                type="button"
+                onClick={() => go(s.id)}
+                className="group flex w-full cursor-pointer items-center gap-4 rounded-2xl border border-[#E4D2A6] bg-white/95 px-3.5 py-3 text-left shadow-[0_12px_28px_rgba(15,31,69,0.10)] outline-none backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-[#C9922E] hover:shadow-[0_18px_36px_rgba(201,146,46,0.25)] focus-visible:ring-2 focus-visible:ring-[#C9922E]"
+              >
+                <span className="relative z-10 flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-gradient-to-b from-[#1A3170] to-[#0F1F45] text-[#E6C27A] ring-4 ring-white">
+                  <Icon className="h-[22px] w-[22px]" strokeWidth={1.8} />
+                  <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#E6C27A] font-serif-luxury text-[11px] font-bold text-[#0F1F45]">
+                    {i + 1}
+                  </span>
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block font-serif-luxury text-[17px] font-bold leading-tight text-[#0F1F45]">{s.short}</span>
+                  <span className="mt-0.5 block text-[12.5px] leading-snug text-[#64748B]">{s.outcome}</span>
+                </span>
+                <ArrowRight className="h-4 w-4 shrink-0 text-[#C9922E] opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100" />
+              </button>
+            </motion.li>
+          );
+        })}
+      </ol>
     </div>
   );
 }
@@ -51,7 +63,7 @@ export default function OurProcessPage() {
   return (
     <div className="relative z-10 bg-white">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#F1F4FA] via-[#F7F8FB] to-white pb-10 pt-28 sm:pb-12 sm:pt-36">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#F1F4FA] via-[#F7F8FB] to-white pb-10 pt-24 sm:pb-12 sm:pt-28">
         <div aria-hidden="true" className="pointer-events-none absolute -top-40 left-[-12%] h-[640px] w-[640px] rounded-full bg-[#2F5BC7]/[0.07] blur-[120px]" />
         <div aria-hidden="true" className="pointer-events-none absolute right-[2%] top-[8%] h-[360px] w-[360px] rounded-full bg-[#C9A04F]/[0.14] blur-[100px]" />
 
@@ -65,8 +77,8 @@ export default function OurProcessPage() {
               <Route className="h-4 w-4 text-[#C9A04F]" />
               Our process
             </p>
-            <h1 className="mt-4 font-serif-luxury text-[38px] font-bold leading-[1.06] tracking-[-0.035em] text-[#0F1F45] [text-wrap:balance] sm:text-[52px] lg:text-[56px]">
-              Five steps from first call to a plan you can follow.
+            <h1 className="mt-4 font-serif-luxury text-[36px] font-bold leading-[1.08] tracking-[-0.02em] text-[#0F1F45] [text-wrap:balance] sm:text-[52px] lg:text-[56px]">
+              Five steps from first call to <span className="text-[#B8862B]">a plan you can follow.</span>
             </h1>
             <span aria-hidden="true" className="mt-5 block h-[4px] w-20 rounded-full" style={{ background: 'var(--grad-gold)' }} />
             <p className="mt-5 max-w-[52ch] text-[17px] leading-relaxed text-[#475569] sm:text-lg">
@@ -107,7 +119,7 @@ export default function OurProcessPage() {
             </div>
           </motion.div>
 
-          <Fan reduceMotion={reduceMotion} />
+          <StepsPath reduceMotion={reduceMotion} />
         </div>
       </section>
 
