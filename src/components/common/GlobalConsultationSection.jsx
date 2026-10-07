@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   User, 
@@ -55,6 +55,27 @@ export default function GlobalConsultationSection() {
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [phoneTouched, setPhoneTouched] = useState(false);
+
+  // Pages can pre-fill the goal and message before scrolling here (e.g. the Who We Serve guide).
+  // A message the visitor typed themselves is never overwritten.
+  const prefilledMessage = useRef('');
+  useEffect(() => {
+    const handlePrefill = (e) => {
+      const { goal, message } = e.detail || {};
+      setFormData((prev) => {
+        const next = { ...prev };
+        if (planningInterests.includes(goal)) next.goal = goal;
+        const untouched = !prev.message.trim() || prev.message === prefilledMessage.current;
+        if (message && untouched) {
+          next.message = message;
+          prefilledMessage.current = message;
+        }
+        return next;
+      });
+    };
+    window.addEventListener('solahana:prefill-consultation', handlePrefill);
+    return () => window.removeEventListener('solahana:prefill-consultation', handlePrefill);
+  }, []);
 
   const isPhoneValid = /^[6-9][0-9]{9}$/.test(formData.phone.replace(/\D/g, ''));
 

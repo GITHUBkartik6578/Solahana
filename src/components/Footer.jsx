@@ -41,12 +41,13 @@ const SERVICES = [
   { name: 'Estate Planning', icon: Home, key: 'estate-planning' },
   { name: 'Goal Planning', icon: Target, key: 'goals' },
 ];
+// Each link opens its own guide on the Who We Serve page
 const WHO = [
-  { name: 'Individuals & Families', icon: Users, key: 'who-we-serve' },
-  { name: 'Professionals', icon: User, key: 'who-we-serve' },
-  { name: 'Business Owners', icon: Briefcase, key: 'who-we-serve' },
+  { name: 'Individuals & Families', icon: Users, key: '/who-we-serve#families' },
+  { name: 'Professionals', icon: User, key: '/who-we-serve#salaried' },
+  { name: 'Business Owners', icon: Briefcase, key: '/who-we-serve#business-owners' },
   { name: 'HNI Families', icon: Gem, key: 'who-we-serve' },
-  { name: 'NRIs', icon: Globe, key: 'who-we-serve' },
+  { name: 'NRIs', icon: Globe, key: '/who-we-serve#nri' },
 ];
 // Partner types: informational only, there is no page for them
 const NETWORK = [
@@ -102,8 +103,10 @@ export default function Footer() {
   const navigate = useNavigate();
 
   const go = (key) => {
-    navigate(pathMap[key] || key);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const path = pathMap[key] || key;
+    navigate(path);
+    // Links with a #section are scrolled into place by ScrollToTopAndSEO
+    if (!path.includes('#')) window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const ColumnTitle = ({ children }) => (

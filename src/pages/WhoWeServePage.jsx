@@ -1,140 +1,133 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Users } from 'lucide-react';
-import FeatureRow from '../components/common/FeatureRow';
-import {
-  SalariedVisual,
-  BusinessVisual,
-  FamiliesVisual,
-  NriVisual,
-  YoungProVisual,
-  RetireeVisual,
-} from '../components/illustrations/AudienceProcessVisuals';
-import familiesPhoto from '../assets/families-planning-together.jpg';
+import React, { useCallback, useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
+import { ArrowRight, Check, Phone, Users } from 'lucide-react';
+import AudienceGuide from '../components/who-we-serve/AudienceGuide';
+import FocusMap from '../components/who-we-serve/FocusMap';
+import HowItWorks from '../components/who-we-serve/HowItWorks';
+import FitCheck from '../components/who-we-serve/FitCheck';
+import { DEFAULT_AUDIENCE, audienceFromHash, openConsultation } from '../data/whoWeServe';
+import mascot from '../assets/hero-mascot.webp';
+import coin from '../assets/solahana-16-ana-coin.webp';
 
-const AUDIENCES = [
-  {
-    id: 'salaried',
-    chip: 'Salaried Professionals',
-    eyebrow: 'Salaried Professionals',
-    title: 'Salary comes in. By the 25th, it’s gone.',
-    lead: 'Good income, busy life, and money that never seems to stay. We put your savings on autopilot so progress happens without you thinking about it.',
-    problems: ['Savings don’t grow even as salary does', 'Tax-saving products bought in a March rush', 'No idea if you’re on track for your goals'],
-    points: ['SIPs that run on salary day', 'The right tax regime, used well', 'An emergency fund you won’t touch'],
-    cta: 'Plan My Salary',
-    Visual: SalariedVisual,
-  },
-  {
-    id: 'business-owners',
-    chip: 'Business Owners',
-    eyebrow: 'Business Owners',
-    title: 'The business is growing. Is your personal wealth?',
-    lead: 'Most founders have almost everything tied up in the business. We help you build wealth outside it, and keep business and family money clearly apart.',
-    problems: ['Business and home money get mixed up', 'Most of your wealth is locked in one place', 'No clear plan for who takes over'],
-    points: ['Separate business and family money', 'Pay yourself the tax-smart way', 'Build wealth outside the business', 'Plan succession clearly'],
-    cta: 'Plan for My Business',
-    Visual: BusinessVisual,
-  },
-  {
-    id: 'families',
-    chip: 'Families',
-    eyebrow: 'Families',
-    title: 'Many goals. One income. A lot of responsibility.',
-    lead: 'School fees, a home loan and your parents’ health, often all at once. We give every goal its own fund so they stop competing for the same money.',
-    problems: ['Every goal pulls from the same savings', 'Not sure if your insurance is enough', 'Will and nominees still pending'],
-    points: ['Its own fund for every goal', 'Right-sized health and term cover', 'Will and nominees, sorted'],
-    cta: 'Plan for My Family',
-    Visual: FamiliesVisual,
-    photo: familiesPhoto,
-    photoAlt: 'A couple sitting together at home, going through their financial plan',
-  },
-  {
-    id: 'nri',
-    chip: 'NRI Families',
-    eyebrow: 'NRI Families',
-    title: 'Earning abroad. Planning for home.',
-    lead: 'Whether you’re in the Gulf, the US, the UK or Singapore, we help you keep your Indian money organised and working, without the paperwork headaches.',
-    problems: ['Confused between NRE and NRO accounts', 'Worried about paying tax twice', 'Investments in India left unmanaged'],
-    points: ['Accounts set up the right way', 'Avoid paying tax twice on the same income', 'A clear investment plan for India'],
-    cta: 'Plan as an NRI',
-    Visual: NriVisual,
-  },
-  {
-    id: 'young-professionals',
-    chip: 'Young Professionals',
-    eyebrow: 'Young Professionals',
-    title: 'Your first salary is the best time to start.',
-    lead: 'Too many apps and too much advice. We give you a simple first plan, so small, steady habits do the heavy lifting over the years.',
-    problems: ['Not sure where to begin', 'Conflicting advice from apps and friends', 'Travel, a bike and a home, all at once'],
-    points: ['A simple first plan', 'Small SIPs that grow with your pay', 'Term cover while it’s cheap'],
-    cta: 'Start My First Plan',
-    Visual: YoungProVisual,
-  },
-  {
-    id: 'retirees',
-    chip: 'Pre-retirees & Retirees',
-    eyebrow: 'Pre-retirees & Retirees',
-    title: 'Your salary stops. Your expenses don’t.',
-    lead: 'The big question is whether your money will last. We plan a steady monthly income and protect it from rising costs and medical bills.',
-    problems: ['Will my savings last?', 'Too much sitting idle in FDs', 'Medical costs keep going up'],
-    points: ['Know your retirement number', 'A monthly income plan', 'Health cover that lasts'],
-    cta: 'Plan My Retirement',
-    Visual: RetireeVisual,
-  },
-];
+// Straight from our Process page: nothing here is a new claim.
+const HERO_FACTS = ['Free first call', 'Plain language', 'No product pushing'];
 
 export default function WhoWeServePage() {
+  const { hash } = useLocation();
+  const reduceMotion = useReducedMotion();
+  const [activeId, setActiveId] = useState(
+    () => audienceFromHash(typeof window === 'undefined' ? '' : window.location.hash) ?? DEFAULT_AUDIENCE,
+  );
+
+  // Links like /who-we-serve#nri open that guide (the scroll itself is handled by ScrollToTopAndSEO)
+  useEffect(() => {
+    const id = audienceFromHash(hash);
+    if (id) setActiveId(id);
+  }, [hash]);
+
+  const selectAudience = useCallback((id, { scroll = false } = {}) => {
+    setActiveId(id);
+    // Keep the address shareable without triggering a router navigation (and its scroll jump)
+    window.history.replaceState(window.history.state, '', `#${id}`);
+    if (scroll) {
+      document.getElementById('audience-guide')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, []);
+
   return (
     <div className="relative z-10 bg-white">
-      {/* Hero */}
-      <section className="relative pt-32 pb-14 sm:pt-40 sm:pb-16 overflow-hidden bg-gradient-to-b from-[#F4F6FB] to-white">
-        <div className="absolute -top-32 right-[-10%] w-[620px] h-[620px] rounded-full bg-[#2F5BC7]/[0.07] blur-[120px] pointer-events-none" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EEF2FB] text-[11px] font-bold uppercase tracking-[0.16em] text-[#2F5BC7]">
-              <Users className="w-3.5 h-3.5 text-[#C9A04F]" /> Who We Serve
-            </span>
-            <h1 className="mt-5 text-[36px] sm:text-5xl lg:text-[56px] font-serif-luxury font-bold text-[#0F1F45] leading-[1.1]">
-              Different lives.
-              <br />
-              <span className="gold-gradient-text">Different money questions.</span>
-            </h1>
-            <p className="mt-5 text-base sm:text-lg text-[#475569] max-w-2xl mx-auto leading-relaxed">
-              First salary or family business, we start from where you are today, not from a template.
-            </p>
-          </motion.div>
+      {/* Hero + guide */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#F1F4FA] via-[#F7F8FB] to-white pb-16 pt-28 sm:pb-24 sm:pt-36">
+        <div aria-hidden="true" className="pointer-events-none absolute -top-40 right-[-12%] h-[640px] w-[640px] rounded-full bg-[#2F5BC7]/[0.07] blur-[120px]" />
+        <div aria-hidden="true" className="pointer-events-none absolute left-[-10%] top-[40%] h-[460px] w-[460px] rounded-full bg-[#C9A04F]/[0.14] blur-[110px]" />
 
-          {/* Jump chips */}
-          <nav aria-label="Jump to a section" className="mt-9 flex flex-wrap justify-center gap-2.5">
-            {AUDIENCES.map((a) => (
-              <a
-                key={a.id}
-                href={`#${a.id}`}
-                className="px-4 py-2 rounded-full bg-white border border-[#E4E8F0] text-sm font-semibold text-[#0F1F45] hover:border-[#CBD6EE] hover:text-[#2F5BC7] hover:-translate-y-0.5 transition-all shadow-[0_1px_2px_rgba(15,31,69,0.04)]"
-              >
-                {a.chip}
-              </a>
-            ))}
-          </nav>
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-8">
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <p className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#2F5BC7]">
+                <Users className="h-4 w-4 text-[#C9A04F]" />
+                Who we serve
+              </p>
+              <h1 className="mt-4 font-serif-luxury text-[38px] font-bold leading-[1.06] tracking-[-0.035em] text-[#0F1F45] [text-wrap:balance] sm:text-[52px] lg:text-[58px]">
+                Which of these sounds like you today?
+              </h1>
+              <span aria-hidden="true" className="mt-5 block h-[4px] w-20 rounded-full" style={{ background: 'var(--grad-gold)' }} />
+              <p className="mt-5 max-w-[52ch] text-[17px] leading-relaxed text-[#475569] sm:text-lg">
+                Most people are several of them over a lifetime. Pick the one closest to where you are now, and see where we’d start.
+              </p>
+              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2.5">
+                {HERO_FACTS.map((f) => (
+                  <li key={f} className="inline-flex items-center gap-2 text-[14px] font-semibold text-[#0F1F45]">
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#C9A04F]/20 text-[#A67C2E]">
+                      <Check className="h-3 w-3" strokeWidth={3.2} />
+                    </span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Mascot on a gold-ringed disc */}
+            <motion.div
+              aria-hidden="true"
+              initial={reduceMotion ? false : { opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative mx-auto hidden aspect-square w-full max-w-[330px] lg:block"
+            >
+              <span className="absolute inset-[6%] rounded-full border border-[#C9A04F]/45" />
+              <span className="absolute inset-[16%] rounded-full bg-[radial-gradient(closest-side,rgba(230,194,122,0.55),rgba(230,194,122,0.08)_72%,transparent)]" />
+              <span className="absolute inset-[16%] rounded-full border border-dashed border-[#C9A04F]/60" />
+              <img src={mascot} alt="" draggable={false} className="absolute inset-x-[14%] bottom-[8%] top-[10%] h-[82%] w-[72%] object-contain drop-shadow-[0_18px_22px_rgba(15,31,69,0.22)]" />
+              <img src={coin} alt="" draggable={false} className="absolute right-[2%] top-[6%] h-[22%] w-[22%] rounded-full object-cover shadow-[0_10px_22px_rgba(166,124,46,0.35)]" />
+            </motion.div>
+          </div>
+
+          <div className="mt-10 sm:mt-14">
+            <AudienceGuide activeId={activeId} onSelect={selectAudience} />
+          </div>
         </div>
       </section>
 
-      {AUDIENCES.map((a, i) => (
-        <FeatureRow key={a.id} index={i} {...a} />
-      ))}
+      <FocusMap activeId={activeId} onSelect={selectAudience} />
+      <HowItWorks />
+      <FitCheck />
 
-      {/* Not listed? */}
-      <section className="py-16 sm:py-20 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-[#0F1F45]">Don’t see yourself here?</h2>
-          <p className="mt-3 text-[#475569]">
-            Most people are a mix of these. Tell us your situation and we’ll shape the plan around it.
-          </p>
-          <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <Link to="/our-process" className="btn-luxury-outline inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm">
-              See how we work <ArrowRight className="w-4 h-4" />
-            </Link>
+      {/* Closing band, leads into the consultation form below */}
+      <section className="bg-ink-band py-16 sm:py-20">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div className="max-w-2xl">
+            <h2 className="font-serif-luxury text-[28px] font-bold leading-tight text-white [text-wrap:balance] sm:text-[38px]">
+              Most people are a mix of two or three of these.
+            </h2>
+            <p className="mt-4 text-[17px] leading-relaxed text-[#C7D2E6]">
+              Tell us where you are today. We’ll shape the plan around your life, not a template.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-col gap-4 sm:flex-row sm:items-center">
+            <a
+              href="#global-consultation-section"
+              onClick={(e) => {
+                e.preventDefault();
+                openConsultation();
+              }}
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-[#0F1F45] shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+              Book a consultation
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </a>
+            <a
+              href="tel:+917304442171"
+              className="inline-flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-semibold text-[#E6C27A] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              <Phone className="h-4 w-4" />
+              Or call +91 73044 42171
+            </a>
           </div>
         </div>
       </section>
