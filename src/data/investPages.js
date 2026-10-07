@@ -12,8 +12,6 @@ const PARTNERS = { icon: Handshake, label: 'Seamless Execution via Regulated Ins
 const COMMON = {
   goal: 'Investment Planning',
   calculatorId: null,
-  heroFile: 'fp-hero-clean',
-  heroAspect: 1920 / 1459,
   taglineBox: null,
   ctaFile: 'invest-cta',
   tagline: [],
@@ -22,6 +20,7 @@ const COMMON = {
 export const MUTUAL_FUNDS_PAGE = {
   ...COMMON,
   id: 'mutual-funds',
+  heroAspect: 880 / 1076,
   art: 'mf',
   eyebrow: 'Mutual Funds & SIPs',
   titleGold: ['Disciplined Mutual Fund', 'Architecture.'],
@@ -86,6 +85,7 @@ export const MUTUAL_FUNDS_PAGE = {
 export const PMS_AIF_PAGE = {
   ...COMMON,
   id: 'pms-aif-sif',
+  heroAspect: 880 / 1028,
   art: 'pms',
   eyebrow: 'PMS, AIF & SIF',
   titleGold: ['Alternative & Strategic', 'Wealth Architecture.'],
@@ -150,6 +150,7 @@ export const PMS_AIF_PAGE = {
 export const REAL_ESTATE_PAGE = {
   ...COMMON,
   id: 'real-estate',
+  heroAspect: 908 / 1072,
   art: 're',
   eyebrow: 'Real Estate, REITs & Fractional Ownership',
   titleGold: ['Real Estate', 'Architecture.'],
@@ -214,6 +215,7 @@ export const REAL_ESTATE_PAGE = {
 export const BONDS_PAGE = {
   ...COMMON,
   id: 'bonds',
+  heroAspect: 908 / 1044,
   art: 'bonds',
   eyebrow: 'Bonds, NCDs & Fixed Income',
   titleGold: ['Fixed Income', 'Architecture.'],
@@ -278,6 +280,7 @@ export const BONDS_PAGE = {
 export const EQUITY_PAGE = {
   ...COMMON,
   id: 'equities',
+  heroAspect: 912 / 1096,
   art: 'eq',
   eyebrow: 'Equities, International Investing & IPOs',
   titleGold: ['Direct Equity &', 'Global Architecture.'],
