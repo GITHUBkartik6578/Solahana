@@ -8,7 +8,8 @@ import {
 } from 'lucide-react';
 
 // Photos cropped from the owner's Financial Planning design and upscaled (src/assets/planning/fp-*.webp)
-import heroPhoto from '../assets/planning/fp-hero.webp';
+import heroPhoto from '../assets/planning/fp-hero-clean.webp';
+import anaCoin from '../assets/solahana-16-ana-coin.webp';
 import archFinancial from '../assets/planning/fp-a0.webp';
 import archInvest from '../assets/planning/fp-a1.webp';
 import archRetire from '../assets/planning/fp-a2.webp';
@@ -198,7 +199,15 @@ function Hero() {
             src={heroPhoto}
             alt="Amit R. Pandey, Chartered Wealth Manager"
             draggable="false"
-            className="absolute inset-0 h-full w-full object-cover object-[30%_35%] lg:object-[8%_30%]"
+            className="absolute inset-0 h-full w-full object-cover object-[25%_28%]"
+          />
+          {/* Solahana's 16 Ana coin resting on the desk */}
+          <img
+            src={anaCoin}
+            alt=""
+            aria-hidden="true"
+            draggable="false"
+            className="absolute bottom-[9%] right-[7%] w-[19%] max-w-[150px] drop-shadow-[0_14px_22px_rgba(0,0,0,0.55)]"
           />
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-[#0F1F45] to-transparent lg:hidden" />
         </motion.div>
