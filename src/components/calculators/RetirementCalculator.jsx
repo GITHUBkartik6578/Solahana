@@ -5,13 +5,8 @@ import { ShieldCheck, Flame, RotateCcw, Bookmark, Sparkles, TrendingUp, Calendar
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { calculateRetirement, formatINR } from '../../utils/calculatorEngine';
 
-import RetirementHero from '../planning/RetirementHero';
-import WhyRetirementMatters from '../planning/WhyRetirementMatters';
-import RetirementJourney from '../planning/RetirementJourney';
-import RetirementSolutions from '../planning/RetirementSolutions';
-import RetirementBenefits from '../planning/RetirementBenefits';
-import RetirementFAQ from '../planning/RetirementFAQ';
-import { RetirementPartner, RetirementCantWait, RetirementScenarios, RetirementClosingCTA } from '../planning/RetirementGuide';
+import { PlanningTop, PlanningCta } from '../planning-pages/PlanningPageTemplate';
+import { RETIREMENT_PAGE } from '../../data/planningPages';
 
 export default function RetirementCalculator() {
   const location = useLocation();
@@ -64,54 +59,12 @@ export default function RetirementCalculator() {
     setTimeout(() => setIsSaved(false), 3000);
   };
 
-  const scrollToConsultation = () => {
-    const el = document.getElementById('global-consultation-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const scrollToCalculator = () => {
-    const el = document.getElementById('retirement-calculator');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <div className="relative z-10 bg-[#F7F8FB]">
       
-      {/* 1. PREMIUM HERO SECTION */}
-      <RetirementHero
-        onStartPlanning={scrollToCalculator}
-        onRequestCallback={scrollToConsultation}
-      />
+      <PlanningTop config={RETIREMENT_PAGE} />
 
-      {/* Your partner in building a retirement plan */}
-      <RetirementPartner />
-
-      {/* 2. WHY RETIREMENT PLANNING MATTERS */}
-      <WhyRetirementMatters />
-
-      {/* Why retirement planning can't wait */}
-      <RetirementCantWait />
-
-      {/* 3. RETIREMENT PLANNING JOURNEY (GOLD ROADMAP) */}
-      <RetirementJourney />
-
-      {/* 4. RETIREMENT PLANNING SOLUTIONS */}
-      <RetirementSolutions />
-
-      {/* 5. RETIREMENT BENEFITS SECTION */}
-      <RetirementBenefits />
-
-      {/* What a plan can do: illustrative numbers */}
-      <RetirementScenarios />
-
-      {/* 6. FREQUENTLY ASKED QUESTIONS */}
-      <RetirementFAQ />
-
-      {/* 7. RETIREMENT CALCULATOR (PENULTIMATE SECTION - SOLAHANA BRANDING) */}
+      {/* the retirement calculator stays on the page */}
       <section id="retirement-calculator" className="py-16 sm:py-24 bg-[#F7F8FB] relative overflow-hidden border-t border-[#E4E8F0]">
         {/* Soft Ambient Background Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#2F5BC7]/10 rounded-full blur-[160px] pointer-events-none" />
@@ -425,7 +378,7 @@ export default function RetirementCalculator() {
       </section>
 
       {/* Closing call to action, leads into the booking form */}
-      <RetirementClosingCTA />
+      <PlanningCta config={RETIREMENT_PAGE} />
     </div>
   );
 }

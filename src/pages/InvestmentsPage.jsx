@@ -1,45 +1,15 @@
 import React from 'react';
-import InvestmentsHero from '../components/investments/InvestmentsHero';
-import WhyInvestingMatters from '../components/investments/WhyInvestingMatters';
-import InvestmentCategories from '../components/investments/InvestmentCategories';
-import WhyChooseSolahanaInvestment from '../components/investments/WhyChooseSolahanaInvestment';
+import { PlanningTop, PlanningCta } from '../components/planning-pages/PlanningPageTemplate';
 import InvestmentCalculator from '../components/investments/InvestmentCalculator';
+import { INVESTMENT_PAGE } from '../data/planningPages';
 
-export default function InvestmentsPage({ onOpenSearch }) {
-
-  const scrollToCalculator = () => {
-    const el = document.getElementById('investment-calculator');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const scrollToConsultation = () => {
-    const el = document.getElementById('global-consultation-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
+export default function InvestmentsPage() {
   return (
     <div className="relative z-10 bg-[#F7F8FB]">
-      {/* 1. HERO SECTION */}
-      <InvestmentsHero 
-        onStartPlanning={scrollToCalculator}
-        onRequestCallback={scrollToConsultation}
-      />
-
-      {/* 2. WHY INVESTMENT PLANNING MATTERS */}
-      <WhyInvestingMatters />
-
-      {/* 3. INVESTMENT PLANNING SOLUTIONS */}
-      <InvestmentCategories />
-
-      {/* 4. WHY CHOOSE SOLAHANA */}
-      <WhyChooseSolahanaInvestment />
-
-      {/* 5. INVESTMENT CALCULATOR */}
+      <PlanningTop config={INVESTMENT_PAGE} />
+      {/* the existing investment calculator stays on the page */}
       <InvestmentCalculator />
+      <PlanningCta config={INVESTMENT_PAGE} />
     </div>
   );
 }
