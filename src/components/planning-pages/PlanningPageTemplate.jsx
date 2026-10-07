@@ -55,11 +55,11 @@ function Hero({ cfg }) {
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:min-h-[clamp(520px,calc(100svh-80px),700px)] lg:grid-cols-1 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:max-w-[52%] lg:py-12">
           <Eyebrow light>{cfg.eyebrow}</Eyebrow>
-          <h1 style={serif} className="mt-5 text-[34px] font-bold leading-[1.1] tracking-tight text-white sm:text-[44px] lg:text-[clamp(34px,3.5vw,50px)]">
+          <h1 style={serif} className="[text-wrap:balance] mt-5 text-[34px] font-semibold leading-[1.1] tracking-[-0.01em] text-white sm:text-[44px] lg:text-[clamp(34px,3.5vw,50px)]">
             <span className="text-[#E2B24E]"><Lines lines={cfg.titleGold} /></span>
             <Lines lines={cfg.titleWhite} />
           </h1>
-          <p className="mt-5 max-w-[56ch] text-[15px] leading-relaxed text-slate-200 sm:text-[16.5px]">{cfg.text}</p>
+          <p className="[text-wrap:pretty] mt-5 max-w-[56ch] text-[15px] leading-relaxed text-slate-200 sm:text-[16.5px]">{cfg.text}</p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <button
               type="button"
@@ -127,11 +127,11 @@ function Philosophy({ cfg }) {
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-14 lg:px-8">
         <motion.div {...fade}>
           <Eyebrow>{p.eyebrow}</Eyebrow>
-          <h2 style={serif} className="mt-4 text-[30px] font-bold leading-[1.15] tracking-tight text-[#0F1F45] sm:text-[38px]">
+          <h2 style={serif} className="[text-wrap:balance] mt-4 text-[30px] font-semibold leading-[1.15] tracking-[-0.01em] text-[#0F1F45] sm:text-[38px]">
             <Lines lines={p.title} />
           </h2>
           <GoldRule />
-          <p className="mt-5 max-w-[58ch] text-[15.5px] leading-relaxed text-[#475569]">{p.text}</p>
+          <p className="[text-wrap:pretty] mt-5 max-w-[58ch] text-[15.5px] leading-relaxed text-[#475569]">{p.text}</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {p.cards.map((c, i) => {
@@ -146,8 +146,8 @@ function Philosophy({ cfg }) {
                 <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#1A3170] to-[#0F1F45] text-[#E2B24E]">
                   <Icon className="h-6 w-6" strokeWidth={1.6} />
                 </span>
-                <h3 style={serif} className="mt-4 text-[16.5px] font-bold leading-tight text-[#0F1F45]">{c.title}</h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-[#475569]">{c.desc}</p>
+                <h3 style={serif} className="mt-4 text-[16.5px] font-semibold leading-tight text-[#0F1F45]">{c.title}</h3>
+                <p className="[text-wrap:pretty] mt-2 text-[13px] leading-relaxed text-[#475569]">{c.desc}</p>
               </motion.div>
             );
           })}
@@ -164,7 +164,7 @@ function Pillars({ cfg, sectionId }) {
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         <motion.div {...fade} className="text-center">
           <Eyebrow light center>{p.eyebrow}</Eyebrow>
-          <h2 style={serif} className="mx-auto mt-4 max-w-3xl text-[28px] font-bold leading-[1.15] tracking-tight text-white sm:text-[38px]">{p.title}</h2>
+          <h2 style={serif} className="[text-wrap:balance] mx-auto mt-4 max-w-3xl text-[28px] font-semibold leading-[1.15] tracking-[-0.01em] text-white sm:text-[38px]">{p.title}</h2>
           <GoldRule center />
         </motion.div>
         <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -189,8 +189,8 @@ function Pillars({ cfg, sectionId }) {
                   )}
                 </div>
                 <div className="flex flex-1 flex-col p-5">
-                  <h3 style={serif} className="text-[18px] font-bold leading-tight text-white">{c.title}</h3>
-                  <p className="mt-2 flex-1 text-[13px] leading-relaxed text-slate-300">{c.desc}</p>
+                  <h3 style={serif} className="text-[18px] font-semibold leading-tight text-white">{c.title}</h3>
+                  <p className="[text-wrap:pretty] mt-2 flex-1 text-[13px] leading-relaxed text-slate-300">{c.desc}</p>
                   <span className="mt-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#E2B24E]/70 text-[#E2B24E] transition-all duration-300 group-hover:bg-[#E2B24E] group-hover:text-[#0F1F45]">
                     <ArrowRight className="h-4 w-4" />
                   </span>
@@ -212,10 +212,10 @@ function Stewardship({ cfg }) {
         <motion.div {...fade} className="grid grid-cols-1 items-end gap-5 lg:grid-cols-[1fr_minmax(0,0.8fr)] lg:gap-16">
           <div>
             <Eyebrow>Beyond Standard Planning</Eyebrow>
-            <h2 style={serif} className="mt-4 text-[28px] font-bold leading-[1.15] tracking-tight text-[#0F1F45] sm:text-[38px]">{s.title}</h2>
+            <h2 style={serif} className="[text-wrap:balance] mt-4 text-[28px] font-semibold leading-[1.15] tracking-[-0.01em] text-[#0F1F45] sm:text-[38px]">{s.title}</h2>
             <GoldRule />
           </div>
-          <p className="text-[15px] leading-relaxed text-[#475569]">{s.text}</p>
+          <p className="[text-wrap:pretty] text-[15px] leading-relaxed text-[#475569]">{s.text}</p>
         </motion.div>
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
           {s.items.map((c, i) => {
@@ -230,7 +230,7 @@ function Stewardship({ cfg }) {
                   <img src={art(cfg, `s${i}`)} alt="" loading="lazy" draggable="false" className="h-full w-full object-cover" />
                 </div>
                 <div className={`flex-1 p-6 ${cfg.stewardDark ? 'bg-[#0F1F45]' : ''}`}>
-                  <h3 style={serif} className={`text-[18px] font-bold leading-tight ${cfg.stewardDark ? 'text-white' : 'text-[#0F1F45]'}`}>{c.title}</h3>
+                  <h3 style={serif} className={`text-[18px] font-semibold leading-tight ${cfg.stewardDark ? 'text-white' : 'text-[#0F1F45]'}`}>{c.title}</h3>
                   <p className={`mt-2 text-[13.5px] leading-relaxed ${cfg.stewardDark ? 'text-slate-300' : 'text-[#475569]'}`}>{c.desc}</p>
                 </div>
               </motion.div>
@@ -250,10 +250,10 @@ function Lifecycle({ cfg }) {
         <motion.div {...fade} className="grid grid-cols-1 items-end gap-5 lg:grid-cols-[1fr_minmax(0,0.8fr)] lg:gap-16">
           <div>
             <Eyebrow>{l.eyebrow}</Eyebrow>
-            <h2 style={serif} className="mt-4 text-[28px] font-bold leading-[1.15] tracking-tight text-[#0F1F45] sm:text-[38px]">{l.title}</h2>
+            <h2 style={serif} className="[text-wrap:balance] mt-4 text-[28px] font-semibold leading-[1.15] tracking-[-0.01em] text-[#0F1F45] sm:text-[38px]">{l.title}</h2>
             <GoldRule />
           </div>
-          <p className="text-[15px] leading-relaxed text-[#475569]">{l.text}</p>
+          <p className="[text-wrap:pretty] text-[15px] leading-relaxed text-[#475569]">{l.text}</p>
         </motion.div>
 
         <ol className="relative mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
@@ -264,11 +264,11 @@ function Lifecycle({ cfg }) {
               <motion.li key={s.title} {...fade} transition={{ duration: 0.5, delay: i * 0.08 }} className="relative flex flex-col items-center text-center">
                 <span className="relative z-10 flex h-[68px] w-[68px] items-center justify-center rounded-full border-2 border-[#C9922E] bg-white text-[#0F1F45] shadow-[0_10px_24px_rgba(201,146,46,0.25)]">
                   <Icon className="h-7 w-7" strokeWidth={1.5} />
-                  <span style={serif} className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#0F1F45] text-[11px] font-bold text-[#E2B24E]">
+                  <span style={serif} className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#0F1F45] text-[11px] font-semibold text-[#E2B24E]">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                 </span>
-                <h3 style={serif} className="mt-4 text-[17.5px] font-bold leading-tight text-[#0F1F45]">{s.title}</h3>
+                <h3 style={serif} className="mt-4 text-[17.5px] font-semibold leading-tight text-[#0F1F45]">{s.title}</h3>
                 <p className="mt-1.5 max-w-[28ch] text-[13px] leading-snug text-[#475569]">{s.desc}</p>
               </motion.li>
             );
@@ -290,10 +290,10 @@ function Cta({ cfg }) {
           <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
             <div>
               <Eyebrow light>{c.eyebrow}</Eyebrow>
-              <h2 style={serif} className="mt-4 text-[28px] font-bold leading-[1.12] text-[#E2B24E] sm:text-[40px]">
+              <h2 style={serif} className="[text-wrap:balance] mt-4 text-[28px] font-semibold leading-[1.12] text-[#E2B24E] sm:text-[40px]">
                 <Lines lines={c.title} />
               </h2>
-              <p className="mt-4 max-w-[52ch] text-[16px] leading-relaxed text-slate-200">{c.text}</p>
+              <p className="[text-wrap:pretty] mt-4 max-w-[52ch] text-[16px] leading-relaxed text-slate-200">{c.text}</p>
               <button
                 type="button"
                 onClick={() => consult(cfg)}

@@ -43,7 +43,7 @@ const fade = {
 /* ------------------------------------------------------------------ */
 const TRUST = [
   { icon: Eye, label: 'Holistic Wealth View' },
-  { icon: Layers, label: 'Institutional Planning Partners' },
+  { icon: Layers, label: 'Institutional Planning Framework' },
   { icon: Handshake, label: 'Execution through Regulated Partners' },
 ];
 
@@ -60,18 +60,18 @@ const WEALTH_NODES = [
 
 const ARCHITECTURE = [
   { title: 'Financial Planning', desc: 'A complete view of your current position and future goals.', art: archFinancial, to: '/goals' },
-  { title: 'Investment Planning', desc: 'Portfolio strategies aligned to your objectives and risk capacity.', art: archInvest, to: '/investments' },
+  { title: 'Investment Planning', desc: 'Multi-asset strategies aligned to your risk capacity.', art: archInvest, to: '/investments' },
   { title: 'Retirement & Cash Flow Planning', desc: 'Inflation-adjusted planning for financial independence.', art: archRetire, to: '/calculators/retirement' },
   { title: 'Risk Planning', desc: 'Protecting your family and wealth from uncertainties.', art: archRisk, to: '/risk-management' },
-  { title: 'Tax Planning', desc: 'Strategic tax optimisation for today and your legacy.', art: archTax, to: '/tax-planning' },
+  { title: 'Tax Planning', desc: 'Strategic tax optimization across life stages.', art: archTax, to: '/tax-planning' },
   { title: 'Estate & Succession Planning', desc: 'Securing and transferring wealth across generations.', art: archEstate, to: '/estate-planning' },
 ];
 
 const FAMILY_OFFICE = [
   { title: 'Family Governance', desc: 'Defining how financial decisions are made across generations.', photo: foGovernance, icon: Landmark },
-  { title: 'Intergenerational Wealth', desc: 'Preparing assets, responsibility and financial education for the next generation.', photo: foGenerations, icon: GraduationCap },
-  { title: 'Business – Personal Wealth Integration', desc: 'Aligning entrepreneurial cash flows with personal wealth objectives.', photo: foBusiness, icon: Building2 },
-  { title: 'Family Constitution & Succession Framework', desc: 'Creating clarity around ownership, succession and continuity.', photo: foConstitution, icon: Scale },
+  { title: 'Intergenerational Wealth', desc: 'Preparing assets, responsibilities and financial education for the next generation.', photo: foGenerations, icon: GraduationCap },
+  { title: 'Business – Personal Wealth Integration', desc: 'Aligning entrepreneurial cash flows with personal wealth milestones.', photo: foBusiness, icon: Building2 },
+  { title: 'Family Constitution & Succession Framework', desc: 'Creating clarity around roles, ownership, succession and continuity.', photo: foConstitution, icon: Scale },
 ];
 
 const CASH_FLOW = [
@@ -88,7 +88,7 @@ const CASH_FLOW = [
 const CAPITAL = [
   { title: 'Liquidity Capital', desc: 'For immediate and near-term requirements.', art: capLiquidity },
   { title: 'Core Wealth', desc: 'Long-term diversified wealth creation.', art: capCore },
-  { title: 'Growth Capital', desc: 'Higher growth opportunities aligned to your risk appetite.', art: capGrowth },
+  { title: 'Growth Capital', desc: 'Higher-growth opportunities aligned to your aspirations.', art: capGrowth },
   { title: 'Legacy Capital', desc: 'Capital designed for future generations.', art: capLegacy },
 ];
 
@@ -102,14 +102,14 @@ const PROTECTION = [
 ];
 
 const TAX_ESTATE = [
-  { title: 'Tax Efficiency', desc: 'Strategic structuring across income, investments and succession.', icon: Receipt },
-  { title: 'Legacy Continuity', desc: 'Wills, trusts and nominations planned with expert professionals.', icon: FileText },
+  { title: 'Tax Efficiency', desc: 'Strategic structuring to optimize taxes and enhance after-tax wealth.', icon: Receipt },
+  { title: 'Legacy Continuity', desc: 'Will, Trust, Nomination and Succession planning with expert professionals.', icon: FileText },
 ];
 
 const JOURNEY = [
   { n: '01', title: 'Discover', desc: 'Understand your financial landscape and aspirations.', icon: Compass },
-  { n: '02', title: 'Diagnose', desc: 'Detailed analysis of assets, liabilities and cash flows.', icon: Search },
-  { n: '03', title: 'Architect', desc: 'Design your customised wealth blueprint.', icon: PencilRuler },
+  { n: '02', title: 'Diagnose', desc: 'Detailed analysis of assets, liabilities and gaps.', icon: Search },
+  { n: '03', title: 'Architect', desc: 'Design your customized wealth blueprint.', icon: PencilRuler },
   { n: '04', title: 'Present', desc: 'Discuss and refine the plan with you.', icon: Presentation },
   { n: '05', title: 'Implement', desc: 'Execute through regulated partners.', icon: Rocket },
   { n: '06', title: 'Steward', desc: 'Ongoing monitoring, reviews and updates.', icon: Sprout },
@@ -150,11 +150,11 @@ function Hero() {
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:min-h-[clamp(500px,calc(100svh-80px),680px)] lg:px-8">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:max-w-[50%] lg:py-12">
           <Eyebrow light>Financial Planning</Eyebrow>
-          <h1 style={serif} className="mt-5 text-[38px] font-bold leading-[1.08] tracking-tight text-white sm:text-[50px] lg:text-[clamp(40px,3.9vw,56px)]">
+          <h1 style={serif} className="[text-wrap:balance] mt-5 text-[38px] font-semibold leading-[1.08] tracking-[-0.01em] text-white sm:text-[50px] lg:text-[clamp(40px,3.9vw,56px)]">
             Architecting Wealth.
             <span className="block text-[#E2B24E]">Preserving Legacy.</span>
           </h1>
-          <p className="mt-5 max-w-[54ch] text-[15.5px] leading-relaxed text-slate-200 sm:text-[17px]">
+          <p className="[text-wrap:pretty] mt-5 max-w-[54ch] text-[15.5px] leading-relaxed text-slate-200 sm:text-[17px]">
             A structured financial planning framework for families seeking clarity across wealth, cash flows, investments, risk, taxation, retirement and succession.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -194,13 +194,13 @@ function Hero() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="relative mx-auto h-[340px] w-full max-w-[560px] overflow-hidden sm:h-[440px] lg:absolute lg:bottom-0 lg:right-0 lg:top-[80px] lg:h-auto lg:w-[54%] lg:max-w-none"
+          className="relative mx-auto h-[340px] w-full max-w-[560px] overflow-hidden sm:h-[440px] lg:absolute lg:bottom-0 lg:right-0 lg:top-[80px] lg:h-auto lg:w-[54%] lg:max-w-none [mask-image:linear-gradient(to_right,transparent,black_10%)]"
         >
           <img
             src={heroPhoto}
             alt="Amit R. Pandey, Chartered Wealth Manager"
             draggable="false"
-            className="absolute inset-0 h-full w-full object-cover object-[30%_35%] lg:inset-auto lg:right-0 lg:top-0 lg:h-full lg:w-auto lg:max-w-none [mask-image:linear-gradient(to_right,transparent,black_8%)]"
+            className="absolute inset-0 h-full w-full object-cover object-[30%_35%] lg:object-[8%_30%]"
           />
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-[#0F1F45] to-transparent lg:hidden" />
         </motion.div>
@@ -215,16 +215,16 @@ function Problem() {
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-16 lg:px-8">
         <motion.div {...fade}>
           <Eyebrow>The Problem</Eyebrow>
-          <h2 style={serif} className="mt-4 text-[32px] font-bold leading-[1.12] tracking-tight text-[#0F1F45] sm:text-[42px]">
+          <h2 style={serif} className="[text-wrap:balance] mt-4 text-[32px] font-semibold leading-[1.12] tracking-[-0.01em] text-[#0F1F45] sm:text-[42px]">
             Your Wealth Is Connected.
             <span className="block text-[#B8862B]">Your Advice Should Be Too.</span>
           </h2>
           <GoldRule />
-          <p className="mt-6 max-w-[56ch] text-[16px] leading-relaxed text-[#475569]">
+          <p className="[text-wrap:pretty] mt-6 max-w-[56ch] text-[16px] leading-relaxed text-[#475569]">
             Most families deal with multiple advisors working in isolation — investment agents, insurance brokers, tax consultants and legal experts. This leads to a fragmented view and missed opportunities.
           </p>
           <span className="mt-6 block h-px w-14 bg-[#C9922E]/50" />
-          <p style={serif} className="mt-6 max-w-[40ch] text-[20px] font-bold leading-snug text-[#0F1F45]">
+          <p style={serif} className="mt-6 max-w-[40ch] text-[20px] font-semibold leading-snug text-[#0F1F45]">
             Solahana brings it all together through one consolidated wealth map.
           </p>
         </motion.div>
@@ -265,7 +265,7 @@ function Architecture() {
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         <motion.div {...fade} className="text-center">
           <Eyebrow light>Our Solahana Architecture</Eyebrow>
-          <h2 style={serif} className="mx-auto mt-4 max-w-3xl text-[30px] font-bold leading-[1.15] tracking-tight text-white sm:text-[40px]">
+          <h2 style={serif} className="[text-wrap:balance] mx-auto mt-4 max-w-3xl text-[30px] font-semibold leading-[1.15] tracking-[-0.01em] text-white sm:text-[40px]">
             From Financial Complexity to One Master Blueprint
           </h2>
           <GoldRule center />
@@ -283,8 +283,8 @@ function Architecture() {
                   <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#102552] to-transparent" />
                 </div>
                 <div className="flex flex-1 flex-col p-5">
-                  <h3 style={serif} className="text-[18px] font-bold leading-tight text-white">{c.title}</h3>
-                  <p className="mt-2 flex-1 text-[13px] leading-relaxed text-slate-300">{c.desc}</p>
+                  <h3 style={serif} className="text-[18px] font-semibold leading-tight text-white">{c.title}</h3>
+                  <p className="[text-wrap:pretty] mt-2 flex-1 text-[13px] leading-relaxed text-slate-300">{c.desc}</p>
                   <div className="mt-4"><RoundBtn /></div>
                 </div>
               </Link>
@@ -303,10 +303,10 @@ function FamilyOffice() {
         <motion.div {...fade} className="grid grid-cols-1 items-end gap-5 lg:grid-cols-[1fr_minmax(0,0.8fr)] lg:gap-16">
           <div>
             <Eyebrow>Beyond Standard Planning</Eyebrow>
-            <h2 style={serif} className="mt-4 text-[30px] font-bold leading-[1.15] tracking-tight text-[#0F1F45] sm:text-[40px]">Private Family Office Services</h2>
+            <h2 style={serif} className="[text-wrap:balance] mt-4 text-[30px] font-semibold leading-[1.15] tracking-[-0.01em] text-[#0F1F45] sm:text-[40px]">Private Family Office Services</h2>
             <GoldRule />
           </div>
-          <p className="text-[15.5px] leading-relaxed text-[#475569]">
+          <p className="[text-wrap:pretty] text-[15.5px] leading-relaxed text-[#475569]">
             For business families and high-net-worth individuals, we offer a deeper layer of planning focused on governance, continuity and legacy.
           </p>
         </motion.div>
@@ -328,8 +328,8 @@ function FamilyOffice() {
                   </span>
                 </div>
                 <div className="p-6">
-                  <h3 style={serif} className="text-[18px] font-bold leading-tight text-[#0F1F45]">{c.title}</h3>
-                  <p className="mt-2 text-[14px] leading-relaxed text-[#475569]">{c.desc}</p>
+                  <h3 style={serif} className="text-[18px] font-semibold leading-tight text-[#0F1F45]">{c.title}</h3>
+                  <p className="[text-wrap:pretty] mt-2 text-[14px] leading-relaxed text-[#475569]">{c.desc}</p>
                 </div>
               </motion.div>
             );
@@ -347,12 +347,12 @@ function CashFlow() {
         <motion.div {...fade} className="grid grid-cols-1 items-end gap-5 lg:grid-cols-[1fr_minmax(0,0.85fr)] lg:gap-16">
           <div>
             <Eyebrow light>Cash Flow Intelligence</Eyebrow>
-            <h2 style={serif} className="mt-4 text-[30px] font-bold leading-[1.15] tracking-tight text-white sm:text-[40px]">
+            <h2 style={serif} className="[text-wrap:balance] mt-4 text-[30px] font-semibold leading-[1.15] tracking-[-0.01em] text-white sm:text-[40px]">
               We Don’t Just Look at Your Assets.
               <span className="block text-[#E2B24E]">We Map Your Money.</span>
             </h2>
           </div>
-          <p className="text-[15.5px] leading-relaxed text-slate-300">
+          <p className="[text-wrap:pretty] text-[15.5px] leading-relaxed text-slate-300">
             A detailed cash flow analysis helps us understand how your income, expenses, business cash flows and investments work together — so you can make better decisions today and tomorrow.
           </p>
         </motion.div>
@@ -385,10 +385,10 @@ function CapitalSection() {
         <motion.div {...fade} className="grid grid-cols-1 items-end gap-5 lg:grid-cols-[1fr_minmax(0,0.8fr)] lg:gap-16">
           <div>
             <Eyebrow>Investment Architecture</Eyebrow>
-            <h2 style={serif} className="mt-4 text-[30px] font-bold leading-[1.15] tracking-tight text-[#0F1F45] sm:text-[40px]">Capital With a Purpose</h2>
+            <h2 style={serif} className="[text-wrap:balance] mt-4 text-[30px] font-semibold leading-[1.15] tracking-[-0.01em] text-[#0F1F45] sm:text-[40px]">Capital With a Purpose</h2>
             <GoldRule />
           </div>
-          <p className="text-[15.5px] leading-relaxed text-[#475569]">
+          <p className="[text-wrap:pretty] text-[15.5px] leading-relaxed text-[#475569]">
             A multi-asset approach designed around your goals, time horizon and risk profile.
           </p>
         </motion.div>
@@ -403,7 +403,7 @@ function CapitalSection() {
             >
               <img src={c.art} alt="" loading="lazy" draggable="false" className="h-[88px] w-[72px] shrink-0 rounded-xl bg-[#0A1836] object-cover object-[center_40%]" />
               <div>
-                <h3 style={serif} className="text-[17px] font-bold leading-tight text-[#0F1F45]">{c.title}</h3>
+                <h3 style={serif} className="text-[17px] font-semibold leading-tight text-[#0F1F45]">{c.title}</h3>
                 <p className="mt-1.5 text-[13px] leading-snug text-[#475569]">{c.desc}</p>
               </div>
             </motion.div>
@@ -423,7 +423,7 @@ function RiskAndTax() {
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#0A1836] via-[#0A1836]/80 to-transparent" />
           <div className="relative">
             <Eyebrow light>Risk &amp; Protection</Eyebrow>
-            <h2 style={serif} className="mt-4 max-w-md text-[28px] font-bold leading-[1.15] text-white sm:text-[36px]">Protect the Architecture Before You Grow It.</h2>
+            <h2 style={serif} className="[text-wrap:balance] mt-4 max-w-md text-[28px] font-semibold leading-[1.15] text-white sm:text-[36px]">Protect the Architecture Before You Grow It.</h2>
             <ul className="mt-8 grid grid-cols-3 gap-x-3 gap-y-6 sm:grid-cols-6">
               {PROTECTION.map((p) => {
                 const Icon = p.icon;
@@ -442,7 +442,7 @@ function RiskAndTax() {
 
         <motion.div {...fade} transition={{ duration: 0.55, delay: 0.1 }} className="rounded-3xl border border-[#E7DFCF] bg-white p-7 shadow-[0_14px_36px_rgba(15,31,69,0.07)] sm:p-10">
           <Eyebrow>Tax &amp; Estate Planning</Eyebrow>
-          <h2 style={serif} className="mt-4 text-[28px] font-bold leading-[1.15] text-[#0F1F45] sm:text-[34px]">
+          <h2 style={serif} className="[text-wrap:balance] mt-4 text-[28px] font-semibold leading-[1.15] text-[#0F1F45] sm:text-[34px]">
             Efficiency Today.
             <span className="block text-[#B8862B]">Legacy Tomorrow.</span>
           </h2>
@@ -454,7 +454,7 @@ function RiskAndTax() {
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#1A3170] to-[#0F1F45] text-[#E2B24E]">
                     <Icon className="h-5 w-5" strokeWidth={1.6} />
                   </span>
-                  <h3 style={serif} className="mt-4 text-[16.5px] font-bold text-[#0F1F45]">{t.title}</h3>
+                  <h3 style={serif} className="mt-4 text-[16.5px] font-semibold text-[#0F1F45]">{t.title}</h3>
                   <p className="mt-1.5 text-[13px] leading-snug text-[#475569]">{t.desc}</p>
                 </div>
               );
@@ -477,11 +477,11 @@ function Journey() {
         <motion.div {...fade} className="grid grid-cols-1 items-end gap-5 lg:grid-cols-[1fr_minmax(0,0.8fr)] lg:gap-16">
           <div>
             <Eyebrow>The Solahana Wealth Planning Journey</Eyebrow>
-            <h2 style={serif} className="mt-4 text-[30px] font-bold leading-[1.15] tracking-tight text-[#0F1F45] sm:text-[40px]">A Structured 6-Step Process</h2>
+            <h2 style={serif} className="[text-wrap:balance] mt-4 text-[30px] font-semibold leading-[1.15] tracking-[-0.01em] text-[#0F1F45] sm:text-[40px]">A Structured 6-Step Process</h2>
             <GoldRule />
           </div>
-          <p className="text-[15.5px] leading-relaxed text-[#475569]">
-            A disciplined and transparent process to build your customised financial plan and help you stay on track.
+          <p className="[text-wrap:pretty] text-[15.5px] leading-relaxed text-[#475569]">
+            A disciplined and transparent process to build your customized financial plan and help you stay on track.
           </p>
         </motion.div>
 
@@ -493,9 +493,9 @@ function Journey() {
               <motion.li key={s.title} {...fade} transition={{ duration: 0.5, delay: i * 0.08 }} className="relative flex flex-col items-center text-center">
                 <span className="relative z-10 flex h-[68px] w-[68px] items-center justify-center rounded-full border-2 border-[#C9922E] bg-white text-[#0F1F45] shadow-[0_10px_24px_rgba(201,146,46,0.25)]">
                   <Icon className="h-7 w-7" strokeWidth={1.5} />
-                  <span style={serif} className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#0F1F45] text-[11px] font-bold text-[#E2B24E]">{s.n}</span>
+                  <span style={serif} className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#0F1F45] text-[11px] font-semibold text-[#E2B24E]">{s.n}</span>
                 </span>
-                <h3 style={serif} className="mt-4 text-[18px] font-bold text-[#0F1F45]">{s.title}</h3>
+                <h3 style={serif} className="mt-4 text-[18px] font-semibold text-[#0F1F45]">{s.title}</h3>
                 <p className="mt-1.5 max-w-[24ch] text-[13px] leading-snug text-[#475569]">{s.desc}</p>
               </motion.li>
             );
@@ -515,11 +515,11 @@ function ClosingCta() {
           <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-[#C9922E]/25 blur-[90px]" />
           <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
-              <h2 style={serif} className="text-[30px] font-bold leading-[1.12] text-white sm:text-[42px]">
+              <h2 style={serif} className="[text-wrap:balance] text-[30px] font-semibold leading-[1.12] text-white sm:text-[42px]">
                 Your Wealth Deserves
                 <span className="block text-[#E2B24E]">a Master Plan.</span>
               </h2>
-              <p className="mt-4 max-w-[52ch] text-[16px] leading-relaxed text-slate-200">
+              <p className="[text-wrap:pretty] mt-4 max-w-[52ch] text-[16px] leading-relaxed text-slate-200">
                 Begin a private conversation with Solahana and take the first step towards a more secure and fulfilling future.
               </p>
             </div>
