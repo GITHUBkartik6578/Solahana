@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 
 // Photos cropped from the owner's Financial Planning design and upscaled (src/assets/planning/fp-*.webp)
-import heroPhoto from '../assets/planning/fp-hero-clean.webp';
+import heroPhoto from '../assets/planning/fp-hero-nocoin.webp';
 import archFinancial from '../assets/planning/fp-a0.webp';
 import archInvest from '../assets/planning/fp-a1.webp';
 import archRetire from '../assets/planning/fp-a2.webp';
@@ -198,7 +198,7 @@ function Hero() {
             src={heroPhoto}
             alt="Amit R. Pandey, Chartered Wealth Manager"
             draggable="false"
-            className="absolute inset-0 h-full w-full object-cover object-[25%_28%]"
+            className="absolute inset-0 h-full w-full object-cover object-[12%_30%]"
           />
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-[#0F1F45] to-transparent lg:hidden" />
         </motion.div>
