@@ -41,14 +41,14 @@ const TRUST = [
 ];
 
 const WEALTH_NODES = [
-  { label: 'Business & Income', icon: Briefcase },
-  { label: 'Investments', icon: TrendingUp },
-  { label: 'Tax', icon: Receipt },
-  { label: 'Retirement', icon: Armchair },
-  { label: 'Next Generation', icon: Users },
-  { label: 'Estate & Legacy', icon: Scroll },
-  { label: 'Insurance & Protection', icon: ShieldCheck },
-  { label: 'Lifestyle', icon: Home },
+  { label: 'Business & Income', icon: Briefcase, to: '/who-we-serve#business-owners' },
+  { label: 'Investments', icon: TrendingUp, to: '/investments' },
+  { label: 'Tax', icon: Receipt, to: '/tax-planning' },
+  { label: 'Retirement', icon: Armchair, to: '/calculators/retirement' },
+  { label: 'Next Generation', icon: Users, to: '/goals' },
+  { label: 'Estate & Legacy', icon: Scroll, to: '/estate-planning' },
+  { label: 'Insurance & Protection', icon: ShieldCheck, to: '/risk-management' },
+  { label: 'Lifestyle', icon: Home, to: '/goals' },
 ];
 
 const ARCHITECTURE = [
@@ -233,16 +233,17 @@ function Problem() {
             const a = (i / WEALTH_NODES.length) * 2 * Math.PI - Math.PI / 2;
             const Icon = n.icon;
             return (
-              <div
+              <Link
                 key={n.label}
+                to={n.to}
                 style={{ left: `${50 + 41 * Math.cos(a)}%`, top: `${50 + 41 * Math.sin(a)}%` }}
-                className="absolute flex w-[96px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 text-center sm:w-[110px]"
+                className="group absolute flex w-[96px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 rounded-2xl text-center outline-none focus-visible:ring-2 focus-visible:ring-[#C9922E] sm:w-[110px]"
               >
-                <span className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-[#E4D2A6] bg-white text-[#B8862B] shadow-[0_8px_20px_rgba(15,31,69,0.12)] sm:h-14 sm:w-14">
+                <span className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-[#E4D2A6] bg-white text-[#B8862B] shadow-[0_8px_20px_rgba(15,31,69,0.12)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-[#C9922E] group-hover:bg-[#0F1F45] group-hover:text-[#E2B24E] group-hover:shadow-[0_14px_28px_rgba(201,146,46,0.35)] sm:h-14 sm:w-14">
                   <Icon className="h-5 w-5 sm:h-[22px] sm:w-[22px]" strokeWidth={1.6} />
                 </span>
-                <span className="text-[11px] font-semibold leading-tight text-[#0F1F45] sm:text-[12px]">{n.label}</span>
-              </div>
+                <span className="text-[11px] font-semibold leading-tight text-[#0F1F45] transition-colors group-hover:text-[#B8862B] sm:text-[12px]">{n.label}</span>
+              </Link>
             );
           })}
         </motion.div>
