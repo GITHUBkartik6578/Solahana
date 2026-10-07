@@ -68,7 +68,7 @@ export default function AudienceGuide({ activeId, onSelect }) {
             >
               {/* Speech bubble (desktop) */}
               <span
-                className={`relative mb-5 hidden w-full max-w-[188px] rounded-2xl px-3.5 py-3 text-left transition-colors duration-200 lg:block ${
+                className={`relative mb-5 hidden w-full max-w-[188px] rounded-2xl px-3.5 py-3 text-left transition-colors duration-200 lg:block lg:h-[150px] ${
                   selected
                     ? 'bg-[#0F1F45] text-white shadow-[0_14px_30px_rgba(15,31,69,0.22)]'
                     : 'border border-[#E4E8F0] bg-white text-[#0F1F45] shadow-[0_1px_2px_rgba(15,31,69,0.04)] group-hover:border-[#C5D2EC]'
