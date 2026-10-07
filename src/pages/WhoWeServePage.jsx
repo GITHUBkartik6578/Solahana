@@ -8,7 +8,6 @@ import HowItWorks from '../components/who-we-serve/HowItWorks';
 import FitCheck from '../components/who-we-serve/FitCheck';
 import { DEFAULT_AUDIENCE, audienceFromHash, openConsultation } from '../data/whoWeServe';
 import mascot from '../assets/hero-mascot.webp';
-import coin from '../assets/solahana-16-ana-coin.webp';
 
 // Straight from our Process page: nothing here is a new claim.
 const HERO_FACTS = ['Free first call', 'Plain language', 'No product pushing'];
@@ -84,7 +83,6 @@ export default function WhoWeServePage() {
               <span className="absolute inset-[16%] rounded-full bg-[radial-gradient(closest-side,rgba(230,194,122,0.55),rgba(230,194,122,0.08)_72%,transparent)]" />
               <span className="absolute inset-[16%] rounded-full border border-dashed border-[#C9A04F]/60" />
               <img src={mascot} alt="" draggable={false} className="absolute inset-x-[14%] bottom-[8%] top-[10%] h-[82%] w-[72%] object-contain drop-shadow-[0_18px_22px_rgba(15,31,69,0.22)]" />
-              <img src={coin} alt="" draggable={false} className="absolute right-[2%] top-[6%] h-[22%] w-[22%] rounded-full object-cover shadow-[0_10px_22px_rgba(166,124,46,0.35)]" />
             </motion.div>
           </div>
 
