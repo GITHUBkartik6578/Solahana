@@ -9,12 +9,12 @@ import {
 
 // Photos cropped from the owner's Financial Planning design and upscaled (src/assets/planning/fp-*.webp)
 import heroPhoto from '../assets/planning/fp-hero-nocoin.webp';
-import archFinancial from '../assets/planning/fp-a0.webp';
-import archInvest from '../assets/planning/fp-a1.webp';
-import archRetire from '../assets/planning/fp-a2.webp';
-import archRisk from '../assets/planning/fp-a3.webp';
-import archTax from '../assets/planning/fp-a4.webp';
-import archEstate from '../assets/planning/fp-a5.webp';
+import archFinancial from '../assets/services/financial.webp';
+import archInvest from '../assets/services/investment.webp';
+import archRetire from '../assets/services/retirement.webp';
+import archRisk from '../assets/services/risk.webp';
+import archTax from '../assets/services/tax.webp';
+import archEstate from '../assets/services/estate.webp';
 import foGovernance from '../assets/planning/fp-f0.webp';
 import foGenerations from '../assets/planning/fp-f1.webp';
 import foBusiness from '../assets/planning/fp-f2.webp';
@@ -276,9 +276,21 @@ function Architecture() {
                 to={c.to}
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#102552] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#E2B24E]/60 hover:shadow-[0_22px_44px_rgba(0,0,0,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E2B24E]"
               >
-                <div className="relative h-[150px] overflow-hidden bg-[#0A1836]">
-                  <img src={c.art} alt="" loading="lazy" draggable="false" className="h-full w-full object-cover object-[center_35%] transition-transform duration-500 group-hover:scale-105" />
-                  <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#102552] to-transparent" />
+                <div className="relative h-[190px] overflow-hidden bg-[#0F1F45]">
+                  {/* soft backdrop: the same art enlarged and blurred so the sides blend in */}
+                  <img src={c.art} alt="" aria-hidden="true" loading="lazy" draggable="false" className="absolute inset-0 h-full w-full scale-150 object-cover object-bottom blur-xl" />
+                  {/* the artwork itself */}
+                  <img
+                    src={c.art}
+                    alt=""
+                    loading="lazy"
+                    draggable="false"
+                    className="absolute bottom-0 left-1/2 h-[128%] w-auto max-w-none -translate-x-1/2 transition-transform duration-500 group-hover:scale-105 [mask-image:linear-gradient(to_right,transparent_0%,black_20%,black_80%,transparent_100%)]"
+                  />
+                  <span className="absolute left-4 top-3 font-serif-luxury text-[24px] leading-none text-[#F1D9A3]">
+                    {String(i + 1).padStart(2, '0')}
+                    <span className="mt-1.5 block h-px w-5 bg-[#F1D9A3]/80" />
+                  </span>
                 </div>
                 <div className="flex flex-1 flex-col p-5">
                   <h3 className="text-[18px] font-semibold leading-tight text-white">{c.title}</h3>
