@@ -100,12 +100,19 @@ function Hero({ cfg }) {
         >
           {/* soft copy of the photo fills the space beside it */}
           <img src={art(cfg, 'hero')} alt="" aria-hidden="true" draggable="false" className="absolute inset-0 h-full w-full scale-125 object-cover opacity-50 blur-2xl" />
-          <img
-            src={art(cfg, 'hero')}
-            alt="Amit R. Pandey, Chartered Wealth Manager"
-            draggable="false"
-            className="absolute inset-y-0 right-0 h-full w-auto max-w-none [mask-image:linear-gradient(to_right,transparent,black_22%)]"
-          />
+          <div style={{ aspectRatio: cfg.heroAspect }} className="absolute inset-y-0 right-0 h-full max-w-none [mask-image:linear-gradient(to_right,transparent,black_22%)]">
+            <img src={art(cfg, 'hero')} alt="Amit R. Pandey, Chartered Wealth Manager" draggable="false" className="h-full w-full" />
+            {cfg.taglineBox && (
+              <p
+                style={{ ...serif, left: `${cfg.taglineBox.x * 100}%`, top: `${cfg.taglineBox.y * 100}%`, width: `${cfg.taglineBox.w * 100}%`, textAlign: cfg.taglineBox.align }}
+                className="absolute hidden text-[19px] font-medium italic leading-snug text-[#F1D9A3] drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] sm:block lg:text-[23px]"
+              >
+                {cfg.tagline.map((l) => (
+                  <span key={l} className="block">{l}</span>
+                ))}
+              </p>
+            )}
+          </div>
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0F1F45] via-transparent to-transparent" />
         </motion.div>
       </div>

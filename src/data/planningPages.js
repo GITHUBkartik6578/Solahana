@@ -14,6 +14,8 @@ const REGULATED = { icon: Handshake, label: 'Seamless Execution via Regulated Pa
 export const RETIREMENT_PAGE = {
   id: 'retirement',
   art: 'retire',
+  heroAspect: 736 / 824,
+  taglineBox: { x: 0.58, y: 0.72, w: 0.4, align: 'right' },
   stewardDark: true,
   goal: 'Retirement Planning',
   calculatorId: 'retirement-calculator',
@@ -80,6 +82,8 @@ export const RETIREMENT_PAGE = {
 export const INVESTMENT_PAGE = {
   id: 'investment',
   art: 'invest',
+  heroAspect: 928 / 1044,
+  taglineBox: { x: 0.57, y: 0.3, w: 0.3, align: 'left' },
   goal: 'Investment Planning',
   calculatorId: 'investment-calculator',
   eyebrow: 'Investment Planning',
@@ -146,6 +150,8 @@ export const INVESTMENT_PAGE = {
 export const TAX_PAGE = {
   id: 'tax',
   art: 'tax',
+  heroAspect: 964 / 936,
+  taglineBox: { x: 0.6, y: 0.18, w: 0.3, align: 'left' },
   goal: 'Tax Planning',
   calculatorId: 'tax-calculator',
   eyebrow: 'Tax Planning',
@@ -212,6 +218,8 @@ export const TAX_PAGE = {
 export const RISK_PAGE = {
   id: 'risk',
   art: 'risk',
+  heroAspect: 996 / 892,
+  taglineBox: null,
   pillarBadge: true,
   goal: 'Risk Management',
   calculatorId: 'risk-calculator',
@@ -279,6 +287,8 @@ export const RISK_PAGE = {
 export const ESTATE_PAGE = {
   id: 'estate',
   art: 'estate',
+  heroAspect: 996 / 924,
+  taglineBox: { x: 0.77, y: 0.1, w: 0.22, align: 'left' },
   pillarBadge: true,
   goal: 'Estate Planning',
   calculatorId: null,
