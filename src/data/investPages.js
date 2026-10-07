@@ -13,7 +13,6 @@ const COMMON = {
   goal: 'Investment Planning',
   calculatorId: null,
   taglineBox: null,
-  ctaFile: 'invest-cta',
   tagline: [],
 };
 
