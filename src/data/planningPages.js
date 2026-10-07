@@ -13,6 +13,8 @@ const REGULATED = { icon: Handshake, label: 'Seamless Execution via Regulated Pa
 
 export const RETIREMENT_PAGE = {
   id: 'retirement',
+  art: 'retire',
+  stewardDark: true,
   goal: 'Retirement Planning',
   calculatorId: 'retirement-calculator',
   eyebrow: 'Retirement Planning',
@@ -77,6 +79,7 @@ export const RETIREMENT_PAGE = {
 
 export const INVESTMENT_PAGE = {
   id: 'investment',
+  art: 'invest',
   goal: 'Investment Planning',
   calculatorId: 'investment-calculator',
   eyebrow: 'Investment Planning',
@@ -142,6 +145,7 @@ export const INVESTMENT_PAGE = {
 
 export const TAX_PAGE = {
   id: 'tax',
+  art: 'tax',
   goal: 'Tax Planning',
   calculatorId: 'tax-calculator',
   eyebrow: 'Tax Planning',
@@ -207,6 +211,8 @@ export const TAX_PAGE = {
 
 export const RISK_PAGE = {
   id: 'risk',
+  art: 'risk',
+  pillarBadge: true,
   goal: 'Risk Management',
   calculatorId: 'risk-calculator',
   eyebrow: 'Risk Management',
@@ -272,6 +278,8 @@ export const RISK_PAGE = {
 
 export const ESTATE_PAGE = {
   id: 'estate',
+  art: 'estate',
+  pillarBadge: true,
   goal: 'Estate Planning',
   calculatorId: null,
   eyebrow: 'Estate Planning',
