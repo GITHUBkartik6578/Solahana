@@ -82,8 +82,8 @@ export const RETIREMENT_PAGE = {
 export const INVESTMENT_PAGE = {
   id: 'investment',
   art: 'invest',
-  heroAspect: 928 / 1044,
-  taglineBox: { x: 0.57, y: 0.3, w: 0.3, align: 'left' },
+  heroAspect: 1000 / 1165,
+  taglineBox: null, // the new investment hero already has a clean tagline in the photo
   goal: 'Investment Planning',
   calculatorId: 'investment-calculator',
   eyebrow: 'Investment Planning',
