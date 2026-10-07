@@ -125,8 +125,8 @@ export default function Navbar() {
     ],
     invest: [
       { title: 'Mutual Funds & SIPs', path: '/invest/mutual-funds', desc: 'Goal-based wealth creation, liquid funds, and core equity/debt allocations.', icon: TrendingUp },
-      { title: 'PMS, AIF & SIF', sub: 'Alternative & Strategic Funds', path: '/investments', desc: 'High-alpha portfolio management services and institutional alternative funds.', icon: Briefcase },
-      { title: 'Real Estate, REITs & Fractional Ownership', path: '/investments', desc: 'Commercial real estate investments, REITs (Real Estate Investment Trusts), and high-yield fractional ownership opportunities.', icon: Building2 },
+      { title: 'PMS, AIF & SIF', sub: 'Alternative & Strategic Funds', path: '/invest/pms-aif-sif', desc: 'High-alpha portfolio management services and institutional alternative funds.', icon: Briefcase },
+      { title: 'Real Estate, REITs & Fractional Ownership', path: '/invest/real-estate', desc: 'Commercial real estate investments, REITs (Real Estate Investment Trusts), and high-yield fractional ownership opportunities.', icon: Building2 },
       { title: 'Bonds, NCDs & Fixed Income', path: '/invest/bonds', desc: 'Tax-free bonds, high-yield corporate bonds, and fixed deposits for secure cash flows.', icon: Landmark },
       { title: 'Equities, International Investing & IPOs', sub: 'Via Authorized Partners', path: '/invest/domestic-equity', desc: 'Direct domestic equity mandates, global markets exposure, and primary market issuances.', icon: Globe },
       { title: 'Insurance & Risk Solutions', sub: 'Life, Health, General & Keyman Insurance', path: '/risk-management', desc: 'Comprehensive family risk management and liability protection.', icon: ShieldCheck },

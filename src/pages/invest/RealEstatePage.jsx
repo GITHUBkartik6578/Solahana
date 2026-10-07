@@ -1,12 +1,12 @@
 import React from 'react';
 import { PlanningTop, PlanningCta } from '../../components/planning-pages/PlanningPageTemplate';
-import { MUTUAL_FUNDS_PAGE } from '../../data/investPages';
+import { REAL_ESTATE_PAGE } from '../../data/investPages';
 
-export default function MutualFundsPage() {
+export default function RealEstatePage() {
   return (
     <div className="relative z-10 bg-[#F7F8FB]">
-      <PlanningTop config={MUTUAL_FUNDS_PAGE} />
-      <PlanningCta config={MUTUAL_FUNDS_PAGE} />
+      <PlanningTop config={REAL_ESTATE_PAGE} />
+      <PlanningCta config={REAL_ESTATE_PAGE} />
     </div>
   );
 }

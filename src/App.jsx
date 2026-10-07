@@ -55,6 +55,8 @@ import BondsPage from './pages/invest/BondsPage';
 import DomesticEquityPage from './pages/invest/DomesticEquityPage';
 import InternationalEquityPage from './pages/invest/InternationalEquityPage';
 import IpoPage from './pages/invest/IpoPage';
+import PmsAifSifPage from './pages/invest/PmsAifSifPage';
+import RealEstatePage from './pages/invest/RealEstatePage';
 
 import LifeStagesSection from './components/LifeStagesSection';
 import InvestSolutions from './components/InvestSolutions';
@@ -111,6 +113,8 @@ function AppContent() {
           {/* Invest Module Routes */}
           <Route path="/invest/mutual-funds" element={<MutualFundsPage />} />
           <Route path="/invest/bonds" element={<BondsPage />} />
+          <Route path="/invest/pms-aif-sif" element={<PmsAifSifPage />} />
+          <Route path="/invest/real-estate" element={<RealEstatePage />} />
           <Route path="/invest/domestic-equity" element={<DomesticEquityPage />} />
           <Route path="/invest/international-equity" element={<InternationalEquityPage />} />
           <Route path="/invest/ipo" element={<IpoPage />} />

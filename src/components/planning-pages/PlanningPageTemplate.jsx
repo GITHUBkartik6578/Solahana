@@ -7,6 +7,9 @@ import { openConsultation } from '../../data/whoWeServe';
 // Photos cropped from the design mock-ups and upscaled: planning/<page>-<name>.webp
 const ART = import.meta.glob('../../assets/planning/*.webp', { eager: true, import: 'default' });
 const art = (cfg, name) => ART[`../../assets/planning/${cfg.art}-${name}.webp`];
+const artFile = (file) => ART[`../../assets/planning/${file}.webp`];
+const heroSrc = (cfg) => (cfg.heroFile ? artFile(cfg.heroFile) : art(cfg, 'hero'));
+const ctaSrc = (cfg) => (cfg.ctaFile ? artFile(cfg.ctaFile) : art(cfg, 'cta'));
 
 const serif = { fontFamily: "'Playfair Display', Georgia, serif" };
 
@@ -99,9 +102,9 @@ function Hero({ cfg }) {
           className="relative mx-auto h-[360px] w-full max-w-[560px] overflow-hidden sm:h-[440px] lg:absolute lg:bottom-0 lg:right-0 lg:top-[80px] lg:h-auto lg:w-[50%] lg:self-stretch lg:max-w-none"
         >
           {/* soft copy of the photo fills the space beside it */}
-          <img src={art(cfg, 'hero')} alt="" aria-hidden="true" draggable="false" className="absolute inset-0 h-full w-full scale-125 object-cover opacity-50 blur-2xl" />
+          <img src={heroSrc(cfg)} alt="" aria-hidden="true" draggable="false" className="absolute inset-0 h-full w-full scale-125 object-cover opacity-50 blur-2xl" />
           <div style={{ aspectRatio: cfg.heroAspect }} className="absolute inset-y-0 right-0 h-full max-w-none [mask-image:linear-gradient(to_right,transparent,black_22%)]">
-            <img src={art(cfg, 'hero')} alt="Amit R. Pandey, Chartered Wealth Manager" draggable="false" className="h-full w-full" />
+            <img src={heroSrc(cfg)} alt="Amit R. Pandey, Chartered Wealth Manager" draggable="false" className="h-full w-full" />
             {cfg.taglineBox && (
               <p
                 style={{ ...serif, left: `${cfg.taglineBox.x * 100}%`, top: `${cfg.taglineBox.y * 100}%`, width: `${cfg.taglineBox.w * 100}%`, textAlign: cfg.taglineBox.align }}
@@ -285,7 +288,7 @@ function Cta({ cfg }) {
     <section className="bg-[#F7F8FB] pb-16 pt-4 sm:pb-20">
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         <motion.div {...fade} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#1A3170] px-7 py-12 sm:px-12 sm:py-14">
-          <img src={art(cfg, 'cta')} alt="" aria-hidden="true" loading="lazy" draggable="false" className="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[62%] object-cover opacity-95 [mask-image:linear-gradient(to_right,transparent,black_30%)] lg:block" />
+          <img src={ctaSrc(cfg)} alt="" aria-hidden="true" loading="lazy" draggable="false" className="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[62%] object-cover opacity-95 [mask-image:linear-gradient(to_right,transparent,black_30%)] lg:block" />
           <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-[#C9922E]/25 blur-[90px]" />
           <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
             <div>

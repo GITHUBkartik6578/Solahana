@@ -1,12 +1,12 @@
 import React from 'react';
 import { PlanningTop, PlanningCta } from '../../components/planning-pages/PlanningPageTemplate';
-import { MUTUAL_FUNDS_PAGE } from '../../data/investPages';
+import { PMS_AIF_PAGE } from '../../data/investPages';
 
-export default function MutualFundsPage() {
+export default function PmsAifSifPage() {
   return (
     <div className="relative z-10 bg-[#F7F8FB]">
-      <PlanningTop config={MUTUAL_FUNDS_PAGE} />
-      <PlanningCta config={MUTUAL_FUNDS_PAGE} />
+      <PlanningTop config={PMS_AIF_PAGE} />
+      <PlanningCta config={PMS_AIF_PAGE} />
     </div>
   );
 }

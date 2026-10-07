@@ -7,6 +7,8 @@ const ROUTE_TITLES = {
   '/about': 'About Us — SOLAHANA Financial Planning',
   '/who-we-serve': 'Who We Serve — SOLAHANA Financial Planning',
   '/our-experts': 'Our Experts — SOLAHANA Financial Planning',
+  '/invest/pms-aif-sif': 'PMS, AIF & SIF — SOLAHANA',
+  '/invest/real-estate': 'Real Estate, REITs & Fractional Ownership — SOLAHANA',
   '/our-process': 'Our Process — SOLAHANA Financial Planning',
   '/financial-planning': 'Financial Planning Services — SOLAHANA',
   '/goals': 'Life Goal Roadmap — SOLAHANA',

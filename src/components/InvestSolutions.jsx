@@ -25,14 +25,14 @@ const SOLUTIONS = [
     sub: '(Alternative & Strategic Funds)',
     desc: 'High-alpha portfolio management services and institutional alternative funds.',
     art: art2,
-    to: '/investments',
+    to: '/invest/pms-aif-sif',
   },
   {
     title: ['Real Estate, REITs', '& Fractional Ownership'],
     sub: null,
     desc: 'Commercial real estate investments, REITs (Real Estate Investment Trusts), and high-yield fractional ownership opportunities.',
     art: art3,
-    to: '/investments',
+    to: '/invest/real-estate',
   },
   {
     title: ['Bonds, NCDs &', 'Fixed Income'],
