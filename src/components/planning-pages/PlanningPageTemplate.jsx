@@ -99,11 +99,14 @@ function Hero({ cfg }) {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="relative mx-auto h-[360px] w-full max-w-[560px] overflow-hidden sm:h-[440px] lg:absolute lg:bottom-0 lg:right-0 lg:top-[80px] lg:h-auto lg:w-[50%] lg:self-stretch lg:max-w-none"
+          className={`${cfg.heroClear ? '[container-type:size] ' : ''}relative mx-auto h-[360px] w-full max-w-[560px] overflow-hidden sm:h-[440px] lg:absolute lg:bottom-0 lg:right-0 lg:top-[80px] lg:h-auto lg:w-[50%] lg:self-stretch lg:max-w-none`}
         >
           {/* soft copy of the photo fills the space beside it */}
-          <img src={heroSrc(cfg)} alt="" aria-hidden="true" draggable="false" className="absolute inset-0 h-full w-full scale-125 object-cover opacity-50 blur-2xl" />
-          <div style={{ aspectRatio: cfg.heroAspect }} className="absolute inset-y-0 right-0 h-full max-w-none [mask-image:linear-gradient(to_right,transparent,black_22%)]">
+          <img src={heroSrc(cfg)} alt="" aria-hidden="true" draggable="false" className={`absolute inset-0 h-full w-full scale-125 object-cover blur-2xl ${cfg.heroClear ? 'opacity-40 [mask-image:linear-gradient(to_right,transparent,black_40%)]' : 'opacity-50'}`} />
+          <div
+            style={cfg.heroClear ? { aspectRatio: cfg.heroAspect, width: `min(100cqw, ${cfg.heroAspect * 100}cqh)` } : { aspectRatio: cfg.heroAspect }}
+            className={`absolute right-0 max-w-none [mask-image:linear-gradient(to_right,transparent,black_22%)] ${cfg.heroClear ? 'bottom-0' : 'inset-y-0 h-full'}`}
+          >
             <img src={heroSrc(cfg)} alt="Amit R. Pandey, Chartered Wealth Manager" draggable="false" className="h-full w-full" />
             {cfg.taglineBox && (
               <p
@@ -116,7 +119,8 @@ function Hero({ cfg }) {
               </p>
             )}
           </div>
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0F1F45] via-transparent to-transparent" />
+          {/* heroClear: the photo already carries its own navy lead-in on the left, so no overlay tints the subject */}
+          {!cfg.heroClear && <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0F1F45] via-transparent to-transparent" />}
         </motion.div>
       </div>
     </section>

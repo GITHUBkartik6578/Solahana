@@ -215,7 +215,8 @@ export const REAL_ESTATE_PAGE = {
 export const BONDS_PAGE = {
   ...COMMON,
   id: 'bonds',
-  heroAspect: 908 / 1044,
+  heroAspect: 2360 / 2088,
+  heroClear: true,
   art: 'bonds',
   eyebrow: 'Bonds, NCDs & Fixed Income',
   titleGold: ['Fixed Income', 'Architecture.'],
