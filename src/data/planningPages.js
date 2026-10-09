@@ -221,6 +221,10 @@ export const RISK_PAGE = {
   heroAspect: 996 / 892,
   banner: {
     file: 'risk-banner',
+    ratio: 1600 / 900,
+    maxVw: 42.5,
+    fit: 0.7,
+    minH: 440,
     alt: 'Risk Management. Comprehensive Risk Architecture. Shielding your wealth from the unforeseen.',
     primary: { left: '3.5%', top: '75.7%', width: '20.6%', height: '7.4%' },
     secondary: { left: '25.2%', top: '75.7%', width: '23.3%', height: '7.4%' },

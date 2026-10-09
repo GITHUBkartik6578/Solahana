@@ -26,6 +26,7 @@ import capLegacy from '../assets/planning/fp-c3.webp';
 import umbrellaArt from '../assets/planning/fp-risk.webp';
 import ctaArt from '../assets/planning/fp-cta.webp';
 import { openConsultation } from '../data/whoWeServe';
+import HeroBanner from '../components/common/HeroBanner';
 
 const serif = { fontFamily: "'Cormorant Garamond', 'Playfair Display', Georgia, serif" };
 const BOOK = { goal: 'Financial Planning', message: 'I’d like to request a private consultation.' };
@@ -146,30 +147,18 @@ function Hero() {
   return (
     <>
     {/* Desktop: the owner's full hero banner; the two buttons in it are made clickable */}
-    <section className="relative hidden bg-[#0A1836] pt-[80px] lg:block">
-      <div className="relative mx-auto w-full max-w-[1920px]">
-        <img
-          src={heroBanner}
-          alt="Solahana. Architecting Wealth. Preserving Legacy. Financial Planning and Family Office"
-          draggable="false"
-          className="block h-auto w-full select-none"
-        />
-        <button
-          type="button"
-          onClick={book}
-          aria-label="Request a Private Consultation"
-          className="absolute cursor-pointer rounded-md"
-          style={{ left: '4.7%', top: '67.3%', width: '19.6%', height: '7.7%' }}
-        />
-        <button
-          type="button"
-          onClick={scrollToFramework}
-          aria-label="Explore Our Family Office Services"
-          className="absolute cursor-pointer rounded-md"
-          style={{ left: '25.4%', top: '67.3%', width: '18%', height: '7.7%' }}
-        />
-      </div>
-    </section>
+    <HeroBanner
+      src={heroBanner}
+      alt="Solahana. Architecting Wealth. Preserving Legacy. Financial Planning and Family Office"
+      ratio={1600 / 600}
+      maxVw={37.5}
+      fit={0.93}
+      minH={440}
+      hotspots={[
+        { label: 'Request a Private Consultation', onClick: book, style: { left: '4.7%', top: '67.3%', width: '19.6%', height: '7.7%' } },
+        { label: 'Explore Our Family Office Services', onClick: scrollToFramework, style: { left: '25.4%', top: '67.3%', width: '18%', height: '7.7%' } },
+      ]}
+    />
 
     {/* Tablet / mobile: text hero with the new photo, so the copy stays readable */}
     <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px] lg:hidden">

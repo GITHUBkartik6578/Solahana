@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 import { openConsultation } from '../../data/whoWeServe';
+import HeroBanner from '../common/HeroBanner';
 
 // Photos cropped from the design mock-ups and upscaled: planning/<page>-<name>.webp
 const ART = import.meta.glob('../../assets/planning/*.webp', { eager: true, import: 'default' });
@@ -57,13 +58,18 @@ function Hero({ cfg }) {
     <>
     {/* Optional full-width hero banner (desktop only); its two baked-in buttons get invisible click areas */}
     {b && (
-      <section className="relative hidden bg-[#0A1836] pt-[80px] lg:block">
-        <div className="relative mx-auto w-full max-w-[1920px]">
-          <img src={artFile(b.file)} alt={b.alt} draggable="false" className="block h-auto w-full select-none" />
-          <button type="button" onClick={goCalc} aria-label={cfg.primaryCta} className="absolute cursor-pointer rounded-md" style={b.primary} />
-          <button type="button" onClick={() => consult(cfg)} aria-label="Request a Private Consultation" className="absolute cursor-pointer rounded-md" style={b.secondary} />
-        </div>
-      </section>
+      <HeroBanner
+        src={artFile(b.file)}
+        alt={b.alt}
+        ratio={b.ratio}
+        maxVw={b.maxVw}
+        fit={b.fit}
+        minH={b.minH}
+        hotspots={[
+          { label: cfg.primaryCta, onClick: goCalc, style: b.primary },
+          { label: 'Request a Private Consultation', onClick: () => consult(cfg), style: b.secondary },
+        ]}
+      />
     )}
     <section className={`relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]${b ? ' lg:hidden' : ''}`}>
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 top-10 h-[480px] w-[480px] rounded-full bg-[#C9922E]/15 blur-[120px]" />
