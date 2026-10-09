@@ -26,7 +26,9 @@ export default function HeroBanner({ src, alt, ratio, fit = 0.9, minH = 400, hot
     <section className="relative hidden bg-[#0A1836] pt-[80px] lg:block">
       <div
         className="relative mx-auto w-full max-w-[1920px] overflow-hidden [container-type:size]"
-        style={{ height: `clamp(${minH}px, calc(100svh - 80px), calc((100vw - ${CONTAINER_VW}) * ${k}))` }}
+        // height = the screen's height, but never so short that the picture would have to shrink (that would leave
+        // empty bands at the sides): the floor is the picture's own full-width height, cropped to the `fit` part
+        style={{ height: `max(${minH}px, calc((100vw - ${CONTAINER_VW}) * ${k} * ${fit}), min(calc(100svh - 80px), calc((100vw - ${CONTAINER_VW}) * ${k})))` }}
       >
         <img src={src} alt="" aria-hidden="true" draggable="false" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-90 blur-2xl" />
         <div
