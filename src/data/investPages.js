@@ -94,7 +94,16 @@ export const MUTUAL_FUNDS_PAGE = {
 export const PMS_AIF_PAGE = {
   ...COMMON,
   id: 'pms-aif-sif',
-  heroAspect: 880 / 1028,
+  heroAspect: 880 / 500,
+  banner: {
+    file: 'pms-banner',
+    alt: 'PMS, AIF and SIF. Alternative and Strategic Wealth Architecture. Beyond conventional horizons.',
+    ratio: 1600 / 600,
+    fit: 0.97,
+    minH: 400,
+    primary: { left: '5.5%', top: '72.4%', width: '18.6%', height: '8%' },
+    secondary: { left: '25.6%', top: '72.4%', width: '18.6%', height: '8%' },
+  },
   art: 'pms',
   eyebrow: 'PMS, AIF & SIF',
   titleGold: ['Alternative & Strategic', 'Wealth Architecture.'],
