@@ -12,7 +12,7 @@ export default function AboutHeroBanner() {
   return (
     <section
       aria-label="About SOLAHANA"
-      className="relative isolate overflow-hidden bg-[#0A1836] pt-[80px] text-white"
+      className="relative isolate overflow-hidden bg-[#0A1836] pt-[80px] text-white lg:hidden"
     >
       {/* warm glow + deep navy base */}
       <div

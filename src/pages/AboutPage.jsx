@@ -1,4 +1,5 @@
 import React from 'react';
+import AboutHeroImage from '../components/about/AboutHeroImage';
 import AboutHeroBanner from '../components/about/AboutHeroBanner';
 import AboutMissionVisionCards from '../components/about/AboutMissionVisionCards';
 import AboutFounderNote from '../components/about/AboutFounderNote';
@@ -9,6 +10,7 @@ import AboutFinalCta from '../components/about/AboutFinalCta';
 export default function AboutPage() {
   return (
     <div className="relative z-10 bg-white">
+      <AboutHeroImage />
       <AboutHeroBanner />
       <AboutMissionVisionCards />
       <AboutFounderNote />
