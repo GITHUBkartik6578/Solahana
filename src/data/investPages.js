@@ -25,7 +25,7 @@ export const MUTUAL_FUNDS_PAGE = {
     file: 'mf-banner',
     alt: 'Mutual Funds and SIPs. Disciplined Mutual Fund Architecture. Compounding powered by precision.',
     ratio: 1600 / 900,
-    fit: 0.9,
+    fit: 1,
     capped: true,
     minH: 400,
     primary: { left: '4.3%', top: '72.7%', width: '20.8%', height: '7.6%' },
