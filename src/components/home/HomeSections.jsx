@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight, Play, Gem, ChartColumnIncreasing, Users, ShieldCheck, Video, Volume2, Captions, Settings, PictureInPicture2, Maximize, ShieldPlus, Ban, FileText, Handshake, Armchair, Percent, Target,
-  Globe, Earth, Building2, Plus, Coins, TreeDeciduous, Network,
+  Globe, Earth, Building2, Plus, Coins,
 } from 'lucide-react';
 import { openConsultation } from '../../data/whoWeServe';
 import founderPhoto from '../../assets/home-founder.webp';
@@ -340,12 +340,60 @@ export function WealthArchitecture() {
 /* ------------------------------------------------------------------ */
 /* 6. Beyond investments: family wealth, founder's view, our process   */
 /* ------------------------------------------------------------------ */
+/* filled line-art icons for the family-wealth row (lucide has no filled equivalents) */
+const svgProps = { viewBox: '0 0 48 48', fill: 'currentColor', 'aria-hidden': true };
+const FamilyIcons = {
+  governance: (c) => (
+    <svg {...svgProps} className={c}>
+      <path d="M2 38c0-6.500 3.600-10.500 9-10.500 1.700 0 3.100.4 4.300 1.100C12.300 31.200 10.700 34.700 10.700 38z" />
+      <path d="M46 38c0-6.500-3.600-10.500-9-10.500-1.700 0-3.100.4-4.300 1.100 3 2.600 4.600 6.100 4.600 9.400z" />
+      <circle cx="11" cy="20" r="5" />
+      <circle cx="37" cy="20" r="5" />
+      <circle cx="24" cy="15" r="7" />
+      <path d="M11.500 42c0-8.500 5-13.500 12.500-13.500S36.500 33.500 36.500 42z" />
+    </svg>
+  ),
+  tree: (c) => (
+    <svg {...svgProps} className={c}>
+      <path d="M24 3c-6.500 0-11 4.300-11 9.500 0 .9.1 1.700.4 2.500C9.800 16.300 7.500 19.700 7.500 23.500c0 5.800 4.700 9.800 10.500 9.800H22V45h4V33.300h4c5.800 0 10.500-4 10.500-9.800 0-3.800-2.300-7.200-5.900-8.500.3-.8.400-1.600.4-2.500C35 7.300 30.500 3 24 3z" />
+    </svg>
+  ),
+  coins: (c) => (
+    <svg {...svgProps} className={c}>
+      {[31, 20, 9].map((y) => (
+        <g key={y}>
+          <path d={`M9 ${y + 3}v6.500c0 3 6.700 5.500 15 5.500s15-2.500 15-5.500V${y + 3}z`} />
+          <ellipse cx="24" cy={y + 3} rx="15" ry="5.500" stroke="#FFF7EA" strokeWidth="1.600" />
+        </g>
+      ))}
+    </svg>
+  ),
+  network: (c) => (
+    <svg {...svgProps} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className={c}>
+      <circle cx="24" cy="9" r="5" />
+      <circle cx="24" cy="26" r="3.500" />
+      <circle cx="10" cy="38" r="5" />
+      <circle cx="38" cy="38" r="5" />
+      <path d="M24 14v8.500M21.500 28.500 13.500 34M26.500 28.500 34.500 34" />
+    </svg>
+  ),
+  growth: (c) => (
+    <svg {...svgProps} className={c}>
+      <rect x="5" y="30" width="10" height="15" rx="1.500" />
+      <rect x="19" y="22" width="10" height="23" rx="1.500" />
+      <rect x="33" y="13" width="10" height="32" rx="1.500" />
+      <path d="M4 21 17 11l8 6.500L40 5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M31 4.500h10V14.500" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+};
+
 const FAMILY = [
-  { icon: Users, label: ['Family', 'Governance'], to: '/estate-planning' },
-  { icon: TreeDeciduous, label: ['Intergenerational', 'Wealth'], to: '/estate-planning' },
-  { icon: Coins, label: ['Cash Flow', 'Architecture'], to: '/financial-planning' },
-  { icon: Network, label: ['Succession', 'Planning'], to: '/estate-planning' },
-  { icon: ChartColumnIncreasing, label: ['Business–Personal', 'Wealth Integration'], to: '/who-we-serve#business-owners' },
+  { icon: FamilyIcons.governance, label: ['Family', 'Governance'], to: '/estate-planning' },
+  { icon: FamilyIcons.tree, label: ['Intergenerational', 'Wealth'], to: '/estate-planning' },
+  { icon: FamilyIcons.coins, label: ['Cash Flow', 'Architecture'], to: '/financial-planning' },
+  { icon: FamilyIcons.network, label: ['Succession', 'Planning'], to: '/estate-planning' },
+  { icon: FamilyIcons.growth, label: ['Business–Personal', 'Wealth Integration'], to: '/who-we-serve#business-owners', bare: true },
 ];
 
 const STEPS = [
@@ -363,7 +411,7 @@ export function FamilyAndProcess() {
       {/* family wealth + founder's perspective */}
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-stretch gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-8 lg:px-8">
         <motion.div {...fade} className="flex flex-col justify-center py-2">
-          <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E08A1E]">Beyond Investments</p>
+          <p className="font-sora text-[12.5px] font-bold uppercase tracking-[0.34em] text-[#E08A1E] sm:text-[13px]">Beyond Investments</p>
           <h2 style={serif} className="mt-3 text-[34px] font-semibold leading-[1.05] text-[#0A1836] sm:text-[44px] lg:whitespace-nowrap lg:text-[clamp(38px,3.6vw,56px)]">
             Family Wealth. For Generations.
           </h2>
@@ -371,8 +419,8 @@ export function FamilyAndProcess() {
             {FAMILY.map((f, i) => (
               <li key={f.label[0]} className={`sm:px-1 ${i > 0 ? 'sm:border-l sm:border-[#EEE9DD]' : ''}`}>
                 <Link to={f.to} className="group flex h-full flex-col items-center text-center">
-                  <span className="flex h-[74px] w-[74px] items-center justify-center rounded-full border border-[#F0C98A] bg-[#FFF7EA] text-[#E08A1E] transition-transform group-hover:-translate-y-1 sm:h-[68px] sm:w-[68px] xl:h-[80px] xl:w-[80px]">
-                    <f.icon className="h-8 w-8 xl:h-9 xl:w-9" strokeWidth={1.6} />
+                  <span className={`flex h-[74px] w-[74px] items-center justify-center text-[#E08A1E] transition-transform group-hover:-translate-y-1 sm:h-[68px] sm:w-[68px] xl:h-[80px] xl:w-[80px] ${f.bare ? '' : 'rounded-full border border-[#F0C98A] bg-[#FFF7EA]'}`}>
+                    {f.icon(f.bare ? 'h-[52px] w-[52px] xl:h-[60px] xl:w-[60px]' : 'h-9 w-9 xl:h-10 xl:w-10')}
                   </span>
                   <span className="mt-3 whitespace-nowrap text-[13.5px] leading-snug text-[#0A1836] xl:text-[14.5px]">{f.label[0]}<br />{f.label[1]}</span>
                 </Link>
@@ -390,7 +438,7 @@ export function FamilyAndProcess() {
 
           <div className="px-6 pb-7 pt-7 sm:min-h-[330px] sm:px-8 sm:pb-8 lg:min-h-[340px]">
             <div className="sm:max-w-[62%]">
-              <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E2B24E]">Founder’s Perspective</p>
+              <p className="font-sora text-[12.5px] font-bold uppercase tracking-[0.34em] text-[#E2B24E] sm:text-[13px]">Founder’s Perspective</p>
               <blockquote style={serif} className="mt-4 text-[26px] font-medium leading-[1.2] text-white sm:text-[27px] lg:text-[clamp(25px,2.15vw,33px)]">
                 “My role is not to add more products to your financial life. It is to bring <span className="text-[#F3C95F]">clarity</span> to <span className="text-[#F3C95F]">the decisions</span> that matter.”
               </blockquote>
@@ -414,24 +462,24 @@ export function FamilyAndProcess() {
       <div className="mx-auto mt-9 max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-6 border-t border-[#EEE9DD] pt-7 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,2.22fr)] lg:gap-6">
           <motion.div {...fade}>
-            <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E08A1E]">Our Process</p>
+            <p className="font-sora text-[12.5px] font-bold uppercase tracking-[0.34em] text-[#E08A1E] sm:text-[13px]">Our Process</p>
             <h2 style={serif} className="mt-2 text-[28px] font-semibold leading-tight text-[#0A1836] sm:text-[32px]">A Disciplined and Transparent Journey</h2>
           </motion.div>
 
-          <ol className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-5 lg:flex lg:items-start lg:gap-0">
+          <ol className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-5 lg:flex lg:items-start lg:gap-0 lg:px-14">
             {STEPS.map((s, i) => (
               <React.Fragment key={s.n}>
-                <li className="lg:w-[clamp(110px,9.4vw,138px)] lg:shrink-0">
+                <li className="lg:w-[clamp(84px,6.8vw,104px)] lg:shrink-0">
                   <Link to="/our-process" className="group flex flex-col items-center text-center">
-                    <span style={serif} className="flex h-[54px] w-[54px] items-center justify-center rounded-full border border-[#E8B26A] bg-white text-[22px] font-semibold text-[#E08A1E] transition-colors group-hover:bg-[#E08A1E] group-hover:text-white">
+                    <span className="flex h-[56px] w-[56px] items-center justify-center rounded-full border border-[#E8B26A] bg-white text-[19px] font-bold tracking-wide text-[#E08A1E] transition-colors group-hover:bg-[#E08A1E] group-hover:text-white">
                       {s.n}
                     </span>
-                    <span className="mt-2.5 text-[15.5px] font-semibold text-[#0A1836]">{s.title}</span>
-                    <span style={serif} className="mt-0.5 max-w-[20ch] text-[14.5px] leading-snug text-[#475569]">{s.sub}</span>
+                    <span className="mt-2.5 text-[16px] font-semibold text-[#0A1836]">{s.title}</span>
+                    <span style={serif} className="mt-0.5 text-[15px] font-medium leading-snug text-[#475569] lg:whitespace-nowrap">{s.sub}</span>
                   </Link>
                 </li>
                 {i < STEPS.length - 1 && (
-                  <li aria-hidden="true" className="hidden h-[54px] min-w-[24px] flex-1 items-center px-2 lg:flex">
+                  <li aria-hidden="true" className="hidden h-[56px] min-w-[24px] flex-1 items-center px-3 lg:flex">
                     <span className="h-px flex-1 bg-[#E08A1E]" />
                     <svg viewBox="0 0 8 10" className="-ml-px h-2.5 w-2 shrink-0 text-[#E08A1E]"><path d="M0 0 L8 5 L0 10 Z" fill="currentColor" /></svg>
                   </li>
