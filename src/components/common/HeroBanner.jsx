@@ -38,11 +38,21 @@ export default function HeroBanner({ src, alt, ratio, fit = 0.9, minH = 400, hot
             aspectRatio: R,
           }}
         >
+          {/* spare room on the right: the picture's last pixel column stretched sideways and softened, so it
+              continues the scene smoothly and fades into the navy hero background (no seam, no duplicate objects) */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-full top-0 h-full w-[100cqw] overflow-hidden blur-[18px] [mask-image:linear-gradient(to_right,black,black_30%,transparent_90%)]"
+          >
+            <div className="h-full w-px origin-left scale-x-[2400] overflow-hidden">
+              <img src={src} alt="" draggable="false" className="h-full max-w-none" style={{ width: 'var(--w)', marginLeft: 'calc(1px - var(--w))' }} />
+            </div>
+          </div>
           <img
             src={src}
             alt={alt}
             draggable="false"
-            className="block h-full w-full select-none [mask-image:linear-gradient(to_right,transparent,black_3%,black_97.5%,transparent)]"
+            className="relative block h-full w-full select-none [mask-image:linear-gradient(to_right,transparent,black_3%)]"
           />
           {hotspots.map((h) => (
             <button
