@@ -302,6 +302,12 @@ export const BONDS_PAGE = {
     ],
   },
   cta: {
+    banner: {
+      file: 'bonds-cta-banner',
+      ratio: 1600 / 650,
+      alt: 'Optimize your cash flows with institutional fixed income. Regular income, capital preservation, tax-efficient growth, financial stability for generations.',
+      hotspot: { left: '5%', top: '82.3%', width: '38.2%', height: '11.6%' },
+    },
     eyebrow: 'Your Income. Your Peace of Mind.',
     title: ['Optimize Your Cash Flows', 'with Institutional Fixed Income.'],
     text: 'Move beyond ordinary bank deposits with objective, zero-fee advisory guidance.',

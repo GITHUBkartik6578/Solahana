@@ -309,10 +309,17 @@ function Lifecycle({ cfg }) {
 
 function Cta({ cfg }) {
   const c = cfg.cta;
+  const b = c.banner; // optional ready-made banner picture (desktop); smaller screens keep the live-text card below
   return (
     <section className="bg-[#F7F8FB] pb-16 pt-4 sm:pb-20">
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-        <motion.div {...fade} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#1A3170] px-7 py-12 sm:px-12 sm:py-14">
+        {b && (
+          <motion.div {...fade} className="relative hidden overflow-hidden rounded-3xl bg-[#0A1836] lg:block">
+            <img src={artFile(b.file)} alt={b.alt} loading="lazy" draggable="false" style={{ aspectRatio: b.ratio }} className="block h-auto w-full select-none" />
+            <button type="button" onClick={() => consult(cfg)} aria-label={c.button} className="absolute cursor-pointer rounded-full" style={b.hotspot} />
+          </motion.div>
+        )}
+        <motion.div {...fade} className={`relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#1A3170] px-7 py-12 sm:px-12 sm:py-14${b ? ' lg:hidden' : ''}`}>
           <img src={ctaSrc(cfg)} alt="" aria-hidden="true" loading="lazy" draggable="false" className="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[62%] object-cover opacity-95 [mask-image:linear-gradient(to_right,transparent,black_30%)] lg:block" />
           <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-[#C9922E]/25 blur-[90px]" />
           <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
