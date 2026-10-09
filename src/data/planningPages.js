@@ -219,6 +219,12 @@ export const RISK_PAGE = {
   id: 'risk',
   art: 'risk',
   heroAspect: 996 / 892,
+  banner: {
+    file: 'risk-banner',
+    alt: 'Risk Management. Comprehensive Risk Architecture. Shielding your wealth from the unforeseen.',
+    primary: { left: '3.5%', top: '75.7%', width: '20.6%', height: '7.4%' },
+    secondary: { left: '25.2%', top: '75.7%', width: '23.3%', height: '7.4%' },
+  },
   taglineBox: null,
   pillarBadge: true,
   goal: 'Risk Management',

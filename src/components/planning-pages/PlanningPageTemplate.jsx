@@ -52,8 +52,20 @@ function Hero({ cfg }) {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     else consult(cfg);
   };
+  const b = cfg.banner;
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]">
+    <>
+    {/* Optional full-width hero banner (desktop only); its two baked-in buttons get invisible click areas */}
+    {b && (
+      <section className="relative hidden bg-[#0A1836] pt-[80px] lg:block">
+        <div className="relative mx-auto w-full max-w-[1920px]">
+          <img src={artFile(b.file)} alt={b.alt} draggable="false" className="block h-auto w-full select-none" />
+          <button type="button" onClick={goCalc} aria-label={cfg.primaryCta} className="absolute cursor-pointer rounded-md" style={b.primary} />
+          <button type="button" onClick={() => consult(cfg)} aria-label="Request a Private Consultation" className="absolute cursor-pointer rounded-md" style={b.secondary} />
+        </div>
+      </section>
+    )}
+    <section className={`relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]${b ? ' lg:hidden' : ''}`}>
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 top-10 h-[480px] w-[480px] rounded-full bg-[#C9922E]/15 blur-[120px]" />
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:min-h-[clamp(520px,calc(100svh-80px),700px)] lg:grid-cols-1 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:max-w-[52%] lg:py-12">
@@ -124,6 +136,7 @@ function Hero({ cfg }) {
         </motion.div>
       </div>
     </section>
+    </>
   );
 }
 
