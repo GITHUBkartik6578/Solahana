@@ -332,7 +332,7 @@ export const ESTATE_PAGE = {
     file: 'estate-banner',
     alt: 'Estate Planning. Generational Estate Architecture. Preserving legacy, securing succession.',
     ratio: 1600 / 900,
-    fit: 0.74,
+    fit: 0.84,
     minH: 400,
     primary: { left: '5.7%', top: '69.9%', width: '21.3%', height: '6.4%' },
     secondary: { left: '28.3%', top: '69.9%', width: '19.3%', height: '6.4%' },
