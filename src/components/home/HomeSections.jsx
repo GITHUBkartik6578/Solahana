@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  ArrowRight, Play, Gem, BarChart3, ChartColumnIncreasing, Users, ShieldCheck, Video, Volume2, Captions, Settings, PictureInPicture2, Maximize, ShieldPlus, Ban, FileText, Handshake, Armchair, Percent, Target,
+  ArrowRight, Play, Gem, ChartColumnIncreasing, Users, ShieldCheck, Video, Volume2, Captions, Settings, PictureInPicture2, Maximize, ShieldPlus, Ban, FileText, Handshake, Armchair, Percent, Target,
   Globe, Earth, Building2, Plus, Coins, TreeDeciduous, Network,
 } from 'lucide-react';
 import { openConsultation } from '../../data/whoWeServe';
@@ -338,60 +338,16 @@ export function WealthArchitecture() {
 }
 
 /* ------------------------------------------------------------------ */
-/* 6. Family wealth + founder's perspective                            */
+/* 6. Beyond investments: family wealth, founder's view, our process   */
 /* ------------------------------------------------------------------ */
 const FAMILY = [
   { icon: Users, label: ['Family', 'Governance'], to: '/estate-planning' },
   { icon: TreeDeciduous, label: ['Intergenerational', 'Wealth'], to: '/estate-planning' },
   { icon: Coins, label: ['Cash Flow', 'Architecture'], to: '/financial-planning' },
   { icon: Network, label: ['Succession', 'Planning'], to: '/estate-planning' },
-  { icon: BarChart3, label: ['Business–Personal', 'Wealth Integration'], to: '/who-we-serve#business-owners' },
+  { icon: ChartColumnIncreasing, label: ['Business–Personal', 'Wealth Integration'], to: '/who-we-serve#business-owners' },
 ];
 
-export function FamilyAndFounder() {
-  const navigate = useNavigate();
-  return (
-    <section className="bg-white pb-10">
-      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-stretch gap-6 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-8 lg:px-8">
-        <motion.div {...fade} className="flex flex-col justify-center">
-          <Eyebrow>Beyond Investments</Eyebrow>
-          <h2 style={serif} className="mt-2 text-[30px] font-semibold leading-tight text-[#0F1F45] sm:text-[36px]">Family Wealth. For Generations.</h2>
-          <ul className="mt-5 grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-5">
-            {FAMILY.map((f) => (
-              <li key={f.label[0]}>
-                <Link to={f.to} className="group flex flex-col items-center text-center">
-                  <f.icon className="h-11 w-11 text-[#E08A1E] transition-transform group-hover:-translate-y-0.5" strokeWidth={1.4} />
-                  <span className="mt-2 text-[12.5px] font-medium leading-snug text-[#0F1F45]">{f.label[0]}<br />{f.label[1]}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-
-        <motion.div {...fade} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] shadow-[0_16px_40px_rgba(15,31,69,0.25)]">
-          <div className="relative z-10 grid grid-cols-1 sm:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
-            <div className="p-6 sm:p-7">
-              <Eyebrow light>Founder’s Perspective</Eyebrow>
-              <blockquote style={serif} className="[text-wrap:balance] mt-3 text-[25px] font-semibold leading-[1.2] text-white sm:text-[28px]">
-                “My role is not to add more products to your financial life. It is to bring clarity to the decisions that matter.”
-              </blockquote>
-              <p style={serif} className="mt-4 text-[18px] font-semibold text-[#E2B24E]">Amit R. Pandey, CWM®</p>
-              <p className="text-[12.5px] text-slate-300">MBA | Ex-Banker | 25+ Years in Financial Services</p>
-              <GoldArrowBtn onClick={() => navigate('/our-process')} className="mt-5">Explore My Approach</GoldArrowBtn>
-            </div>
-            <div className="relative hidden min-h-[220px] sm:block [mask-image:linear-gradient(to_right,transparent,black_28%)]">
-              <img src={founderPhoto} alt="Amit R. Pandey, Chartered Wealth Manager" loading="lazy" draggable="false" className="absolute inset-0 h-full w-full object-cover object-[50%_18%]" />
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* 7. Our process                                                      */
-/* ------------------------------------------------------------------ */
 const STEPS = [
   { n: '01', title: 'Discover', sub: 'Understand your goals' },
   { n: '02', title: 'Diagnose', sub: 'Deep financial analysis' },
@@ -400,30 +356,90 @@ const STEPS = [
   { n: '05', title: 'Steward', sub: 'Ongoing monitoring & review' },
 ];
 
-export function ProcessStrip() {
+export function FamilyAndProcess() {
+  const navigate = useNavigate();
   return (
-    <section className="border-y border-[#EFE9D8] bg-[#FBF9F3] py-9">
-      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,2.2fr)] lg:px-8">
-        <motion.div {...fade}>
-          <Eyebrow>Our Process</Eyebrow>
-          <h2 style={serif} className="mt-2 text-[26px] font-semibold leading-tight text-[#0F1F45] sm:text-[30px]">A Disciplined and Transparent Journey</h2>
+    <section className="bg-white pb-6 pt-4 sm:pt-6">
+      {/* family wealth + founder's perspective */}
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-stretch gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-8 lg:px-8">
+        <motion.div {...fade} className="flex flex-col justify-center py-2">
+          <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E08A1E]">Beyond Investments</p>
+          <h2 style={serif} className="mt-3 text-[34px] font-semibold leading-[1.05] text-[#0A1836] sm:text-[44px] lg:whitespace-nowrap lg:text-[clamp(38px,3.6vw,56px)]">
+            Family Wealth. For Generations.
+          </h2>
+          <ul className="mt-8 grid grid-cols-2 gap-x-2 gap-y-7 sm:grid-cols-5 sm:gap-y-0">
+            {FAMILY.map((f, i) => (
+              <li key={f.label[0]} className={`sm:px-1 ${i > 0 ? 'sm:border-l sm:border-[#EEE9DD]' : ''}`}>
+                <Link to={f.to} className="group flex h-full flex-col items-center text-center">
+                  <span className="flex h-[74px] w-[74px] items-center justify-center rounded-full border border-[#F0C98A] bg-[#FFF7EA] text-[#E08A1E] transition-transform group-hover:-translate-y-1 sm:h-[68px] sm:w-[68px] xl:h-[80px] xl:w-[80px]">
+                    <f.icon className="h-8 w-8 xl:h-9 xl:w-9" strokeWidth={1.6} />
+                  </span>
+                  <span className="mt-3 whitespace-nowrap text-[13.5px] leading-snug text-[#0A1836] xl:text-[14.5px]">{f.label[0]}<br />{f.label[1]}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </motion.div>
-        <ol className="grid grid-cols-2 gap-5 sm:grid-cols-5 sm:gap-2">
-          {STEPS.map((s, i) => (
-            <li key={s.n} className="relative">
-              <Link to="/our-process" className="group flex flex-col items-center text-center">
-                <span style={serif} className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-[#E6C27A] bg-[#FBF9F3] text-[20px] font-medium text-[#C9922E] transition-colors group-hover:bg-[#C9922E] group-hover:text-white">
-                  {s.n}
-                </span>
-                <span className="mt-2 text-[14.5px] font-bold text-[#0F1F45]">{s.title}</span>
-                <span className="mt-0.5 max-w-[18ch] text-[11.5px] leading-snug text-[#64748B]">{s.sub}</span>
-              </Link>
-              {i < STEPS.length - 1 && (
-                <span aria-hidden="true" className="absolute left-[calc(50%+30px)] top-6 hidden h-px w-[calc(100%-60px)] bg-gradient-to-r from-[#E6C27A] to-[#E6C27A]/40 sm:block" />
-              )}
-            </li>
-          ))}
-        </ol>
+
+        <motion.div {...fade} className="relative isolate overflow-hidden rounded-xl bg-[#0A1836] shadow-[0_16px_40px_rgba(15,31,69,0.28)]">
+          {/* founder portrait on the right, fading into the navy */}
+          <div className="absolute inset-y-0 right-0 -z-10 hidden w-[44%] sm:block [mask-image:linear-gradient(to_right,transparent,black_38%)]">
+            <img src={founderPhoto} alt="Amit R. Pandey, Chartered Wealth Manager" loading="lazy" draggable="false" className="h-full w-full object-cover object-[50%_20%]" />
+          </div>
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(420px_260px_at_88%_30%,rgba(201,146,46,0.2),transparent_70%)]" />
+
+          <div className="px-6 pb-7 pt-7 sm:min-h-[330px] sm:px-8 sm:pb-8 lg:min-h-[340px]">
+            <div className="sm:max-w-[62%]">
+              <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E2B24E]">Founder’s Perspective</p>
+              <blockquote style={serif} className="mt-4 text-[26px] font-medium leading-[1.2] text-white sm:text-[27px] lg:text-[clamp(25px,2.15vw,33px)]">
+                “My role is not to add more products to your financial life. It is to bring <span className="text-[#F3C95F]">clarity</span> to <span className="text-[#F3C95F]">the decisions</span> that matter.”
+              </blockquote>
+              <span className="mt-5 block h-px w-24 bg-[#E2B24E]/60" />
+              <p style={serif} className="mt-4 text-[24px] font-semibold text-white">Amit R. Pandey, CWM<sup className="text-[0.55em] leading-none">®</sup></p>
+              <p className="mt-1 text-[13.5px] text-white/90">MBA <span className="mx-1 text-white/60">|</span> Ex-Banker <span className="mx-1 text-white/60">|</span> 25+ Years in Financial Services</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => navigate('/our-process')}
+              className="group mt-6 inline-flex cursor-pointer items-center justify-center gap-3 rounded-md bg-gradient-to-b from-[#FBE08E] to-[#F3C95F] px-6 py-3.5 text-[15px] font-semibold text-[#0A1836] shadow-[0_8px_22px_rgba(243,201,95,0.35)] transition-transform hover:-translate-y-0.5 sm:absolute sm:bottom-6 sm:right-6 sm:mt-0"
+            >
+              Explore My Approach
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </button>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* our process */}
+      <div className="mx-auto mt-9 max-w-[1400px] px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-6 border-t border-[#EEE9DD] pt-7 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,2.22fr)] lg:gap-6">
+          <motion.div {...fade}>
+            <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E08A1E]">Our Process</p>
+            <h2 style={serif} className="mt-2 text-[28px] font-semibold leading-tight text-[#0A1836] sm:text-[32px]">A Disciplined and Transparent Journey</h2>
+          </motion.div>
+
+          <ol className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-5 lg:flex lg:items-start lg:gap-0">
+            {STEPS.map((s, i) => (
+              <React.Fragment key={s.n}>
+                <li className="lg:w-[clamp(110px,9.4vw,138px)] lg:shrink-0">
+                  <Link to="/our-process" className="group flex flex-col items-center text-center">
+                    <span style={serif} className="flex h-[54px] w-[54px] items-center justify-center rounded-full border border-[#E8B26A] bg-white text-[22px] font-semibold text-[#E08A1E] transition-colors group-hover:bg-[#E08A1E] group-hover:text-white">
+                      {s.n}
+                    </span>
+                    <span className="mt-2.5 text-[15.5px] font-semibold text-[#0A1836]">{s.title}</span>
+                    <span style={serif} className="mt-0.5 max-w-[20ch] text-[14.5px] leading-snug text-[#475569]">{s.sub}</span>
+                  </Link>
+                </li>
+                {i < STEPS.length - 1 && (
+                  <li aria-hidden="true" className="hidden h-[54px] min-w-[24px] flex-1 items-center px-2 lg:flex">
+                    <span className="h-px flex-1 bg-[#E08A1E]" />
+                    <svg viewBox="0 0 8 10" className="-ml-px h-2.5 w-2 shrink-0 text-[#E08A1E]"><path d="M0 0 L8 5 L0 10 Z" fill="currentColor" /></svg>
+                  </li>
+                )}
+              </React.Fragment>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   );
@@ -470,8 +486,7 @@ export function MasterPlanCta() {
 export default function HomeSections() {
   return (
     <>
-      <FamilyAndFounder />
-      <ProcessStrip />
+      <FamilyAndProcess />
       <MasterPlanCta />
     </>
   );
