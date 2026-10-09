@@ -1,31 +1,49 @@
 import React from 'react';
 
 /**
- * Full-width hero banner image that always fits on screen: the hero height follows the
- * viewport (clamped), the picture is scaled so its important part (`fit` of the image
- * height, centred) fits that height, and any spare room at the sides is filled with a soft
- * blurred copy. The invisible click areas stay glued to the buttons drawn inside the picture.
+ * Full-width hero banner image, aligned with the rest of the site.
+ *
+ * - The text drawn inside the picture starts at the same left edge as the navbar logo and the
+ *   page sections (the 1320px container). Any spare room on the left is filled by a soft blurred
+ *   copy of the picture (its left side is dark navy anyway).
+ * - The hero height follows the viewport (clamped), so heading, text and buttons fit on one screen.
+ * - The invisible click areas stay glued to the buttons drawn inside the picture.
  *
  * ratio    image width / height
  * fit      share of the image height (0-1, centred) that must stay visible: text + buttons
- * maxVw    tallest the hero may get, as a % of viewport width
  * minH     smallest hero height in px
- * hotspots [{ label, onClick, style }]  style = % box inside the image (left/top/width/height)
+ * hotspots [{ label, onClick, style }]  style = % box inside the image (left/top/width/height);
+ *          the first hotspot's left edge is taken as the picture's text-left edge.
  */
-export default function HeroBanner({ src, alt, ratio, fit = 0.9, maxVw, minH = 440, hotspots = [] }) {
+const CONTAINER = 'calc(max(0px, (100cqw - 1320px) / 2) + 32px)'; // left edge of the site container
+const CONTAINER_VW = 'calc(max(0px, (100vw - 1320px) / 2) + 32px)';
+
+export default function HeroBanner({ src, alt, ratio, fit = 0.9, minH = 400, hotspots = [] }) {
   const R = ratio.toFixed(4);
+  const f = (parseFloat(hotspots[0]?.style?.left) || 4) / 100; // text-left as a share of the image width
+  const k = (1 / ((1 - f) * ratio)).toFixed(4); // image height / (viewport width - container left)
   return (
     <section className="relative hidden bg-[#0A1836] pt-[80px] lg:block">
       <div
         className="relative mx-auto w-full max-w-[1920px] overflow-hidden [container-type:size]"
-        style={{ height: `clamp(${minH}px, calc(100svh - 80px), ${maxVw}vw)` }}
+        style={{ height: `clamp(${minH}px, calc(100svh - 80px), calc((100vw - ${CONTAINER_VW}) * ${k}))` }}
       >
         <img src={src} alt="" aria-hidden="true" draggable="false" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-90 blur-2xl" />
         <div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-          style={{ width: `min(calc(100cqh * ${R} / ${fit}), max(100cqw, calc(100cqh * ${R})))`, aspectRatio: R }}
+          className="absolute top-1/2 -translate-y-1/2"
+          style={{
+            '--w': `min(calc((100cqw - ${CONTAINER}) / ${(1 - f).toFixed(4)}), calc(100cqh * ${R} / ${fit}))`,
+            width: 'var(--w)',
+            left: `calc(${CONTAINER} - var(--w) * ${f})`,
+            aspectRatio: R,
+          }}
         >
-          <img src={src} alt={alt} draggable="false" className="block h-full w-full select-none [mask-image:linear-gradient(to_right,transparent,black_2.5%,black_97.5%,transparent)]" />
+          <img
+            src={src}
+            alt={alt}
+            draggable="false"
+            className="block h-full w-full select-none [mask-image:linear-gradient(to_right,transparent,black_3%,black_97.5%,transparent)]"
+          />
           {hotspots.map((h) => (
             <button
               key={h.label}
