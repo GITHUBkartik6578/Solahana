@@ -93,6 +93,16 @@ export const INVESTMENT_PAGE = {
   id: 'investment',
   art: 'invest',
   heroAspect: 1000 / 1165,
+  banner: {
+    file: 'invest-banner',
+    alt: 'Investment Planning. Institutional-Grade Investment Architecture. Compounding engineered for generations.',
+    ratio: 1600 / 684,
+    fit: 0.9,
+    maxVw: 42.75,
+    minH: 400,
+    primary: { left: '4.2%', top: '73%', width: '20.5%', height: '7.7%' },
+    secondary: { left: '25.9%', top: '73%', width: '19.8%', height: '7.7%' },
+  },
   taglineBox: null, // the new investment hero already has a clean tagline in the photo
   goal: 'Investment Planning',
   calculatorId: 'investment-calculator',
