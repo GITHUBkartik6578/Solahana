@@ -252,7 +252,7 @@ export const RISK_PAGE = {
   banner: {
     file: 'risk-banner',
     ratio: 1600 / 900,
-    maxVw: 37.5,
+    maxVw: 42.75,
     fit: 0.7,
     minH: 400,
     alt: 'Risk Management. Comprehensive Risk Architecture. Shielding your wealth from the unforeseen.',
