@@ -15,6 +15,16 @@ export const RETIREMENT_PAGE = {
   id: 'retirement',
   art: 'retire',
   heroAspect: 1000 / 1152,
+  banner: {
+    file: 'retire-banner',
+    alt: 'Retirement Planning. Retirement Architecture. Design freedom, not just a corpus.',
+    ratio: 1600 / 600,
+    fit: 0.92,
+    maxVw: 37.5,
+    minH: 400,
+    primary: { left: '4.9%', top: '70.3%', width: '20.2%', height: '7.4%' },
+    secondary: { left: '26%', top: '70.3%', width: '18.2%', height: '7.4%' },
+  },
   taglineBox: null, // the new retirement hero already has a clean tagline in the photo
   stewardDark: true,
   goal: 'Retirement Planning',
