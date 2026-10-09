@@ -168,7 +168,16 @@ export const PMS_AIF_PAGE = {
 export const REAL_ESTATE_PAGE = {
   ...COMMON,
   id: 'real-estate',
-  heroAspect: 908 / 1072,
+  heroAspect: 840 / 662,
+  banner: {
+    file: 're-banner',
+    alt: 'Real Estate, REITs and Fractional Ownership. Real Estate Architecture. Tangible assets, liquid yields.',
+    ratio: 1600 / 792,
+    fit: 0.93,
+    minH: 400,
+    primary: { left: '4.1%', top: '73.4%', width: '20.9%', height: '7.8%' },
+    secondary: { left: '26.3%', top: '73.4%', width: '20.1%', height: '7.8%' },
+  },
   art: 're',
   eyebrow: 'Real Estate, REITs & Fractional Ownership',
   titleGold: ['Real Estate', 'Architecture.'],
