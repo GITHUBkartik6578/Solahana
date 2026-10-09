@@ -203,14 +203,14 @@ const UNIVERSE = [
   { icon: Earth, label: ['International', 'Investing'], to: '/invest/international-equity' },
 ];
 
-export function ArchitectureAndUniverse() {
+export function PlanningPillars() {
   return (
     <section className="bg-white pb-10">
-      <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-5 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         <motion.div {...fade} className="rounded-2xl bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] p-6 shadow-[0_16px_40px_rgba(15,31,69,0.25)]">
           <Eyebrow light>Our Planning Architectures</Eyebrow>
           <h2 style={serif} className="mt-2 text-[28px] font-semibold leading-tight text-white sm:text-[32px]">Six Pillars for a Stronger Financial Life</h2>
-          <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {PILLARS.map((p) => (
               <li key={p.label[0]}>
                 <Link to={p.to} className="group flex h-full items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-3.5 transition-colors hover:border-[#E2B24E]/60 hover:bg-white/[0.08]">
@@ -224,11 +224,19 @@ export function ArchitectureAndUniverse() {
             ))}
           </ul>
         </motion.div>
+      </div>
+    </section>
+  );
+}
 
+export function InvestmentUniverse() {
+  return (
+    <section className="bg-white pb-10">
+      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         <motion.div {...fade} className="rounded-2xl border border-[#E7E2D5] bg-[#FEFDF9] p-6 shadow-[0_10px_30px_rgba(15,31,69,0.06)]">
           <Eyebrow>Our Investment Universe</Eyebrow>
           <h2 style={serif} className="mt-2 text-[28px] font-semibold leading-tight text-[#0F1F45] sm:text-[32px]">Multiple Opportunities. One Framework.</h2>
-          <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {UNIVERSE.map((u) => (
               <li key={u.label[0]}>
                 <Link to={u.to} className="group flex h-full items-center gap-3 rounded-lg border border-[#EFE9D8] bg-white px-3 py-3.5 transition-shadow hover:shadow-[0_10px_24px_rgba(15,31,69,0.1)]">
@@ -375,14 +383,13 @@ export function MasterPlanCta() {
   );
 }
 
-/** Sections 2 to 8 of the approved home design, in order. */
+/** The rest of the approved home design, in order. PersonalWelcome and WealthConnected are rendered
+ *  separately in App.jsx, right after the hero (together with InvestmentUniverse). */
 export default function HomeSections() {
   return (
     <>
-      <PersonalWelcome />
       <ClientFirstBand />
-      <WealthConnected />
-      <ArchitectureAndUniverse />
+      <PlanningPillars />
       <FamilyAndFounder />
       <ProcessStrip />
       <MasterPlanCta />

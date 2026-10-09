@@ -10,13 +10,13 @@ SOLAHANA is a goal-based financial-planning website (India). Marketing site + ca
 
 - **Frontend:** React 19, Vite, Tailwind CSS 4, Framer Motion, React Router 7, Recharts, lucide-react icons.
 - **Backend:** Node + Express 5, MongoDB (Mongoose), Zod validation, JWT auth (cookie/Bearer), Helmet, CORS, rate limits.
-- **Repo:** https://github.com/GITHUBkartik6578/Solahana (branch `main`). The project folder is `Solahana-main/` (git root is that folder, not its parent).
+- **Repo:** https://github.com/GITHUBkartik6578/Solahana (branch `main`). The project folder is `Solahana/` (the git root; `package.json`, `src/` and `server/` are directly inside it). Do not look for a nested `Solahana-main/` folder: that was an old GitHub ZIP copy and has been removed.
 - **Other contributor:** `mohammed-hanzala` also pushes to `main` (planning guide pages, navbar). Always `git fetch` and check `HEAD..origin/main` before pushing.
 
 ## 2. Run it locally
 
 ```bash
-cd Solahana-main
+cd Solahana        # the git root, where package.json lives
 npm install
 npm run dev        # frontend (Vite). The preview in this project uses port 5180:
                    #   npm run dev -- --port 5180 --strictPort
@@ -28,7 +28,7 @@ npx oxlint src     # lint
 - `.env` (git-ignored) needs at least: `PORT=5000`, `NODE_ENV=development`, `CLIENT_URL=http://localhost:5173` (add `http://localhost:5180` if you call the API directly), `MONGODB_URI=mongodb://localhost:27017/solahana`, `JWT_SECRET=<long random>`. Copy `.env.example` for the rest.
 - A MongoDB 8.x Windows service is installed on this machine and runs on `localhost:27017`.
 - Vite proxies `/api` to `localhost:5000` (`vite.config.js`), so the frontend works on any port.
-- `.claude/launch.json` (repo parent) defines a preview server named `frontend` on **port 5180**. Ports 5173/5174 were taken by other copies of the project on the owner's machine.
+- `.claude/launch.json` (in the repo root) defines a preview server named `frontend` that runs `npm run dev` on **port 5173**. If 5173 is busy because another copy of the project is running, start with `npm run dev -- --port 5180 --strictPort`.
 - Admin user: `npm run create-admin` (reads `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME` from `.env`). Not created yet.
 - Windows machine, PowerShell and Git Bash both available. Large Bash heredocs containing quotes sometimes fail to parse; write big files with the Write tool.
 
