@@ -242,7 +242,17 @@ export const REAL_ESTATE_PAGE = {
 export const BONDS_PAGE = {
   ...COMMON,
   id: 'bonds',
-  heroAspect: 2360 / 2088,
+  heroAspect: 785 / 745,
+  banner: {
+    file: 'bonds-banner',
+    alt: 'Bonds, NCDs and Fixed Income. Fixed Income Architecture. Unshakeable yields, capital preservation.',
+    ratio: 1600 / 900,
+    fit: 0.86,
+    capped: true,
+    minH: 400,
+    primary: { left: '4.75%', top: '72.9%', width: '21.8%', height: '7.4%' },
+    secondary: { left: '27.75%', top: '72.9%', width: '22.4%', height: '7.4%' },
+  },
   heroClear: true,
   art: 'bonds',
   eyebrow: 'Bonds, NCDs & Fixed Income',
