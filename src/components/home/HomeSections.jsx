@@ -109,7 +109,7 @@ export function PersonalWelcome() {
   return (
     <>
       <section className="bg-white pt-8 pb-8 sm:pt-10 lg:pt-7 lg:pb-9">
-        <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)_minmax(0,0.5fr)] lg:gap-9 lg:px-8">
+        <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)_minmax(0,0.5fr)] lg:gap-9 lg:px-8">
           <VideoCard />
 
           <motion.div {...fade}>
@@ -183,7 +183,7 @@ function ShieldBadge() {
 export function ClientFirstBand() {
   return (
     <section className="bg-[#FBF1E6]">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,2.15fr)] lg:gap-8 lg:px-8">
+      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,2.15fr)] lg:gap-8 lg:px-8">
         <motion.div {...fade} className="flex items-center gap-5">
           <ShieldBadge />
           <div>
@@ -267,7 +267,7 @@ export function WealthArchitecture() {
       {/* header: statement + five connected areas */}
       <div className="relative overflow-hidden">
         <HeaderMountains />
-        <div className="relative mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-8 px-4 pb-7 sm:px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.4fr)] lg:gap-6 lg:px-8">
+        <div className="relative mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-8 px-4 pb-7 sm:px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.4fr)] lg:gap-6 lg:px-8">
           <motion.div {...fade}>
             <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E08A1E]">Your Complete Wealth Architecture</p>
             <h2 style={serif} className="[text-wrap:balance] mt-3 text-[34px] font-semibold leading-[1.08] text-[#0A1836] sm:text-[44px] lg:whitespace-nowrap lg:text-[clamp(34px,3vw,50px)]">
@@ -296,7 +296,7 @@ export function WealthArchitecture() {
       </div>
 
       {/* six pillars + investment universe */}
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-5 px-4 sm:px-6 lg:grid-cols-2 lg:gap-6 lg:px-8">
+      <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-5 px-4 sm:px-6 lg:grid-cols-2 lg:gap-6 lg:px-8">
         <motion.div {...fade} className="rounded-2xl bg-[#0A1836] p-6 shadow-[0_16px_40px_rgba(15,31,69,0.25)]">
           <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E2B24E]">Our Planning Architectures</p>
           <h3 style={serif} className="mt-2 text-[28px] font-semibold leading-tight text-white sm:text-[32px]">Six Pillars for a Stronger Financial Life</h3>
@@ -409,34 +409,38 @@ export function FamilyAndProcess() {
   return (
     <section className="bg-white pb-6 pt-4 sm:pt-6">
       {/* family wealth + founder's perspective */}
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-stretch gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-8 lg:px-8">
-        <motion.div {...fade} className="flex flex-col justify-center py-2">
+      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-8 lg:px-8">
+        {/* sizes below scale with the column width (container query units) so nothing can overflow or collide with the card */}
+        <motion.div {...fade} className="@container py-2">
           <p className="font-sora text-[12.5px] font-bold uppercase tracking-[0.34em] text-[#E08A1E] sm:text-[13px]">Beyond Investments</p>
-          <h2 style={serif} className="mt-3 text-[34px] font-semibold leading-[1.05] text-[#0A1836] sm:text-[44px] lg:whitespace-nowrap lg:text-[clamp(40px,3.6vw,62px)]">
+          <h2 style={{ ...serif, fontSize: 'clamp(32px, 6.4cqw, 54px)' }} className="mt-3 font-semibold leading-[1.05] text-[#0A1836]">
             Family Wealth. For Generations.
           </h2>
-          <ul className="mt-8 grid grid-cols-2 gap-x-2 gap-y-7 sm:grid-cols-5 sm:gap-y-0">
+          <ul className="mt-7 grid grid-cols-2 gap-x-2 gap-y-7 sm:grid-cols-5 sm:gap-y-0">
             {FAMILY.map((f, i) => (
-              <li key={f.label[0]} className={`sm:px-1 ${i > 0 ? 'sm:border-l sm:border-[#EEE9DD]' : ''}`}>
+              <li key={f.label[0]} className={`sm:px-0.5 ${i > 0 ? 'sm:border-l sm:border-[#EEE9DD]' : ''}`}>
                 <Link to={f.to} className="group flex h-full flex-col items-center text-center">
-                  <span className={`flex h-[74px] w-[74px] items-center justify-center text-[#E08A1E] transition-transform group-hover:-translate-y-1 sm:h-[68px] sm:w-[68px] xl:h-[88px] xl:w-[88px] ${f.bare ? '' : 'rounded-full border border-[#F0C98A] bg-[#FFF7EA]'}`}>
-                    {f.icon(f.bare ? 'h-[52px] w-[52px] xl:h-[66px] xl:w-[66px]' : 'h-9 w-9 xl:h-11 xl:w-11')}
+                  <span
+                    style={{ width: 'clamp(64px, 13cqw, 86px)', height: 'clamp(64px, 13cqw, 86px)' }}
+                    className={`flex items-center justify-center text-[#E08A1E] transition-transform group-hover:-translate-y-1 ${f.bare ? '' : 'rounded-full border border-[#F0C98A] bg-[#FFF7EA]'}`}
+                  >
+                    {f.icon(f.bare ? 'h-[72%] w-[72%]' : 'h-[46%] w-[46%]')}
                   </span>
-                  <span className="mt-3 whitespace-nowrap text-[13.5px] leading-snug text-[#0A1836] xl:text-[15px]">{f.label[0]}<br />{f.label[1]}</span>
+                  <span style={{ fontSize: 'clamp(12px, 2.35cqw, 15px)' }} className="mt-3 whitespace-nowrap leading-snug text-[#0A1836]">{f.label[0]}<br />{f.label[1]}</span>
                 </Link>
               </li>
             ))}
           </ul>
         </motion.div>
 
-        <motion.div {...fade} className="relative isolate overflow-hidden rounded-xl bg-[#0A1836] shadow-[0_16px_40px_rgba(15,31,69,0.28)]">
-          {/* founder portrait on the right, fading into the navy */}
+        <motion.div {...fade} className="@container relative isolate overflow-hidden rounded-xl bg-[#0A1836] shadow-[0_16px_40px_rgba(15,31,69,0.28)]">
+          {/* founder portrait, bottom-right, fading into the navy */}
           <div
-            className="absolute bottom-0 right-0 -z-10 hidden h-[84%] sm:block"
+            className="absolute bottom-0 right-0 -z-10 hidden w-[41%] sm:block"
             style={{
               aspectRatio: '726 / 708',
-              WebkitMaskImage: 'linear-gradient(to right, transparent, black 30%), linear-gradient(to bottom, transparent, black 24%)',
-              maskImage: 'linear-gradient(to right, transparent, black 30%), linear-gradient(to bottom, transparent, black 24%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 30%), linear-gradient(to bottom, transparent, black 26%)',
+              maskImage: 'linear-gradient(to right, transparent, black 30%), linear-gradient(to bottom, transparent, black 26%)',
               WebkitMaskComposite: 'source-in',
               maskComposite: 'intersect',
             }}
@@ -445,20 +449,20 @@ export function FamilyAndProcess() {
           </div>
           <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(420px_260px_at_88%_30%,rgba(201,146,46,0.2),transparent_70%)]" />
 
-          <div className="px-6 pb-7 pt-7 sm:min-h-[330px] sm:px-8 sm:pb-8 lg:min-h-[340px]">
-            <div className="sm:max-w-[58%]">
+          <div style={{ minHeight: 'clamp(300px, 56cqw, 380px)' }} className="px-6 pb-7 pt-7 sm:px-8 sm:pb-8">
+            <div className="sm:max-w-[60%]">
               <p className="font-sora text-[12.5px] font-bold uppercase tracking-[0.34em] text-[#E2B24E] sm:text-[13px]">Founder’s Perspective</p>
-              <blockquote style={serif} className="mt-4 text-[26px] font-medium leading-[1.2] text-white sm:text-[27px] lg:text-[clamp(23px,1.95vw,32px)]">
+              <blockquote style={{ ...serif, fontSize: 'clamp(22px, 4.5cqw, 32px)' }} className="mt-4 font-medium leading-[1.2] text-white">
                 “My role is not to add more products to your financial life. It is to bring <span className="text-[#F3C95F]">clarity</span> to <span className="text-[#F3C95F]">the decisions</span> that matter.”
               </blockquote>
               <span className="mt-5 block h-px w-24 bg-[#E2B24E]/60" />
-              <p style={serif} className="mt-4 text-[24px] font-semibold text-white">Amit R. Pandey, CWM<sup className="text-[0.55em] leading-none">®</sup></p>
-              <p className="mt-1 text-[13.5px] text-white/90">MBA <span className="mx-1 text-white/60">|</span> Ex-Banker <span className="mx-1 text-white/60">|</span> 25+ Years in Financial Services</p>
+              <p style={{ ...serif, fontSize: 'clamp(20px, 3.9cqw, 26px)' }} className="mt-4 font-semibold text-white">Amit R. Pandey, CWM<sup className="text-[0.55em] leading-none">®</sup></p>
+              <p style={{ fontSize: 'clamp(11.5px, 2cqw, 14px)' }} className="mt-1 text-white/90">MBA <span className="mx-1 text-white/60">|</span> Ex-Banker <span className="mx-1 text-white/60">|</span> 25+ Years in Financial Services</p>
             </div>
             <button
               type="button"
               onClick={() => navigate('/our-process')}
-              className="group mt-6 inline-flex cursor-pointer items-center justify-center gap-3 rounded-md bg-gradient-to-b from-[#FBE08E] to-[#F3C95F] px-6 py-3.5 text-[15px] font-semibold text-[#0A1836] shadow-[0_8px_22px_rgba(243,201,95,0.35)] transition-transform hover:-translate-y-0.5 sm:absolute sm:bottom-6 sm:right-6 sm:mt-0"
+              className="group mt-6 inline-flex cursor-pointer items-center justify-center gap-3 rounded-md bg-gradient-to-b from-[#FBE08E] to-[#F3C95F] px-5 py-3.5 text-[15px] font-semibold text-[#0A1836] shadow-[0_8px_22px_rgba(243,201,95,0.35)] transition-transform hover:-translate-y-0.5 sm:absolute sm:bottom-6 sm:right-5 sm:mt-0"
             >
               Explore My Approach
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -468,17 +472,17 @@ export function FamilyAndProcess() {
       </div>
 
       {/* our process */}
-      <div className="mx-auto mt-9 max-w-[1400px] px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-6 border-t border-[#EEE9DD] pt-7 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,2.22fr)] lg:gap-6">
+      <div className="mx-auto mt-9 max-w-[1320px] px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-6 border-t border-[#EEE9DD] pt-7 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,2.38fr)] lg:gap-6">
           <motion.div {...fade}>
             <p className="font-sora text-[12.5px] font-bold uppercase tracking-[0.34em] text-[#E08A1E] sm:text-[13px]">Our Process</p>
             <h2 style={serif} className="mt-2 text-[28px] font-semibold leading-tight text-[#0A1836] sm:text-[32px]">A Disciplined and Transparent Journey</h2>
           </motion.div>
 
-          <ol className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-5 lg:flex lg:items-start lg:gap-0 lg:px-14">
+          <ol className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-5 lg:flex lg:items-start lg:gap-0 lg:px-6">
             {STEPS.map((s, i) => (
               <React.Fragment key={s.n}>
-                <li className="lg:w-[clamp(84px,6.8vw,104px)] lg:shrink-0">
+                <li className="lg:w-[clamp(96px,7.4vw,112px)] lg:shrink-0">
                   <Link to="/our-process" className="group flex flex-col items-center text-center">
                     <span className="flex h-[58px] w-[58px] items-center justify-center rounded-full border border-[#E8B26A] bg-white text-[20px] font-bold tracking-wide text-[#E08A1E] transition-colors group-hover:bg-[#E08A1E] group-hover:text-white">
                       {s.n}
