@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 
 // Photos cropped from the owner's Financial Planning design and upscaled (src/assets/planning/fp-*.webp)
-import heroPhoto from '../assets/planning/fp-hero-nocoin.webp';
+import heroBanner from '../assets/planning/fp-hero-banner.webp';
 import archFinancial from '../assets/services/financial.webp';
 import archInvest from '../assets/services/investment.webp';
 import archRetire from '../assets/services/retirement.webp';
@@ -144,7 +144,35 @@ function RoundBtn() {
 function Hero() {
   const scrollToFramework = () => document.getElementById('planning-framework')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]">
+    <>
+    {/* Desktop: the owner's full hero banner; the two buttons in it are made clickable */}
+    <section className="relative hidden bg-[#0A1836] pt-[80px] lg:block">
+      <div className="relative mx-auto w-full max-w-[1920px]">
+        <img
+          src={heroBanner}
+          alt="Solahana. Architecting Wealth. Preserving Legacy. Financial Planning and Family Office"
+          draggable="false"
+          className="block h-auto w-full select-none"
+        />
+        <button
+          type="button"
+          onClick={book}
+          aria-label="Request a Private Consultation"
+          className="absolute cursor-pointer rounded-md"
+          style={{ left: '4.7%', top: '67.3%', width: '19.6%', height: '7.7%' }}
+        />
+        <button
+          type="button"
+          onClick={scrollToFramework}
+          aria-label="Explore Our Family Office Services"
+          className="absolute cursor-pointer rounded-md"
+          style={{ left: '25.4%', top: '67.3%', width: '18%', height: '7.7%' }}
+        />
+      </div>
+    </section>
+
+    {/* Tablet / mobile: text hero with the new photo, so the copy stays readable */}
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px] lg:hidden">
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 top-10 h-[480px] w-[480px] rounded-full bg-[#C9922E]/15 blur-[120px]" />
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:min-h-[clamp(500px,calc(100svh-80px),680px)] lg:px-8">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:max-w-[50%] lg:py-12">
@@ -195,15 +223,16 @@ function Hero() {
           className="relative mx-auto h-[340px] w-full max-w-[560px] overflow-hidden sm:h-[440px] lg:absolute lg:bottom-0 lg:right-0 lg:top-[80px] lg:h-auto lg:w-[54%] lg:max-w-none [mask-image:linear-gradient(to_right,transparent,black_10%)]"
         >
           <img
-            src={heroPhoto}
-            alt="Amit R. Pandey, Chartered Wealth Manager"
+            src={heroBanner}
+            alt="Chartered wealth manager at his desk"
             draggable="false"
-            className="absolute inset-0 h-full w-full object-cover object-[12%_30%]"
+            className="absolute inset-0 h-full w-full object-cover object-[78%_40%]"
           />
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-[#0F1F45] to-transparent lg:hidden" />
         </motion.div>
       </div>
     </section>
+    </>
   );
 }
 
