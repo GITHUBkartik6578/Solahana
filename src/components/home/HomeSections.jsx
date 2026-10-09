@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight, Play, Gem, BarChart3, ChartColumnIncreasing, Users, ShieldCheck, Video, Volume2, Captions, Settings, PictureInPicture2, Maximize, ShieldPlus, Ban, FileText, Handshake, Armchair, Percent, Target,
-  Coins, TreeDeciduous, Network,
+  Globe, Earth, Building2, Plus, Coins, TreeDeciduous, Network,
 } from 'lucide-react';
 import { openConsultation } from '../../data/whoWeServe';
 import founderPhoto from '../../assets/home-founder.webp';
@@ -209,70 +209,122 @@ export function ClientFirstBand() {
 }
 
 /* ------------------------------------------------------------------ */
-/* 4. Your wealth is connected                                         */
+/* 4. Wealth architecture: connected planning, six pillars, universe   */
 /* ------------------------------------------------------------------ */
 const CONNECTED = [
-  { icon: BarChart3, title: 'Invest', sub: 'Grow Your Wealth', to: '/investments' },
+  { icon: ChartColumnIncreasing, title: 'Invest', sub: 'Grow Your Wealth', to: '/investments' },
   { icon: ShieldPlus, title: 'Protect', sub: 'Manage Life’s Risks', to: '/risk-management' },
   { icon: Armchair, title: 'Retire', sub: 'Ensure Income', to: '/calculators/retirement' },
   { icon: Percent, title: 'Tax', sub: 'Keep More of What You Earn', to: '/tax-planning' },
   { icon: Users, title: 'Estate', sub: 'Preserve for Generations', to: '/estate-planning' },
 ];
 
-export function WealthConnected() {
-  return (
-    <section className="bg-white py-12 sm:py-14">
-      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] lg:px-8">
-        <motion.div {...fade}>
-          <Eyebrow>Your Complete Wealth Architecture</Eyebrow>
-          <h2 style={serif} className="[text-wrap:balance] mt-3 text-[34px] font-semibold leading-[1.1] text-[#0F1F45] sm:text-[44px]">
-            Your Wealth Is Connected. Your Planning Should Be Too.
-          </h2>
-        </motion.div>
-        <ul className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
-          {CONNECTED.map((c, i) => (
-            <motion.li key={c.title} {...fade} transition={{ duration: 0.5, delay: i * 0.06 }}>
-              <Link to={c.to} className="group flex flex-col items-center text-center">
-                <span className="flex h-[68px] w-[68px] items-center justify-center rounded-full bg-gradient-to-b from-[#1A3170] to-[#0A1836] text-[#E2B24E] shadow-[0_10px_24px_rgba(15,31,69,0.28)] ring-2 ring-[#E2B24E]/40 transition-transform group-hover:-translate-y-1">
-                  <c.icon className="h-7 w-7" strokeWidth={1.7} />
-                </span>
-                <span className="mt-3 text-[15.5px] font-bold text-[#0F1F45]">{c.title}</span>
-                <span className="mt-0.5 max-w-[16ch] text-[12.5px] leading-snug text-[#64748B]">{c.sub}</span>
-              </Link>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* 5. Six pillars + investment universe                                */
-/* ------------------------------------------------------------------ */
 const PILLARS = [
   { icon: Target, label: ['Financial', 'Planning'], to: '/financial-planning' },
-  { icon: BarChart3, label: ['Investment', 'Planning'], to: '/investments' },
+  { icon: ChartColumnIncreasing, label: ['Investment', 'Planning'], to: '/investments' },
   { icon: Armchair, label: ['Retirement', 'Planning'], to: '/calculators/retirement' },
   { icon: ShieldPlus, label: ['Risk', 'Planning'], to: '/risk-management' },
   { icon: Percent, label: ['Tax', 'Planning'], to: '/tax-planning' },
   { icon: Users, label: ['Estate', 'Planning'], to: '/estate-planning' },
 ];
 
-export function PlanningPillars() {
+const UNIVERSE = [
+  { icon: ChartColumnIncreasing, label: ['Mutual Funds', '& SIPs'], to: '/invest/mutual-funds' },
+  { icon: Globe, label: ['Direct Equities', '& Global Investing'], to: '/invest/domestic-equity' },
+  { icon: Coins, label: ['PMS, AIF & SIF'], to: '/invest/pms-aif-sif' },
+  { icon: Building2, label: ['Real Estate', '& REITs'], to: '/invest/real-estate' },
+  { icon: FileText, label: ['Bonds, NCDs', '& Fixed Income'], to: '/invest/bonds' },
+  { icon: Earth, label: ['International', 'Investing'], to: '/invest/international-equity' },
+];
+
+/* faint snow-capped range behind the top-right of the header */
+function HeaderMountains() {
   return (
-    <section className="bg-white pb-10">
-      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-        <motion.div {...fade} className="rounded-2xl bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] p-6 shadow-[0_16px_40px_rgba(15,31,69,0.25)]">
-          <Eyebrow light>Our Planning Architectures</Eyebrow>
-          <h2 style={serif} className="mt-2 text-[28px] font-semibold leading-tight text-white sm:text-[32px]">Six Pillars for a Stronger Financial Life</h2>
+    <svg aria-hidden="true" viewBox="0 0 360 200" preserveAspectRatio="xMaxYMax slice" className="pointer-events-none absolute bottom-0 right-0 hidden h-full w-[300px] lg:block">
+      <defs>
+        <linearGradient id="wa-m" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#8EA3C9" stopOpacity="0.55" />
+          <stop offset="1" stopColor="#DCE3F0" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="wa-fade" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0.6" stopColor="#fff" stopOpacity="1" />
+        </linearGradient>
+        <mask id="wa-mask"><rect width="360" height="200" fill="url(#wa-fade)" /></mask>
+      </defs>
+      <g mask="url(#wa-mask)">
+        <path d="M60 200 L130 120 L170 150 L240 50 L290 110 L330 30 L360 70 L360 200 Z" fill="url(#wa-m)" />
+        <path d="M240 50 L222 80 L238 74 L252 92 L268 72 L290 110 L262 70 Z" fill="#fff" fillOpacity="0.7" />
+        <path d="M330 30 L312 62 L326 56 L340 72 L360 70 L346 48 Z" fill="#fff" fillOpacity="0.7" />
+      </g>
+    </svg>
+  );
+}
+
+export function WealthArchitecture() {
+  return (
+    <section className="bg-white pb-10 pt-8 sm:pt-10">
+      {/* header: statement + five connected areas */}
+      <div className="relative overflow-hidden">
+        <HeaderMountains />
+        <div className="relative mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-8 px-4 pb-7 sm:px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.4fr)] lg:gap-6 lg:px-8">
+          <motion.div {...fade}>
+            <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E08A1E]">Your Complete Wealth Architecture</p>
+            <h2 style={serif} className="[text-wrap:balance] mt-3 text-[34px] font-semibold leading-[1.08] text-[#0A1836] sm:text-[44px] lg:whitespace-nowrap lg:text-[clamp(34px,3vw,50px)]">
+              Your Wealth Is Connected.<br className="hidden lg:block" /> Your Planning Should Be Too.
+            </h2>
+          </motion.div>
+          <ul className="grid grid-cols-2 gap-y-6 sm:grid-cols-3 lg:grid-cols-5 lg:gap-y-0">
+            {CONNECTED.map((c, i) => (
+              <motion.li
+                key={c.title}
+                {...fade}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+                className="lg:border-l lg:border-[#EEE9DD] lg:px-2 lg:first:border-l-0 lg:first:pl-0"
+              >
+                <Link to={c.to} className="group flex flex-col items-center text-center">
+                  <span className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#0A1836] text-[#E2B24E] shadow-[0_10px_24px_rgba(15,31,69,0.28)] transition-transform group-hover:-translate-y-1">
+                    <c.icon className="h-8 w-8" strokeWidth={1.8} />
+                  </span>
+                  <span className="mt-3 text-[16.5px] font-bold text-[#0A1836]">{c.title}</span>
+                  <span className="mt-0.5 max-w-[16ch] text-[13.5px] leading-snug text-[#475569]">{c.sub}</span>
+                </Link>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* six pillars + investment universe */}
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-5 px-4 sm:px-6 lg:grid-cols-2 lg:gap-6 lg:px-8">
+        <motion.div {...fade} className="rounded-2xl bg-[#0A1836] p-6 shadow-[0_16px_40px_rgba(15,31,69,0.25)]">
+          <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E2B24E]">Our Planning Architectures</p>
+          <h3 style={serif} className="mt-2 text-[28px] font-semibold leading-tight text-white sm:text-[32px]">Six Pillars for a Stronger Financial Life</h3>
           <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {PILLARS.map((p) => (
               <li key={p.label[0]}>
-                <Link to={p.to} className="group flex h-full items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-3.5 transition-colors hover:border-[#E2B24E]/60 hover:bg-white/[0.08]">
-                  <p.icon className="h-8 w-8 shrink-0 text-[#E2B24E]" strokeWidth={1.6} />
-                  <span className="flex-1 text-[13px] font-semibold leading-tight text-white">{p.label[0]}<br />{p.label[1]}</span>
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/50 text-white transition-colors group-hover:border-[#E2B24E] group-hover:bg-[#E2B24E] group-hover:text-[#0F1F45]">
+                <Link to={p.to} className="group flex h-full items-center gap-2.5 rounded-md border border-white/15 bg-white/[0.03] px-3 py-4 transition-colors hover:border-[#E2B24E]/60 hover:bg-white/[0.07]">
+                  <p.icon className="h-8 w-8 shrink-0 text-[#F0B94F]" strokeWidth={1.7} />
+                  <span className="flex-1 text-[14px] leading-tight text-white">{p.label[0]}<br />{p.label[1]}</span>
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/70 text-white transition-colors group-hover:border-[#E2B24E] group-hover:bg-[#E2B24E] group-hover:text-[#0A1836]">
+                    <Plus className="h-4 w-4" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        <motion.div {...fade} className="rounded-2xl border border-[#EEE9DD] bg-[#FEFDFB] p-6 shadow-[0_10px_30px_rgba(15,31,69,0.06)]">
+          <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E08A1E]">Our Investment Universe</p>
+          <h3 style={serif} className="mt-2 text-[28px] font-semibold leading-tight text-[#0A1836] sm:text-[32px]">Multiple Opportunities. One Framework.</h3>
+          <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {UNIVERSE.map((u) => (
+              <li key={u.label[0]}>
+                <Link to={u.to} className="group flex h-full items-center gap-2.5 rounded-md border border-[#EEE9DD] bg-white px-3 py-4 transition-shadow hover:shadow-[0_10px_24px_rgba(15,31,69,0.1)]">
+                  <u.icon className="h-8 w-8 shrink-0 text-[#E08A1E]" strokeWidth={1.7} />
+                  <span className="flex-1 text-[13.5px] leading-tight text-[#0A1836]">{u.label[0]}{u.label[1] && <><br />{u.label[1]}</>}</span>
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#E2B24E] text-[#E08A1E] transition-colors group-hover:bg-[#E2B24E] group-hover:text-[#0A1836]">
                     <ArrowRight className="h-3.5 w-3.5" />
                   </span>
                 </Link>
@@ -413,12 +465,11 @@ export function MasterPlanCta() {
   );
 }
 
-/** The rest of the approved home design, in order. PersonalWelcome and WealthConnected are rendered
+/** The rest of the approved home design, in order. PersonalWelcome and WealthArchitecture are rendered
  *  separately in App.jsx, right after the hero. */
 export default function HomeSections() {
   return (
     <>
-      <PlanningPillars />
       <FamilyAndFounder />
       <ProcessStrip />
       <MasterPlanCta />

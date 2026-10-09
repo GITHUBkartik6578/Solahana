@@ -19,7 +19,7 @@ import EstatePlanningPage from './pages/EstatePlanningPage';
 import WhoWeServePage from './pages/WhoWeServePage';
 import OurProcessPage from './pages/OurProcessPage';
 import LegalPage from './components/legal/LegalPage';
-import HomeSections, { PersonalWelcome, WealthConnected } from './components/home/HomeSections';
+import HomeSections, { PersonalWelcome, WealthArchitecture } from './components/home/HomeSections';
 import TrustStrip from './components/TrustStrip';
 import LifeStagesSection from './components/LifeStagesSection';
 import InvestSolutions from './components/InvestSolutions';
@@ -72,13 +72,13 @@ function HomePage({ onOpenSearch }) {
       {/* Full First Screen Hero Section */}
       <Hero onOpenSearch={onOpenSearch} />
       <PersonalWelcome />
-      <WealthConnected />
+      <WealthArchitecture />
       <TrustStrip />
       <InvestSolutions />
       <TaxLegacySection />
       <LifeStagesSection />
-      {/* Remaining sections of the approved home design (client first, pillars + universe,
-          family wealth + founder, process, master plan), just before the Google reviews */}
+      {/* Remaining sections of the approved home design (family wealth + founder,
+          process, master plan), just before the Google reviews */}
       <HomeSections />
       <ClientStories />
     </>
