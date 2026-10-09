@@ -8,6 +8,7 @@ import {
 import { openConsultation } from '../../data/whoWeServe';
 import founderPhoto from '../../assets/home-founder-card.webp';
 import beyondBanner from '../../assets/beyond-investments-banner.webp';
+import masterPlanBanner from '../../assets/master-plan-banner.webp';
 import mountainArt from '../../assets/our-process-hero.webp';
 
 // Set this to the YouTube / Vimeo link when the welcome video is ready; until then the video card says "Coming soon".
@@ -573,9 +574,9 @@ export function FamilyAndProcess() {
 /* ------------------------------------------------------------------ */
 const OUTCOMES = ['Clarity Today', 'Confident Tomorrow', 'Generational Prosperity'];
 
-export function MasterPlanCta() {
+function MasterPlanCtaLive() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C]">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] lg:hidden">
       {/* left half of the mountain art: the climber looking at the summit (no path icons) */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-[8%] hidden w-[38%] overflow-hidden opacity-90 [mask-image:linear-gradient(to_right,transparent,black_30%,black_80%,transparent)] lg:block">
         <img src={mountainArt} alt="" loading="lazy" draggable="false" className="h-full w-[200%] max-w-none object-cover object-[0%_36%]" />
@@ -601,6 +602,60 @@ export function MasterPlanCta() {
         </motion.ul>
       </div>
     </section>
+  );
+}
+
+/* Desktop version: the approved design picture. Its text starts at the site container's left edge (same line as the
+   sections above); any spare room on the left is filled with the picture's own dark navy. Tablet / mobile use the
+   live-text version above. */
+const MP = { w: 1600, h: 398, textLeft: 47 }; // crop of the design picture (pixels); textLeft = where its text begins
+
+export function MasterPlanCta() {
+  const f = MP.textLeft / MP.w;
+  return (
+    <>
+      <section aria-label="Schedule a private consultation" className="hidden bg-[#02101F] lg:block [container-type:inline-size]">
+        <h2 className="sr-only">Your Wealth Deserves a Master Plan: Comprehensive Wealth Architecture.</h2>
+        <p className="sr-only">Connect directly for a confidential, zero-obligation strategic consultation. Clarity Today. Confident Tomorrow. Generational Prosperity.</p>
+        <div
+          className="relative w-full overflow-hidden"
+          style={{
+            '--l': 'calc(max(0px, (100cqw - 1320px) / 2) + 32px)',
+            '--w': `calc((100cqw - var(--l)) / ${(1 - f).toFixed(5)})`,
+            height: `calc(var(--w) * ${MP.h} / ${MP.w})`,
+          }}
+        >
+          <div
+            className="absolute top-0 h-full"
+            style={{ width: 'var(--w)', left: `calc(var(--l) - var(--w) * ${f.toFixed(5)})` }}
+          >
+            <img
+              src={masterPlanBanner}
+              alt=""
+              aria-hidden="true"
+              width={MP.w}
+              height={MP.h}
+              loading="lazy"
+              draggable="false"
+              className="block h-full w-full select-none [mask-image:linear-gradient(to_right,transparent,black_4%)]"
+            />
+            <button
+              type="button"
+              onClick={() => openConsultation()}
+              aria-label="Schedule Your Private Consultation"
+              className="absolute cursor-pointer rounded-md outline-none focus-visible:ring-2 focus-visible:ring-[#F6D488]"
+              style={{
+                left: `${((47 / MP.w) * 100).toFixed(3)}%`,
+                top: `${((266 / MP.h) * 100).toFixed(3)}%`,
+                width: `${(((556 - 47) / MP.w) * 100).toFixed(3)}%`,
+                height: `${(((329 - 266) / MP.h) * 100).toFixed(3)}%`,
+              }}
+            />
+          </div>
+        </div>
+      </section>
+      <MasterPlanCtaLive />
+    </>
   );
 }
 
