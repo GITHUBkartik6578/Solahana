@@ -8,6 +8,7 @@ import {
   CheckCircle2, 
 } from 'lucide-react';
 import { CALCULATOR_META } from '../../components/calculators/CalculatorLayout';
+import HealthCheck from '../../components/planning/HealthCheck';
 
 export default function CalculatorsLandingPage() {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export default function CalculatorsLandingPage() {
   });
 
   return (
+    <>
     <div className="min-h-screen pt-28 pb-24 bg-[#F7F8FB] text-[#0F1F45] relative overflow-hidden text-left">
       {/* Background Soft Glow */}
       <div className="absolute top-10 left-1/3 w-[600px] h-[600px] bg-[#2F5BC7]/10 rounded-full blur-[150px] pointer-events-none" />
@@ -137,5 +139,9 @@ export default function CalculatorsLandingPage() {
 
       </div>
     </div>
+
+    {/* Money health check (the navbar's "Is your money healthy? Check now" button lands here) */}
+    <HealthCheck />
+    </>
   );
 }

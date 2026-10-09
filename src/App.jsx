@@ -3,8 +3,6 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import BackgroundEffects from './components/BackgroundEffects';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import TrustStrip from './components/TrustStrip';
-import HealthCheck from './components/planning/HealthCheck';
 import ClientStories from './components/ClientStories';
 import FinalCTA from './components/FinalCTA';
 import GlobalConsultationSection from './components/common/GlobalConsultationSection';
@@ -21,6 +19,11 @@ import EstatePlanningPage from './pages/EstatePlanningPage';
 import WhoWeServePage from './pages/WhoWeServePage';
 import OurProcessPage from './pages/OurProcessPage';
 import LegalPage from './components/legal/LegalPage';
+import HomeSections from './components/home/HomeSections';
+import TrustStrip from './components/TrustStrip';
+import LifeStagesSection from './components/LifeStagesSection';
+import InvestSolutions from './components/InvestSolutions';
+import TaxLegacySection from './components/TaxLegacySection';
 import { LEGAL_PAGES } from './data/legalPages';
 import OurExpertsPage from './pages/OurExpertsPage';
 import { CalculatorsPage } from './pages/CalculatorsPage';
@@ -60,9 +63,6 @@ import IpoPage from './pages/invest/IpoPage';
 import PmsAifSifPage from './pages/invest/PmsAifSifPage';
 import RealEstatePage from './pages/invest/RealEstatePage';
 
-import LifeStagesSection from './components/LifeStagesSection';
-import InvestSolutions from './components/InvestSolutions';
-import TaxLegacySection from './components/TaxLegacySection';
 
 
 
@@ -74,8 +74,10 @@ function HomePage({ onOpenSearch }) {
       <TrustStrip />
       <InvestSolutions />
       <TaxLegacySection />
-      <HealthCheck />
       <LifeStagesSection />
+      {/* Sections 2 to 8 of the approved home design (welcome video, client first, wealth architecture,
+          pillars + universe, family wealth + founder, process, master plan), just before the Google reviews */}
+      <HomeSections />
       <ClientStories />
     </>
   );

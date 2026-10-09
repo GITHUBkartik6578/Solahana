@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, Shield, Users, BarChart3 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import heroOrbit from '../assets/hero-orbit.webp';
 import heroMascot from '../assets/hero-mascot.webp';
@@ -84,6 +84,7 @@ function OrbitLine() {
 }
 
 function MainSlide() {
+  const navigate = useNavigate();
   return (
     <div className="bg-[#FEFDF9] overflow-hidden">
       {/* ONE container, ONE grid: left copy and right artwork are siblings, both centred on the same axis */}
@@ -107,10 +108,7 @@ function MainSlide() {
 
           <button
             type="button"
-            onClick={() => {
-              const el = document.getElementById('health-check');
-              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }}
+            onClick={() => navigate('/calculators#health-check')}
             className="group inline-flex items-center gap-2 rounded-full border border-[#C9922E]/50 bg-white/80 px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-[13px] font-semibold text-[#0F1F45] shadow-[0_6px_18px_rgba(201,146,46,0.18)] transition-all hover:border-[#C9922E] hover:bg-white cursor-pointer"
           >
             <span className="relative flex h-2 w-2">

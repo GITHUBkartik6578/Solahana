@@ -362,10 +362,11 @@ function Cta({ cfg }) {
 export function PlanningTop({ config, pillarsId }) {
   return (
     <>
-      <Hero cfg={config} />
-      <Philosophy cfg={config} />
-      <Pillars cfg={config} sectionId={pillarsId} />
-      <Stewardship cfg={config} />
+      {config.HeroSection ? <config.HeroSection cfg={config} /> : <Hero cfg={config} />}
+      {config.PhilosophySection ? <config.PhilosophySection cfg={config} /> : <Philosophy cfg={config} />}
+      {/* a page may bring its own versions of these two sections (config.PillarsSection / StewardshipSection) */}
+      {config.PillarsSection ? <config.PillarsSection cfg={config} sectionId={pillarsId} /> : <Pillars cfg={config} sectionId={pillarsId} />}
+      {config.StewardshipSection ? <config.StewardshipSection cfg={config} /> : <Stewardship cfg={config} />}
       <Lifecycle cfg={config} />
     </>
   );
