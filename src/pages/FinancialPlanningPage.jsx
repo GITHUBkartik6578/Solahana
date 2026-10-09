@@ -153,7 +153,7 @@ function Hero() {
       ratio={1600 / 600}
       maxVw={37.5}
       fit={0.93}
-      minH={440}
+      minH={400}
       hotspots={[
         { label: 'Request a Private Consultation', onClick: book, style: { left: '4.7%', top: '67.3%', width: '19.6%', height: '7.7%' } },
         { label: 'Explore Our Family Office Services', onClick: scrollToFramework, style: { left: '25.4%', top: '67.3%', width: '18%', height: '7.7%' } },
