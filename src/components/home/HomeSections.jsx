@@ -6,7 +6,7 @@ import {
   Globe, Earth, Building2, Plus, Coins,
 } from 'lucide-react';
 import { openConsultation } from '../../data/whoWeServe';
-import founderPhoto from '../../assets/home-founder.webp';
+import founderPhoto from '../../assets/home-founder-card.webp';
 import mountainArt from '../../assets/our-process-hero.webp';
 
 // Set this to the YouTube / Vimeo link when the welcome video is ready; until then the video card says "Coming soon".
@@ -412,17 +412,17 @@ export function FamilyAndProcess() {
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-stretch gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-8 lg:px-8">
         <motion.div {...fade} className="flex flex-col justify-center py-2">
           <p className="font-sora text-[12.5px] font-bold uppercase tracking-[0.34em] text-[#E08A1E] sm:text-[13px]">Beyond Investments</p>
-          <h2 style={serif} className="mt-3 text-[34px] font-semibold leading-[1.05] text-[#0A1836] sm:text-[44px] lg:whitespace-nowrap lg:text-[clamp(38px,3.6vw,56px)]">
+          <h2 style={serif} className="mt-3 text-[34px] font-semibold leading-[1.05] text-[#0A1836] sm:text-[44px] lg:whitespace-nowrap lg:text-[clamp(40px,3.6vw,62px)]">
             Family Wealth. For Generations.
           </h2>
           <ul className="mt-8 grid grid-cols-2 gap-x-2 gap-y-7 sm:grid-cols-5 sm:gap-y-0">
             {FAMILY.map((f, i) => (
               <li key={f.label[0]} className={`sm:px-1 ${i > 0 ? 'sm:border-l sm:border-[#EEE9DD]' : ''}`}>
                 <Link to={f.to} className="group flex h-full flex-col items-center text-center">
-                  <span className={`flex h-[74px] w-[74px] items-center justify-center text-[#E08A1E] transition-transform group-hover:-translate-y-1 sm:h-[68px] sm:w-[68px] xl:h-[80px] xl:w-[80px] ${f.bare ? '' : 'rounded-full border border-[#F0C98A] bg-[#FFF7EA]'}`}>
-                    {f.icon(f.bare ? 'h-[52px] w-[52px] xl:h-[60px] xl:w-[60px]' : 'h-9 w-9 xl:h-10 xl:w-10')}
+                  <span className={`flex h-[74px] w-[74px] items-center justify-center text-[#E08A1E] transition-transform group-hover:-translate-y-1 sm:h-[68px] sm:w-[68px] xl:h-[88px] xl:w-[88px] ${f.bare ? '' : 'rounded-full border border-[#F0C98A] bg-[#FFF7EA]'}`}>
+                    {f.icon(f.bare ? 'h-[52px] w-[52px] xl:h-[66px] xl:w-[66px]' : 'h-9 w-9 xl:h-11 xl:w-11')}
                   </span>
-                  <span className="mt-3 whitespace-nowrap text-[13.5px] leading-snug text-[#0A1836] xl:text-[14.5px]">{f.label[0]}<br />{f.label[1]}</span>
+                  <span className="mt-3 whitespace-nowrap text-[13.5px] leading-snug text-[#0A1836] xl:text-[15px]">{f.label[0]}<br />{f.label[1]}</span>
                 </Link>
               </li>
             ))}
@@ -431,15 +431,24 @@ export function FamilyAndProcess() {
 
         <motion.div {...fade} className="relative isolate overflow-hidden rounded-xl bg-[#0A1836] shadow-[0_16px_40px_rgba(15,31,69,0.28)]">
           {/* founder portrait on the right, fading into the navy */}
-          <div className="absolute inset-y-0 right-0 -z-10 hidden w-[44%] sm:block [mask-image:linear-gradient(to_right,transparent,black_38%)]">
-            <img src={founderPhoto} alt="Amit R. Pandey, Chartered Wealth Manager" loading="lazy" draggable="false" className="h-full w-full object-cover object-[50%_20%]" />
+          <div
+            className="absolute bottom-0 right-0 -z-10 hidden h-[84%] sm:block"
+            style={{
+              aspectRatio: '726 / 708',
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 30%), linear-gradient(to bottom, transparent, black 24%)',
+              maskImage: 'linear-gradient(to right, transparent, black 30%), linear-gradient(to bottom, transparent, black 24%)',
+              WebkitMaskComposite: 'source-in',
+              maskComposite: 'intersect',
+            }}
+          >
+            <img src={founderPhoto} alt="Amit R. Pandey, Chartered Wealth Manager" loading="lazy" draggable="false" className="h-full w-full object-cover" />
           </div>
           <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(420px_260px_at_88%_30%,rgba(201,146,46,0.2),transparent_70%)]" />
 
           <div className="px-6 pb-7 pt-7 sm:min-h-[330px] sm:px-8 sm:pb-8 lg:min-h-[340px]">
-            <div className="sm:max-w-[62%]">
+            <div className="sm:max-w-[58%]">
               <p className="font-sora text-[12.5px] font-bold uppercase tracking-[0.34em] text-[#E2B24E] sm:text-[13px]">Founder’s Perspective</p>
-              <blockquote style={serif} className="mt-4 text-[26px] font-medium leading-[1.2] text-white sm:text-[27px] lg:text-[clamp(25px,2.15vw,33px)]">
+              <blockquote style={serif} className="mt-4 text-[26px] font-medium leading-[1.2] text-white sm:text-[27px] lg:text-[clamp(23px,1.95vw,32px)]">
                 “My role is not to add more products to your financial life. It is to bring <span className="text-[#F3C95F]">clarity</span> to <span className="text-[#F3C95F]">the decisions</span> that matter.”
               </blockquote>
               <span className="mt-5 block h-px w-24 bg-[#E2B24E]/60" />
@@ -471,7 +480,7 @@ export function FamilyAndProcess() {
               <React.Fragment key={s.n}>
                 <li className="lg:w-[clamp(84px,6.8vw,104px)] lg:shrink-0">
                   <Link to="/our-process" className="group flex flex-col items-center text-center">
-                    <span className="flex h-[56px] w-[56px] items-center justify-center rounded-full border border-[#E8B26A] bg-white text-[19px] font-bold tracking-wide text-[#E08A1E] transition-colors group-hover:bg-[#E08A1E] group-hover:text-white">
+                    <span className="flex h-[58px] w-[58px] items-center justify-center rounded-full border border-[#E8B26A] bg-white text-[20px] font-bold tracking-wide text-[#E08A1E] transition-colors group-hover:bg-[#E08A1E] group-hover:text-white">
                       {s.n}
                     </span>
                     <span className="mt-2.5 text-[16px] font-semibold text-[#0A1836]">{s.title}</span>
