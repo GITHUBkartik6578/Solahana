@@ -5,6 +5,8 @@ import {
   ArrowRight, Check, Users, Globe, Briefcase, UserRound, BarChart3, ShieldCheck, GraduationCap, Landmark, Target,
 } from 'lucide-react';
 import { openConsultation } from '../data/whoWeServe';
+import HeroBanner from '../components/common/HeroBanner';
+import heroBanner from '../assets/who-we-serve-hero.webp';
 
 // Photography: sharp originals already used across the site (swap these files for new photos, no code change needed)
 import heroPhoto from '../assets/planning/pms-hero.webp';
@@ -122,8 +124,24 @@ function RoundIcon({ icon: Icon, size = 'h-11 w-11', iconSize = 'h-5 w-5' }) {
 
 /* ------------------------------------------------------------------ */
 function Hero() {
+  const toApproach = () => document.getElementById('segments')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]">
+    <>
+    {/* Desktop: the ready-made hero banner; its two buttons get invisible click areas */}
+    <HeroBanner
+      src={heroBanner}
+      alt="Who We Serve. Tailored Wealth Architecture for Distinct Ambitions."
+      ratio={1599 / 650}
+      fit={0.93}
+      minH={400}
+      hotspots={[
+        { label: 'Schedule Your Private Consultation', onClick: () => openConsultation(), style: { left: '3.9%', top: '86%', width: '26.7%', height: '9.2%' } },
+        { label: 'Explore Our Approach', onClick: toApproach, style: { left: '31.9%', top: '86%', width: '16.4%', height: '9.2%' } },
+      ]}
+    />
+
+    {/* Tablet / mobile: live-text hero */}
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px] lg:hidden">
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 top-10 h-[480px] w-[480px] rounded-full bg-[#C9922E]/15 blur-[120px]" />
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:min-h-[clamp(520px,calc(100svh-80px),680px)] lg:px-8">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:max-w-[52%] lg:py-12">
@@ -182,12 +200,13 @@ function Hero() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 
 function Segments() {
   return (
-    <section className="bg-[#FEFDF9] py-16 sm:py-20 lg:py-24">
+    <section id="segments" className="scroll-mt-20 bg-[#FEFDF9] py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         <motion.div {...fade} className="grid items-end gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
           <div>
