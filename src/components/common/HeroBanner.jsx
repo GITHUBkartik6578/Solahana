@@ -13,13 +13,14 @@ import React from 'react';
  * fit      share of the image height (0-1, centred) that must stay visible: text + buttons
  * minH     smallest hero height in px
  * capped   true = the hero is never taller than the `fit` part of the picture (keeps tall pictures close to the other heroes' height)
+ * fadeBottom  true = softly fades the bottom edge into dark navy (hides a sliver of content cut by a tight crop)
  * hotspots [{ label, onClick, style }]  style = % box inside the image (left/top/width/height);
  *          the first hotspot's left edge is taken as the picture's text-left edge.
  */
 const CONTAINER = 'calc(max(0px, (100cqw - 1320px) / 2) + 32px)'; // left edge of the site container
 const CONTAINER_VW = 'calc(max(0px, (100vw - 1320px) / 2) + 32px)';
 
-export default function HeroBanner({ src, alt, ratio, fit = 0.9, minH = 400, capped = false, hotspots = [] }) {
+export default function HeroBanner({ src, alt, ratio, fit = 0.9, minH = 400, capped = false, fadeBottom = false, hotspots = [] }) {
   const R = ratio.toFixed(4);
   const f = (parseFloat(hotspots[0]?.style?.left) || 4) / 100; // text-left as a share of the image width
   const k = (1 / ((1 - f) * ratio)).toFixed(4); // image height / (viewport width - container left)
@@ -32,6 +33,7 @@ export default function HeroBanner({ src, alt, ratio, fit = 0.9, minH = 400, cap
         style={{ height: capped ? `max(${minH}px, calc((100vw - ${CONTAINER_VW}) * ${k} * ${fit}))` : `max(${minH}px, calc((100vw - ${CONTAINER_VW}) * ${k} * ${fit}), min(calc(100svh - 80px), calc((100vw - ${CONTAINER_VW}) * ${k})))` }}
       >
         <img src={src} alt="" aria-hidden="true" draggable="false" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-90 blur-2xl" />
+        {fadeBottom && <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[11%] bg-gradient-to-t from-[#04101f] via-[#04101f]/85 to-transparent" />}
         <div
           className="absolute top-1/2 -translate-y-1/2"
           style={{

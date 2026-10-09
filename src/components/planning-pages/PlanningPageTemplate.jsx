@@ -66,6 +66,7 @@ function Hero({ cfg }) {
         fit={b.fit}
         minH={b.minH}
         capped={b.capped}
+        fadeBottom={b.fadeBottom}
         hotspots={[
           { label: cfg.primaryCta, onClick: goCalc, style: b.primary },
           { label: 'Request a Private Consultation', onClick: () => consult(cfg), style: b.secondary },
