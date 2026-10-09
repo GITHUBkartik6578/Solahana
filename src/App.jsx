@@ -19,7 +19,7 @@ import EstatePlanningPage from './pages/EstatePlanningPage';
 import WhoWeServePage from './pages/WhoWeServePage';
 import OurProcessPage from './pages/OurProcessPage';
 import LegalPage from './components/legal/LegalPage';
-import HomeSections, { PersonalWelcome, InvestmentUniverse, WealthConnected } from './components/home/HomeSections';
+import HomeSections, { PersonalWelcome, WealthConnected } from './components/home/HomeSections';
 import TrustStrip from './components/TrustStrip';
 import LifeStagesSection from './components/LifeStagesSection';
 import InvestSolutions from './components/InvestSolutions';
@@ -72,7 +72,6 @@ function HomePage({ onOpenSearch }) {
       {/* Full First Screen Hero Section */}
       <Hero onOpenSearch={onOpenSearch} />
       <PersonalWelcome />
-      <InvestmentUniverse />
       <WealthConnected />
       <TrustStrip />
       <InvestSolutions />

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight, Play, Gem, BarChart3, ChartColumnIncreasing, Users, ShieldCheck, Video, Volume2, Captions, Settings, PictureInPicture2, Maximize, ShieldPlus, Ban, FileText, Handshake, Armchair, Percent, Target,
-  Globe, Earth, Coins, Building2, Layers, TreeDeciduous, Network,
+  Coins, TreeDeciduous, Network,
 } from 'lucide-react';
 import { openConsultation } from '../../data/whoWeServe';
 import founderPhoto from '../../assets/home-founder.webp';
@@ -259,15 +259,6 @@ const PILLARS = [
   { icon: Users, label: ['Estate', 'Planning'], to: '/estate-planning' },
 ];
 
-const UNIVERSE = [
-  { icon: BarChart3, label: ['Mutual Funds', '& SIPs'], to: '/invest/mutual-funds' },
-  { icon: Globe, label: ['Direct Equities', '& Global Investing'], to: '/invest/domestic-equity' },
-  { icon: Layers, label: ['PMS, AIF & SIF'], to: '/invest/pms-aif-sif' },
-  { icon: Building2, label: ['Real Estate', '& REITs'], to: '/invest/real-estate' },
-  { icon: FileText, label: ['Bonds, NCDs', '& Fixed Income'], to: '/invest/bonds' },
-  { icon: Earth, label: ['International', 'Investing'], to: '/invest/international-equity' },
-];
-
 export function PlanningPillars() {
   return (
     <section className="bg-white pb-10">
@@ -282,32 +273,6 @@ export function PlanningPillars() {
                   <p.icon className="h-8 w-8 shrink-0 text-[#E2B24E]" strokeWidth={1.6} />
                   <span className="flex-1 text-[13px] font-semibold leading-tight text-white">{p.label[0]}<br />{p.label[1]}</span>
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/50 text-white transition-colors group-hover:border-[#E2B24E] group-hover:bg-[#E2B24E] group-hover:text-[#0F1F45]">
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-export function InvestmentUniverse() {
-  return (
-    <section className="bg-white pb-10">
-      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-        <motion.div {...fade} className="rounded-2xl border border-[#E7E2D5] bg-[#FEFDF9] p-6 shadow-[0_10px_30px_rgba(15,31,69,0.06)]">
-          <Eyebrow>Our Investment Universe</Eyebrow>
-          <h2 style={serif} className="mt-2 text-[28px] font-semibold leading-tight text-[#0F1F45] sm:text-[32px]">Multiple Opportunities. One Framework.</h2>
-          <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {UNIVERSE.map((u) => (
-              <li key={u.label[0]}>
-                <Link to={u.to} className="group flex h-full items-center gap-3 rounded-lg border border-[#EFE9D8] bg-white px-3 py-3.5 transition-shadow hover:shadow-[0_10px_24px_rgba(15,31,69,0.1)]">
-                  <u.icon className="h-8 w-8 shrink-0 text-[#E08A1E]" strokeWidth={1.5} />
-                  <span className="flex-1 text-[13px] font-semibold leading-tight text-[#0F1F45]">{u.label[0]}{u.label[1] && <><br />{u.label[1]}</>}</span>
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#E2B24E] text-[#C9922E] transition-colors group-hover:bg-[#E2B24E] group-hover:text-[#0F1F45]">
                     <ArrowRight className="h-3.5 w-3.5" />
                   </span>
                 </Link>
@@ -449,7 +414,7 @@ export function MasterPlanCta() {
 }
 
 /** The rest of the approved home design, in order. PersonalWelcome and WealthConnected are rendered
- *  separately in App.jsx, right after the hero (together with InvestmentUniverse). */
+ *  separately in App.jsx, right after the hero. */
 export default function HomeSections() {
   return (
     <>
