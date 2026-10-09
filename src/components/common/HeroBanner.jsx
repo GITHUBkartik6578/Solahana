@@ -14,13 +14,14 @@ import React from 'react';
  * minH     smallest hero height in px
  * capped   true = the hero is never taller than the `fit` part of the picture (keeps tall pictures close to the other heroes' height)
  * fadeBottom  true = softly fades the bottom edge into dark navy (hides a sliver of content cut by a tight crop)
+ * overlay   optional real HTML shown over the picture, inside the 1320px site container (e.g. a side panel)
  * hotspots [{ label, onClick, style }]  style = % box inside the image (left/top/width/height);
  *          the first hotspot's left edge is taken as the picture's text-left edge.
  */
 const CONTAINER = 'calc(max(0px, (100cqw - 1320px) / 2) + 32px)'; // left edge of the site container
 const CONTAINER_VW = 'calc(max(0px, (100vw - 1320px) / 2) + 32px)';
 
-export default function HeroBanner({ src, alt, ratio, fit = 0.9, minH = 400, capped = false, fadeBottom = false, hotspots = [] }) {
+export default function HeroBanner({ src, alt, ratio, fit = 0.9, minH = 400, capped = false, fadeBottom = false, overlay = null, hotspots = [] }) {
   const R = ratio.toFixed(4);
   const f = (parseFloat(hotspots[0]?.style?.left) || 4) / 100; // text-left as a share of the image width
   const k = (1 / ((1 - f) * ratio)).toFixed(4); // image height / (viewport width - container left)
@@ -70,6 +71,11 @@ export default function HeroBanner({ src, alt, ratio, fit = 0.9, minH = 400, cap
             />
           ))}
         </div>
+        {overlay && (
+          <div className="pointer-events-none absolute inset-0 z-20">
+            <div className="relative mx-auto h-full max-w-[1320px] px-8">{overlay}</div>
+          </div>
+        )}
       </div>
     </section>
   );

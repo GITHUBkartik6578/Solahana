@@ -434,7 +434,7 @@ export default function GlobalConsultationSection() {
                         onChange={handleChange}
                         className="rounded border-[#2F5BC7] text-[#2F5BC7] focus:ring-[#2F5BC7]"
                       />
-                      <span>I agree to the <a href="/contact" className="text-[#1A3170] underline font-medium">Terms & Conditions</a> and <a href="/contact" className="text-[#1A3170] underline font-medium">Privacy Policy</a></span>
+                      <span>I agree to the <a href="/terms-of-use" className="text-[#1A3170] underline font-medium">Terms & Conditions</a> and <a href="/privacy-policy" className="text-[#1A3170] underline font-medium">Privacy Policy</a></span>
                     </label>
 
                     <label className="flex items-center gap-2 cursor-pointer">

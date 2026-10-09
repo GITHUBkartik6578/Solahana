@@ -20,6 +20,8 @@ import RiskManagementPage from './pages/RiskManagementPage';
 import EstatePlanningPage from './pages/EstatePlanningPage';
 import WhoWeServePage from './pages/WhoWeServePage';
 import OurProcessPage from './pages/OurProcessPage';
+import LegalPage from './components/legal/LegalPage';
+import { LEGAL_PAGES } from './data/legalPages';
 import OurExpertsPage from './pages/OurExpertsPage';
 import { CalculatorsPage } from './pages/CalculatorsPage';
 import DashboardPage from './pages/DashboardPage';
@@ -141,6 +143,11 @@ function AppContent() {
           <Route path="/blogs/:slug" element={<BlogDetailsPage />} />
 
           <Route path="/contact" element={<Navigate to="/about#book" replace />} />
+          <Route path="/privacy-policy" element={<LegalPage page={LEGAL_PAGES.privacy} />} />
+          <Route path="/terms-of-use" element={<LegalPage page={LEGAL_PAGES.terms} />} />
+          <Route path="/disclosures" element={<LegalPage page={LEGAL_PAGES.disclosures} />} />
+          <Route path="/grievance-redressal" element={<LegalPage page={LEGAL_PAGES.grievance} />} />
+          <Route path="/contact-us" element={<LegalPage page={LEGAL_PAGES.contact} />} />
 
           {/* User Dashboard */}
           <Route

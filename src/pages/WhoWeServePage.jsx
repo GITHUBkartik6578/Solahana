@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight, Check, Users, Globe, Briefcase, UserRound, BarChart3, ShieldCheck, GraduationCap, Landmark, Target,
 } from 'lucide-react';
@@ -10,10 +10,10 @@ import heroBanner from '../assets/who-we-serve-hero.webp';
 
 // Photography: sharp originals already used across the site (swap these files for new photos, no code change needed)
 import heroPhoto from '../assets/planning/pms-hero.webp';
-import photoFamilies from '../assets/families-planning-together.jpg';
-import photoNri from '../assets/planning/eq-hero.webp';
-import photoBusiness from '../assets/planning/re-hero.webp';
-import photoSenior from '../assets/planning/bonds-hero.webp';
+import photoFamilies from '../assets/who-we-serve-families.webp';
+import photoNri from '../assets/who-we-serve-nri.webp';
+import photoBusiness from '../assets/who-we-serve-business.webp';
+import photoSenior from '../assets/who-we-serve-senior.webp';
 import photoFiduciary from '../assets/planning/mf-hero.webp';
 import photoCta from '../assets/planning/fp-cta.webp';
 
@@ -38,8 +38,6 @@ const SEGMENTS = [
     id: 'families',
     icon: Users,
     photo: photoFamilies,
-    photoPos: 'object-[50%_30%]',
-    zoom: '',
     title: 'High-Net-Worth & Ultra-HNI Families',
     desc: 'Multi-generational wealth preservation, private family trusts, asset structuring, and estate planning.',
     points: ['Family office solutions', 'Legacy and succession planning', 'Tax-efficient wealth transfer', 'Global asset coordination'],
@@ -49,8 +47,6 @@ const SEGMENTS = [
     id: 'nri',
     icon: Globe,
     photo: photoNri,
-    photoPos: 'object-[30%_8%]',
-    zoom: 'scale-[1.12] origin-[30%_8%]',
     title: 'Non-Resident Indians (NRIs)',
     desc: 'Cross-border asset coordination, repatriation rules, FEMA compliance, and strategic Indian market investments.',
     points: ['India & global portfolio alignment', 'FEMA and regulatory guidance', 'Remote wealth management', 'Seamless reporting and updates'],
@@ -60,8 +56,6 @@ const SEGMENTS = [
     id: 'business-owners',
     icon: Briefcase,
     photo: photoBusiness,
-    photoPos: 'object-[20%_35%]',
-    zoom: 'scale-[1.7] origin-[18%_30%]',
     title: 'Successful Business Owners & Entrepreneurs',
     desc: 'Business-to-personal wealth bridging, corporate surplus structuring, risk mitigation, and liquidity planning.',
     points: ['Separate business and personal risk', 'Corporate treasury investments', 'Liquidity and exit planning', 'Wealth creation beyond business'],
@@ -71,8 +65,6 @@ const SEGMENTS = [
     id: 'salaried',
     icon: UserRound,
     photo: photoSenior,
-    photoPos: 'object-[20%_35%]',
-    zoom: 'scale-[1.7] origin-[18%_30%]',
     title: 'Senior Professionals & Corporate Leaders',
     desc: 'ESOP structuring, retirement cash-flow modeling, tax-efficient portfolio scaling, and goal-based planning.',
     points: ['ESOP and equity compensation', 'Retirement income planning', 'Tax-efficient growth strategies', 'Transition from active to passive income'],
@@ -122,9 +114,29 @@ function RoundIcon({ icon: Icon, size = 'h-11 w-11', iconSize = 'h-5 w-5' }) {
   );
 }
 
+/** "Different journeys" panel, shown over the desktop hero banner */
+function JourneysPanel() {
+  return (
+    <div className="absolute right-8 top-[9%] w-[200px] rounded-xl bg-[#07122b]/55 p-4 backdrop-blur-[2px]">
+      <p style={serif} className="text-[19px] font-semibold uppercase leading-[1.25] tracking-[0.04em] text-white">
+        Different Journeys.<br />A Common Destination.
+      </p>
+      <span aria-hidden="true" className="mt-3 block h-[2px] w-10 bg-[#C9922E]" />
+      <ul className="mt-4 space-y-3">
+        {HERO_CHIPS.map((c) => (
+          <li key={c.label} className="flex items-center gap-3">
+            <RoundIcon icon={c.icon} size="h-10 w-10" iconSize="h-[18px] w-[18px]" />
+            <span className="text-[13px] font-semibold leading-tight text-white">{c.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 function Hero() {
-  const toApproach = () => document.getElementById('segments')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const navigate = useNavigate();
   return (
     <>
     {/* Desktop: the ready-made hero banner; its two buttons get invisible click areas */}
@@ -134,9 +146,10 @@ function Hero() {
       ratio={1599 / 650}
       fit={0.93}
       minH={400}
+      overlay={<JourneysPanel />}
       hotspots={[
         { label: 'Schedule Your Private Consultation', onClick: () => openConsultation(), style: { left: '3.9%', top: '86%', width: '26.7%', height: '9.2%' } },
-        { label: 'Explore Our Approach', onClick: toApproach, style: { left: '31.9%', top: '86%', width: '16.4%', height: '9.2%' } },
+        { label: 'Explore Our Approach', onClick: () => navigate('/our-process'), style: { left: '31.9%', top: '86%', width: '16.4%', height: '9.2%' } },
       ]}
     />
 
@@ -183,21 +196,6 @@ function Hero() {
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-[46%] bg-gradient-to-l from-[#0A1836] from-30% via-[#0A1836]/90 to-transparent" />
         </motion.div>
 
-        {/* desktop: "Different journeys" panel over the photo */}
-        <div className="pointer-events-none absolute right-[max(2rem,calc((100%-1320px)/2+2rem))] top-[calc(80px+3rem)] z-10 hidden w-[190px] lg:block">
-          <p style={serif} className="text-[20px] font-semibold uppercase leading-[1.25] tracking-[0.04em] text-white">
-            Different Journeys.<br />A Common Destination.
-          </p>
-          <span aria-hidden="true" className="mt-3 block h-[2px] w-10 bg-[#C9922E]" />
-          <ul className="mt-5 space-y-3.5">
-            {HERO_CHIPS.map((c) => (
-              <li key={c.label} className="flex items-center gap-3">
-                <RoundIcon icon={c.icon} size="h-10 w-10" iconSize="h-[18px] w-[18px]" />
-                <span className="text-[13px] font-semibold leading-tight text-white">{c.label}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
     </>
@@ -229,8 +227,8 @@ function Segments() {
               transition={{ duration: 0.55, delay: i * 0.06 }}
               className="group flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border border-[#E7E2D5] bg-white shadow-[0_10px_30px_rgba(15,31,69,0.07)] transition-shadow hover:shadow-[0_18px_44px_rgba(15,31,69,0.14)]"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-[#0F1F45]">
-                <img src={s.photo} alt="" loading="lazy" draggable="false" className={`h-full w-full object-cover ${s.photoPos} ${s.zoom}`} />
+              <div className="relative aspect-[241/130] overflow-hidden bg-[#0F1F45]">
+                <img src={s.photo} alt={s.title} loading="lazy" draggable="false" className="h-full w-full object-cover" />
               </div>
               <div className="relative flex flex-1 flex-col px-6 pb-6 pt-9">
                 <span className="absolute -top-6 left-6 flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#E2B24E] bg-[#0F1F45] text-[#E2B24E] shadow-[0_8px_20px_rgba(15,31,69,0.3)]">
