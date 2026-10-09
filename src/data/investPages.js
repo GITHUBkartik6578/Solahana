@@ -20,17 +20,7 @@ const COMMON = {
 export const MUTUAL_FUNDS_PAGE = {
   ...COMMON,
   id: 'mutual-funds',
-  heroAspect: 880 / 1076,
-  banner: {
-    file: 'mf-banner',
-    alt: 'Mutual Funds and SIPs. Disciplined Mutual Fund Architecture. Compounding powered by precision.',
-    ratio: 1600 / 900,
-    fit: 1,
-    capped: true,
-    minH: 400,
-    primary: { left: '4.3%', top: '72.7%', width: '20.8%', height: '7.6%' },
-    secondary: { left: '26.2%', top: '72.7%', width: '24%', height: '7.6%' },
-  },
+  heroAspect: 785 / 745,
   art: 'mf',
   eyebrow: 'Mutual Funds & SIPs',
   titleGold: ['Disciplined Mutual Fund', 'Architecture.'],
