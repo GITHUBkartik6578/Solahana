@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, Shield, Users, BarChart3 } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import heroOrbit from '../assets/hero-orbit.webp';
 import heroMascot from '../assets/hero-mascot.webp';
@@ -84,7 +84,6 @@ function OrbitLine() {
 }
 
 function MainSlide() {
-  const navigate = useNavigate();
   return (
     <div className="bg-[#FEFDF9] overflow-hidden">
       {/* ONE container, ONE grid: left copy and right artwork are siblings, both centred on the same axis */}
@@ -108,23 +107,11 @@ function MainSlide() {
         <div className="mt-7 flex flex-wrap items-center justify-center xl:justify-start gap-3">
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-2.5 rounded-full bg-[#0F1F45] px-6 sm:px-7 py-3 sm:py-3.5 text-sm sm:text-base font-medium text-white shadow-[0_10px_30px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_15px_40px_rgba(15,31,69,0.45)]"
+            className="group inline-flex items-center gap-2.5 rounded-full bg-[#0F1F45] px-6 py-2 text-sm font-medium text-white shadow-[0_10px_30px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_15px_40px_rgba(15,31,69,0.45)]"
           >
             <span>Get Started</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
           </Link>
-
-          <button
-            type="button"
-            onClick={() => navigate('/calculators#health-check')}
-            className="group inline-flex items-center gap-2 rounded-full border border-[#C9922E]/50 bg-white/80 px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-[13px] font-semibold text-[#0F1F45] shadow-[0_6px_18px_rgba(201,146,46,0.18)] transition-all hover:border-[#C9922E] hover:bg-white cursor-pointer"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C9922E] opacity-60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#C9922E]" />
-            </span>
-            <span>Check your financial health now</span>
-          </button>
         </div>
 
         <div className="mt-6 flex flex-wrap items-center justify-center xl:justify-start gap-x-5 gap-y-3">

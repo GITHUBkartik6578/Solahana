@@ -281,7 +281,7 @@ export function PlanningSlide({ slide }) {
           </p>
           <Link
             to={slide.route}
-            className="group mt-6 inline-flex items-center gap-3 rounded-full bg-[#0F1F45] px-9 py-4 text-sm sm:text-base font-medium text-white shadow-[0_10px_30px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_15px_40px_rgba(15,31,69,0.45)]"
+            className="group mt-6 inline-flex items-center gap-3 rounded-full bg-[#0F1F45] px-7 py-2.5 text-sm font-medium text-white shadow-[0_10px_30px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_15px_40px_rgba(15,31,69,0.45)]"
           >
             <span>{slide.cta || 'Get Started'}</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
