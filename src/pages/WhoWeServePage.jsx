@@ -204,7 +204,7 @@ function Hero() {
 
 function Segments() {
   return (
-    <section id="segments" className="scroll-mt-20 bg-[#FEFDF9] py-16 sm:py-20 lg:py-24">
+    <section id="segments" className="scroll-mt-20 bg-[#FEFDF9] pb-10 pt-16 sm:pt-20 lg:pb-12 lg:pt-24">
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         <motion.div {...fade} className="grid items-end gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
           <div>
@@ -261,27 +261,27 @@ function Segments() {
 function Fiduciary() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-white via-[#F7F8FB] to-[#EEF1F8]">
-      <div className="mx-auto grid max-w-[1320px] grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-        <div className="relative h-[320px] overflow-hidden sm:h-[420px] lg:ml-[min(0px,calc((1320px-100vw)/2))] lg:h-auto lg:min-h-[560px]">
-          <img src={photoFiduciary} alt="Solahana adviser at his desk" loading="lazy" draggable="false" className="absolute inset-0 h-full w-full object-cover object-[60%_15%]" />
+      <div className="mx-auto grid max-w-[1320px] grid-cols-1 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center">
+        <div className="relative h-[280px] overflow-hidden sm:h-[340px] lg:ml-[min(0px,calc((1320px-100vw)/2))] lg:h-[400px]">
+          <img src={photoFiduciary} alt="Solahana adviser at his desk" loading="lazy" draggable="false" className="absolute inset-0 h-full w-full object-cover object-[55%_20%]" />
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/4 bg-gradient-to-r from-transparent to-[#F7F8FB] lg:block" />
         </div>
-        <motion.div {...fade} className="px-4 py-14 sm:px-8 lg:py-20 lg:pl-10 lg:pr-8">
+        <motion.div {...fade} className="px-4 py-10 sm:px-8 lg:py-8 lg:pl-10 lg:pr-8">
           <Eyebrow>The Fiduciary Distinction</Eyebrow>
-          <h2 style={serif} className="[text-wrap:balance] mt-4 text-[34px] font-semibold leading-[1.1] text-[#0F1F45] sm:text-[46px]">
+          <h2 style={serif} className="[text-wrap:balance] mt-3 text-[28px] font-semibold leading-[1.1] text-[#0F1F45] sm:text-[36px]">
             Engineered for Absolute Clarity and Zero Bias
           </h2>
-          <p className="[text-wrap:pretty] mt-5 max-w-[62ch] text-[16px] leading-relaxed text-[#475569]">
+          <p className="[text-wrap:pretty] mt-3 max-w-[62ch] text-[14.5px] leading-relaxed text-[#475569]">
             Our advice is not driven by sales targets or proprietary products. It is driven solely by your goals, backed by professional expertise and executed through trusted institutions.
           </p>
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
             {DISTINCTIONS.map((d) => (
-              <div key={d.title} className="rounded-2xl border border-[#E7E2D5] bg-white p-5 shadow-[0_8px_24px_rgba(15,31,69,0.06)]">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-[#E6C27A] to-[#C9922E] text-[#0F1F45]">
-                  <d.icon className="h-5 w-5" strokeWidth={1.8} />
+              <div key={d.title} className="rounded-2xl border border-[#E7E2D5] bg-white p-4 shadow-[0_8px_24px_rgba(15,31,69,0.06)]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#E6C27A] to-[#C9922E] text-[#0F1F45]">
+                  <d.icon className="h-4 w-4" strokeWidth={1.8} />
                 </span>
-                <h3 className="mt-4 font-sans text-[16px] font-bold leading-snug text-[#0F1F45]">{d.title}</h3>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-[#475569]">{d.desc}</p>
+                <h3 className="mt-3 font-sans text-[14.5px] font-bold leading-snug text-[#0F1F45]">{d.title}</h3>
+                <p className="mt-1.5 text-[12.5px] leading-[1.5] text-[#475569]">{d.desc}</p>
               </div>
             ))}
           </div>
