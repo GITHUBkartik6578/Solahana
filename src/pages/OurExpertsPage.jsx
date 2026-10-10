@@ -38,7 +38,7 @@ function ExpertListCard({ expert, active, onSelect }) {
       <div className="min-w-0 flex-1">
         <p style={serif} className="text-[17px] font-bold leading-tight text-[#0F1F45]">{expert.name}</p>
         <p className="mt-0.5 text-[12.5px] font-medium leading-snug text-[#475569]">
-          {expert.role}, {expert.qualifications.slice(1).join(', ')}
+          {[expert.role, ...(expert.qualifications || []).slice(1)].join(', ')}
         </p>
         <span className="my-2 block h-px w-full bg-[#E7DFCF]" />
         <div className="flex items-center text-[12px]">
@@ -46,10 +46,12 @@ function ExpertListCard({ expert, active, onSelect }) {
             <p className="text-[10.5px] font-semibold uppercase tracking-wider text-[#64748B]">Experience</p>
             <p className="font-bold text-[#0F1F45]">{expert.years}+ Years</p>
           </div>
-          <div className="border-l border-[#E7DFCF] pl-4">
-            <p className="text-[10.5px] font-semibold uppercase tracking-wider text-[#64748B]">Location</p>
-            <p className="font-bold text-[#0F1F45]">{expert.location}</p>
-          </div>
+          {expert.location && (
+            <div className="border-l border-[#E7DFCF] pl-4">
+              <p className="text-[10.5px] font-semibold uppercase tracking-wider text-[#64748B]">Location</p>
+              <p className="font-bold text-[#0F1F45]">{expert.location}</p>
+            </div>
+          )}
         </div>
       </div>
     </button>
@@ -70,17 +72,23 @@ function ExpertDetail({ expert }) {
       <div className="p-5 text-center sm:p-6">
         <img src={expert.avatar} alt={expert.photoAlt} draggable="false" className="mx-auto h-[88px] w-[88px] rounded-full object-cover ring-4 ring-[#C9922E]/40" />
         <h2 style={serif} className="mt-2 text-[22px] font-bold leading-tight text-[#0F1F45]">{expert.name}</h2>
-        <p className="mt-1 text-[13px] font-medium text-[#475569]">{expert.credential}</p>
-        <p className="mt-0.5 text-[12.5px] text-[#64748B]">{expert.qualifications.slice(1).join(' | ')}</p>
+        <p className="mt-1 text-[13px] font-medium text-[#475569]">{expert.credential || expert.role}</p>
+        {expert.qualifications && expert.qualifications.length > 1 && (
+          <p className="mt-0.5 text-[12.5px] text-[#64748B]">{expert.qualifications.slice(1).join(' | ')}</p>
+        )}
 
         <div className="mt-4 flex items-stretch divide-x divide-[#E7DFCF] border-y border-[#E7DFCF] py-3">
           <Stat label="Experience">{expert.years}+ Years</Stat>
-          <Stat label="Location">{expert.location}</Stat>
+          {expert.location && <Stat label="Location">{expert.location}</Stat>}
           <Stat label="Planning areas">{expert.expertise.length}</Stat>
         </div>
 
-        <h3 className="mt-4 text-[13px] font-bold uppercase tracking-[0.18em] text-[#0F1F45]">About Me</h3>
-        <p className="mt-1.5 text-[13px] leading-relaxed text-[#475569]">{expert.summary}</p>
+        {expert.summary && (
+          <>
+            <h3 className="mt-4 text-[13px] font-bold uppercase tracking-[0.18em] text-[#0F1F45]">About Me</h3>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-[#475569]">{expert.summary}</p>
+          </>
+        )}
 
         <h3 className="mt-4 text-[13px] font-bold uppercase tracking-[0.18em] text-[#0F1F45]">Areas of Expertise</h3>
         <ul className="mt-2.5 flex flex-wrap justify-center gap-2">
@@ -96,35 +104,45 @@ function ExpertDetail({ expert }) {
           ))}
         </ul>
 
-        <p className="mt-5 flex items-center justify-center gap-1.5 text-[12px] text-[#64748B]">
-          <Clock className="h-3.5 w-3.5 text-[#C9922E]" />
-          Available {expert.hours}
-        </p>
+        {expert.hours && (
+          <p className="mt-5 flex items-center justify-center gap-1.5 text-[12px] text-[#64748B]">
+            <Clock className="h-3.5 w-3.5 text-[#C9922E]" />
+            Available {expert.hours}
+          </p>
+        )}
 
-        <div className="mt-3 grid grid-cols-2 gap-2.5">
-          <a
-            href={expert.phoneTel}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-[#0F1F45] px-4 py-2.5 text-[13px] font-bold text-[#0F1F45] transition-colors hover:bg-[#0F1F45] hover:text-white"
-          >
-            <Phone className="h-4 w-4" />
-            Call
-          </a>
-          <a
-            href={expert.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-600 px-4 py-2.5 text-[13px] font-bold text-emerald-700 transition-colors hover:bg-emerald-600 hover:text-white"
-          >
-            <MessageCircle className="h-4 w-4" />
-            WhatsApp
-          </a>
-        </div>
-        <p className="mt-2 text-[12px] font-semibold text-[#475569]">{expert.phoneDisplay}</p>
+        {(expert.phoneTel || expert.whatsapp) && (
+          <>
+            <div className={`mt-3 grid gap-2.5 ${expert.phoneTel && expert.whatsapp ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {expert.phoneTel && (
+                <a
+                  href={expert.phoneTel}
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[#0F1F45] px-4 py-2.5 text-[13px] font-bold text-[#0F1F45] transition-colors hover:bg-[#0F1F45] hover:text-white"
+                >
+                  <Phone className="h-4 w-4" />
+                  Call
+                </a>
+              )}
+              {expert.whatsapp && (
+                <a
+                  href={expert.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-600 px-4 py-2.5 text-[13px] font-bold text-emerald-700 transition-colors hover:bg-emerald-600 hover:text-white"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  WhatsApp
+                </a>
+              )}
+            </div>
+            {expert.phoneDisplay && <p className="mt-2 text-[12px] font-semibold text-[#475569]">{expert.phoneDisplay}</p>}
+          </>
+        )}
 
         <button
           type="button"
           onClick={() => scrollToConsultation()}
-          className="mt-3 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#0F1F45] px-6 py-3 text-sm font-bold text-white shadow-[0_10px_26px_rgba(15,31,69,0.3)] transition-all hover:bg-[#1A3170]"
+          className={`${expert.phoneTel || expert.whatsapp ? 'mt-3' : 'mt-5'} inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#0F1F45] px-6 py-3 text-sm font-bold text-white shadow-[0_10px_26px_rgba(15,31,69,0.3)] transition-all hover:bg-[#1A3170]`}
         >
           <CalendarCheck className="h-4 w-4" />
           Book Appointment
@@ -146,7 +164,10 @@ export default function OurExpertsPage() {
     const q = query.trim().toLowerCase();
     const tests = EXPERIENCE_FILTERS.filter((f) => exp.includes(f.id));
     return EXPERTS.filter((e) => {
-      const hay = `${e.name} ${e.credential} ${e.role} ${e.location} ${e.qualifications.join(' ')} ${e.expertise.map((a) => a.label).join(' ')}`.toLowerCase();
+      const hay = [e.name, e.credential, e.role, e.location, ...(e.qualifications || []), ...(e.expertise || []).map((a) => a.label)]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
       return (!q || hay.includes(q)) && (!tests.length || tests.some((f) => f.test(e.years)));
     });
   }, [query, exp]);
