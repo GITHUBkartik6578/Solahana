@@ -1,93 +1,72 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Target, Eye, Sparkles } from 'lucide-react';
+import { Target, Eye } from 'lucide-react';
+
+import missionScene from '../../assets/about-mission-scene.webp';
+import visionScene from '../../assets/about-vision-scene.webp';
+
+const serif = { fontFamily: "'Playfair Display', Georgia, serif" };
+
+const CARDS = [
+  {
+    key: 'mission',
+    title: 'Our Mission',
+    icon: Target,
+    scene: missionScene,
+    sceneAlt: 'Sunlit mountain range',
+    text: '“To engineer absolute financial clarity and multi-generational prosperity for families by providing objective, zero-bias strategic guidance, completely free from the pressures of product-pushing and corporate sales quotas.”',
+    tint: 'from-[#FFFBF6] via-[#FEFBF7] to-[#FBF3EA]',
+  },
+  {
+    key: 'vision',
+    title: 'Our Vision',
+    icon: Eye,
+    scene: visionScene,
+    sceneAlt: 'City skyline at sunset',
+    text: '“To set the gold standard in independent Family Office architecture, where every client relationship is anchored on uncompromising integrity, institutional rigor, and long-term fiduciary dedication.”',
+    tint: 'from-[#EEF4FF] via-[#F8F4EE] to-[#FCEBDD]',
+  },
+];
 
 export default function AboutMissionVision() {
   return (
-    <section className="py-12 sm:py-16 lg:py-20 relative overflow-hidden bg-[#F7F8FB]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto space-y-3 mb-10 sm:mb-12">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full gold-badge text-[#1A3170] text-xs font-semibold uppercase tracking-widest font-sora">
-            <Sparkles className="w-3.5 h-3.5 text-[#C9A04F]" />
-            <span>PURPOSE & FUTURE</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-serif-luxury font-bold text-[#0F1F45]">
-            Our Mission & Vision
-          </h2>
-          <p className="text-sm sm:text-base text-[#475569] font-inter">
-            What we do every day, and where we're headed.
-          </p>
-        </div>
+    <section className="relative overflow-hidden bg-white py-6 sm:py-7" aria-label="Our mission and vision">
+      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6">
+          {CARDS.map((c, i) => {
+            const Icon = c.icon;
+            return (
+              <motion.article
+                key={c.key}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.55, delay: i * 0.1 }}
+                className={`relative flex min-h-[340px] flex-col overflow-hidden rounded-2xl border border-[#E7E2D6] bg-gradient-to-br ${c.tint} shadow-[0_14px_36px_rgba(15,31,69,0.10)] sm:min-h-[370px]`}
+              >
+                <div className="relative z-10 flex gap-5 p-6 sm:gap-6 sm:p-8">
+                  <span className="flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full bg-[#0F1F45] text-[#E2B24E] ring-[3px] ring-[#C9922E] shadow-[0_8px_20px_rgba(15,31,69,0.25)] sm:h-[88px] sm:w-[88px]">
+                    <Icon className="h-9 w-9 sm:h-10 sm:w-10" strokeWidth={1.7} />
+                  </span>
+                  <span aria-hidden="true" className="hidden w-px shrink-0 bg-[#C9922E]/60 sm:block" />
+                  <div className="min-w-0">
+                    <h2 style={serif} className="text-[32px] font-semibold leading-tight text-[#0F1F45] sm:text-[38px]">
+                      {c.title}
+                    </h2>
+                    <p className="[text-wrap:pretty] mt-2 text-[15px] leading-relaxed text-[#1E293B] sm:text-[16.5px]">{c.text}</p>
+                  </div>
+                </div>
 
-        {/* Two Luxury Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          
-          {/* Card 1 — MISSION */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            whileHover={{ y: -6 }}
-            className="p-8 sm:p-10 rounded-3xl bg-white border border-[#2F5BC7]/30 hover:border-[#CBD6EE] hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(11,27,63,0.09)] transition-all duration-300 shadow-lg text-left group"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <div className="w-14 h-14 rounded-2xl bg-[#2F5BC7]/10 border border-[#2F5BC7]/30 text-[#2F5BC7] flex items-center justify-center">
-                <Target className="w-7 h-7" />
-              </div>
-
-              <span className="text-xs font-sora font-bold text-[#1A3170] uppercase tracking-widest px-3 py-1 rounded-full bg-[#F7F8FB] border border-[#2F5BC7]/30">
-                OUR MISSION
-              </span>
-            </div>
-
-            <h3 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-[#0F1F45] mb-3 group-hover:text-[#2F5BC7] transition-colors">
-              Clarity for Every Family
-            </h3>
-
-            <p className="text-base sm:text-lg text-[#0F1F45] font-serif-luxury italic leading-relaxed mb-4 font-medium">
-              "To help families make confident money decisions with a plan they truly understand."
-            </p>
-
-            <p className="text-sm text-[#475569] font-inter leading-relaxed line-clamp-2">
-              We replace guesswork with a simple plan built around your income, your goals and your comfort with risk.
-            </p>
-          </motion.div>
-
-          {/* Card 2 — VISION */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            whileHover={{ y: -6 }}
-            className="p-8 sm:p-10 rounded-3xl bg-white border border-[#2F5BC7]/30 hover:border-[#CBD6EE] hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(11,27,63,0.09)] transition-all duration-300 shadow-lg text-left group"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <div className="w-14 h-14 rounded-2xl bg-[#2F5BC7]/10 border border-[#2F5BC7]/30 text-[#2F5BC7] flex items-center justify-center">
-                <Eye className="w-7 h-7" />
-              </div>
-
-              <span className="text-xs font-sora font-bold text-[#1A3170] uppercase tracking-widest px-3 py-1 rounded-full bg-[#F7F8FB] border border-[#2F5BC7]/30">
-                OUR VISION
-              </span>
-            </div>
-
-            <h3 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-[#0F1F45] mb-3 group-hover:text-[#2F5BC7] transition-colors">
-              Advice Families Can Trust
-            </h3>
-
-            <p className="text-base sm:text-lg text-[#0F1F45] font-serif-luxury italic leading-relaxed mb-4 font-medium">
-              "To be the advisor Indian families trust first, because we put their interests first."
-            </p>
-
-            <p className="text-sm text-[#475569] font-inter leading-relaxed line-clamp-2">
-              Honest, easy-to-understand financial advice for every family, not just the wealthy.
-            </p>
-          </motion.div>
-
+                <img
+                  src={c.scene}
+                  alt={c.sceneAlt}
+                  loading="lazy"
+                  draggable="false"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-[40%] w-full object-cover object-bottom [mask-image:linear-gradient(to_bottom,transparent,black_30%)]"
+                />
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>

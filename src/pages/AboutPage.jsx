@@ -1,10 +1,9 @@
 import React from 'react';
 import AboutHero from '../components/about/AboutHero';
-import AboutStory from '../components/about/AboutStory';
 import AboutMissionVision from '../components/about/AboutMissionVision';
-import AboutValues from '../components/about/AboutValues';
-import WhySolahanaExists from '../components/about/WhySolahanaExists';
-import AboutConnectOptions from '../components/about/AboutConnectOptions';
+import FounderNote from '../components/about/FounderNote';
+import SolahanaStandard from '../components/about/SolahanaStandard';
+import ProfessionalPedigree from '../components/about/ProfessionalPedigree';
 import AboutOfficeLocation from '../components/about/AboutOfficeLocation';
 
 export default function AboutPage({ onOpenSearch }) {
@@ -24,20 +23,17 @@ export default function AboutPage({ onOpenSearch }) {
         onOpenSearch={onOpenSearch}
       />
 
-      {/* SECTION 2: OUR STORY */}
-      <AboutStory />
-
       {/* SECTION 3: MISSION & VISION */}
       <AboutMissionVision />
 
-      {/* SECTION 4: OUR VALUES */}
-      <AboutValues />
+      {/* FOUNDER'S NOTE & PHILOSOPHY (replaces Our Guiding Values) */}
+      <FounderNote />
 
-      {/* SECTION 5: WHY SOLAHANA EXISTS */}
-      <WhySolahanaExists />
+      {/* THE SOLAHANA STANDARD (replaces "How we think / Why SOLAHANA Exists") */}
+      <SolahanaStandard />
 
-      {/* SECTION 6: CHOOSE HOW TO CONNECT (MERGED CONTACT) */}
-      <AboutConnectOptions />
+      {/* PROFESSIONAL PEDIGREE & EXPERIENCE (replaces "Choose how to connect") */}
+      <ProfessionalPedigree />
 
       {/* SECTION 7: OFFICE LOCATION & WORKING HOURS (MERGED CONTACT) */}
       <AboutOfficeLocation />

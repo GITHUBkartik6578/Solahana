@@ -1,24 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
-  Sparkles, 
-  CheckCircle2, 
-  Lock, 
-  Send, 
+import {
+  User,
+  Mail,
+  MapPin,
+  Clock,
+  CalendarDays,
+  CheckCircle2,
   Loader2,
   AlertCircle,
-  ShieldCheck,
+  Lock,
+  Users,
   TrendingUp,
-  Award
+  ChevronDown,
+  ArrowRight,
+  Info,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import consultationService from '../../services/consultationService';
-import solahanaLogo from '../../assets/solahana-logo.png';
 
 const planningInterests = [
   'Financial Planning',
@@ -151,331 +150,251 @@ export default function GlobalConsultationSection() {
     }
   };
 
-  return (
-    <section id="global-consultation-section" className="relative py-10 sm:py-12 lg:py-8 bg-gradient-to-b from-[#F3F6FC] via-[#EAF0FA] to-[#F7F1E3] overflow-x-hidden font-inter">
-      {/* Background Subtle Luxury Accents */}
-      {/* faint grid texture for depth */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.08] bg-[linear-gradient(rgba(15,31,69,0.7)_1px,transparent_1px),linear-gradient(90deg,rgba(15,31,69,0.7)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+  const serif = { fontFamily: "'Playfair Display', Georgia, serif" };
+  const fieldCls =
+    'w-full rounded-lg border border-[#DCE1EA] bg-white px-3.5 py-2.5 text-[13.5px] text-[#0F1F45] outline-none transition-all placeholder:text-[#94A3B8] focus:border-[#C9922E] focus:ring-2 focus:ring-[#C9922E]/20';
+  const labelCls = 'mb-1 block text-[12.5px] font-semibold text-[#0F1F45]';
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Golden-ratio split: 0.382fr (≈38.2%) : 0.618fr (≈61.8%) so the
-            copy column and the form card sit in a true φ (1.618) proportion
-            instead of the old 5/7 (12-col) approximation. items-start keeps
-            both columns anchored to the same top line so the shorter copy
-            column never gets vertically centered against the much taller
-            form and "cut" the visual rhythm. */}
-        <div className="grid grid-cols-1 lg:grid-cols-[0.382fr_0.618fr] gap-8 lg:gap-12 items-center">
-          
-          {/* ========================================================= */}
-          {/* LEFT COLUMN: HEADLINE, CONCISE COPY & FIDUCIARY HIGHLIGHTS */}
-          {/* ========================================================= */}
+  const FEATURES = [
+    { title: 'Private & Confidential', desc: 'Your data and discussions are strictly protected under professional fiduciary standards. Used solely for your personalized session.', icon: Lock },
+    { title: 'Tailored Strategic Blueprint', desc: 'Cash flows, tax efficiency, risk protection, and investment structuring, looked at comprehensively together.', icon: TrendingUp },
+    { title: 'Zero Product Bias', desc: 'Objective, transparent guidance rooted in CWM® and CFP® principles. No sales pressure, no forced product pushing.', icon: Users },
+  ];
+
+  return (
+    <section id="global-consultation-section" className="relative overflow-hidden bg-gradient-to-br from-white via-[#FBFAF7] to-[#F4F0E8] py-12 font-inter sm:py-14 lg:py-16">
+      {/* soft gold swooshes, as in the design */}
+      <svg aria-hidden="true" className="pointer-events-none absolute -left-24 bottom-0 h-[420px] w-[520px] opacity-60" viewBox="0 0 520 420" fill="none">
+        <path d="M-20 400 C 120 330, 160 180, 360 120" stroke="#E6C27A" strokeOpacity="0.55" strokeWidth="26" strokeLinecap="round" />
+        <path d="M-60 430 C 100 380, 200 260, 420 210" stroke="#C9922E" strokeOpacity="0.25" strokeWidth="10" strokeLinecap="round" />
+      </svg>
+      <svg aria-hidden="true" className="pointer-events-none absolute -right-24 top-6 hidden h-[360px] w-[420px] opacity-50 lg:block" viewBox="0 0 420 360" fill="none">
+        <path d="M440 20 C 330 70, 300 190, 160 260" stroke="#E6C27A" strokeOpacity="0.5" strokeWidth="22" strokeLinecap="round" />
+      </svg>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-14">
+          {/* ================= LEFT: headline, copy, three promises ================= */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-5 text-left"
+            transition={{ duration: 0.55 }}
+            className="text-left"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#C9922E]/40 text-[11px] font-semibold uppercase tracking-widest text-[#9A7220] shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-[#C9922E]" />
-              <span>SOLAHANA PLANNING</span>
-            </div>
+            <p className="font-sora text-[11.5px] font-semibold uppercase tracking-[0.3em] text-[#0F1F45] sm:text-[12.5px]">
+              Solahana Wealth Architecture &amp; Family Office
+            </p>
+            <span aria-hidden="true" className="mt-4 block h-[2px] w-40 rounded-full bg-gradient-to-r from-[#C9922E] to-transparent sm:w-56" />
 
-            <h2 className="font-serif-luxury text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F1F45] leading-tight tracking-tight">
-              Schedule Your Free{' '}
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#C9922E] via-[#B8862B] to-[#9A7220] font-serif-luxury">
-                Wealth Consultation
-              </span>
+            <h2 style={serif} className="mt-5 text-[40px] font-bold leading-[1.02] tracking-[-0.01em] text-[#0F1F45] sm:text-[52px] lg:text-[clamp(44px,4.2vw,60px)]">
+              Schedule Your
+              <span className="block bg-gradient-to-r from-[#B8862B] via-[#D9A441] to-[#B8862B] bg-clip-text text-transparent">Private Wealth</span>
+              Consultation
             </h2>
 
-            <p className="text-sm sm:text-base text-[#475569] leading-relaxed font-normal">
-              Tell us a little about yourself. A planner will call, understand your situation and suggest clear next steps. No obligation.
+            <p className="[text-wrap:pretty] mt-5 max-w-[56ch] text-[15.5px] leading-relaxed text-[#334155] sm:text-[17px]">
+              Connect directly with certified wealth architects. We listen to your goals, evaluate your financial health, and outline strategic next steps—completely confidential and zero obligation.
             </p>
 
-            {/* Key Fiduciary Features */}
-            <div className="pt-1 space-y-2.5">
-              {[
-                { title: 'Private & Confidential', desc: 'Your details are used only to plan your call.', icon: ShieldCheck },
-                { title: 'A Plan Made for You', desc: 'Goals, tax, insurance and investments, looked at together.', icon: TrendingUp },
-                { title: 'Clear, Honest Advice', desc: 'Simple explanations, no pressure to buy anything.', icon: Award },
-              ].map((item, idx) => {
-                const Icon = item.icon;
+            <ul className="mt-7 space-y-3">
+              {FEATURES.map((f) => {
+                const Icon = f.icon;
                 return (
-                  <div key={idx} className="flex items-start gap-3.5 p-3 rounded-2xl bg-white border border-[#E7DFCF] shadow-[0_6px_16px_rgba(15,31,69,0.06)]">
-                    <div className="p-2 rounded-xl bg-[#C9922E]/12 text-[#B8862B] ring-1 ring-[#C9922E]/35 shrink-0 mt-0.5">
-                      <Icon className="w-4.5 h-4.5" />
-                    </div>
+                  <li key={f.title} className="flex items-start gap-4 rounded-xl border border-[#EDE6D8] bg-white/90 p-4 shadow-[0_6px_18px_rgba(15,31,69,0.05)]">
+                    <span className="flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-full bg-[#FBF0DC] text-[#B8862B]">
+                      <Icon className="h-6 w-6" strokeWidth={1.8} />
+                    </span>
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-[#0F1F45]">{item.title}</h4>
-                      <p className="text-[11px] sm:text-xs text-[#475569] mt-0.5">{item.desc}</p>
+                      <h3 style={serif} className="text-[18px] font-bold leading-tight text-[#0F1F45]">{f.title}</h3>
+                      <p className="[text-wrap:pretty] mt-1 text-[13.5px] leading-snug text-[#475569]">{f.desc}</p>
                     </div>
-                  </div>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </motion.div>
 
-          {/* ========================================================= */}
-          {/* RIGHT COLUMN: LIGHT & SPACIOUS CONSULTATION FORM CARD     */}
-          {/* ========================================================= */}
+          {/* ================= RIGHT: booking form card ================= */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.55, delay: 0.1 }}
             className="min-w-0"
           >
-            <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#D9E2F3] shadow-[0_24px_60px_rgba(15,31,69,0.16)] relative overflow-hidden max-w-[600px] w-full mx-auto lg:mx-0 lg:ml-auto">
-
-              {/* Subtle Top Accent Bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#E6C27A] via-[#C9A04F] to-[#A67C2E]" />
-
-              {/* Prominent SOLAHANA Logo Header */}
-              <div className="text-center mb-3">
-                <img
-                  src={solahanaLogo}
-                  alt="SOLAHANA"
-                  className="h-8 w-auto mx-auto object-contain mb-1"
-                />
-                <h3 className="font-serif-luxury text-lg sm:text-xl font-bold text-[#0F1F45]">
-                  Book Free Consultation
-                </h3>
-                <p className="text-[11px] sm:text-xs text-[#64748B] mt-0.5">
-                  Takes less than a minute. We'll call you at the time you choose.
-                </p>
+            <div className="relative mx-auto w-full max-w-[600px] overflow-hidden rounded-3xl border border-[#E7E2D6] bg-white p-5 shadow-[0_24px_60px_rgba(15,31,69,0.12)] sm:p-6 lg:ml-auto lg:mr-0">
+              <div className="mb-4 flex items-center gap-3.5">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#EEF2FB] text-[#1A3170]">
+                  <CalendarDays className="h-6 w-6" strokeWidth={1.7} />
+                </span>
+                <div>
+                  <h3 style={serif} className="text-[24px] font-bold leading-tight text-[#0F1F45] sm:text-[27px]">Book Your Consultation</h3>
+                  <p className="text-[12.5px] text-[#64748B] sm:text-[13px]">Take the first step towards a more secure financial future.</p>
+                </div>
               </div>
 
               {submitted ? (
-                <motion.div
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  className="py-10 text-center space-y-4"
-                >
-                  <div className="w-16 h-16 mx-auto rounded-full bg-[#2F5BC7]/15 border-2 border-[#2F5BC7] flex items-center justify-center text-[#1A3170]">
-                    <CheckCircle2 className="w-8 h-8" />
+                <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="space-y-4 py-10 text-center">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#C9922E] bg-[#FBF0DC] text-[#B8862B]">
+                    <CheckCircle2 className="h-8 w-8" />
                   </div>
-                  <h4 className="font-serif-luxury text-2xl font-bold text-[#0F1F45]">
-                    Consultation Request Received!
-                  </h4>
-                  <p className="text-xs sm:text-sm text-[#475569] max-w-sm mx-auto leading-relaxed">
+                  <h4 style={serif} className="text-2xl font-bold text-[#0F1F45]">Consultation Request Received!</h4>
+                  <p className="mx-auto max-w-sm text-xs leading-relaxed text-[#475569] sm:text-sm">
                     Thank you, <strong>{formData.fullName}</strong>. A dedicated SOLAHANA financial planner will contact you at <strong>+91 {formData.phone}</strong> during your selected slot (<strong>{formData.preferredTime}</strong>).
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="mt-4 px-6 py-2 rounded-full border border-[#2F5BC7] text-xs font-bold text-[#1A3170] hover:bg-[#1A3170] hover:text-white transition-all cursor-pointer"
+                    className="mt-3 cursor-pointer rounded-full border border-[#0F1F45] px-6 py-2.5 text-xs font-bold text-[#0F1F45] transition-all hover:bg-[#0F1F45] hover:text-white"
                   >
                     Submit Another Request
                   </button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-2.5 text-left">
-                  
+                <form onSubmit={handleSubmit} className="space-y-3 text-left">
                   {errorMsg && (
-                    <div className="sm:col-span-2 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4 shrink-0 text-red-500" />
+                    <div className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-600">
+                      <AlertCircle className="h-4 w-4 shrink-0 text-red-500" />
                       <span>{errorMsg}</span>
                     </div>
                   )}
 
-                  {/* 1. Full Name */}
+                  {/* Full name */}
                   <div>
-                    <label className="block text-xs font-semibold text-[#0F1F45] mb-1">
-                      Full Name *
-                    </label>
+                    <label htmlFor="gc-fullName" className={labelCls}>Full Name <span className="text-red-500">*</span></label>
                     <div className="relative">
-                      <User className="w-4 h-4 text-[#2F5BC7] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                      <input
-                        type="text"
-                        name="fullName"
-                        required
-                        placeholder="e.g. Ananya Sharma"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        className="w-full px-3.5 py-2 pl-10 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] transition-all"
-                      />
+                      <User className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#64748B]" />
+                      <input id="gc-fullName" type="text" name="fullName" required placeholder="Ananya Sharma" value={formData.fullName} onChange={handleChange} className={`${fieldCls} pl-10`} />
                     </div>
                   </div>
 
-                  {/* 2. Mobile Number (+91) */}
+                  {/* Mobile */}
                   <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <label className="text-xs font-semibold text-[#0F1F45]">
-                        Mobile Number *
-                      </label>
+                    <div className="mb-1 flex items-center justify-between">
+                      <label htmlFor="gc-phone" className="text-[12.5px] font-semibold text-[#0F1F45]">Mobile Number <span className="text-red-500">*</span></label>
                       {phoneTouched && (
-                        <span className={`text-[10px] font-mono ${isPhoneValid ? 'text-emerald-600 font-bold' : 'text-red-500'}`}>
-                          {formData.phone.length}/10 digits
-                        </span>
+                        <span className={`font-mono text-[10px] ${isPhoneValid ? 'font-bold text-emerald-600' : 'text-red-500'}`}>{formData.phone.length}/10 digits</span>
                       )}
                     </div>
                     <div className="relative flex items-center">
-                      <div className="absolute left-3.5 flex items-center gap-1.5 pointer-events-none text-xs font-semibold text-[#0F1F45]">
+                      <div className="pointer-events-none absolute left-3.5 flex items-center gap-1.5 text-[13px] font-semibold text-[#0F1F45]">
                         <span className="text-sm">🇮🇳</span>
                         <span>+91</span>
+                        <ChevronDown className="h-3.5 w-3.5 text-[#64748B]" />
                       </div>
                       <input
+                        id="gc-phone"
                         type="tel"
                         name="phone"
                         required
                         maxLength={10}
-                        placeholder="9876543210"
+                        placeholder="98765 43210"
                         value={formData.phone}
                         onChange={handlePhoneChange}
                         onBlur={() => setPhoneTouched(true)}
-                        className={`w-full px-3.5 py-2 pl-16 rounded-xl text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] transition-all border ${
-                          phoneTouched
-                            ? isPhoneValid
-                              ? 'border-emerald-500 focus:ring-2 focus:ring-emerald-500/20'
-                              : 'border-red-500 focus:ring-2 focus:ring-red-500/20'
-                            : 'border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15'
+                        className={`${fieldCls} pl-[88px] ${
+                          phoneTouched ? (isPhoneValid ? '!border-emerald-500 focus:!ring-emerald-500/20' : '!border-red-500 focus:!ring-red-500/20') : ''
                         }`}
                       />
                     </div>
                   </div>
 
-                  {/* 3. Email Address */}
+                  {/* Email */}
                   <div>
-                    <label className="block text-xs font-semibold text-[#0F1F45] mb-1">
-                      Email Address *
-                    </label>
+                    <label htmlFor="gc-email" className={labelCls}>Email Address <span className="text-red-500">*</span></label>
                     <div className="relative">
-                      <Mail className="w-4 h-4 text-[#2F5BC7] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="ananya@example.com"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-3.5 py-2 pl-10 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] transition-all"
-                      />
+                      <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#64748B]" />
+                      <input id="gc-email" type="email" name="email" required placeholder="ananya@example.com" value={formData.email} onChange={handleChange} className={`${fieldCls} pl-10`} />
                     </div>
                   </div>
 
-                  {/* 4. City & Planning Interest */}
-                    <div>
-                      <label className="block text-xs font-semibold text-[#0F1F45] mb-1">
-                        City *
-                      </label>
-                      <div className="relative">
-                        <MapPin className="w-4 h-4 text-[#2F5BC7] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                        <input
-                          type="text"
-                          name="city"
-                          required
-                          placeholder="e.g. Mumbai"
-                          value={formData.city}
-                          onChange={handleChange}
-                          className="w-full px-3.5 py-2 pl-10 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] transition-all"
-                        />
-                      </div>
+                  {/* City */}
+                  <div>
+                    <label htmlFor="gc-city" className={labelCls}>City <span className="text-red-500">*</span></label>
+                    <div className="relative">
+                      <MapPin className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#64748B]" />
+                      <input id="gc-city" type="text" name="city" required placeholder="Mumbai" value={formData.city} onChange={handleChange} className={`${fieldCls} pl-10`} />
                     </div>
+                  </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold text-[#0F1F45] mb-1">
-                        Planning Interest *
-                      </label>
-                      <select
-                        name="goal"
-                        value={formData.goal}
-                        onChange={handleChange}
-                        className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] cursor-pointer transition-all"
-                      >
-                        {planningInterests.map(interest => (
-                          <option key={interest} value={interest}>
-                            {interest}
-                          </option>
+                  {/* Planning interest */}
+                  <div>
+                    <label htmlFor="gc-goal" className={labelCls}>Planning Interest <span className="text-red-500">*</span></label>
+                    <div className="relative">
+                      <select id="gc-goal" name="goal" value={formData.goal} onChange={handleChange} className={`${fieldCls} cursor-pointer appearance-none pr-10`}>
+                        {planningInterests.map((interest) => (
+                          <option key={interest} value={interest}>{interest}</option>
                         ))}
                       </select>
+                      <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#64748B]" />
                     </div>
+                  </div>
 
-                  {/* 5. Preferred Callback Time */}
+                  {/* Preferred callback time */}
+                  <fieldset>
+                    <legend className={labelCls}>Preferred Callback Time</legend>
+                    <div className="grid grid-cols-3 gap-2">
+                      {timeSlots.map((slot) => {
+                        const [name, range] = slot.split(' (');
+                        const on = formData.preferredTime === slot;
+                        return (
+                          <label
+                            key={slot}
+                            className={`relative flex cursor-pointer items-center justify-center gap-2 rounded-lg border px-2 py-2 text-center text-[12px] leading-tight transition-all focus-within:ring-2 focus-within:ring-[#C9922E]/40 ${
+                              on ? 'border-[#0F1F45] bg-[#0F1F45] text-white shadow-[0_6px_14px_rgba(15,31,69,0.25)]' : 'border-[#DCE1EA] bg-white text-[#0F1F45] hover:border-[#C9922E]'
+                            }`}
+                          >
+                            <input type="radio" name="preferredTime" value={slot} checked={on} onChange={handleChange} className="sr-only" />
+                            {on && <Clock className="h-4 w-4 shrink-0" />}
+                            <span>
+                              {name}
+                              <span className="block">({range}</span>
+                            </span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </fieldset>
+
+                  {/* Message */}
                   <div>
-                    <label className="block text-xs font-semibold text-[#0F1F45] mb-1 flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-[#2F5BC7]" />
-                      <span>Preferred Callback Time</span>
-                    </label>
-                    <select
-                      name="preferredTime"
-                      value={formData.preferredTime}
-                      onChange={handleChange}
-                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs sm:text-sm outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] cursor-pointer transition-all"
-                    >
-                      {timeSlots.map(slot => (
-                        <option key={slot} value={slot}>
-                          {slot}
-                        </option>
-                      ))}
-                    </select>
+                    <label htmlFor="gc-message" className={labelCls}>Message (Optional)</label>
+                    <input id="gc-message" type="text" name="message" placeholder="Briefly share any specific financial goals or questions." value={formData.message} onChange={handleChange} className={fieldCls} />
                   </div>
 
-                  {/* 6. Message (Optional) */}
-                  <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-[#0F1F45] mb-1">
-                      Message (Optional)
+                  {/* Consent */}
+                  <div className="space-y-1.5 text-[12.5px] text-[#334155]">
+                    <label className="flex cursor-pointer items-center gap-2.5">
+                      <input type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} className="h-4 w-4 rounded border-[#1A3170] text-[#0F1F45] focus:ring-[#C9922E]" />
+                      <span>I agree to the <a href="/contact" className="font-medium text-[#1A56DB] underline">Terms &amp; Conditions</a> and <a href="/contact" className="font-medium text-[#1A56DB] underline">Privacy Policy</a>.</span>
                     </label>
-                    <textarea
-                      name="message"
-                      rows={1}
-                      placeholder="Specify any questions regarding retirement, SIP, tax or investments..."
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 text-xs outline-none bg-[#FFFFFF]/40 focus:bg-white text-[#0F1F45] resize-none transition-all"
-                    />
-                  </div>
-
-                  {/* Checkboxes */}
-                  <div className="sm:col-span-2 flex flex-wrap gap-x-5 gap-y-1.5 text-[11px] text-[#475569]">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        name="agreeTerms"
-                        checked={formData.agreeTerms}
-                        onChange={handleChange}
-                        className="rounded border-[#2F5BC7] text-[#2F5BC7] focus:ring-[#2F5BC7]"
-                      />
-                      <span>I agree to the <a href="/contact" className="text-[#1A3170] underline font-medium">Terms & Conditions</a> and <a href="/contact" className="text-[#1A3170] underline font-medium">Privacy Policy</a></span>
-                    </label>
-
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        name="subscribeWhatsapp"
-                        checked={formData.subscribeWhatsapp}
-                        onChange={handleChange}
-                        className="rounded border-[#2F5BC7] text-[#2F5BC7] focus:ring-[#2F5BC7]"
-                      />
-                      <span className="flex items-center gap-1">
-                        Subscribe me for <span className="text-emerald-600 font-semibold flex items-center gap-0.5">💬 WhatsApp</span> notifications
-                      </span>
+                    <label className="flex cursor-pointer items-center gap-2.5">
+                      <input type="checkbox" name="subscribeWhatsapp" checked={formData.subscribeWhatsapp} onChange={handleChange} className="h-4 w-4 rounded border-[#1A3170] text-[#0F1F45] focus:ring-[#C9922E]" />
+                      <span>Subscribe me for confidential updates &amp; insights.</span>
                     </label>
                   </div>
 
-                  {/* Single Strong CTA Button */}
-                  <div className="sm:col-span-2 pt-1">
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="gold-glow-button w-full py-3 rounded-full text-white font-bold text-sm sm:text-base tracking-wide flex items-center justify-center space-x-2 cursor-pointer shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
-                    >
-                      {loading ? (
-                        <Loader2 className="w-4.5 h-4.5 animate-spin text-white" />
-                      ) : (
-                        <Send className="w-4.5 h-4.5" />
-                      )}
-                      <span>{loading ? 'Submitting Details...' : 'Book Free Consultation'}</span>
-                    </button>
-                    <p className="text-[11px] text-center text-[#64748B] mt-2 flex items-center justify-center gap-1">
-                      <Lock className="w-3.5 h-3.5 text-[#2F5BC7]" />
-                      <span>Your details stay private. No spam.</span>
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-gradient-to-r from-[#0A1836] to-[#15296A] px-6 py-3.5 text-[15px] font-bold text-white shadow-[0_10px_24px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_14px_30px_rgba(15,31,69,0.4)] disabled:opacity-60"
+                  >
+                    {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <CalendarDays className="h-5 w-5 text-[#E6C27A]" />}
+                    <span style={serif}>{loading ? 'Submitting Details...' : 'Request Private Consultation'}</span>
+                    {!loading && <ArrowRight className="h-4 w-4" />}
+                  </button>
+
+                  <div className="flex items-start gap-3 rounded-lg bg-[#EAF1FC] p-3 text-[12.5px] leading-snug text-[#1E293B]">
+                    <Info className="mt-0.5 h-[18px] w-[18px] shrink-0 text-[#1A3170]" />
+                    <p>
+                      <strong>Note:</strong> Solahana operates strictly as a consultative Family Office platform. All initial strategy sessions are complimentary diagnostics structured under professional CWM® standards.
                     </p>
                   </div>
-
                 </form>
               )}
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>

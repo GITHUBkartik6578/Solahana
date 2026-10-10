@@ -61,6 +61,7 @@ import RealEstatePage from './pages/invest/RealEstatePage';
 import LifeStagesSection from './components/LifeStagesSection';
 import InvestSolutions from './components/InvestSolutions';
 import TaxLegacySection from './components/TaxLegacySection';
+import AboutClosingBanner from './components/about/AboutClosingBanner';
 
 
 
@@ -231,6 +232,8 @@ function AppContent() {
 
         {/* Global Consultation Booking Section before Footer */}
         {showGlobalConsultation && <GlobalConsultationSection />}
+        {/* About page only: closing banner right under the consultation form */}
+        {pathname === '/about' && <AboutClosingBanner />}
         {showGlobalConsultation && <SolahanaChat />}
 
         {/* Shared Footer across pages */}
