@@ -1,8 +1,12 @@
 import amitPandey from '../assets/expert-amit-pandey.webp';
 import amitPandeyAvatar from '../assets/expert-amit-pandey-avatar.webp';
+import abhishekPandey from '../assets/expert-abhishek-pandey.webp';
+import abhishekPandeyAvatar from '../assets/expert-abhishek-pandey-avatar.webp';
 
 // One entry per expert. Add the next expert here and the "Our Experts" page lists them automatically.
 // Only put facts the owner has confirmed.
+// Optional fields (credential, location, qualifications, summary, phone*, whatsapp, hours) can be left out;
+// the page hides whatever an expert does not have.
 export const EXPERTS = [
   {
     id: 'amit-pandey',
@@ -42,5 +46,19 @@ export const EXPERTS = [
     phoneTel: 'tel:+917304442171',
     whatsapp: 'https://wa.me/917304442171?text=' + encodeURIComponent('Hi Amit, I found you on the Solahana website and would like to talk.'),
     hours: 'Monday to Saturday, 10 AM to 7 PM',
+  },
+  {
+    id: 'abhishek-pandey',
+    name: 'Abhishek Pandey',
+    photo: abhishekPandey,
+    avatar: abhishekPandeyAvatar,
+    years: 20,
+    role: 'Risk Planning & Investment Specialist',
+    photoAlt: 'Abhishek Pandey, Risk Planning & Investment Specialist',
+    summary: 'Abhishek Pandey is a Risk Planning & Investment Specialist with 20+ years of experience.',
+    expertise: [
+      { label: 'Risk Planning', to: '/risk-management' },
+      { label: 'Investment Planning', to: '/investments' },
+    ],
   },
 ];
