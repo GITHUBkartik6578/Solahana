@@ -23,11 +23,11 @@ const IMG_W = 710;
 const IMG_H = 782;
 const hotspots = [
   { label: 'Financial Planning', to: '/financial-planning', x: 352, y: 110 },
-  { label: 'Wealth Planning', to: '/goals', x: 109, y: 235 },
-  { label: 'Investment Planning', to: '/investments', x: 100, y: 478 },
+  { label: 'Estate Planning', to: '/estate-planning', x: 109, y: 235 },
+  { label: 'Risk Planning', to: '/risk-management', x: 100, y: 478 },
   { label: 'Tax Planning', to: '/tax-planning', x: 350, y: 612 },
-  { label: 'Risk Planning', to: '/risk-management', x: 606, y: 478 },
-  { label: 'Estate Planning', to: '/estate-planning', x: 600, y: 235 },
+  { label: 'Investment Planning', to: '/investments', x: 606, y: 478 },
+  { label: 'Wealth Planning', to: '/goals', x: 600, y: 235 },
 ];
 
 // The dashed connector from the artwork, redrawn as SVG in the image's pixel space so it can turn.
