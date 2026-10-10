@@ -59,11 +59,11 @@ export default function Navbar() {
     setMobileMenuOpen(false);
     setActiveDropdown(null);
 
-    // Money health check lives on the home page: scroll to it, or go there first
+    // Money health check lives on the Calculators page: scroll to it, or go there first
     if (targetPath === 'health-check') {
-      const el = pathname === '/' && document.getElementById('health-check');
+      const el = pathname === '/calculators' && document.getElementById('health-check');
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      else navigate('/#health-check');
+      else navigate('/calculators#health-check');
       return;
     }
 

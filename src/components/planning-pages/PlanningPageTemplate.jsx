@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 import { openConsultation } from '../../data/whoWeServe';
+import HeroBanner from '../common/HeroBanner';
 
 // Photos cropped from the design mock-ups and upscaled: planning/<page>-<name>.webp
 const ART = import.meta.glob('../../assets/planning/*.webp', { eager: true, import: 'default' });
@@ -52,8 +53,27 @@ function Hero({ cfg }) {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     else consult(cfg);
   };
+  const b = cfg.banner;
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]">
+    <>
+    {/* Optional full-width hero banner (desktop only); its two baked-in buttons get invisible click areas */}
+    {b && (
+      <HeroBanner
+        src={artFile(b.file)}
+        alt={b.alt}
+        ratio={b.ratio}
+        maxVw={b.maxVw}
+        fit={b.fit}
+        minH={b.minH}
+        capped={b.capped}
+        fadeBottom={b.fadeBottom}
+        hotspots={[
+          { label: cfg.primaryCta, onClick: goCalc, style: b.primary },
+          { label: 'Request a Private Consultation', onClick: () => consult(cfg), style: b.secondary },
+        ]}
+      />
+    )}
+    <section className={`relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]${b ? ' lg:hidden' : ''}`}>
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 top-10 h-[480px] w-[480px] rounded-full bg-[#C9922E]/15 blur-[120px]" />
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:min-h-[clamp(520px,calc(100svh-80px),700px)] lg:grid-cols-1 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:max-w-[52%] lg:py-12">
@@ -99,11 +119,14 @@ function Hero({ cfg }) {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="relative mx-auto h-[360px] w-full max-w-[560px] overflow-hidden sm:h-[440px] lg:absolute lg:bottom-0 lg:right-0 lg:top-[80px] lg:h-auto lg:w-[50%] lg:self-stretch lg:max-w-none"
+          className={`${cfg.heroClear ? '[container-type:size] ' : ''}relative mx-auto h-[360px] w-full max-w-[560px] overflow-hidden sm:h-[440px] lg:absolute lg:bottom-0 lg:right-0 lg:top-[80px] lg:h-auto lg:w-[50%] lg:self-stretch lg:max-w-none`}
         >
           {/* soft copy of the photo fills the space beside it */}
-          <img src={heroSrc(cfg)} alt="" aria-hidden="true" draggable="false" className="absolute inset-0 h-full w-full scale-125 object-cover opacity-50 blur-2xl" />
-          <div style={{ aspectRatio: cfg.heroAspect }} className="absolute inset-y-0 right-0 h-full max-w-none [mask-image:linear-gradient(to_right,transparent,black_22%)]">
+          <img src={heroSrc(cfg)} alt="" aria-hidden="true" draggable="false" className={`absolute inset-0 h-full w-full scale-125 object-cover blur-2xl ${cfg.heroClear ? 'opacity-40 [mask-image:linear-gradient(to_right,transparent,black_40%)]' : 'opacity-50'}`} />
+          <div
+            style={cfg.heroClear ? { aspectRatio: cfg.heroAspect, width: `min(100cqw, ${cfg.heroAspect * 100}cqh)` } : { aspectRatio: cfg.heroAspect }}
+            className={`absolute right-0 max-w-none [mask-image:linear-gradient(to_right,transparent,black_22%)] ${cfg.heroClear ? 'bottom-0' : 'inset-y-0 h-full'}`}
+          >
             <img src={heroSrc(cfg)} alt="Amit R. Pandey, Chartered Wealth Manager" draggable="false" className="h-full w-full" />
             {cfg.taglineBox && (
               <p
@@ -116,10 +139,12 @@ function Hero({ cfg }) {
               </p>
             )}
           </div>
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0F1F45] via-transparent to-transparent" />
+          {/* heroClear: the photo already carries its own navy lead-in on the left, so no overlay tints the subject */}
+          {!cfg.heroClear && <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0F1F45] via-transparent to-transparent" />}
         </motion.div>
       </div>
     </section>
+    </>
   );
 }
 
@@ -284,10 +309,17 @@ function Lifecycle({ cfg }) {
 
 function Cta({ cfg }) {
   const c = cfg.cta;
+  const b = c.banner; // optional ready-made banner picture (desktop); smaller screens keep the live-text card below
   return (
     <section className="bg-[#F7F8FB] pb-16 pt-4 sm:pb-20">
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-        <motion.div {...fade} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#1A3170] px-7 py-12 sm:px-12 sm:py-14">
+        {b && (
+          <motion.div {...fade} className="relative hidden overflow-hidden rounded-3xl bg-[#0A1836] lg:block">
+            <img src={artFile(b.file)} alt={b.alt} loading="lazy" draggable="false" style={{ aspectRatio: b.ratio }} className="block h-auto w-full select-none" />
+            <button type="button" onClick={() => consult(cfg)} aria-label={c.button} className="absolute cursor-pointer rounded-full" style={b.hotspot} />
+          </motion.div>
+        )}
+        <motion.div {...fade} className={`relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#1A3170] px-7 py-12 sm:px-12 sm:py-14${b ? ' lg:hidden' : ''}`}>
           <img src={ctaSrc(cfg)} alt="" aria-hidden="true" loading="lazy" draggable="false" className="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[62%] object-cover opacity-95 [mask-image:linear-gradient(to_right,transparent,black_30%)] lg:block" />
           <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-[#C9922E]/25 blur-[90px]" />
           <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
@@ -330,10 +362,11 @@ function Cta({ cfg }) {
 export function PlanningTop({ config, pillarsId }) {
   return (
     <>
-      <Hero cfg={config} />
-      <Philosophy cfg={config} />
-      <Pillars cfg={config} sectionId={pillarsId} />
-      <Stewardship cfg={config} />
+      {config.HeroSection ? <config.HeroSection cfg={config} /> : <Hero cfg={config} />}
+      {config.PhilosophySection ? <config.PhilosophySection cfg={config} /> : <Philosophy cfg={config} />}
+      {/* a page may bring its own versions of these two sections (config.PillarsSection / StewardshipSection) */}
+      {config.PillarsSection ? <config.PillarsSection cfg={config} sectionId={pillarsId} /> : <Pillars cfg={config} sectionId={pillarsId} />}
+      {config.StewardshipSection ? <config.StewardshipSection cfg={config} /> : <Stewardship cfg={config} />}
       <Lifecycle cfg={config} />
     </>
   );

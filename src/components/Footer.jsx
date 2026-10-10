@@ -1,4 +1,5 @@
 import React from 'react';
+import { IMPORTANT_INFORMATION } from '../data/legalPages';
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
@@ -63,14 +64,14 @@ const ABOUT = [
   { name: 'Our Process', icon: Cog, key: 'our-process' },
   { name: 'Our Experts', icon: Award, key: 'our-experts' },
   { name: 'Knowledge Centre', icon: BookOpen, key: 'blogs' },
-  { name: 'Contact Us', icon: Phone, key: 'contact' },
+  { name: 'Contact Us', icon: Phone, key: 'contact-us' },
 ];
 const LEGAL = [
-  { name: 'Privacy Policy', key: 'contact' },
-  { name: 'Terms of Use', key: 'contact' },
-  { name: 'Disclosures', key: 'contact' },
-  { name: 'Grievance Redressal', key: 'contact' },
-  { name: 'Contact', key: 'contact' },
+  { name: 'Privacy Policy', key: 'privacy-policy' },
+  { name: 'Terms of Use', key: 'terms-of-use' },
+  { name: 'Disclosures', key: 'disclosures' },
+  { name: 'Grievance Redressal', key: 'grievance-redressal' },
+  { name: 'Contact', key: 'contact-us' },
 ];
 const SOCIAL = [
   { title: 'LinkedIn', href: 'https://www.linkedin.com/company/solahana', path: 'M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z' },
@@ -89,6 +90,11 @@ const pathMap = {
   investments: '/investments',
   'tax-planning': '/tax-planning',
   contact: '/contact',
+  'contact-us': '/contact-us',
+  'privacy-policy': '/privacy-policy',
+  'terms-of-use': '/terms-of-use',
+  disclosures: '/disclosures',
+  'grievance-redressal': '/grievance-redressal',
   blogs: '/blogs',
   'risk-management': '/risk-management',
   'estate-planning': '/estate-planning',
@@ -260,10 +266,7 @@ export default function Footer() {
                 Important Information
               </h4>
               <p className="mt-0.5 text-[11.5px] leading-snug text-[#AEBBD3]">
-                Solahana provides financial planning services with the expertise of qualified Chartered Wealth Managers (CWM). We work with regulated product partners, including
-                Mutual Fund Distributors, Insurance Partners, Loan Providers, CA &amp; Tax Professionals, Legal Experts and other professionals, as per their respective terms and
-                conditions. Investment products are subject to market risks. Please consider your financial objectives, risk profile and circumstances before making any financial
-                decisions.
+                {IMPORTANT_INFORMATION}
               </p>
             </div>
           </div>

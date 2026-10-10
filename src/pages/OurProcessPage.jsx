@@ -1,199 +1,316 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Phone, Route, Users, SearchCheck, FileText, RefreshCw } from 'lucide-react';
-import ProcessJourney from '../components/our-process/ProcessJourney';
-import PrepChecklist from '../components/our-process/PrepChecklist';
-import ProcessFaq from '../components/our-process/ProcessFaq';
-import { HERO_FACTS, PRINCIPLES, STEPS } from '../data/ourProcess';
+import { motion } from 'framer-motion';
+import {
+  ArrowRight, Play, Users, BarChart3, ShieldCheck, Target, FileText, Settings, Cog, Search, Lightbulb,
+  BookOpen, Scale, CircleCheck, CirclePlus, ChevronRight,
+} from 'lucide-react';
 import { openConsultation } from '../data/whoWeServe';
 
-const EASE = [0.22, 1, 0.36, 1];
-const BOOK = { goal: 'Financial Planning', message: 'I’d like to book the free intro conversation.' };
+// Artwork cropped from the approved design (swap these files for higher-resolution originals, no code change needed)
+import heroArt from '../assets/our-process-hero.webp';
+import step1 from '../assets/our-process-step1.webp';
+import step2 from '../assets/our-process-step2.webp';
+import step3 from '../assets/our-process-step3.webp';
+import step4 from '../assets/our-process-step4.webp';
+import ctaArt from '../assets/our-process-cta.webp';
 
-const STEP_ICONS = [Phone, Users, SearchCheck, FileText, RefreshCw];
+const serif = { fontFamily: "'Cormorant Garamond', 'Playfair Display', Georgia, serif" };
+const BOOK = { goal: 'Financial Planning', message: 'I’d like to book the free first call.' };
 
-/** The five steps as a connected, clickable path (replaces the photo fan). */
-function StepsPath({ reduceMotion }) {
-  const go = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+const fade = {
+  initial: { opacity: 0, y: 22 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-60px' },
+  transition: { duration: 0.55 },
+};
+
+const HERO_CHIPS = [
+  { icon: Users, label: ['Personalised', '& Collaborative'] },
+  { icon: BarChart3, label: ['Objective', '& Transparent'] },
+  { icon: ShieldCheck, label: ['Executed via', 'Regulated Partners'] },
+];
+
+// Milestones on the path, placed on the art (as % of the art). The labels were removed from the picture itself, so they are real, sharp text.
+const MILESTONES = [
+  { lines: ['Your', 'Financial Freedom'], x: 75.2, y: 14.6 },
+  { lines: ['Generational', 'Wealth'], x: 65, y: 30.7 },
+  { lines: ['Secure', 'Retirement'], x: 58, y: 43.2 },
+  { lines: ['Grow', 'Investments'], x: 51, y: 54.5 },
+  { lines: ['Protect', 'Your Family'], x: 63.4, y: 66.7 },
+  { lines: ['Understand', 'Your Goals'], x: 49.6, y: 78.1 },
+];
+
+const STEPS = [
+  {
+    n: '01', title: ['Discovery &', 'Listening'], sub: 'The First Conversation', photo: step1, alt: 'An adviser talking with a client',
+    objIcon: Target, objective: 'Understanding your unique story, aspirations, family milestones, and risk comfort.',
+    doIcon: Users, what: 'We listen actively to your goals—whether it is funding children’s education, scaling a business, or securing a peaceful retirement—ensuring a completely customized approach from day one.',
+  },
+  {
+    n: '02', title: ['Diagnostic', 'Deep-Dive'], sub: 'Financial Health Check', photo: step2, alt: 'Reviewing portfolio analytics on a laptop',
+    objIcon: FileText, objective: 'Rigorous evaluation of your existing cash flows, tax structures, assets, and insurance covers.',
+    doIcon: Search, what: 'Using advanced CWM® diagnostic frameworks, we analyze your portfolio gaps, tax inefficiencies, and risk exposures to identify immediate optimization opportunities.',
+  },
+  {
+    n: '03', title: ['Strategy &', 'Roadmap Architecture'], sub: '', photo: step3, alt: 'A financial plan being drawn on paper',
+    objIcon: BarChart3, objective: 'Designing a transparent, zero-bias master financial plan.',
+    doIcon: Lightbulb, what: 'We create a clear, actionable blueprint encompassing asset allocation, risk mitigation, and estate structuring—tailored specifically to your family’s long-term timeline without any product-pushing pressure.',
+  },
+  {
+    n: '04', title: ['Seamless Execution', '& Ongoing Review'], sub: '', photo: step4, alt: 'A handshake over the city skyline',
+    objIcon: Settings, objective: 'Safe implementation and continuous monitoring.',
+    doIcon: Cog, what: 'All transactional executions are routed strictly through verified SEBI and AMFI-registered institutional channel partners, followed by periodic reviews to adapt your plan as life evolves.',
+  },
+];
+
+const PRINCIPLES = [
+  { icon: BookOpen, title: 'Plain Language', desc: 'Complex financial concepts translated into simple, easy-to-understand terms.' },
+  { icon: Users, title: 'Free First Call', desc: 'Zero-obligation initial consultation to see if we are the right fit for your family.' },
+  { icon: Scale, title: 'Zero Product Bias', desc: 'Objective advice focused purely on what works best for your wealth.' },
+];
+
+const OUTCOMES = [
+  { icon: Target, label: 'Clarity Today' },
+  { icon: CircleCheck, label: 'Better Decisions' },
+  { icon: ShieldCheck, label: 'Long-Term Wealth' },
+  { icon: CirclePlus, label: 'Peace of Mind' },
+];
+
+function Eyebrow({ children, light }) {
   return (
-    <div className="relative mx-auto hidden w-full max-w-[470px] lg:block">
-      <span aria-hidden="true" className="pointer-events-none absolute -inset-6 rounded-[40px] bg-[radial-gradient(closest-side,rgba(230,194,122,0.35),transparent)]" />
-      <ol className="relative space-y-3">
-        <span aria-hidden="true" className="absolute bottom-6 left-[41px] top-6 w-[2px] rounded-full bg-gradient-to-b from-[#E6C27A] via-[#C9922E] to-[#E6C27A]/30" />
-        {STEPS.map((s, i) => {
-          const Icon = STEP_ICONS[i % STEP_ICONS.length];
-          return (
-            <motion.li
-              key={s.id}
-              initial={reduceMotion ? false : { opacity: 0, x: 28 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 + i * 0.1, ease: EASE }}
-              style={{ marginLeft: `${i * 14}px` }}
-              className="relative"
+    <p className={`inline-flex items-center gap-3 font-sora text-[12px] font-bold uppercase tracking-[0.28em] ${light ? 'text-[#E2B24E]' : 'text-[#C9922E]'}`}>
+      {children}
+    </p>
+  );
+}
+
+function GoldBtn({ children, onClick, className = '' }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`group inline-flex cursor-pointer items-center justify-center gap-2 rounded-md bg-gradient-to-r from-[#E6C27A] to-[#C9922E] px-7 py-3.5 text-sm font-bold text-[#0F1F45] shadow-[0_12px_30px_rgba(201,146,46,0.35)] transition-transform hover:-translate-y-0.5 ${className}`}
+    >
+      {children}
+      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+    </button>
+  );
+}
+
+function RoundIcon({ icon: Icon, size = 'h-11 w-11', iconSize = 'h-5 w-5', tone = 'gold' }) {
+  const ring = tone === 'gold' ? 'border-[#E2B24E]/70 text-[#E2B24E]' : 'border-[#C9922E]/50 bg-[#C9922E]/10 text-[#C9922E]';
+  return (
+    <span className={`flex ${size} shrink-0 items-center justify-center rounded-full border ${ring}`}>
+      <Icon className={iconSize} strokeWidth={1.6} />
+    </span>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+function Hero() {
+  const toJourney = () => document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]">
+      <div aria-hidden="true" className="pointer-events-none absolute -left-24 top-24 h-[420px] w-[420px] rounded-full bg-[#C9922E]/10 blur-[120px]" />
+      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-4 lg:px-8">
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:py-14">
+          <Eyebrow light>Our Process</Eyebrow>
+          <h1 style={serif} className="[text-wrap:balance] mt-5 text-[40px] font-semibold leading-[1.06] text-white sm:text-[52px] lg:text-[clamp(44px,4.4vw,64px)]">
+            A Structured Path to <span className="text-[#E2B24E]">Absolute Financial Clarity.</span>
+          </h1>
+          <p className="[text-wrap:pretty] mt-5 max-w-[56ch] text-[15.5px] leading-relaxed text-slate-200 sm:text-[17px]">
+            No complex jargon, no hidden agendas. Our 4-step consultative process is designed to understand your life goals, evaluate your current financial health, and build a resilient, multi-generational roadmap.
+          </p>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <GoldBtn onClick={() => openConsultation(BOOK)}>Start Your Journey</GoldBtn>
+            <button
+              type="button"
+              onClick={toJourney}
+              className="inline-flex cursor-pointer items-center justify-center gap-2.5 rounded-md border border-white/40 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
-              <button
-                type="button"
-                onClick={() => go(s.id)}
-                className="group flex w-full cursor-pointer items-center gap-4 rounded-2xl border border-[#E4D2A6] bg-white/95 px-3.5 py-3 text-left shadow-[0_12px_28px_rgba(15,31,69,0.10)] outline-none backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-[#C9922E] hover:shadow-[0_18px_36px_rgba(201,146,46,0.25)] focus-visible:ring-2 focus-visible:ring-[#C9922E]"
-              >
-                <span className="relative z-10 flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-gradient-to-b from-[#1A3170] to-[#0F1F45] text-[#E6C27A] ring-4 ring-white">
-                  <Icon className="h-[22px] w-[22px]" strokeWidth={1.8} />
-                  <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#E6C27A] font-serif-luxury text-[11px] font-bold text-[#0F1F45]">
-                    {i + 1}
-                  </span>
+              <span className="flex h-6 w-6 items-center justify-center rounded-full border border-[#E2B24E] text-[#E2B24E]">
+                <Play className="h-3 w-3 translate-x-[1px] fill-current" />
+              </span>
+              Watch How It Works
+            </button>
+          </div>
+          <ul className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {HERO_CHIPS.map((c) => (
+              <li key={c.label[0]} className="flex items-center gap-3">
+                <RoundIcon icon={c.icon} size="h-12 w-12" iconSize="h-[22px] w-[22px]" />
+                <span className="text-[13px] font-medium leading-snug text-slate-100">
+                  {c.label[0]}<br />{c.label[1]}
                 </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block font-serif-luxury text-[17px] font-bold leading-tight text-[#0F1F45]">{s.short}</span>
-                  <span className="mt-0.5 block text-[12.5px] leading-snug text-[#64748B]">{s.outcome}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        {/* Hero art: kept at its own aspect ratio so the milestone labels line up on every screen */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="relative mx-auto w-full max-w-[560px] overflow-hidden [container-type:inline-size] lg:mx-0 lg:w-[calc(100%+max(0px,(100vw-1320px)/2)+2rem)] lg:max-w-none [mask-image:linear-gradient(to_right,transparent,black_16%)]"
+          style={{ aspectRatio: '476 / 384' }}
+        >
+          <img src={heroArt} alt="A professional looking up a glowing path to the summit: understand your goals, protect your family, grow investments, secure retirement, generational wealth, financial freedom" draggable="false" className="absolute inset-0 block h-full w-full select-none" />
+          {MILESTONES.map((m) => (
+            <span
+              key={m.lines[0]}
+              className="absolute flex flex-col whitespace-nowrap font-sans font-medium leading-[1.22] text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.9),0_0_2px_rgba(0,0,0,0.8)]"
+              style={{ left: `${m.x}%`, top: `${m.y}%`, fontSize: 'max(9px, 2.5cqw)' }}
+            >
+              <span>{m.lines[0]}</span>
+              <span>{m.lines[1]}</span>
+            </span>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function Journey() {
+  return (
+    <section id="journey" className="scroll-mt-20 bg-[#FEFDF9] pb-16 pt-14 sm:pt-16 lg:pb-20">
+      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+        <motion.div {...fade} className="grid items-end gap-5 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] lg:gap-12">
+          <div>
+            <Eyebrow>The 4-Step Collaborative Journey</Eyebrow>
+            <h2 style={serif} className="[text-wrap:balance] mt-4 text-[34px] font-semibold leading-[1.1] text-[#0F1F45] sm:text-[48px]">
+              From Conversation to Generational Wealth.
+            </h2>
+          </div>
+          <p className="[text-wrap:pretty] max-w-[40ch] text-[15px] leading-relaxed text-[#475569] lg:justify-self-end">
+            A clear, disciplined process to turn your aspirations into a practical, achievable roadmap.
+          </p>
+        </motion.div>
+
+        <ol className="mt-10 grid grid-cols-1 gap-y-4 md:grid-cols-2 xl:grid-cols-4">
+          {STEPS.map((s, i) => (
+            <motion.li
+              key={s.n}
+              {...fade}
+              transition={{ duration: 0.55, delay: i * 0.07 }}
+              className="relative flex flex-col rounded-2xl border border-[#EFE9D8] bg-white/70 px-4 pb-6 pt-5 xl:rounded-none xl:border-0 xl:border-r xl:border-[#EFE9D8] xl:bg-transparent xl:last:border-r-0"
+            >
+              <div className="flex min-h-[84px] items-center gap-4">
+                <span style={serif} className="flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-full border border-[#E6C27A] text-[28px] font-medium leading-none text-[#C9922E]">
+                  {s.n}
                 </span>
-                <ArrowRight className="h-4 w-4 shrink-0 text-[#C9922E] opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100" />
-              </button>
+                <div className="min-w-0">
+                  <h3 style={serif} className="text-[22px] font-semibold leading-[1.1] text-[#0F1F45]">
+                    {s.title[0]}<br />{s.title[1]}
+                  </h3>
+                  {s.sub && <p className="mt-1 text-[13.5px] text-[#475569]">{s.sub}</p>}
+                </div>
+              </div>
+
+              <div className="mt-5 overflow-hidden rounded-lg shadow-[0_10px_26px_rgba(15,31,69,0.16)]">
+                <img src={s.photo} alt={s.alt} loading="lazy" draggable="false" className="block aspect-[225/152] w-full object-cover" />
+              </div>
+
+              <div className="mt-5 flex gap-3">
+                <RoundIcon icon={s.objIcon} size="h-10 w-10" iconSize="h-[18px] w-[18px]" tone="soft" />
+                <div>
+                  <p className="text-[14.5px] font-bold text-[#0F1F45]">Objective</p>
+                  <p className="mt-1 text-[13.5px] leading-relaxed text-[#475569]">{s.objective}</p>
+                </div>
+              </div>
+              <div className="mt-5 flex gap-3">
+                <RoundIcon icon={s.doIcon} size="h-10 w-10" iconSize="h-[18px] w-[18px]" tone="soft" />
+                <div>
+                  <p className="text-[14.5px] font-bold text-[#0F1F45]">What We Do</p>
+                  <p className="mt-1 text-[13.5px] leading-relaxed text-[#475569]">{s.what}</p>
+                </div>
+              </div>
+
+              {/* arrow to the next step */}
+              {i < STEPS.length - 1 && (
+                <span aria-hidden="true" className="absolute -right-3 top-[232px] z-10 hidden h-6 w-6 items-center justify-center text-[#C9922E] xl:flex">
+                  <ChevronRight className="h-6 w-6" strokeWidth={2.4} />
+                </span>
+              )}
             </motion.li>
-          );
-        })}
-      </ol>
-    </div>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function Principles() {
+  return (
+    <section className="bg-[#F7F5EE] py-14 sm:py-16">
+      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+        <motion.div {...fade} className="grid items-end gap-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-12">
+          <div>
+            <Eyebrow>The Solahana Promise</Eyebrow>
+            <h2 style={serif} className="mt-4 text-[34px] font-semibold leading-[1.1] text-[#0F1F45] sm:text-[48px]">Our Core Guiding Principles</h2>
+          </div>
+          <p className="[text-wrap:pretty] max-w-[48ch] text-[15px] leading-relaxed text-[#475569] lg:justify-self-end">
+            These principles are at the heart of everything we do and ensure a trusted, long-term relationship with your family.
+          </p>
+        </motion.div>
+        <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
+          {PRINCIPLES.map((p, i) => (
+            <motion.div
+              key={p.title}
+              {...fade}
+              transition={{ duration: 0.55, delay: i * 0.07 }}
+              className="flex items-center gap-5 rounded-2xl border border-[#EFE9D8] bg-white/80 p-6 shadow-[0_8px_24px_rgba(15,31,69,0.05)]"
+            >
+              <span className="flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#F6D894] to-[#E2A93E] text-[#0F1F45]">
+                <p.icon className="h-8 w-8" strokeWidth={1.8} />
+              </span>
+              <div>
+                <h3 style={serif} className="text-[22px] font-semibold leading-tight text-[#0F1F45]">{p.title}</h3>
+                <p className="mt-1.5 text-[15px] leading-snug text-[#475569]">{p.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Closing() {
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C]">
+      <img src={ctaArt} alt="" aria-hidden="true" loading="lazy" draggable="false" className="pointer-events-none absolute inset-y-0 right-[16%] hidden h-full w-[48%] object-cover [mask-image:linear-gradient(to_right,transparent,black_30%,black_85%,transparent)] lg:block" />
+      <div className="relative mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-10 px-4 py-14 sm:px-6 sm:py-16 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] lg:px-8">
+        <motion.div {...fade}>
+          <Eyebrow light>Your Future. A Clearer Path.</Eyebrow>
+          <h2 style={serif} className="[text-wrap:balance] mt-4 text-[34px] font-semibold leading-[1.08] text-[#E2B24E] sm:text-[48px]">
+            Ready to Take Control of Your Financial Future?
+          </h2>
+          <p className="[text-wrap:pretty] mt-4 max-w-[52ch] text-[16px] leading-relaxed text-slate-100">
+            Start with a simple, confidential, and pressure-free conversation.
+          </p>
+          <GoldBtn onClick={() => openConsultation(BOOK)} className="mt-7">Schedule Your Free Consultation</GoldBtn>
+        </motion.div>
+        <motion.ul {...fade} className="relative grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1 lg:justify-self-end">
+          {OUTCOMES.map((o) => (
+            <li key={o.label} className="flex items-center gap-4">
+              <RoundIcon icon={o.icon} size="h-11 w-11" />
+              <span className="text-[15px] font-semibold text-white">{o.label}</span>
+            </li>
+          ))}
+        </motion.ul>
+      </div>
+    </section>
   );
 }
 
 export default function OurProcessPage() {
-  const reduceMotion = useReducedMotion();
-
   return (
     <div className="relative z-10 bg-white">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#F1F4FA] via-[#F7F8FB] to-white pb-10 pt-24 sm:pb-12 sm:pt-28">
-        <div aria-hidden="true" className="pointer-events-none absolute -top-40 left-[-12%] h-[640px] w-[640px] rounded-full bg-[#2F5BC7]/[0.07] blur-[120px]" />
-        <div aria-hidden="true" className="pointer-events-none absolute right-[2%] top-[8%] h-[360px] w-[360px] rounded-full bg-[#C9A04F]/[0.14] blur-[100px]" />
-
-        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-10 lg:px-8">
-          <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: EASE }}
-          >
-            <p className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#2F5BC7]">
-              <Route className="h-4 w-4 text-[#C9A04F]" />
-              Our process
-            </p>
-            <h1 className="mt-4 font-serif-luxury text-[36px] font-bold leading-[1.08] tracking-[-0.02em] text-[#0F1F45] [text-wrap:balance] sm:text-[52px] lg:text-[56px]">
-              Five steps from first call to <span className="text-[#B8862B]">a plan you can follow.</span>
-            </h1>
-            <span aria-hidden="true" className="mt-5 block h-[4px] w-20 rounded-full" style={{ background: 'var(--grad-gold)' }} />
-            <p className="mt-5 max-w-[52ch] text-[17px] leading-relaxed text-[#475569] sm:text-lg">
-              You always know what happens next, and why. No surprises, and no step you can’t say no to.
-            </p>
-            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2.5">
-              {HERO_FACTS.map((f) => (
-                <li key={f} className="inline-flex items-center gap-2 text-[14px] font-semibold text-[#0F1F45]">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#C9A04F]/20 text-[#A67C2E]">
-                    <Check className="h-3 w-3" strokeWidth={3.2} />
-                  </span>
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <a
-                href="#global-consultation-section"
-                onClick={(e) => {
-                  e.preventDefault();
-                  openConsultation(BOOK);
-                }}
-                className="gold-glow-button group"
-              >
-                <span>Book my free intro call</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-              <a
-                href="#step-1"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('step-1')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }}
-                className="inline-flex items-center gap-2 text-sm font-bold text-[#2F5BC7] underline-offset-4 hover:text-[#1A3170] hover:underline"
-              >
-                See the five steps
-              </a>
-            </div>
-          </motion.div>
-
-          <StepsPath reduceMotion={reduceMotion} />
-        </div>
-      </section>
-
-      <ProcessJourney />
-      <PrepChecklist />
-
-      {/* Principles */}
-      <section className="bg-white py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="max-w-2xl font-serif-luxury text-[28px] font-bold leading-tight text-[#0F1F45] [text-wrap:balance] sm:text-[34px]">
-            Three things stay the same at every step
-          </h2>
-          <span aria-hidden="true" className="mt-4 block h-[3px] w-12 rounded-full" style={{ background: 'var(--grad-gold)' }} />
-
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {PRINCIPLES.map((p) => {
-              const Icon = p.icon;
-              return (
-                <div
-                  key={p.title}
-                  className="rounded-3xl border border-[#E4E8F0] bg-gradient-to-b from-white to-[#F9F6EC] p-7 shadow-[0_1px_2px_rgba(15,31,69,0.04),0_14px_36px_rgba(15,31,69,0.05)]"
-                >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl text-[#0F1F45] shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]" style={{ background: 'var(--grad-gold)' }}>
-                    <Icon className="h-6 w-6" strokeWidth={2.1} />
-                  </span>
-                  <h3 className="mt-5 font-serif-luxury text-[20px] font-bold text-[#0F1F45]">{p.title}</h3>
-                  <p className="mt-2 text-[15.5px] leading-relaxed text-[#475569]">{p.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <ProcessFaq />
-
-      {/* Closing band, leads into the consultation form below */}
-      <section className="bg-ink-band py-16 sm:py-20">
-        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-          <div className="max-w-2xl">
-            <h2 className="font-serif-luxury text-[28px] font-bold leading-tight text-white [text-wrap:balance] sm:text-[38px]">
-              Step 1 is a short, free conversation.
-            </h2>
-            <p className="mt-4 text-[17px] leading-relaxed text-[#C7D2E6]">
-              Tell us where you are today. We’ll tell you honestly whether and how we can help.
-            </p>
-          </div>
-          <div className="flex shrink-0 flex-col gap-4 sm:flex-row sm:items-center">
-            <a
-              href="#global-consultation-section"
-              onClick={(e) => {
-                e.preventDefault();
-                openConsultation(BOOK);
-              }}
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-[#0F1F45] shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-            >
-              Book my free intro call
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
-            <a
-              href="tel:+917304442171"
-              className="inline-flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-semibold text-[#E6C27A] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              <Phone className="h-4 w-4" />
-              Or call +91 73044 42171
-            </a>
-          </div>
-        </div>
-        <div className="mx-auto mt-10 max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Link to="/who-we-serve" className="inline-flex items-center gap-2 text-sm font-semibold text-[#AEBBD3] underline-offset-4 hover:text-white hover:underline">
-            Not sure it’s for you? See who we work with <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
+      <Hero />
+      <Journey />
+      <Principles />
+      <Closing />
     </div>
   );
 }

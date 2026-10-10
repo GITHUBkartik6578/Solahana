@@ -3,8 +3,6 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import BackgroundEffects from './components/BackgroundEffects';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import TrustStrip from './components/TrustStrip';
-import HealthCheck from './components/planning/HealthCheck';
 import ClientStories from './components/ClientStories';
 import FinalCTA from './components/FinalCTA';
 import GlobalConsultationSection from './components/common/GlobalConsultationSection';
@@ -20,6 +18,13 @@ import RiskManagementPage from './pages/RiskManagementPage';
 import EstatePlanningPage from './pages/EstatePlanningPage';
 import WhoWeServePage from './pages/WhoWeServePage';
 import OurProcessPage from './pages/OurProcessPage';
+import LegalPage from './components/legal/LegalPage';
+import HomeSections, { PersonalWelcome, WealthArchitecture } from './components/home/HomeSections';
+import TrustStrip from './components/TrustStrip';
+import LifeStagesSection from './components/LifeStagesSection';
+import InvestSolutions from './components/InvestSolutions';
+import TaxLegacySection from './components/TaxLegacySection';
+import { LEGAL_PAGES } from './data/legalPages';
 import OurExpertsPage from './pages/OurExpertsPage';
 import { CalculatorsPage } from './pages/CalculatorsPage';
 import DashboardPage from './pages/DashboardPage';
@@ -58,9 +63,6 @@ import IpoPage from './pages/invest/IpoPage';
 import PmsAifSifPage from './pages/invest/PmsAifSifPage';
 import RealEstatePage from './pages/invest/RealEstatePage';
 
-import LifeStagesSection from './components/LifeStagesSection';
-import InvestSolutions from './components/InvestSolutions';
-import TaxLegacySection from './components/TaxLegacySection';
 import AboutClosingBanner from './components/about/AboutClosingBanner';
 
 
@@ -70,11 +72,15 @@ function HomePage({ onOpenSearch }) {
     <>
       {/* Full First Screen Hero Section */}
       <Hero onOpenSearch={onOpenSearch} />
+      <PersonalWelcome />
+      <WealthArchitecture />
       <TrustStrip />
       <InvestSolutions />
       <TaxLegacySection />
-      <HealthCheck />
       <LifeStagesSection />
+      {/* Remaining sections of the approved home design (family wealth + founder,
+          process, master plan), just before the Google reviews */}
+      <HomeSections />
       <ClientStories />
     </>
   );
@@ -142,6 +148,11 @@ function AppContent() {
           <Route path="/blogs/:slug" element={<BlogDetailsPage />} />
 
           <Route path="/contact" element={<Navigate to="/about#book" replace />} />
+          <Route path="/privacy-policy" element={<LegalPage page={LEGAL_PAGES.privacy} />} />
+          <Route path="/terms-of-use" element={<LegalPage page={LEGAL_PAGES.terms} />} />
+          <Route path="/disclosures" element={<LegalPage page={LEGAL_PAGES.disclosures} />} />
+          <Route path="/grievance-redressal" element={<LegalPage page={LEGAL_PAGES.grievance} />} />
+          <Route path="/contact-us" element={<LegalPage page={LEGAL_PAGES.contact} />} />
 
           {/* User Dashboard */}
           <Route

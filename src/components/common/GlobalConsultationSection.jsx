@@ -366,7 +366,7 @@ export default function GlobalConsultationSection() {
                   <div className="space-y-1.5 text-[12.5px] text-[#334155]">
                     <label className="flex cursor-pointer items-center gap-2.5">
                       <input type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} className="h-4 w-4 rounded border-[#1A3170] text-[#0F1F45] focus:ring-[#C9922E]" />
-                      <span>I agree to the <a href="/contact" className="font-medium text-[#1A56DB] underline">Terms &amp; Conditions</a> and <a href="/contact" className="font-medium text-[#1A56DB] underline">Privacy Policy</a>.</span>
+                      <span>I agree to the <a href="/terms-of-use" className="font-medium text-[#1A56DB] underline">Terms &amp; Conditions</a> and <a href="/privacy-policy" className="font-medium text-[#1A56DB] underline">Privacy Policy</a>.</span>
                     </label>
                     <label className="flex cursor-pointer items-center gap-2.5">
                       <input type="checkbox" name="subscribeWhatsapp" checked={formData.subscribeWhatsapp} onChange={handleChange} className="h-4 w-4 rounded border-[#1A3170] text-[#0F1F45] focus:ring-[#C9922E]" />
