@@ -6,7 +6,7 @@ export const CONTACT_PHONE = '+91 98200 65944';
 export const CONTACT_PHONE_HREF = 'tel:+919820065944';
 
 export const IMPORTANT_INFORMATION =
-  'Solahana operates as a comprehensive family office, financial planning, and distribution facilitation platform, leveraging the expertise of qualified Chartered Wealth Managers (CWM). We collaborate with regulated institutional partners, AMFI-registered Mutual Fund Distributors, insurance partners, loan providers, CA & tax professionals, legal & estate professionals, and authorized market intermediaries as per their respective terms and conditions. Investment products are subject to market risks. Please read all scheme-related or product-related documents carefully before investing, and evaluate your financial objectives, risk profile, and individual circumstances before making any financial decisions.';
+  'Solahana functions as an integrated family office, financial planning, and distribution facilitation platform. Wealth management products, mutual funds, insurance, and institutional-partnered assets (PMS, AIF, SIF, Bonds, Equity execution) are channeled through authorized group entities, AMFI-registered structures, and registered institutional partners in strict compliance with applicable regulatory frameworks.';
 
 export const LEGAL_PAGES = {
   privacy: {

@@ -8,7 +8,6 @@ import {
   Sprout,
   Umbrella,
   FileText,
-  ShieldCheck,
   Home,
   Target,
   Users,
@@ -34,12 +33,11 @@ const serif = { fontFamily: "'Playfair Display', Georgia, serif" };
 
 const SERVICES = [
   { name: 'Financial Planning', icon: BarChart3, key: 'financial-planning' },
-  { name: 'Wealth Planning', icon: Coins, key: 'goals' },
+  { name: 'Family Wealth Structuring', icon: Coins, key: 'estate-planning' },
   { name: 'Investment Planning', icon: Sprout, key: 'investments' },
   { name: 'Retirement Planning', icon: Umbrella, key: 'retirement' },
-  { name: 'Tax Planning', icon: FileText, key: 'tax-planning' },
-  { name: 'Risk Planning', icon: ShieldCheck, key: 'risk-management' },
-  { name: 'Estate Planning', icon: Home, key: 'estate-planning' },
+  { name: 'Tax & Risk Planning', icon: FileText, key: 'tax-planning' },
+  { name: 'Estate & Succession Planning', icon: Home, key: 'estate-planning' },
   { name: 'Goal Planning', icon: Target, key: 'goals' },
 ];
 // Each link opens its own guide on the Who We Serve page
@@ -47,22 +45,22 @@ const WHO = [
   { name: 'Individuals & Families', icon: Users, key: '/who-we-serve#families' },
   { name: 'Professionals', icon: User, key: '/who-we-serve#salaried' },
   { name: 'Business Owners', icon: Briefcase, key: '/who-we-serve#business-owners' },
-  { name: 'HNI Families', icon: Gem, key: 'who-we-serve' },
+  { name: 'Family Offices & HNI Clients', icon: Gem, key: 'who-we-serve' },
   { name: 'NRIs', icon: Globe, key: '/who-we-serve#nri' },
 ];
-// Partner types: informational only, there is no page for them
+// Partner types: informational only, there is no page for them (sub is the small second line)
 const NETWORK = [
-  { name: 'Mutual Fund Partners', icon: BarChart3 },
-  { name: 'Insurance Partners', icon: Shield },
-  { name: 'Loan & Credit Partners', icon: FileText },
-  { name: 'CA & Tax Professionals', icon: Calculator },
+  { name: 'Mutual Fund & SIP Partners', icon: BarChart3 },
+  { name: 'Insurance Partners', sub: 'Life | Health | General', icon: Shield },
+  { name: 'Loan & Credit Facilities', sub: 'Home | LAP | Business', icon: FileText },
+  { name: 'CA & Tax Specialists', icon: Calculator },
   { name: 'Legal & Estate Professionals', icon: Scale },
-  { name: 'Other Specialists', icon: Users },
+  { name: 'Institutional Solutions', sub: 'PMS | AIF | SIF | Bonds & Corporate FDs | Direct Equity via Partners', icon: Users },
 ];
 const ABOUT = [
   { name: 'Our Approach', icon: Settings, key: 'about' },
   { name: 'Our Process', icon: Cog, key: 'our-process' },
-  { name: 'Our Experts', icon: Award, key: 'our-experts' },
+  { name: 'CWM Expertise', icon: Award, key: 'our-experts' },
   { name: 'Knowledge Centre', icon: BookOpen, key: 'blogs' },
   { name: 'Contact Us', icon: Phone, key: 'contact-us' },
 ];
@@ -129,15 +127,18 @@ export default function Footer() {
     const inner = (
       <>
         <Icon className="w-[18px] h-[18px] shrink-0 text-[#E2B24E]" strokeWidth={1.6} />
-        <span>{item.name}</span>
+        <span>
+          {item.name}
+          {item.sub && <span className="mt-0.5 block text-[11px] leading-snug text-[#AEBBD3]">{item.sub}</span>}
+        </span>
       </>
     );
     return item.key ? (
-      <button onClick={() => go(item.key)} className="flex items-center gap-2.5 text-left text-[13.5px] text-[#D4DCEC] hover:text-[#E2B24E] transition-colors cursor-pointer">
+      <button onClick={() => go(item.key)} className="flex items-start gap-2.5 text-left text-[13.5px] text-[#D4DCEC] hover:text-[#E2B24E] transition-colors cursor-pointer">
         {inner}
       </button>
     ) : (
-      <div className="flex items-center gap-2.5 text-[13.5px] text-[#D4DCEC]">{inner}</div>
+      <div className="flex items-start gap-2.5 text-[13.5px] text-[#D4DCEC]">{inner}</div>
     );
   };
 
@@ -189,7 +190,7 @@ export default function Footer() {
                 <img src={solahanaLogo} alt="SOLAHANA" className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-[1.02]" />
               </span>
             </button>
-            <p className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.3em] text-[#AEBBD3]">Financial Planning Platform</p>
+            <p className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.3em] text-[#AEBBD3]">Family Office &amp; Wealth Platform</p>
 
             <p style={serif} className="mt-3 text-[20px] font-bold leading-[1.14] text-white">
               Plan with <span className="text-[#E2B24E]">Clarity.</span>
@@ -201,8 +202,7 @@ export default function Footer() {
             <span className="mt-3 block h-[2px] w-10 rounded-full bg-[#E2B24E]" />
 
             <p className="mt-2.5 text-[12.5px] text-[#C8D2E6] leading-relaxed max-w-sm">
-              Solahana is a financial planning platform that helps individuals, families, professionals, business owners and HNIs create a comprehensive financial plan with the
-              expertise of Chartered Wealth Managers (CWM).
+              Comprehensive family office and professional financial planning with Chartered Wealth Manager (CWM) expertise, delivering bespoke wealth solutions for generations.
             </p>
 
             <div className="mt-3 flex items-center gap-2.5">
@@ -227,9 +227,9 @@ export default function Footer() {
             <Column title="Who We Serve" items={WHO} />
           </div>
           <div className="xl:border-l xl:border-white/15 xl:px-6">
-            <Column title="Our Professional Network" items={NETWORK}>
+            <Column title="Our Professional Network & Assets" items={NETWORK}>
               <p className="mt-3 text-[11px] leading-snug text-[#AEBBD3]">
-                We work with a network of trusted professionals and product partners, as per their respective terms and conditions, to help you implement your financial plan.
+                We collaborate with trusted professionals and authorized institutional partners across asset classes and advisory segments, subject to their respective terms and conditions, to implement holistic family wealth solutions.
               </p>
             </Column>
           </div>
@@ -263,7 +263,7 @@ export default function Footer() {
             <Shield className="w-7 h-7 shrink-0 text-[#E2B24E]" strokeWidth={1.4} />
             <div>
               <h4 style={serif} className="text-base font-bold text-white">
-                Important Information
+                Professional Disclaimer
               </h4>
               <p className="mt-0.5 text-[11.5px] leading-snug text-[#AEBBD3]">
                 {IMPORTANT_INFORMATION}
