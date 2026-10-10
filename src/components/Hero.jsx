@@ -89,7 +89,15 @@ function MainSlide() {
     <div className="bg-[#FEFDF9] overflow-hidden">
       {/* ONE container, ONE grid: left copy and right artwork are siblings, both centred on the same axis */}
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-6 py-8 xl:grid-cols-2 xl:items-center xl:gap-10 xl:py-0 xl:h-[clamp(460px,calc(100svh-124px),620px)]">
-      <div className="@container w-full text-center xl:text-left">
+      <div className="@container w-full text-center xl:-translate-y-14 xl:text-left">
+        <p className="mb-4 flex items-center justify-center gap-4 font-sora font-medium uppercase leading-[1.5] tracking-[0.3em] text-[#9A7220] text-[length:clamp(10px,2.5cqw,19px)] xl:justify-start">
+          <span>
+            Welcome to
+            <br />
+            Solahana Wealth Architecture
+          </span>
+          <span aria-hidden="true" className="hidden h-px w-[12%] shrink-0 bg-[#C9922E]/60 sm:block" />
+        </p>
                   <h1
           style={serif}
           className="text-[length:clamp(20px,6.6cqw,64px)] font-bold leading-[1.12] tracking-[-0.01em] text-[#0F1F45]"
