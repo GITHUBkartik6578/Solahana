@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  HeartPulse,
+  Heart,
   ChevronDown, 
   Menu, 
   X, 
@@ -403,24 +403,17 @@ export default function Navbar() {
                   </button>
                 )}
 
-                {/* Primary CTA: free money health check on the home page */}
+                {/* Primary CTA: free money health check */}
                 <button
                   onClick={(e) => handleNavClick(e, 'health-check')}
-                  style={{ background: 'var(--grad-brand)' }}
-                  className="ml-5 lg:ml-5.5 xl:ml-6 group relative flex items-center gap-3 rounded-full pl-3 pr-5 py-1.5 text-left text-white shadow-[0_8px_22px_rgba(26,49,112,0.32)] whitespace-nowrap shrink-0 cursor-pointer transition-transform hover:scale-[1.03]"
+                  className="ml-5 lg:ml-5.5 xl:ml-6 group flex items-center gap-3 rounded-full bg-[#0F1F45] pl-4 pr-4 py-2 text-left text-white shadow-[0_8px_22px_rgba(15,31,69,0.3)] whitespace-nowrap shrink-0 cursor-pointer transition-transform hover:scale-[1.03]"
                 >
-                  <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-white/15 ring-1 ring-white/25">
-                    <HeartPulse className="w-4 h-4 text-[#F1C877]" />
-                    <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
-                      <span className="absolute inline-flex h-full w-full rounded-full bg-[#F1C877] opacity-75 animate-ping" />
-                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#F1C877]" />
-                    </span>
+                  <Heart className="w-[18px] h-[18px] shrink-0 text-white/90" strokeWidth={1.7} />
+                  <span className="flex flex-col text-[13px] font-semibold leading-[1.15]">
+                    <span>Check Your</span>
+                    <span>Financial Health</span>
                   </span>
-                  <span className="flex flex-col leading-tight">
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#F1C877]">Free · 2 min · No sign-up</span>
-                    <span className="text-[13px] font-bold">Is your money healthy? Check now</span>
-                  </span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform shrink-0" />
+                  <ArrowRight className="w-4 h-4 shrink-0 group-hover:translate-x-1 transition-transform" />
                 </button>
               </>
             )}
@@ -601,14 +594,10 @@ export default function Navbar() {
 
                 <button
                   onClick={(e) => handleNavClick(e, 'health-check')}
-                  style={{ background: 'var(--grad-brand)' }}
-                  className="w-full rounded-full py-2.5 px-4 text-white flex items-center justify-center gap-3 shadow-md cursor-pointer"
+                  className="w-full rounded-full bg-[#0F1F45] py-3 px-4 text-white flex items-center justify-center gap-3 shadow-md cursor-pointer"
                 >
-                  <HeartPulse className="w-5 h-5 text-[#F1C877] shrink-0" />
-                  <span className="flex flex-col items-start text-left leading-tight">
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#F1C877]">Free · 2 min · No sign-up</span>
-                    <span className="text-[13px] font-bold">Is your money healthy? Check now</span>
-                  </span>
+                  <Heart className="w-5 h-5 shrink-0" strokeWidth={1.7} />
+                  <span className="text-[14px] font-semibold">Check Your Financial Health</span>
                   <ArrowRight className="w-4 h-4 shrink-0" />
                 </button>
               </div>
