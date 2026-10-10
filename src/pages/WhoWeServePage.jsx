@@ -14,7 +14,7 @@ import photoFamilies from '../assets/who-we-serve-families.webp';
 import photoNri from '../assets/who-we-serve-nri.webp';
 import photoBusiness from '../assets/who-we-serve-business.webp';
 import photoSenior from '../assets/who-we-serve-senior.webp';
-import photoFiduciary from '../assets/planning/mf-hero.webp';
+import photoFiduciary from '../assets/who-we-serve-fiduciary.webp';
 import photoCta from '../assets/planning/fp-cta.webp';
 
 const serif = { fontFamily: "'Cormorant Garamond', 'Playfair Display', Georgia, serif" };
@@ -263,7 +263,7 @@ function Fiduciary() {
     <section className="relative overflow-hidden bg-gradient-to-br from-white via-[#F7F8FB] to-[#EEF1F8]">
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
         <div className="relative h-[320px] overflow-hidden sm:h-[420px] lg:ml-[min(0px,calc((1320px-100vw)/2))] lg:h-auto lg:min-h-[560px]">
-          <img src={photoFiduciary} alt="Solahana adviser at his desk" loading="lazy" draggable="false" className="absolute inset-0 h-full w-full origin-[25%_8%] scale-[1.3] object-cover object-[25%_8%]" />
+          <img src={photoFiduciary} alt="Solahana adviser at his desk" loading="lazy" draggable="false" className="absolute inset-0 h-full w-full object-cover object-[60%_15%]" />
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/4 bg-gradient-to-r from-transparent to-[#F7F8FB] lg:block" />
         </div>
         <motion.div {...fade} className="px-4 py-14 sm:px-8 lg:py-20 lg:pl-10 lg:pr-8">

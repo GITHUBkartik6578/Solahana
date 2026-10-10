@@ -2,8 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  ArrowRight, Play, Gem, ChartColumnIncreasing, Users, ShieldCheck, Video, Volume2, Captions, Settings, PictureInPicture2, Maximize, ShieldPlus, Ban, FileText, Handshake, Armchair, Percent, Target,
-  Globe, Earth, Building2, Plus, Coins,
+  ArrowRight, Play, Gem, ChartColumnIncreasing, Users, ShieldCheck, Video, Volume2, Captions, Settings, PictureInPicture2, Maximize, ShieldPlus, Ban, FileText, Handshake, Armchair, Percent,
 } from 'lucide-react';
 import { openConsultation } from '../../data/whoWeServe';
 import founderPhoto from '../../assets/home-founder-card.webp';
@@ -205,24 +204,6 @@ const CONNECTED = [
   { icon: Users, title: 'Estate', sub: 'Preserve for Generations', to: '/estate-planning' },
 ];
 
-const PILLARS = [
-  { icon: Target, label: ['Financial', 'Planning'], to: '/financial-planning' },
-  { icon: ChartColumnIncreasing, label: ['Investment', 'Planning'], to: '/investments' },
-  { icon: Armchair, label: ['Retirement', 'Planning'], to: '/calculators/retirement' },
-  { icon: ShieldPlus, label: ['Risk', 'Planning'], to: '/risk-management' },
-  { icon: Percent, label: ['Tax', 'Planning'], to: '/tax-planning' },
-  { icon: Users, label: ['Estate', 'Planning'], to: '/estate-planning' },
-];
-
-const UNIVERSE = [
-  { icon: ChartColumnIncreasing, label: ['Mutual Funds', '& SIPs'], to: '/invest/mutual-funds' },
-  { icon: Globe, label: ['Direct Equities', '& Global Investing'], to: '/invest/domestic-equity' },
-  { icon: Coins, label: ['PMS, AIF & SIF'], to: '/invest/pms-aif-sif' },
-  { icon: Building2, label: ['Real Estate', '& REITs'], to: '/invest/real-estate' },
-  { icon: FileText, label: ['Bonds, NCDs', '& Fixed Income'], to: '/invest/bonds' },
-  { icon: Earth, label: ['International', 'Investing'], to: '/invest/international-equity' },
-];
-
 /* faint snow-capped range behind the top-right of the header */
 function HeaderMountains() {
   return (
@@ -249,7 +230,7 @@ function HeaderMountains() {
 
 export function WealthArchitecture() {
   return (
-    <section className="bg-white pb-10 pt-8 sm:pt-10">
+    <section className="bg-white pb-2 pt-8 sm:pt-10">
       {/* header: statement + five connected areas */}
       <div className="relative overflow-hidden">
         <HeaderMountains />
@@ -279,45 +260,6 @@ export function WealthArchitecture() {
             ))}
           </ul>
         </div>
-      </div>
-
-      {/* six pillars + investment universe */}
-      <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-5 px-4 sm:px-6 lg:grid-cols-2 lg:gap-6 lg:px-8">
-        <motion.div {...fade} className="rounded-2xl bg-[#0A1836] p-6 shadow-[0_16px_40px_rgba(15,31,69,0.25)]">
-          <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E2B24E]">Our Planning Architectures</p>
-          <h3 style={serif} className="mt-2 text-[28px] font-semibold leading-tight text-white sm:text-[32px]">Six Pillars for a Stronger Financial Life</h3>
-          <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {PILLARS.map((p) => (
-              <li key={p.label[0]}>
-                <Link to={p.to} className="group flex h-full items-center gap-2.5 rounded-md border border-white/15 bg-white/[0.03] px-3 py-4 transition-colors hover:border-[#E2B24E]/60 hover:bg-white/[0.07]">
-                  <p.icon className="h-8 w-8 shrink-0 text-[#F0B94F]" strokeWidth={1.7} />
-                  <span className="flex-1 text-[14px] leading-tight text-white">{p.label[0]}<br />{p.label[1]}</span>
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/70 text-white transition-colors group-hover:border-[#E2B24E] group-hover:bg-[#E2B24E] group-hover:text-[#0A1836]">
-                    <Plus className="h-4 w-4" />
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-
-        <motion.div {...fade} className="rounded-2xl border border-[#EEE9DD] bg-[#FEFDFB] p-6 shadow-[0_10px_30px_rgba(15,31,69,0.06)]">
-          <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.3em] text-[#E08A1E]">Our Investment Universe</p>
-          <h3 style={serif} className="mt-2 text-[28px] font-semibold leading-tight text-[#0A1836] sm:text-[32px]">Multiple Opportunities. One Framework.</h3>
-          <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {UNIVERSE.map((u) => (
-              <li key={u.label[0]}>
-                <Link to={u.to} className="group flex h-full items-center gap-2.5 rounded-md border border-[#EEE9DD] bg-white px-3 py-4 transition-shadow hover:shadow-[0_10px_24px_rgba(15,31,69,0.1)]">
-                  <u.icon className="h-8 w-8 shrink-0 text-[#E08A1E]" strokeWidth={1.7} />
-                  <span className="flex-1 text-[13.5px] leading-tight text-[#0A1836]">{u.label[0]}{u.label[1] && <><br />{u.label[1]}</>}</span>
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#E2B24E] text-[#E08A1E] transition-colors group-hover:bg-[#E2B24E] group-hover:text-[#0A1836]">
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
       </div>
     </section>
   );

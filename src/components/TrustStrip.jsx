@@ -65,7 +65,7 @@ const SERVICES = [
 
 export default function TrustStrip() {
   return (
-    <section className="relative z-20 py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white via-[#FBF8F3] to-white overflow-hidden">
+    <section className="relative z-20 pb-16 pt-8 sm:pb-20 lg:pb-24 lg:pt-10 bg-gradient-to-b from-white via-[#FBF8F3] to-white overflow-hidden">
       <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <motion.div
