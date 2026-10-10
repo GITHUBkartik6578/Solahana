@@ -399,20 +399,20 @@ function FamilyAndProcessLive() {
         {/* sizes below scale with the column width (container query units) so nothing can overflow or collide with the card */}
         <motion.div {...fade} className="@container py-2">
           <p className="font-sora text-[12.5px] font-bold uppercase tracking-[0.34em] text-[#E08A1E] sm:text-[13px]">Beyond Investments</p>
-          <h2 style={{ ...serif, fontSize: 'clamp(32px, 6.4cqw, 54px)' }} className="mt-3 font-semibold leading-[1.05] text-[#0A1836]">
+          <h2 style={{ ...serif, fontSize: 'clamp(28px, 5.4cqw, 44px)' }} className="mt-3 font-semibold leading-[1.05] text-[#0A1836]">
             Family Wealth. For Generations.
           </h2>
-          <ul className="mt-7 grid grid-cols-2 gap-x-2 gap-y-7 sm:grid-cols-5 sm:gap-y-0">
+          <ul className="mt-5 grid grid-cols-2 gap-x-2 gap-y-7 sm:grid-cols-5 sm:gap-y-0">
             {FAMILY.map((f, i) => (
               <li key={f.label[0]} className={`sm:px-0.5 ${i > 0 ? 'sm:border-l sm:border-[#EEE9DD]' : ''}`}>
                 <Link to={f.to} className="group flex h-full flex-col items-center text-center">
                   <span
-                    style={{ width: 'clamp(64px, 13cqw, 86px)', height: 'clamp(64px, 13cqw, 86px)' }}
+                    style={{ width: 'clamp(52px, 10.5cqw, 68px)', height: 'clamp(52px, 10.5cqw, 68px)' }}
                     className={`flex items-center justify-center text-[#E08A1E] transition-transform group-hover:-translate-y-1 ${f.bare ? '' : 'rounded-full border border-[#F0C98A] bg-[#FFF7EA]'}`}
                   >
                     {f.icon(f.bare ? 'h-[72%] w-[72%]' : 'h-[46%] w-[46%]')}
                   </span>
-                  <span style={{ fontSize: 'clamp(12px, 2.35cqw, 15px)' }} className="mt-3 whitespace-nowrap leading-snug text-[#0A1836]">{f.label[0]}<br />{f.label[1]}</span>
+                  <span style={{ fontSize: 'clamp(11.5px, 2.1cqw, 14px)' }} className="mt-3 whitespace-nowrap leading-snug text-[#0A1836]">{f.label[0]}<br />{f.label[1]}</span>
                 </Link>
               </li>
             ))}
@@ -422,7 +422,7 @@ function FamilyAndProcessLive() {
         <motion.div {...fade} className="@container relative isolate overflow-hidden rounded-xl bg-[#0A1836] shadow-[0_16px_40px_rgba(15,31,69,0.28)]">
           {/* founder portrait, bottom-right, fading into the navy */}
           <div
-            className="absolute bottom-0 right-0 -z-10 hidden w-[50%] sm:block"
+            className="absolute bottom-0 right-0 -z-10 hidden w-[42%] sm:block"
             style={{
               aspectRatio: '726 / 708',
               WebkitMaskImage: 'linear-gradient(to right, transparent, black 16%), linear-gradient(to bottom, transparent, black 8%)',
@@ -431,24 +431,24 @@ function FamilyAndProcessLive() {
               maskComposite: 'intersect',
             }}
           >
-            <img src={founderPhoto} alt="Amit R. Pandey, Chartered Wealth Manager" loading="lazy" draggable="false" className="h-full w-full object-cover" />
+            <img src={founderPhoto} alt="Amit R. Pandey, Chartered Wealth Manager" loading="lazy" draggable="false" className="h-full w-full object-cover object-[60%_10%]" />
           </div>
           <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(420px_260px_at_88%_30%,rgba(201,146,46,0.2),transparent_70%)]" />
 
-          <div style={{ minHeight: 'clamp(300px, 56cqw, 380px)' }} className="px-6 pb-7 pt-7 sm:px-8 sm:pb-8">
-            <div className="sm:max-w-[54%]">
+          <div style={{ minHeight: 'clamp(210px, 37cqw, 250px)' }} className="px-5 pb-5 pt-5 sm:px-7 sm:pb-6 sm:pt-6">
+            <div className="sm:max-w-[56%]">
               <p className="font-sora text-[12.5px] font-bold uppercase tracking-[0.34em] text-[#E2B24E] sm:text-[13px]">Founder’s Perspective</p>
-              <blockquote style={{ ...serif, fontSize: 'clamp(22px, 4.5cqw, 32px)' }} className="mt-4 font-medium leading-[1.2] text-white">
+              <blockquote style={{ ...serif, fontSize: 'clamp(18px, 3.5cqw, 25px)' }} className="mt-3 font-medium leading-[1.2] text-white">
                 “My role is not to add more products to your financial life. It is to bring <span className="text-[#F3C95F]">clarity</span> to <span className="text-[#F3C95F]">the decisions</span> that matter.”
               </blockquote>
-              <span className="mt-5 block h-px w-24 bg-[#E2B24E]/60" />
-              <p style={{ ...serif, fontSize: 'clamp(20px, 3.9cqw, 26px)' }} className="mt-4 font-semibold text-white">Amit R. Pandey, CWM<sup className="text-[0.55em] leading-none">®</sup></p>
-              <p style={{ fontSize: 'clamp(11.5px, 2cqw, 14px)' }} className="mt-1 text-white/90">MBA <span className="mx-1 text-white/60">|</span> Ex-Banker <span className="mx-1 text-white/60">|</span> 25+ Years in Financial Services</p>
+              <span className="mt-3 block h-px w-20 bg-[#E2B24E]/60" />
+              <p style={{ ...serif, fontSize: 'clamp(17px, 3cqw, 21px)' }} className="mt-4 font-semibold text-white">Amit R. Pandey, CWM<sup className="text-[0.55em] leading-none">®</sup></p>
+              <p style={{ fontSize: 'clamp(10.5px, 1.9cqw, 13px)' }} className="mt-1 text-white/90">MBA <span className="mx-1 text-white/60">|</span> Ex-Banker <span className="mx-1 text-white/60">|</span> 25+ Years in Financial Services</p>
             </div>
             <button
               type="button"
               onClick={() => navigate('/our-process')}
-              className="group mt-6 inline-flex cursor-pointer items-center justify-center gap-3 rounded-md bg-gradient-to-b from-[#FBE08E] to-[#F3C95F] px-5 py-3.5 text-[15px] font-semibold text-[#0A1836] shadow-[0_8px_22px_rgba(243,201,95,0.35)] transition-transform hover:-translate-y-0.5 sm:absolute sm:bottom-6 sm:right-5 sm:mt-0"
+              className="group mt-6 inline-flex cursor-pointer items-center justify-center gap-3 rounded-md bg-gradient-to-b from-[#FBE08E] to-[#F3C95F] px-4 py-2.5 text-[13px] font-semibold text-[#0A1836] shadow-[0_8px_22px_rgba(243,201,95,0.35)] transition-transform hover:-translate-y-0.5 sm:absolute sm:bottom-5 sm:right-5 sm:mt-0"
             >
               Explore My Approach
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
