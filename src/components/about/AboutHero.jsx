@@ -10,19 +10,19 @@ const IMG_H = 1333;
 // clickable areas drawn over the banner (coordinates on a 2000 x 1333 grid)
 const PLANNING_LINKS = [
   // round icons on the white panel
-  { label: 'Financial Planning', to: '/financial-planning', x: 1031, y: 548, w: 140, h: 170 },
-  { label: 'Investment Planning', to: '/investments', x: 1176, y: 548, w: 140, h: 170 },
-  { label: 'Retirement Planning', to: '/calculators/retirement', x: 1325, y: 548, w: 140, h: 170 },
-  { label: 'Risk Planning', to: '/risk-management', x: 1477, y: 548, w: 140, h: 170 },
-  { label: 'Tax Planning', to: '/tax-planning', x: 1626, y: 548, w: 140, h: 170 },
-  { label: 'Estate Planning', to: '/estate-planning', x: 1780, y: 548, w: 140, h: 170 },
+  { label: 'Financial Planning', to: '/financial-planning', x: 1029, y: 547, w: 143, h: 176 },
+  { label: 'Investment Planning', to: '/investments', x: 1174, y: 547, w: 143, h: 176 },
+  { label: 'Retirement Planning', to: '/calculators/retirement', x: 1323, y: 547, w: 143, h: 176 },
+  { label: 'Risk Planning', to: '/risk-management', x: 1474, y: 547, w: 143, h: 176 },
+  { label: 'Tax Planning', to: '/tax-planning', x: 1624, y: 547, w: 143, h: 176 },
+  { label: 'Estate Planning', to: '/estate-planning', x: 1777, y: 547, w: 143, h: 176 },
   // book spines on the left of the desk
-  { label: 'Financial Planning', to: '/financial-planning', x: 0, y: 691, w: 367, h: 48 },
-  { label: 'Investment Strategy', to: '/investments', x: 0, y: 743, w: 367, h: 48 },
-  { label: 'Risk Management', to: '/risk-management', x: 0, y: 794, w: 367, h: 48 },
-  { label: 'Retirement Planning', to: '/calculators/retirement', x: 0, y: 845, w: 367, h: 48 },
-  { label: 'Tax Planning', to: '/tax-planning', x: 0, y: 896, w: 367, h: 48 },
-  { label: 'Estate Planning', to: '/estate-planning', x: 0, y: 947, w: 367, h: 48 },
+  { label: 'Financial Planning', to: '/financial-planning', x: 0, y: 727, w: 436, h: 57 },
+  { label: 'Investment Strategy', to: '/investments', x: 0, y: 785, w: 436, h: 57 },
+  { label: 'Risk Management', to: '/risk-management', x: 0, y: 844, w: 436, h: 57 },
+  { label: 'Retirement Planning', to: '/calculators/retirement', x: 0, y: 904, w: 436, h: 57 },
+  { label: 'Tax Planning', to: '/tax-planning', x: 0, y: 964, w: 436, h: 57 },
+  { label: 'Estate Planning', to: '/estate-planning', x: 0, y: 1021, w: 436, h: 57 },
 ];
 
 const pct = (v, total) => `${(v / total) * 100}%`;
@@ -40,8 +40,8 @@ export default function AboutHero() {
         <img
           src={aboutHero}
           alt="Amit R. Pandey, Chartered Wealth Manager (CWM), MBA, ex-banker with 25+ years of experience in financial services. Comprehensive financial planning for a secure and prosperous future."
-          width="1600"
-          height="1066"
+          width="1536"
+          height="1024"
           className="block h-auto w-full"
           draggable="false"
         />
