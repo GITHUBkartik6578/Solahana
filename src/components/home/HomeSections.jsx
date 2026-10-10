@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -10,12 +10,8 @@ import founderPhoto from '../../assets/home-founder-card.webp';
 import masterPlanBanner from '../../assets/master-plan-banner.webp';
 import mountainArt from '../../assets/our-process-hero.webp';
 
-// Set this to the YouTube / Vimeo link when the welcome video is ready; until then the video card says "Coming soon".
-const WELCOME_VIDEO_URL = '';
-
 const serif = { fontFamily: "'Cormorant Garamond', 'Playfair Display', Georgia, serif" };
 const playfair = { fontFamily: "'Playfair Display', Georgia, serif" };
-const script = { fontFamily: "'Great Vibes', 'Alex Brush', cursive" };
 
 const fade = {
   initial: { opacity: 0, y: 22 },
@@ -49,9 +45,9 @@ function GoldArrowBtn({ children, onClick, className = '' }) {
 /* 2. A personal welcome (video + client-first band)                   */
 /* ------------------------------------------------------------------ */
 const WELCOME_POINTS = [
-  { icon: Gem, label: ['Independent', 'Guidance'] },
-  { icon: ChartColumnIncreasing, label: ['Long-Term', 'Perspective'] },
-  { icon: Users, label: ['Family-Centric', 'Approach'] },
+  { icon: Gem, label: ['Independent', 'Guidance'], desc: 'Objective advice, always in your best interest.' },
+  { icon: ChartColumnIncreasing, label: ['Long-Term', 'Perspective'], desc: 'Plans designed for generations, not just the next quarter.' },
+  { icon: Users, label: ['Family-Centric', 'Approach'], desc: 'Understanding your family’s unique goals and values.' },
 ];
 
 const PLAYER_ICONS = [Captions, Settings, PictureInPicture2, Maximize];
@@ -61,8 +57,7 @@ function VideoCard() {
   return (
     <motion.div
       {...fade}
-      className="relative isolate overflow-hidden rounded-xl bg-[#0A1428] shadow-[0_18px_44px_rgba(15,31,69,0.28)]"
-      style={{ aspectRatio: '16 / 10.6' }}
+      className="relative isolate aspect-[16/10.6] overflow-hidden rounded-xl bg-[#0A1428] shadow-[0_18px_44px_rgba(15,31,69,0.28)] lg:aspect-auto lg:h-full lg:min-h-[300px]"
     >
       {/* blurred study: dark shelves, warm lamp light, plant */}
       <div
@@ -102,50 +97,40 @@ function VideoCard() {
 }
 
 export function PersonalWelcome() {
-  const [soon, setSoon] = useState(false);
-  const watch = () => {
-    if (WELCOME_VIDEO_URL) window.open(WELCOME_VIDEO_URL, '_blank', 'noopener');
-    else setSoon(true);
-  };
   return (
     <>
       <section className="bg-white pt-8 pb-8 sm:pt-10 lg:pt-7 lg:pb-9">
-        <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)_minmax(0,0.5fr)] lg:gap-9 lg:px-8">
+        {/* video, text and points all share the video's height */}
+        <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-stretch gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1fr)_minmax(0,0.55fr)] lg:gap-9 lg:px-8">
           <VideoCard />
 
-          <motion.div {...fade}>
-            <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.28em] text-[#E08A1E]">A Personal Welcome from Solahana</p>
-            <h2 style={playfair} className="[text-wrap:balance] mt-3 text-[32px] font-bold leading-[1.1] text-[#0A1836] sm:text-[40px] lg:text-[clamp(34px,3.1vw,46px)]">
-              Wealth is not about having more products. It is about having a <span className="text-[#E08A1E]">better plan.</span>
+          <motion.div {...fade} className="flex flex-col justify-center">
+            <p className="block border-b border-[#C9922E]/60 pb-2 font-sora text-[11.5px] font-bold uppercase tracking-[0.28em] text-[#B07A1C]">A Personal Welcome from Solahana</p>
+            <h2 style={playfair} className="mt-4 text-[32px] font-bold leading-[1.1] sm:text-[40px] lg:text-[clamp(30px,2.8vw,42px)]">
+              <span className="block text-[#0A1836] [text-wrap:balance]">Wealth is not about having more products.</span>
+              <span className="mt-1 block text-[#C9922E] [text-wrap:balance]">It is about having a better plan.</span>
             </h2>
             <p className="[text-wrap:pretty] mt-4 max-w-[48ch] text-[14.5px] leading-[1.55] text-[#334155] sm:text-[15px]">
               In this short video, I share my approach to wealth planning, our philosophy, and how Solahana works with families to create long-term financial clarity.
             </p>
             <p style={playfair} className="mt-4 text-[20px] font-bold text-[#0A1836]">Amit R. Pandey, CWM<sup className="text-[0.55em] leading-none">®</sup></p>
             <p className="text-[13.5px] text-[#334155]">MBA <span className="mx-1 text-[#0A1836]">|</span> Ex-Banker <span className="mx-1 text-[#0A1836]">|</span> 25+ Years in Financial Services</p>
-            <div className="mt-5 flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                onClick={watch}
-                className="group inline-flex cursor-pointer items-center justify-center gap-3 rounded-md bg-gradient-to-b from-[#FBE08E] to-[#F3C95F] px-6 py-3.5 text-[15px] font-semibold text-[#0A1836] shadow-[0_8px_22px_rgba(243,201,95,0.4)] transition-transform hover:-translate-y-0.5"
-              >
-                Watch the Full Video
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </button>
-              {soon && <span role="status" className="text-[13px] font-semibold text-[#9A7220]">Coming soon</span>}
-            </div>
           </motion.div>
 
-          <motion.div {...fade} className="relative lg:self-center lg:border-l lg:border-[#EEE9DD] lg:py-6 lg:pl-6">
-            <ul className="divide-y divide-[#EEE9DD]">
+          <motion.div {...fade} className="relative lg:border-l lg:border-[#EEE9DD] lg:pl-6">
+            <ul className="flex h-full flex-col justify-between divide-y divide-[#EEE9DD]">
               {WELCOME_POINTS.map((p) => (
-                <li key={p.label[0]} className="flex items-center gap-3.5 py-4 first:pt-0 lg:py-[22px] lg:first:pt-1">
-                  <p.icon className="h-9 w-9 shrink-0 text-[#E08A1E]" strokeWidth={1.6} />
-                  <span className="text-[15px] leading-snug text-[#0A1836]">{p.label[0]}<br />{p.label[1]}</span>
+                <li key={p.label[0]} className="flex flex-1 items-center gap-4 py-4 lg:py-3">
+                  <span className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-[#FBF1E3] text-[#C9922E]">
+                    <p.icon className="h-6 w-6" strokeWidth={1.6} />
+                  </span>
+                  <span>
+                    <span style={playfair} className="block text-[17px] font-semibold leading-snug text-[#0A1836]">{p.label[0]} {p.label[1]}</span>
+                    <span className="mt-0.5 block text-[13px] leading-snug text-[#64748B]">{p.desc}</span>
+                  </span>
                 </li>
               ))}
             </ul>
-            <p style={script} className="mt-4 whitespace-nowrap text-[40px] leading-none text-[#C9922E] lg:mt-6 lg:text-[clamp(30px,2.5vw,44px)]">Amit R. Pandey</p>
           </motion.div>
         </div>
       </section>
