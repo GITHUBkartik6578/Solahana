@@ -122,28 +122,28 @@ function StageCard({ stage, index }) {
     >
       <Link
         to={stage.to}
-        className="group relative flex h-full flex-col overflow-hidden rounded-2xl xl:min-h-[362px] border border-[#E7DFCF] bg-[#FEFDF9] shadow-[0_12px_30px_rgba(15,31,69,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_44px_rgba(15,31,69,0.2)] data-[active=true]:-translate-y-1.5 data-[active=true]:border-[#C9922E] data-[active=true]:shadow-[0_18px_40px_rgba(201,146,46,0.35)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2F5BC7]/25"
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl xl:min-h-[262px] border border-[#E7DFCF] bg-[#FEFDF9] shadow-[0_12px_30px_rgba(15,31,69,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_44px_rgba(15,31,69,0.2)] data-[active=true]:-translate-y-1.5 data-[active=true]:border-[#C9922E] data-[active=true]:shadow-[0_18px_40px_rgba(201,146,46,0.35)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2F5BC7]/25"
       >
         {/* photo + number badge */}
-        <div className="relative h-[104px] w-full overflow-hidden bg-[#F1E9D8]">
+        <div className="relative h-[84px] w-full overflow-hidden bg-[#F1E9D8]">
           <img src={stage.photo} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" draggable="false" />
           <span
             style={serif}
-            className="absolute left-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-[#0F1F45] text-[13px] font-bold text-[#F1D9A3] ring-2 ring-[#C9922E] shadow-[0_4px_10px_rgba(15,31,69,0.35)]"
+            className="absolute left-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#0F1F45] text-[12px] font-bold text-[#F1D9A3] ring-2 ring-[#C9922E] shadow-[0_4px_10px_rgba(15,31,69,0.35)]"
           >
             {String(index + 1).padStart(2, '0')}
           </span>
         </div>
 
-        <div className="flex flex-1 flex-col px-3.5 pb-4 pt-3 text-left">
-          <p style={serif} className="text-[17px] font-bold leading-none text-[#0F1F45]">
+        <div className="flex flex-1 flex-col px-3 pb-3 pt-2.5 text-left">
+          <p style={serif} className="text-[15px] font-bold leading-none text-[#0F1F45]">
             {stage.age}
           </p>
-          <h3 style={serif} className="mt-2 text-[14px] font-bold leading-[1.2] text-[#0F1F45]">
+          <h3 style={serif} className="mt-1.5 text-[12.5px] font-bold leading-[1.15] text-[#0F1F45]">
             {stage.title}
           </h3>
-          <Icon className="mt-3 h-5 w-5 text-[#C9922E]" strokeWidth={1.6} />
-          <p className="mt-2 text-[11.5px] leading-snug text-[#475569]">
+          <Icon className="mt-2 h-4 w-4 text-[#C9922E]" strokeWidth={1.7} />
+          <p className="mt-1.5 text-[10.5px] leading-[1.35] text-[#475569]">
             <span className="font-bold text-[#0F1F45]">Focus: </span>
             {stage.focus}
           </p>
@@ -158,7 +158,7 @@ export default function LifeStagesSection() {
   const wrapRef = useRef(null);
   const gridRef = useRef(null);
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-[#FBF8F3] to-white py-16 sm:py-20 lg:py-24">
+    <section className="relative overflow-hidden bg-gradient-to-b from-white via-[#FBF8F3] to-white py-12 sm:py-14 lg:py-16">
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div
@@ -172,17 +172,17 @@ export default function LifeStagesSection() {
             <span className="h-px w-8 bg-[#C9922E]/60" />
             A plan for every stage of life
           </span>
-          <h2 style={serif} className="mt-5 text-[34px] sm:text-[44px] lg:text-[52px] font-bold leading-[1.08] tracking-tight text-[#0F1F45]">
+          <h2 style={serif} className="mt-3 text-[32px] sm:text-[40px] lg:text-[46px] font-bold leading-[1.05] tracking-tight text-[#0F1F45]">
             From Today
             <span className="block text-[#B8862B]">to Generations</span>
           </h2>
-          <p className="mt-5 text-base sm:text-lg leading-relaxed text-[#475569]">
+          <p className="mt-3 text-[14.5px] sm:text-[15.5px] leading-[1.55] text-[#475569]">
             Comprehensive financial planning across every stage of life — building security, wealth and legacy for you and your family.
           </p>
         </motion.div>
 
         {/* Staircase (desktop) / grid (smaller screens) */}
-        <div ref={wrapRef} className="relative mt-10 xl:-mt-32">
+        <div ref={wrapRef} className="relative mt-8 xl:-mt-36">
           <div ref={gridRef} className="relative grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-8 xl:items-start xl:gap-3.5">
             {STAGES.map((stage, i) => (
               <StageCard key={stage.age} stage={stage} index={i} />
