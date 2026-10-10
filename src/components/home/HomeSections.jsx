@@ -136,7 +136,7 @@ export function PersonalWelcome() {
             </div>
           </motion.div>
 
-          <motion.div {...fade} className="relative lg:self-stretch lg:border-l lg:border-[#EEE9DD] lg:pl-6">
+          <motion.div {...fade} className="relative lg:self-center lg:border-l lg:border-[#EEE9DD] lg:py-6 lg:pl-6">
             <ul className="divide-y divide-[#EEE9DD]">
               {WELCOME_POINTS.map((p) => (
                 <li key={p.label[0]} className="flex items-center gap-3.5 py-4 first:pt-0 lg:py-[22px] lg:first:pt-1">

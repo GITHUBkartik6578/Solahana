@@ -107,7 +107,7 @@ function MainSlide() {
         <div className="mt-7 flex flex-wrap items-center justify-center xl:justify-start gap-3">
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-2.5 rounded-full bg-[#0F1F45] px-6 py-2 text-sm font-medium text-white shadow-[0_10px_30px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_15px_40px_rgba(15,31,69,0.45)]"
+            className="group inline-flex items-center gap-2.5 rounded-full bg-[#0F1F45] min-h-[46px] min-w-[189px] justify-center px-5 py-2 text-[13px] font-semibold text-white shadow-[0_10px_30px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_15px_40px_rgba(15,31,69,0.45)]"
           >
             <span>Get Started</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
