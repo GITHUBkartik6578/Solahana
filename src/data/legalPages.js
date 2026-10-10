@@ -13,48 +13,69 @@ export const LEGAL_PAGES = {
     slug: 'privacy-policy',
     path: '/privacy-policy',
     title: 'Privacy Policy',
-    tagline: 'How we collect, use and protect your information.',
+    tagline: 'Your information is safe with us.',
+    eyebrow: 'Your data. Our responsibility',
     photo: 'mf',
+    design: 'terms', // rendered by TermsLayout (banner + numbered rows)
+    art: 'privacy',
+    card: true,
     sections: [
-      { heading: 'Data Collection', text: 'We collect personal, contact, and financial details strictly for the purpose of custom financial planning, family office structuring, and facilitating connections with appropriate product partners.' },
-      { heading: 'Data Security', text: 'Your data is protected using enterprise-grade security standards and is never sold or unauthorizedly shared with third parties. It is only shared with authorized institutional partners with your explicit consent for product execution.' },
+      { heading: 'Information Collection', icons: ['file', 'number'], text: 'We collect personal information (Name, Phone Number, Email, City) and high-level financial goals strictly to provide tailored wealth diagnostic sessions, family office structuring, and communication.' },
+      { heading: 'Data Protection & Security', icons: ['shield', 'number'], text: 'Your personal and financial data is protected using enterprise-grade encryption and security protocols.' },
+      { heading: 'Data Sharing', icons: ['share', 'number'], text: 'We never sell or trade your personal data to third parties. Data is shared with regulated institutional partners only upon your explicit consent for product execution purposes.' },
+      { heading: 'Your Rights', icons: ['user', 'number'], text: 'You may request access, correction, or deletion of your personal data by contacting us at online@solahana.com.' },
     ],
   },
   terms: {
     slug: 'terms-of-use',
     path: '/terms-of-use',
     title: 'Terms of Use',
-    tagline: 'The terms that apply when you use the Solahana platform.',
+    tagline: 'Our platform, your trust — with complete transparency.',
     photo: 'pms',
+    design: 'terms', // rendered by TermsLayout (artwork banner + numbered rows)
+    art: 'terms',
+    effective: { date: 'October 2026', entity: 'Solahana Wealth Architecture & Family Office' },
     sections: [
-      { heading: 'Acceptance of Terms', text: 'By accessing and using solahana.com, you agree to comply with and be bound by these Terms of Use. If you do not agree, please refrain from using the platform.' },
-      { heading: 'Nature of Services', text: 'Solahana provides financial planning, wealth structuring, and distribution facilitation services. The platform acts as an intermediary connecting clients with registered institutional partners, AMFI-registered distributors, and authorized service providers for product execution.' },
-      { heading: 'No Direct Portfolio Management / Investment Advisory (SEBI Compliance)', text: 'Solahana does not directly manage funds, execute direct portfolio advisory, or provide direct stock-broking services unless explicitly channeled through pre-registered, licensed institutional channel partners and brokers. All direct market executions occur via respective regulated partners.' },
-      { heading: 'Intellectual Property', text: 'All content, trademarks, logos, and branding elements on this website are the intellectual property of Solahana and protected under applicable laws.' },
+      { heading: 'Acceptance of Terms', icons: ['file', 'number'], text: 'By accessing, browsing, or using solahana.com (“Platform”), you acknowledge that you have read, understood, and agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please discontinue using the platform immediately.' },
+      { heading: 'Nature of Platform & Services', icons: ['building', 'users'], text: 'Solahana operates strictly as a consultative family office, wealth architecture, financial planning, and distribution facilitation platform. We assist clients in diagnostic wealth analysis, asset allocation frameworks, tax optimization, risk management, and estate structuring.' },
+      { heading: 'No Direct Custody or Portfolio Management', icons: ['file', 'shield'], text: 'Solahana does not directly manage funds, act as a fund custodian, or execute direct portfolio advisory/stock-broking services unless routed explicitly through pre-registered, licensed institutional channel partners and regulated intermediaries. All capital transactions and market executions occur strictly via respective regulated partners.' },
+      { heading: 'Intellectual Property Rights', icons: ['copyright', 'copyright'], text: 'All content, logos, trademarks, visual graphics, designs, and branding elements displayed on solahana.com are the exclusive intellectual property of Solahana and are protected under applicable copyright and trademark laws.' },
     ],
   },
   disclosures: {
     slug: 'disclosures',
     path: '/disclosures',
-    title: 'Disclosures',
-    tagline: 'How our business model works, stated plainly.',
+    title: 'Regulatory Disclosures',
+    titleAccent: 'Disclosures', // shown in gold
+    eyebrow: 'Transparency',
+    tagline: 'Clear information for informed decisions.',
     photo: 're',
+    design: 'terms', // rendered by TermsLayout (artwork banner + numbered rows)
+    art: 'disclosures',
+    notice: 'Investments are subject to market risks. Please read all scheme-related or product-related documents carefully before investing, and evaluate your financial objectives, risk profile, and individual circumstances before making any financial decisions.',
     sections: [
-      { heading: 'Distribution & Referral Model', text: 'Solahana earns referral, distribution, or facilitation fees from registered product partners, institutional distributors, and financial service providers when clients opt for products through our referred network.' },
-      { heading: 'Partner Execution', text: 'Transactions relating to Mutual Funds, PMS, AIF, SIF, Bonds, and Equities are processed and executed through our authorized institutional partners and regulated intermediaries. Solahana does not hold client funds directly for trading or investment purposes.' },
-      { heading: 'Professional Credentials', text: 'References to Chartered Wealth Manager (CWM) expertise reflect the professional qualifications and core competence of our core planning team, designed to deliver high-end family office advisory frameworks.' },
+      { heading: 'Distribution & Referral Model', icons: ['handshake', 'number'], text: 'Solahana works on a consultative distribution and facilitation model. We earn referral, distribution, or facilitation fees from registered product manufacturers, institutional distributors, and financial service providers when clients opt for products or services through our referred institutional network.' },
+      { heading: 'Institutional Partner Execution', icons: ['chart', 'number'], text: 'Transactions related to Mutual Funds, PMS, AIF, Bonds, Equities, Loans, and Insurance are processed and executed through authorized institutional partners, AMFI-registered distributors, regulated brokers, and licensed financial partners as per their respective terms. Solahana does not collect or hold client funds directly for investment execution.' },
+      { heading: 'Professional Credentials', icons: ['award', 'number'], text: 'References to Chartered Wealth Manager (CWM®) expertise represent the professional qualifications and competence of our core leadership team to deliver institutional-grade family office frameworks.' },
     ],
   },
   grievance: {
     slug: 'grievance-redressal',
     path: '/grievance-redressal',
-    title: 'Grievance Redressal',
-    tagline: 'Reach our Grievance Officer for any concern.',
+    title: 'Grievance Redressal Policy',
+    tagline: 'Your concerns matter to us.',
+    eyebrow: 'We are here to listen',
     photo: 'bonds',
-    sections: [
-      { heading: 'Grievance Officer', text: 'In case of any grievances regarding platform services, facilitation, or coordination with our partner network, you can reach out to our Grievance Officer at online@solahana.com or call us at +91 98200 65944. We ensure timely resolution of all queries in coordination with our respective institutional partners.' },
+    design: 'terms', // rendered by TermsLayout (banner + intro + contact cards)
+    art: 'grievance',
+    intro: 'If you have any queries, concerns, or grievances regarding our platform services, facilitation, or coordination with our institutional partner network, you can reach out to our Grievance Redressal Officer:',
+    sections: [],
+    cards: [
+      { icon: 'user', title: 'Grievance Redressal Officer', text: 'Compliance & Grievance Cell' },
+      { icon: 'mail', title: 'Email', text: 'online@solahana.com', href: 'mailto:online@solahana.com' },
+      { icon: 'phone', title: 'Contact Number', text: '7304442171', href: 'tel:+917304442171', big: true },
+      { icon: 'clock', title: 'Resolution Timeline', text: 'All complaints will be acknowledged within 48 hours and resolved in coordination with respective regulated partners within 15 business days.' },
     ],
-    contactCards: true,
   },
   contact: {
     slug: 'contact-us',
@@ -62,11 +83,8 @@ export const LEGAL_PAGES = {
     title: 'Contact',
     tagline: 'We’re happy to hear from you.',
     photo: 'estate',
-    sections: [
-      { heading: 'Get in Touch', text: 'Write to us or call, and our team will respond. To start a conversation about your plan, you can also book a free consultation.' },
-    ],
-    contactCards: true,
-    bookCta: true,
+    design: 'contact', // rendered by ContactLayout
+    sections: [],
   },
 };
 

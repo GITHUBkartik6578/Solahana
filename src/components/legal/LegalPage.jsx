@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight, Mail, Phone } from 'lucide-react';
 import { openConsultation } from '../../data/whoWeServe';
+import TermsLayout from './TermsLayout';
+import ContactLayout from './ContactLayout';
 import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_HREF, LEGAL_LINKS } from '../../data/legalPages';
 
 import photoMf from '../../assets/planning/mf-hero.webp';
@@ -27,6 +29,8 @@ const serif = { fontFamily: "'Cormorant Garamond', 'Playfair Display', Georgia, 
  * (bold section headings), then links to the other pages.
  */
 export default function LegalPage({ page }) {
+  if (page.design === 'terms') return <TermsLayout page={page} />;
+  if (page.design === 'contact') return <ContactLayout page={page} />;
   const photo = PHOTOS[page.photo] || PHOTOS.mf;
   return (
     <div className="relative z-10 bg-white">
