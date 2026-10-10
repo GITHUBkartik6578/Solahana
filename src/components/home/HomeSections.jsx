@@ -7,7 +7,6 @@ import {
 } from 'lucide-react';
 import { openConsultation } from '../../data/whoWeServe';
 import founderPhoto from '../../assets/home-founder-card.webp';
-import beyondBanner from '../../assets/beyond-investments-banner.webp';
 import masterPlanBanner from '../../assets/master-plan-banner.webp';
 import mountainArt from '../../assets/our-process-hero.webp';
 
@@ -409,7 +408,7 @@ const STEPS = [
 function FamilyAndProcessLive() {
   const navigate = useNavigate();
   return (
-    <section className="bg-white pb-6 pt-4 sm:pt-6 lg:hidden">
+    <section className="bg-white pb-6 pt-4 sm:pt-6">
       {/* family wealth + founder's perspective */}
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-8 lg:px-8">
         {/* sizes below scale with the column width (container query units) so nothing can overflow or collide with the card */}
@@ -438,11 +437,11 @@ function FamilyAndProcessLive() {
         <motion.div {...fade} className="@container relative isolate overflow-hidden rounded-xl bg-[#0A1836] shadow-[0_16px_40px_rgba(15,31,69,0.28)]">
           {/* founder portrait, bottom-right, fading into the navy */}
           <div
-            className="absolute bottom-0 right-0 -z-10 hidden w-[41%] sm:block"
+            className="absolute bottom-0 right-0 -z-10 hidden w-[50%] sm:block"
             style={{
               aspectRatio: '726 / 708',
-              WebkitMaskImage: 'linear-gradient(to right, transparent, black 30%), linear-gradient(to bottom, transparent, black 26%)',
-              maskImage: 'linear-gradient(to right, transparent, black 30%), linear-gradient(to bottom, transparent, black 26%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 16%), linear-gradient(to bottom, transparent, black 8%)',
+              maskImage: 'linear-gradient(to right, transparent, black 16%), linear-gradient(to bottom, transparent, black 8%)',
               WebkitMaskComposite: 'source-in',
               maskComposite: 'intersect',
             }}
@@ -452,7 +451,7 @@ function FamilyAndProcessLive() {
           <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(420px_260px_at_88%_30%,rgba(201,146,46,0.2),transparent_70%)]" />
 
           <div style={{ minHeight: 'clamp(300px, 56cqw, 380px)' }} className="px-6 pb-7 pt-7 sm:px-8 sm:pb-8">
-            <div className="sm:max-w-[60%]">
+            <div className="sm:max-w-[54%]">
               <p className="font-sora text-[12.5px] font-bold uppercase tracking-[0.34em] text-[#E2B24E] sm:text-[13px]">Founder’s Perspective</p>
               <blockquote style={{ ...serif, fontSize: 'clamp(22px, 4.5cqw, 32px)' }} className="mt-4 font-medium leading-[1.2] text-white">
                 “My role is not to add more products to your financial life. It is to bring <span className="text-[#F3C95F]">clarity</span> to <span className="text-[#F3C95F]">the decisions</span> that matter.”
@@ -508,65 +507,8 @@ function FamilyAndProcessLive() {
   );
 }
 
-/* Desktop version: the approved design picture, aligned to the site container, with invisible click areas
-   laid over the icons, the button and the process steps. Tablet / mobile use the live-text version above. */
-const BANNER = { x: 30, y: 40, w: 1570, h: 500 }; // crop of the original 1600x600 design (pixels)
-const box = (x0, y0, x1, y1) => ({
-  left: `${(((x0 - BANNER.x) / BANNER.w) * 100).toFixed(3)}%`,
-  top: `${(((y0 - BANNER.y) / BANNER.h) * 100).toFixed(3)}%`,
-  width: `${(((x1 - x0) / BANNER.w) * 100).toFixed(3)}%`,
-  height: `${(((y1 - y0) / BANNER.h) * 100).toFixed(3)}%`,
-});
-
-const BANNER_LINKS = [
-  { label: 'Family Governance', to: '/estate-planning', style: box(40, 205, 160, 345) },
-  { label: 'Intergenerational Wealth', to: '/estate-planning', style: box(170, 205, 335, 345) },
-  { label: 'Cash Flow Architecture', to: '/financial-planning', style: box(340, 205, 485, 345) },
-  { label: 'Succession Planning', to: '/estate-planning', style: box(490, 205, 635, 345) },
-  { label: 'Business–Personal Wealth Integration', to: '/who-we-serve#business-owners', style: box(640, 205, 800, 345) },
-  { label: 'Explore My Approach', to: '/our-process', style: box(1297, 305, 1569, 357) },
-  { label: 'Our Process: Discover', to: '/our-process', style: box(500, 410, 650, 525) },
-  { label: 'Our Process: Diagnose', to: '/our-process', style: box(688, 410, 838, 525) },
-  { label: 'Our Process: Architect', to: '/our-process', style: box(888, 410, 1024, 525) },
-  { label: 'Our Process: Implement', to: '/our-process', style: box(1078, 410, 1268, 525) },
-  { label: 'Our Process: Steward', to: '/our-process', style: box(1335, 410, 1537, 525) },
-];
-
 export function FamilyAndProcess() {
-  return (
-    <>
-      <section className="hidden bg-white pb-6 pt-6 lg:block">
-        <div className="mx-auto max-w-[1320px] px-8">
-          <h2 className="sr-only">Beyond Investments: Family Wealth. For Generations.</h2>
-          <p className="sr-only">
-            Founder’s Perspective: “My role is not to add more products to your financial life. It is to bring clarity to the decisions that matter.” Amit R. Pandey, CWM®. MBA, Ex-Banker, 25+ years in financial services. Our process: Discover, Diagnose, Architect, Implement, Steward.
-          </p>
-          <div className="relative" style={{ aspectRatio: `${BANNER.w} / ${BANNER.h}` }}>
-            <img
-              src={beyondBanner}
-              alt=""
-              aria-hidden="true"
-              width={BANNER.w}
-              height={BANNER.h}
-              loading="lazy"
-              draggable="false"
-              className="absolute inset-0 h-full w-full select-none"
-            />
-            {BANNER_LINKS.map((l) => (
-              <Link
-                key={l.label}
-                to={l.to}
-                aria-label={l.label}
-                className="absolute rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#E08A1E]"
-                style={l.style}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-      <FamilyAndProcessLive />
-    </>
-  );
+  return <FamilyAndProcessLive />;
 }
 
 /* ------------------------------------------------------------------ */
