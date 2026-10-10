@@ -30,9 +30,10 @@ export const slides = [
     id: 'financial',
     fit: 'contain',
     label: 'Financial Planning',
-    line1: 'Your Money',
-    line2: 'Deserves a Plan.',
-    body: "From today's goals to tomorrow's legacy, a goal-based financial planning approach to help you grow wealth, stay protected, and live the life you aspire for.",
+    eyebrow: 'Solahana Wealth Strategy & Planning',
+    line1: 'Preserve and Scale Your',
+    line2: 'Generational Wealth. Objectively.',
+    longHeading: true,
     route: '/financial-planning',
     image: financialImg,
     alt: 'Person planning finances on a laptop surrounded by goal icons',
@@ -241,7 +242,7 @@ export function PlanningSlide({ slide }) {
         className={`order-2 xl:order-none relative flex justify-center h-[230px] sm:h-[300px] xl:justify-end xl:absolute ${
           slide.fit === 'cover'
             ? 'xl:right-0 xl:top-0 xl:h-full xl:w-[52%]'
-            : 'xl:h-[88%] xl:aspect-[1.2] xl:top-1/2 xl:-translate-y-1/2 xl:right-[max(2rem,calc((100vw-82.5rem)/2+2rem))]'
+            : `${slide.longHeading ? 'xl:h-[76%]' : 'xl:h-[88%]'} xl:aspect-[1.2] xl:top-1/2 xl:-translate-y-1/2 xl:right-[max(2rem,calc((100vw-82.5rem)/2+2rem))]`
         }`}
       >
         <Link
@@ -265,20 +266,22 @@ export function PlanningSlide({ slide }) {
       )}
 
       <div className="order-1 xl:order-none relative z-10 pointer-events-none max-w-[1320px] mx-auto w-full px-4 sm:px-6 lg:px-8 pt-8 pb-4 xl:py-0">
-        <div className="@container pointer-events-auto w-full xl:w-[42%] text-center xl:text-left">
+        <div className={`@container pointer-events-auto w-full text-center xl:text-left ${slide.longHeading ? 'xl:w-[52%]' : 'xl:w-[42%]'}`}>
           <p className="font-sora text-[11px] sm:text-sm font-semibold tracking-[0.14em] text-[#C58A1B] uppercase leading-relaxed">
-            {slide.label}
+            {slide.eyebrow || slide.label}
           </p>
           <h2
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-            className="mt-4 text-[length:clamp(26px,6.8cqw,58px)] font-bold leading-[1.08] tracking-[-0.01em] text-[#0F1F45]"
+            className={`mt-4 font-bold leading-[1.08] tracking-[-0.01em] text-[#0F1F45] ${slide.longHeading ? 'text-[length:clamp(22px,6.2cqw,54px)]' : 'text-[length:clamp(26px,6.8cqw,58px)]'}`}
           >
             <span className="block whitespace-nowrap">{slide.line1}</span>
             <span className="block whitespace-nowrap text-[#C9922E]">{slide.line2}</span>
           </h2>
-          <p className="mt-4 max-w-[520px] mx-auto xl:mx-0 text-sm sm:text-[17px] text-[#55607A] font-inter leading-relaxed">
-            {slide.body}
-          </p>
+          {slide.body && (
+            <p className="mt-4 max-w-[520px] mx-auto xl:mx-0 text-sm sm:text-[17px] text-[#55607A] font-inter leading-relaxed">
+              {slide.body}
+            </p>
+          )}
           <Link
             to={slide.route}
             className="group mt-6 inline-flex items-center gap-3 rounded-full bg-[#0F1F45] min-h-[46px] min-w-[189px] justify-center px-5 py-2 text-[13px] font-semibold text-white shadow-[0_10px_30px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_15px_40px_rgba(15,31,69,0.45)]"
