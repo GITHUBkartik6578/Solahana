@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Percent, Building2, FileText, ShieldCheck, Users } from 'lucide-react';
 
 const serif = { fontFamily: "'Playfair Display', Georgia, serif" };
+const COPPER = '#A9591F';
 
 const STEPS = [
   {
@@ -38,9 +39,8 @@ const STEPS = [
   },
 ];
 
-// desktop staircase geometry (px): each step sits STEP higher than the one before
-const STEP = 54;
-const COL = 20.5; // % between card left edges
+// desktop: cards sit alternately lower / higher, like the approved design (px offsets from the top of the row)
+const OFFSETS = [36, 0, 32, 0, 36];
 
 function StepCard({ step, index }) {
   const Icon = step.icon;
@@ -49,26 +49,33 @@ function StepCard({ step, index }) {
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="h-full"
+      transition={{ duration: 0.45, delay: index * 0.07 }}
+      className="xl:[margin-top:var(--off)]"
+      style={{ '--off': `${OFFSETS[index]}px` }}
     >
       <Link
         to={step.to}
-        className="group relative flex h-full flex-col rounded-2xl border border-[#E4C98F] bg-gradient-to-br from-white via-[#FEFDF9] to-[#FBF3E1] p-5 shadow-[0_14px_32px_rgba(15,31,69,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_44px_rgba(15,31,69,0.2)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2F5BC7]/25"
+        className="group relative flex h-full flex-col rounded-xl border border-[#EFE9E0] bg-white p-4 shadow-[0_10px_28px_rgba(15,31,69,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(15,31,69,0.14)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2F5BC7]/25"
       >
-        <div className="flex items-start justify-between">
-          <span style={serif} className="text-[26px] font-bold leading-none text-[#C9922E]">
-            {String(index + 1).padStart(2, '0')}
-          </span>
-          <Icon className="h-9 w-9 text-[#C9922E]" strokeWidth={1.3} />
-        </div>
-        <span className="mt-2 block h-[2px] w-6 rounded-full bg-[#C9922E]" />
-        <h3 style={serif} className="mt-3 text-[17px] font-bold leading-[1.2] text-[#0F1F45]">
+        {/* icon on a soft peach disc with a pale blue shape behind it */}
+        <span className="relative block h-[46px] w-[72px]">
+          <span aria-hidden="true" className="absolute left-5 top-1.5 h-9 w-11 rounded-r-full bg-[#DFE8FB]" />
+          <span aria-hidden="true" className="absolute left-0 top-0 h-[46px] w-[46px] rounded-full bg-[#FBEADB]" />
+          <Icon className="absolute left-[12px] top-[12px] h-[22px] w-[22px] text-[#0F1F45]" strokeWidth={1.5} />
+        </span>
+        <span style={{ ...serif, color: COPPER }} className="mt-3 block text-[20px] font-medium leading-none">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <span aria-hidden="true" className="mt-2 block h-[2px] w-6 rounded-full" style={{ background: COPPER }} />
+        <h3 style={serif} className="mt-2 text-[16px] font-bold leading-[1.18] text-[#0F1F45]">
           {step.title[0]}
           {step.title[1] && <span className="block">{step.title[1]}</span>}
         </h3>
-        <p className="mt-2 flex-1 text-[12.5px] leading-relaxed text-[#475569]">{step.desc}</p>
-        <span className="mt-4 flex h-8 w-8 items-center justify-center rounded-full border border-[#C9922E] text-[#B8862B] transition-colors group-hover:bg-[#0F1F45] group-hover:text-white">
+        <p className="mt-1.5 flex-1 text-[12px] leading-[1.5] text-[#64748B]">{step.desc}</p>
+        <span
+          className="mt-3 flex h-8 w-8 items-center justify-center rounded-full border transition-colors group-hover:bg-[#0F1F45] group-hover:text-white"
+          style={{ borderColor: COPPER, color: COPPER }}
+        >
           <ArrowRight className="h-4 w-4" />
         </span>
       </Link>
@@ -78,70 +85,58 @@ function StepCard({ step, index }) {
 
 export default function TaxLegacySection() {
   return (
-    <section
-      className="relative overflow-hidden bg-gradient-to-b from-white via-[#F6F8FD] to-white py-14 sm:py-16 lg:py-20"
-      aria-label="Tax and legacy architecture"
-    >
-      <style>{`
-        @media (min-width: 1280px) {
-          .tl-step { left: var(--l); bottom: var(--b); }
-        }
-      `}</style>
-      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
-        <div className="relative xl:h-[650px]">
-          {/* heading */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mx-auto max-w-3xl text-center xl:absolute xl:left-0 xl:top-0 xl:mx-0 xl:w-[50%] xl:max-w-none xl:text-left"
-          >
-            <span className="inline-flex items-center gap-3 font-sora text-[12px] sm:text-[13px] font-bold uppercase tracking-[0.3em] text-[#9A7220]">
-              <span className="h-px w-8 bg-[#C9922E]/60" />
-              Tax &amp; Legacy Architecture
+    <section className="relative overflow-hidden bg-[#FDFBF8] py-8 sm:py-9 lg:py-10" aria-label="Tax and legacy architecture">
+      {/* soft decorative shapes */}
+      <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-28 h-[420px] w-[420px] rounded-full bg-[#E8EFFB]" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-20 top-6 h-[560px] w-[560px] rounded-full border border-[#F1E3D1]" />
+      <div aria-hidden="true" className="pointer-events-none absolute -bottom-36 -left-28 h-[360px] w-[360px] rounded-full bg-[#FCEFE2]" />
+      <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 left-10 h-[420px] w-[620px] rounded-[100%] border border-[#F1E3D1]" />
+
+      <div className="relative mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8">
+        {/* heading */}
+        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+          <span className="inline-flex items-center gap-3 font-sora text-[11px] font-semibold uppercase tracking-[0.26em]" style={{ color: COPPER }}>
+            <span className="h-px w-8" style={{ background: COPPER }} />
+            Tax &amp; Legacy Architecture
+          </span>
+          <h2 style={serif} className="mt-2 text-[28px] font-bold leading-[1.06] tracking-tight text-[#0F2A6B] sm:text-[36px] xl:text-[clamp(32px,3vw,42px)]">
+            Build Wealth.
+            <span className="block">
+              Protect It. <span style={{ color: COPPER }}>Pass It Forward.</span>
             </span>
-            <h2 style={serif} className="mt-4 text-[32px] sm:text-[42px] xl:text-[clamp(34px,3.4vw,46px)] font-bold leading-[1.1] tracking-tight text-[#0F1F45]">
-              Build Wealth.
-              <span className="block xl:whitespace-nowrap">
-                Protect It. <span className="text-[#B8862B]">Pass It Forward.</span>
-              </span>
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base sm:text-[17px] leading-relaxed text-[#475569] xl:mx-0 xl:max-w-[430px]">
-              From tax-efficient structuring to succession, we help you preserve wealth today and transition it with clarity tomorrow.
-            </p>
-          </motion.div>
+          </h2>
+          <p className="mt-2 max-w-[440px] text-[14px] leading-snug text-[#6B7A99] sm:text-[15px]">
+            From tax-efficient structuring to succession, we help you preserve wealth today and transition it with clarity tomorrow.
+          </p>
+        </motion.div>
 
-          {/* steps */}
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:mt-0 xl:block">
-            {STEPS.map((step, i) => (
-              <div key={step.title.join(' ')} className="tl-step xl:absolute xl:h-[280px] xl:w-[19%]" style={{ '--l': `${i * COL}%`, '--b': `${i * STEP}px` }}>
-                <StepCard step={step} index={i} />
-              </div>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mt-10 flex flex-col items-center text-center xl:absolute xl:bottom-2 xl:right-0 xl:mt-0 xl:w-[38%] xl:items-start xl:text-left"
-          >
-            <p style={serif} className="text-[20px] sm:text-[22px] font-bold leading-snug text-[#0F1F45]">
-              Your wealth is more than a portfolio.
-              <span className="block text-[#B8862B]">It is a legacy in the making.</span>
-            </p>
-            <Link
-              to="/tax-planning"
-              className="group mt-5 inline-flex items-center gap-2.5 rounded-full bg-[#0F1F45] px-7 py-3 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_14px_34px_rgba(15,31,69,0.42)]"
-            >
-              Explore Tax &amp; Legacy Planning
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </motion.div>
+        {/* steps */}
+        <div className="mt-5 grid grid-cols-1 items-start gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:mt-1 xl:grid-cols-5">
+          {STEPS.map((step, i) => (
+            <StepCard key={step.title.join(' ')} step={step} index={i} />
+          ))}
         </div>
+
+        {/* closing line + button */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-5 flex flex-col items-center text-center"
+        >
+          <p style={serif} className="text-[18px] font-bold leading-snug text-[#0F2A6B] sm:text-[21px]">
+            Your wealth is more than a portfolio.
+            <span className="block" style={{ color: COPPER }}>It is a legacy in the making.</span>
+          </p>
+          <Link
+            to="/tax-planning"
+            className="group mt-3 inline-flex items-center gap-2.5 rounded-full bg-[#0F2A6B] px-6 py-2.5 text-[13.5px] font-semibold text-white shadow-[0_10px_26px_rgba(15,42,107,0.3)] transition-all hover:bg-[#0F1F45] hover:shadow-[0_14px_34px_rgba(15,31,69,0.42)]"
+          >
+            Explore Tax &amp; Legacy Planning
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
