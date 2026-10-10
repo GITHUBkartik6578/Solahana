@@ -9,6 +9,7 @@ import { scrollToConsultation } from '../utils/consultation';
 const serif = { fontFamily: "'Playfair Display', Georgia, serif" };
 
 const EXPERIENCE_FILTERS = [
+  { id: 'gt20', label: 'Above 20+ Years', test: (y) => y >= 20 },
   { id: 'gt10', label: 'Above 10 Years', test: (y) => y > 10 },
   { id: '5to10', label: 'Between 5 to 10 Years', test: (y) => y >= 5 && y <= 10 },
   { id: '2to4', label: 'Between 2 to 4 Years', test: (y) => y >= 2 && y < 5 },
