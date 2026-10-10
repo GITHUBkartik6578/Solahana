@@ -89,7 +89,7 @@ function MainSlide() {
     <div className="bg-[#FEFDF9] overflow-hidden">
       {/* ONE container, ONE grid: left copy and right artwork are siblings, both centred on the same axis */}
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-6 py-8 xl:grid-cols-2 xl:items-center xl:gap-10 xl:py-0 xl:h-[clamp(460px,calc(100svh-124px),620px)]">
-      <div className="@container w-full text-center xl:-translate-y-14 xl:text-left">
+      <div className="@container w-full text-center xl:-translate-y-8 xl:text-left">
         <p className="mb-4 flex items-center justify-center gap-4 font-sora font-medium uppercase leading-[1.5] tracking-[0.3em] text-[#9A7220] text-[length:clamp(10px,2.5cqw,19px)] xl:justify-start">
           <span>
             Welcome to
@@ -147,7 +147,7 @@ function MainSlide() {
       </div>
       {/* Right column: the artwork keeps its own aspect ratio inside its column */}
       <div className="flex justify-center xl:h-full xl:items-center">
-        <div className="relative aspect-[710/782] w-full max-w-[460px] xl:h-full xl:w-auto xl:max-w-none">
+        <div className="relative aspect-[710/782] w-full max-w-[460px] xl:h-[86%] xl:w-auto xl:max-w-none">
           <img
             src={heroOrbit}
             alt="Six planning areas around the Solahana mascot: financial, wealth, investment, tax, risk and estate planning"
