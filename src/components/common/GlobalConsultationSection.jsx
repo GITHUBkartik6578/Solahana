@@ -4,7 +4,6 @@ import {
   User,
   Mail,
   MapPin,
-  Clock,
   CalendarDays,
   CheckCircle2,
   Loader2,
@@ -29,12 +28,6 @@ const planningInterests = [
   'Custom Wealth Planning',
 ];
 
-const timeSlots = [
-  'Morning (9 AM - 12 PM)',
-  'Afternoon (12 PM - 4 PM)',
-  'Evening (4 PM - 8 PM)',
-];
-
 export default function GlobalConsultationSection() {
   const { user } = useAuth();
 
@@ -44,7 +37,6 @@ export default function GlobalConsultationSection() {
     email: user ? user.email : '',
     city: user ? user.city : '',
     goal: 'Financial Planning',
-    preferredTime: 'Morning (9 AM - 12 PM)',
     message: '',
     agreeTerms: true,
     subscribeWhatsapp: true,
@@ -133,7 +125,6 @@ export default function GlobalConsultationSection() {
         email: formData.email.trim(),
         city: formData.city.trim(),
         goal: formData.goal,
-        preferredTime: formData.preferredTime,
         consultationMode: 'Phone Call',
         message: formData.message.trim(),
       });
@@ -241,7 +232,7 @@ export default function GlobalConsultationSection() {
                   </div>
                   <h4 style={serif} className="text-2xl font-bold text-[#0F1F45]">Consultation Request Received!</h4>
                   <p className="mx-auto max-w-sm text-xs leading-relaxed text-[#475569] sm:text-sm">
-                    Thank you, <strong>{formData.fullName}</strong>. A dedicated SOLAHANA financial planner will contact you at <strong>+91 {formData.phone}</strong> during your selected slot (<strong>{formData.preferredTime}</strong>).
+                    Thank you, <strong>{formData.fullName}</strong>. A dedicated SOLAHANA financial planner will contact you at <strong>+91 {formData.phone}</strong>.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
@@ -316,45 +307,6 @@ export default function GlobalConsultationSection() {
                       <input id="gc-city" type="text" name="city" required placeholder="Mumbai" value={formData.city} onChange={handleChange} className={`${fieldCls} pl-10`} />
                     </div>
                   </div>
-
-                  {/* Planning interest */}
-                  <div>
-                    <label htmlFor="gc-goal" className={labelCls}>Planning Interest <span className="text-red-500">*</span></label>
-                    <div className="relative">
-                      <select id="gc-goal" name="goal" value={formData.goal} onChange={handleChange} className={`${fieldCls} cursor-pointer appearance-none pr-10`}>
-                        {planningInterests.map((interest) => (
-                          <option key={interest} value={interest}>{interest}</option>
-                        ))}
-                      </select>
-                      <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#64748B]" />
-                    </div>
-                  </div>
-
-                  {/* Preferred callback time */}
-                  <fieldset>
-                    <legend className={labelCls}>Preferred Callback Time</legend>
-                    <div className="grid grid-cols-3 gap-2">
-                      {timeSlots.map((slot) => {
-                        const [name, range] = slot.split(' (');
-                        const on = formData.preferredTime === slot;
-                        return (
-                          <label
-                            key={slot}
-                            className={`relative flex cursor-pointer items-center justify-center gap-2 rounded-lg border px-2 py-2 text-center text-[12px] leading-tight transition-all focus-within:ring-2 focus-within:ring-[#C9922E]/40 ${
-                              on ? 'border-[#0F1F45] bg-[#0F1F45] text-white shadow-[0_6px_14px_rgba(15,31,69,0.25)]' : 'border-[#DCE1EA] bg-white text-[#0F1F45] hover:border-[#C9922E]'
-                            }`}
-                          >
-                            <input type="radio" name="preferredTime" value={slot} checked={on} onChange={handleChange} className="sr-only" />
-                            {on && <Clock className="h-4 w-4 shrink-0" />}
-                            <span>
-                              {name}
-                              <span className="block">({range}</span>
-                            </span>
-                          </label>
-                        );
-                      })}
-                    </div>
-                  </fieldset>
 
                   {/* Message */}
                   <div>
