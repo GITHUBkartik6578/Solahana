@@ -11,7 +11,7 @@ const WHATSAPP = 'https://wa.me/917304442171';
 const ADVISOR = 'Amit Pandey';
 const ADVISOR_FIRST = 'Amit';
 
-// WhatsApp link with the message already typed, so a lead reaches the advisor in one tap
+// WhatsApp link with the message already typed, so a lead reaches the planner in one tap
 const waLink = (text) => (text ? `${WHATSAPP}?text=${encodeURIComponent(text)}` : WHATSAPP);
 const bookingSummary = (d) =>
   `Hi ${ADVISOR_FIRST}, I just booked a free consultation on the Solahana website.\n` +
@@ -30,7 +30,7 @@ const MENU = [
 
 const ANSWERS = {
   greet: {
-    text: 'Hi! I’m the Solahana assistant. I can explain how we work, what it costs, or book a free call with an advisor for you.',
+    text: 'Hi! I’m the Solahana assistant. I can explain how we work, what it costs, or book a free call with a financial planner for you.',
     chips: MENU,
   },
   services: {
@@ -54,7 +54,7 @@ const ANSWERS = {
     chips: [{ label: 'Tax planning', to: '/tax-planning' }, { label: 'Book a free call', intent: 'book', goal: 'Tax Planning' }],
   },
   invest: {
-    text: 'We build goal-based SIP portfolios that match your timeline and comfort with risk, then review them regularly. Specific fund choices need your full picture, so that’s done with an advisor, not in chat.',
+    text: 'We build goal-based SIP portfolios that match your timeline and comfort with risk, then review them regularly. Specific fund choices need your full picture, so that’s done with a financial planner, not in chat.',
     chips: [{ label: 'Investments', to: '/investments' }, { label: 'Book a free call', intent: 'book', goal: 'Investment Planning' }],
   },
   retirement: {
@@ -74,17 +74,17 @@ const ANSWERS = {
     chips: [{ label: 'Book a free call', intent: 'book' }, { label: 'Talk to a person', intent: 'human' }],
   },
   human: {
-    text: `You can talk to ${ADVISOR}, our advisor, directly on ${PHONE_DISPLAY}, by call or WhatsApp, Monday to Saturday, 10am to 7pm. Or I can book a free call for you right now.`,
+    text: `You can talk to ${ADVISOR}, our financial planner, directly on ${PHONE_DISPLAY}, by call or WhatsApp, Monday to Saturday, 10am to 7pm. Or I can book a free call for you right now.`,
     actions: true,
     chips: [{ label: 'Book a free call', intent: 'book' }],
   },
   regulatory: {
-    text: 'For registration and regulatory details, please see our Disclosures, or ask the advisor on your call. They’ll walk you through it.',
+    text: 'For registration and regulatory details, please see our Disclosures, or ask the planner on your call. They’ll walk you through it.',
     chips: [{ label: 'Book a free call', intent: 'book' }, { label: 'Talk to a person', intent: 'human' }],
   },
   thanks: { text: 'Happy to help! Anything else?', chips: MENU },
   fallback: {
-    text: 'I don’t have a good answer for that yet. An advisor can help. Shall I book you a free call?',
+    text: 'I don’t have a good answer for that yet. A financial planner can help. Shall I book you a free call?',
     chips: [{ label: 'Book a free call', intent: 'book' }, { label: 'Talk to a person', intent: 'human' }, { label: 'Main menu', intent: 'greet' }],
   },
 };
@@ -93,7 +93,7 @@ const ANSWERS = {
 // and only then generic questions like "how does it work".
 const ACTION_RULES = [
   ['book', /\b(book|call ?back|appointment|consult|schedule|meet)\b/],
-  ['human', /\b(human|person|agent|advis[oe]r|speak to|talk to|contact|phone number|whatsapp)\b/],
+  ['human', /\b(human|person|agent|advis[oe]r|planner|speak to|talk to|contact|phone number|whatsapp)\b/],
 ];
 const TOPIC_RULES = [
   ['tax', /\b(tax|taxes|80c|80d|nps|regime|itr|elss)\b/, 'Tax Planning'],
@@ -257,7 +257,7 @@ export default function SolahanaChat() {
     if (lead.step === 'email') {
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return pushBot({ text: 'Please check that email address, it doesn’t look quite right.', hint: 'lead' }, 300);
       setLead({ ...lead, email: v, step: 'time' });
-      return pushBot({ text: 'When should the advisor call you?', slots: true, hint: 'lead' });
+      return pushBot({ text: 'When should the planner call you?', slots: true, hint: 'lead' });
     }
     return undefined;
   };
