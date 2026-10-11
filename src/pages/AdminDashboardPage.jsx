@@ -29,13 +29,15 @@ import {
   Download,
   Eye,
   FileText,
-  Check
+  Check,
+  HeartPulse
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import adminService from '../services/adminService';
 import blogService from '../services/blogService';
 import newsletterService from '../services/newsletterService';
+import healthCheckService from '../services/healthCheckService';
 
 const GOAL_OPTIONS = [
   'Dream Home',
@@ -70,6 +72,7 @@ export default function AdminDashboardPage() {
     if (location.pathname.includes('/admin/users')) return 'users';
     if (location.pathname.includes('/admin/blogs')) return 'blogs';
     if (location.pathname.includes('/admin/newsletters') || location.pathname.includes('/admin/newsletter')) return 'newsletter';
+    if (location.pathname.includes('/admin/health-checks')) return 'healthchecks';
     return 'dashboard';
   };
 
@@ -81,6 +84,7 @@ export default function AdminDashboardPage() {
     else if (tab === 'users') navigate('/admin/users');
     else if (tab === 'blogs') navigate('/admin/blogs');
     else if (tab === 'newsletter') navigate('/admin/newsletters');
+    else if (tab === 'healthchecks') navigate('/admin/health-checks');
     else navigate(`/admin/${tab}`);
   };
 
@@ -94,6 +98,7 @@ export default function AdminDashboardPage() {
     cancelledConsultations: 0,
     totalBlogs: 0,
     totalSubscribers: 0,
+    totalHealthChecks: 0,
   });
   const [statsLoading, setStatsLoading] = useState(true);
 
@@ -149,6 +154,16 @@ export default function AdminDashboardPage() {
     status: 'published',
   });
 
+  // Health Check Leads State
+  const [healthList, setHealthList] = useState([]);
+  const [healthPagination, setHealthPagination] = useState({ currentPage: 1, totalPages: 1, total: 0 });
+  const [healthLoading, setHealthLoading] = useState(false);
+  const [healthError, setHealthError] = useState('');
+  const [healthSearch, setHealthSearch] = useState('');
+  const [healthStatus, setHealthStatus] = useState('');
+  const [healthPage, setHealthPage] = useState(1);
+  const [expandedHealthId, setExpandedHealthId] = useState(null);
+
   // Newsletter State
   const [subscribersList, setSubscribersList] = useState([]);
   const [subscriberPagination, setSubscriberPagination] = useState({ currentPage: 1, totalPages: 1, totalSubscribers: 0 });
@@ -171,6 +186,7 @@ export default function AdminDashboardPage() {
         cancelledConsultations: data?.cancelledConsultations || 0,
         totalBlogs: data?.totalBlogs || 0,
         totalSubscribers: data?.totalSubscribers || 0,
+        totalHealthChecks: data?.totalHealthChecks || 0,
       });
     } catch (err) {
       console.error('[Fetch Stats Error]:', err);
@@ -315,6 +331,54 @@ export default function AdminDashboardPage() {
     }
   };
 
+  // Fetch Health Check Leads
+  const fetchHealthChecks = async () => {
+    setHealthLoading(true);
+    setHealthError('');
+    try {
+      const res = await healthCheckService.getAll({
+        page: healthPage,
+        limit: 20,
+        search: healthSearch || undefined,
+        status: healthStatus || undefined,
+      });
+      setHealthList(res.entries);
+      setHealthPagination({ currentPage: res.currentPage, totalPages: res.totalPages, total: res.total });
+    } catch (err) {
+      console.error('[Fetch Health Checks Error]:', err);
+      setHealthError(err.response?.data?.message || err.message || 'Failed to fetch health check leads');
+      setHealthList([]);
+    } finally {
+      setHealthLoading(false);
+    }
+  };
+
+  const handleExportHealthCSV = () => {
+    if (healthList.length === 0) {
+      alert('No health check leads to export.');
+      return;
+    }
+    const q = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    const headers = ['Name', 'Phone', 'Status', 'Score', 'Max Score', 'Percent', 'Result', 'Taken On'];
+    const rows = healthList.map((l) => [
+      q(l.fullName),
+      q(l.phone),
+      q(l.status),
+      q(l.score),
+      q(l.maxScore),
+      q(l.percent),
+      q(l.verdict),
+      q(l.createdAt ? new Date(l.createdAt).toLocaleString('en-IN') : ''),
+    ]);
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');
+    const link = document.createElement('a');
+    link.setAttribute('href', encodeURI(csvContent));
+    link.setAttribute('download', `solahana_health_check_leads_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // Initial Load
   useEffect(() => {
     fetchStats();
@@ -333,8 +397,13 @@ export default function AdminDashboardPage() {
     if (activeTab === 'newsletter') {
       fetchSubscribers();
     }
+    if (activeTab === 'healthchecks') {
+      fetchHealthChecks();
+    }
   }, [
     activeTab,
+    healthPage,
+    healthStatus,
     consultationPage,
     statusFilter,
     goalFilter,
@@ -665,6 +734,21 @@ export default function AdminDashboardPage() {
                 <span>Newsletters</span>
               </div>
               <span className="text-[10px] text-[#475569] font-mono">{stats.totalSubscribers}</span>
+            </button>
+
+            <button
+              onClick={() => handleTabChange('healthchecks')}
+              className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all cursor-pointer ${
+                activeTab === 'healthchecks'
+                  ? 'bg-[#1A3170] text-white font-bold shadow-md'
+                  : 'text-[#475569] hover:text-[#0F1F45] hover:bg-[#FFFFFF]'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <HeartPulse className="w-4 h-4" />
+                <span>Health Checks</span>
+              </div>
+              <span className="text-[10px] text-[#475569] font-mono">{stats.totalHealthChecks}</span>
             </button>
           </nav>
         </div>
@@ -1397,6 +1481,188 @@ export default function AdminDashboardPage() {
                   </tbody>
                 </table>
               </div>
+            )}
+          </div>
+        )}
+        {/* ================= TAB: HEALTH CHECKS ================= */}
+        {activeTab === 'healthchecks' && (
+          <div className="space-y-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-3xl bg-[#F7F8FB] border border-[#2F5BC7]/30">
+              <div>
+                <span className="text-[10px] uppercase font-mono text-[#5A7FD6] tracking-widest px-3 py-1 rounded-full bg-[#EEF2FB]">
+                  MONEY HEALTH CHECK LEADS
+                </span>
+                <h2 className="font-serif-luxury text-2xl font-bold text-[#0F1F45] mt-2">
+                  Health Check Leads
+                </h2>
+                <p className="text-xs text-[#5B6B84] mt-1">
+                  See who took the “How healthy is your money?” check, their phone number, score and answers.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={fetchHealthChecks}
+                  className="p-3 rounded-xl bg-[#F7F8FB] hover:bg-[#EEF2FB] border border-[#E4E8F0] text-[#5B6B84] hover:text-[#2F5BC7] cursor-pointer"
+                  title="Refresh"
+                >
+                  <RefreshCw className={`w-4 h-4 ${healthLoading ? 'animate-spin' : ''}`} />
+                </button>
+                <button
+                  onClick={handleExportHealthCSV}
+                  className="gold-glow-button px-5 py-3 rounded-xl text-xs font-bold text-[#0F1F45] flex items-center gap-2 cursor-pointer shadow-lg"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Export CSV</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Search + status filter */}
+            <div className="p-5 rounded-2xl bg-[#F7F8FB]/70 border border-[#2F5BC7]/20">
+              <form
+                onSubmit={(e) => { e.preventDefault(); if (healthPage === 1) fetchHealthChecks(); else setHealthPage(1); }}
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
+              >
+                <div className="relative flex-1">
+                  <Search className="w-4 h-4 text-[#5B6B84] absolute left-4 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    placeholder="Search by name or phone..."
+                    value={healthSearch}
+                    onChange={(e) => setHealthSearch(e.target.value)}
+                    className="w-full bg-[#FFFFFF] border border-[#E4E8F0] focus:border-[#2F5BC7] rounded-xl py-2.5 pl-11 pr-4 text-[#0F1F45] text-xs placeholder-[#94A3B8] focus:outline-none"
+                  />
+                </div>
+                <select
+                  value={healthStatus}
+                  onChange={(e) => { setHealthStatus(e.target.value); setHealthPage(1); }}
+                  className="bg-[#FFFFFF] border border-[#E4E8F0] rounded-xl py-2.5 px-4 text-[#0F1F45] text-xs focus:outline-none cursor-pointer"
+                >
+                  <option value="">All statuses</option>
+                  <option value="completed">Completed</option>
+                  <option value="started">Started (not finished)</option>
+                </select>
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 rounded-xl bg-[#1A3170] text-white font-bold text-xs shadow hover:bg-[#5A7FD6] cursor-pointer"
+                >
+                  Search
+                </button>
+              </form>
+            </div>
+
+            {healthLoading ? (
+              <div className="py-20 text-center rounded-2xl bg-[#F7F8FB]/40 border border-[#E4E8F0]">
+                <Loader2 className="w-8 h-8 animate-spin mx-auto text-[#2F5BC7]" />
+                <p className="text-xs text-[#5B6B84] mt-3 font-mono">Fetching health check leads...</p>
+              </div>
+            ) : healthError ? (
+              <div className="p-8 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs text-center space-y-3">
+                <p className="font-semibold">{healthError}</p>
+                <button onClick={fetchHealthChecks} className="px-4 py-2 rounded-xl bg-red-500/20 text-[#0F1F45] font-bold cursor-pointer">
+                  Retry
+                </button>
+              </div>
+            ) : healthList.length === 0 ? (
+              <div className="py-16 text-center rounded-2xl bg-[#F7F8FB]/40 border border-[#E4E8F0]">
+                <p className="text-[#5B6B84] text-xs">No health check leads yet.</p>
+              </div>
+            ) : (
+              <>
+                <div className="overflow-x-auto rounded-2xl border border-[#2F5BC7]/25 shadow-2xl bg-[#F7F8FB]/90">
+                  <table className="w-full text-left text-xs text-[#334155]">
+                    <thead className="bg-[#FFFFFF] text-[#0F1F45] uppercase text-[10px] tracking-wider border-b border-[#2F5BC7]/20">
+                      <tr>
+                        <th className="py-4 px-4 font-bold">Name</th>
+                        <th className="py-4 px-4 font-bold">Phone</th>
+                        <th className="py-4 px-4 font-bold">Status</th>
+                        <th className="py-4 px-4 font-bold">Score</th>
+                        <th className="py-4 px-4 font-bold">Result</th>
+                        <th className="py-4 px-4 font-bold">Taken On</th>
+                        <th className="py-4 px-4 font-bold text-right">Answers</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#E4E8F0]">
+                      {healthList.map((lead) => {
+                        const done = lead.status === 'completed';
+                        const open = expandedHealthId === lead._id;
+                        return (
+                          <React.Fragment key={lead._id}>
+                            <tr className="hover:bg-[#EEF2FB] transition-colors">
+                              <td className="py-4 px-4 font-semibold text-[#0F1F45]">{lead.fullName}</td>
+                              <td className="py-4 px-4">
+                                <a href={`tel:+91${lead.phone}`} className="font-mono text-[#1A3170] hover:underline">{lead.phone}</a>
+                              </td>
+                              <td className="py-4 px-4">
+                                <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase font-mono border ${done ? 'bg-emerald-500/20 text-emerald-600 border-emerald-500/40' : 'bg-amber-500/20 text-amber-600 border-amber-500/40'}`}>
+                                  {done ? 'Completed' : 'Started'}
+                                </span>
+                              </td>
+                              <td className="py-4 px-4 font-mono">{done ? `${lead.score}/${lead.maxScore} (${lead.percent}%)` : '—'}</td>
+                              <td className="py-4 px-4 text-[#475569]">{done ? lead.verdict : 'Did not finish'}</td>
+                              <td className="py-4 px-4 text-[#5B6B84]">
+                                {lead.createdAt ? new Date(lead.createdAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) : 'N/A'}
+                              </td>
+                              <td className="py-4 px-4 text-right">
+                                {done && lead.answers?.length > 0 ? (
+                                  <button
+                                    onClick={() => setExpandedHealthId(open ? null : lead._id)}
+                                    className="px-3 py-1 rounded-lg border border-[#2F5BC7]/30 text-[#1A3170] font-semibold hover:bg-[#EEF2FB] cursor-pointer"
+                                  >
+                                    {open ? 'Hide' : 'View'}
+                                  </button>
+                                ) : (
+                                  <span className="text-[#94A3B8]">—</span>
+                                )}
+                              </td>
+                            </tr>
+                            {open && (
+                              <tr className="bg-[#FFFFFF]">
+                                <td colSpan={7} className="px-6 py-4">
+                                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    {lead.answers.map((a) => (
+                                      <li key={a.questionId} className="rounded-xl border border-[#E4E8F0] bg-[#F7F8FB] p-3">
+                                        <p className="text-[10px] uppercase tracking-wider text-[#5A7FD6] font-mono">{a.area || a.questionId}</p>
+                                        <p className="mt-0.5 font-semibold text-[#0F1F45]">{a.question}</p>
+                                        <p className="mt-1 text-[#475569]">{a.answer} <span className="text-[#94A3B8]">· {a.score}/2</span></p>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </td>
+                              </tr>
+                            )}
+                          </React.Fragment>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div className="flex items-center justify-between text-xs text-[#5B6B84]">
+                  <span>
+                    {healthPagination.total} lead{healthPagination.total === 1 ? '' : 's'} · page {healthPagination.currentPage} of {healthPagination.totalPages}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      disabled={healthPage <= 1}
+                      onClick={() => setHealthPage((p) => Math.max(1, p - 1))}
+                      className="p-2 rounded-lg border border-[#E4E8F0] bg-white disabled:opacity-40 cursor-pointer"
+                      aria-label="Previous page"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      disabled={healthPage >= healthPagination.totalPages}
+                      onClick={() => setHealthPage((p) => p + 1)}
+                      className="p-2 rounded-lg border border-[#E4E8F0] bg-white disabled:opacity-40 cursor-pointer"
+                      aria-label="Next page"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </>
             )}
           </div>
         )}

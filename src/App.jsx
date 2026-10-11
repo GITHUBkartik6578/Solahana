@@ -236,6 +236,14 @@ function AppContent() {
               </AdminProtectedRoute>
             }
           />
+          <Route
+            path="/admin/health-checks"
+            element={
+              <AdminProtectedRoute>
+                <AdminDashboardPage />
+              </AdminProtectedRoute>
+            }
+          />
 
           {/* Catch-all Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />

@@ -6,6 +6,7 @@ import Consultation from '../models/Consultation.js';
 
 import Blog from '../models/Blog.js';
 import Newsletter from '../models/Newsletter.js';
+import HealthCheckLead from '../models/HealthCheckLead.js';
 import escapeRegex from '../utils/escapeRegex.js';
 
 /**
@@ -23,6 +24,7 @@ export const getAdminStats = asyncHandler(async (req, res) => {
     cancelledConsultations,
     totalBlogs,
     totalSubscribers,
+    totalHealthChecks,
   ] = await Promise.all([
     User.countDocuments().catch(() => 0),
     Consultation.countDocuments().catch(() => 0),
@@ -32,6 +34,7 @@ export const getAdminStats = asyncHandler(async (req, res) => {
     Consultation.countDocuments({ status: 'Cancelled' }).catch(() => 0),
     Blog.countDocuments().catch(() => 0),
     Newsletter.countDocuments().catch(() => 0),
+    HealthCheckLead.countDocuments().catch(() => 0),
   ]);
 
   return res.status(200).json(
@@ -46,6 +49,7 @@ export const getAdminStats = asyncHandler(async (req, res) => {
         cancelledConsultations: cancelledConsultations || 0,
         totalBlogs: totalBlogs || 0,
         totalSubscribers: totalSubscribers || 0,
+        totalHealthChecks: totalHealthChecks || 0,
       },
       'Admin analytics stats retrieved successfully'
     )

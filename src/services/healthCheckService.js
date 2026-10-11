@@ -18,6 +18,21 @@ const healthCheckService = {
     const response = await apiClient.patch(`/api/health-check/${id}/complete`, { token, answers });
     return response.data?.data;
   },
+
+  /**
+   * Admin: list who took the health check
+   * GET /api/health-check  ->  { total, totalPages, currentPage, entries }
+   */
+  async getAll(params = {}) {
+    const response = await apiClient.get('/api/health-check', { params });
+    const data = response.data?.data || {};
+    return {
+      entries: Array.isArray(data.entries) ? data.entries : [],
+      total: data.total || 0,
+      totalPages: data.totalPages || 1,
+      currentPage: data.currentPage || 1,
+    };
+  },
 };
 
 export default healthCheckService;
