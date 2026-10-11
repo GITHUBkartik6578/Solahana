@@ -60,6 +60,7 @@ function ExpertListCard({ expert, active, onSelect }) {
 }
 
 function ExpertDetail({ expert }) {
+  const hasExpertise = Array.isArray(expert.expertise) && expert.expertise.length > 0;
   return (
     <motion.aside
       key={expert.id}
@@ -81,7 +82,7 @@ function ExpertDetail({ expert }) {
         <div className="mt-4 flex items-stretch divide-x divide-[#E7DFCF] border-y border-[#E7DFCF] py-3">
           <Stat label="Experience">{expert.years}+ Years</Stat>
           {expert.location && <Stat label="Location">{expert.location}</Stat>}
-          <Stat label="Planning areas">{expert.expertise.length}</Stat>
+          {hasExpertise && <Stat label="Planning areas">{expert.expertise.length}</Stat>}
         </div>
 
         {expert.summary && (
@@ -91,19 +92,23 @@ function ExpertDetail({ expert }) {
           </>
         )}
 
-        <h3 className="mt-4 text-[13px] font-bold uppercase tracking-[0.18em] text-[#0F1F45]">Areas of Expertise</h3>
-        <ul className="mt-2.5 flex flex-wrap justify-center gap-2">
-          {expert.expertise.map((a) => (
-            <li key={a.label}>
-              <Link
-                to={a.to}
-                className="inline-flex rounded-full border border-[#C9922E]/50 bg-[#FEFDF9] px-3 py-1 text-[12px] font-semibold text-[#0F1F45] transition-colors hover:bg-[#0F1F45] hover:text-white"
-              >
-                {a.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {hasExpertise && (
+          <>
+            <h3 className="mt-4 text-[13px] font-bold uppercase tracking-[0.18em] text-[#0F1F45]">Areas of Expertise</h3>
+            <ul className="mt-2.5 flex flex-wrap justify-center gap-2">
+              {expert.expertise.map((a) => (
+                <li key={a.label}>
+                  <Link
+                    to={a.to}
+                    className="inline-flex rounded-full border border-[#C9922E]/50 bg-[#FEFDF9] px-3 py-1 text-[12px] font-semibold text-[#0F1F45] transition-colors hover:bg-[#0F1F45] hover:text-white"
+                  >
+                    {a.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
 
         {expert.hours && (
           <p className="mt-5 flex items-center justify-center gap-1.5 text-[12px] text-[#64748B]">
@@ -155,15 +160,16 @@ function ExpertDetail({ expert }) {
 
 export default function OurExpertsPage() {
   const [query, setQuery] = useState('');
-  const [exp, setExp] = useState([]);
+  const [exp, setExp] = useState(null);
   const [selectedId, setSelectedId] = useState(EXPERTS[0].id);
 
-  const toggleExp = (id) => setExp((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]));
-  const reset = () => { setQuery(''); setExp([]); };
+  // One experience filter at a time: ticking another one replaces it, ticking the same one clears it.
+  const toggleExp = (id) => setExp((cur) => (cur === id ? null : id));
+  const reset = () => { setQuery(''); setExp(null); };
 
   const list = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const tests = EXPERIENCE_FILTERS.filter((f) => exp.includes(f.id));
+    const tests = EXPERIENCE_FILTERS.filter((f) => f.id === exp);
     return EXPERTS.filter((e) => {
       const hay = [e.name, e.credential, e.role, e.location, ...(e.qualifications || []), ...(e.expertise || []).map((a) => a.label)]
         .filter(Boolean)
@@ -174,7 +180,7 @@ export default function OurExpertsPage() {
   }, [query, exp]);
 
   const selected = list.find((e) => e.id === selectedId) || list[0];
-  const hasFilters = query || exp.length > 0;
+  const hasFilters = query || exp !== null;
 
   return (
     <div className="relative z-10 min-h-screen bg-[#F7F8FB] pt-[80px]">
@@ -228,7 +234,7 @@ export default function OurExpertsPage() {
                 <label key={f.id} className="flex cursor-pointer items-center gap-2.5 text-[13px] text-[#475569]">
                   <input
                     type="checkbox"
-                    checked={exp.includes(f.id)}
+                    checked={exp === f.id}
                     onChange={() => toggleExp(f.id)}
                     className="h-4 w-4 rounded border-[#C9922E] text-[#C9922E] focus:ring-[#C9922E]"
                   />
