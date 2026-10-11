@@ -1,7 +1,14 @@
 import amitPandey from '../assets/expert-amit-pandey.webp';
 import amitPandeyAvatar from '../assets/expert-amit-pandey-avatar.webp';
+import pallaviMishra from '../assets/expert-pallavi-mishra.webp';
+import pallaviMishraAvatar from '../assets/expert-pallavi-mishra-avatar.webp';
 import abhishekPandey from '../assets/expert-abhishek-pandey.webp';
 import abhishekPandeyAvatar from '../assets/expert-abhishek-pandey-avatar.webp';
+
+// Leads from the other experts' Call / WhatsApp buttons go to Amit R. Pandey's number (the number itself is not shown on their panels).
+const OWNER_PHONE_TEL = 'tel:+917304442171';
+const ownerWhatsapp = (name) =>
+  'https://wa.me/917304442171?text=' + encodeURIComponent(`Hi, I found ${name} on the Solahana website and would like to talk.`);
 
 // One entry per expert. Add the next expert here and the "Our Experts" page lists them automatically.
 // Only put facts the owner has confirmed.
@@ -48,6 +55,20 @@ export const EXPERTS = [
     hours: 'Monday to Saturday, 10 AM to 7 PM',
   },
   {
+    id: 'pallavi-mishra',
+    name: 'Pallavi Mishra',
+    credential: 'Chartered Wealth Manager (CWM®)',
+    photo: pallaviMishra,
+    avatar: pallaviMishraAvatar,
+    years: 7,
+    role: 'Chartered Wealth Manager',
+    photoAlt: 'Pallavi Mishra, Chartered Wealth Manager (CWM)',
+    summary: 'Pallavi Mishra is a Chartered Wealth Manager (CWM®) and former banker with 7+ years of experience.',
+    qualifications: ['Chartered Wealth Manager (CWM®)', 'Ex-Banker'],
+    phoneTel: OWNER_PHONE_TEL,
+    whatsapp: ownerWhatsapp('Pallavi Mishra'),
+  },
+  {
     id: 'abhishek-pandey',
     name: 'Abhishek Pandey',
     photo: abhishekPandey,
@@ -56,9 +77,7 @@ export const EXPERTS = [
     role: 'Risk Planning & Investment Specialist',
     photoAlt: 'Abhishek Pandey, Risk Planning & Investment Specialist',
     summary: 'Abhishek Pandey is a Risk Planning & Investment Specialist with 20+ years of experience.',
-    expertise: [
-      { label: 'Risk Planning', to: '/risk-management' },
-      { label: 'Investment Planning', to: '/investments' },
-    ],
+    phoneTel: OWNER_PHONE_TEL,
+    whatsapp: ownerWhatsapp('Abhishek Pandey'),
   },
 ];
