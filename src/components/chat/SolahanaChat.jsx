@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { X, Send, Phone, MessageCircle, ArrowRight } from 'lucide-react';
 import avatar from '../../assets/solahana-bot-avatar.png';
 import consultationService from '../../services/consultationService';
+import { detectTool } from '../../utils/chatTools';
+import { DIAGNOSTIC_DISCLAIMER, DIAGNOSTIC_QUESTIONS, evaluateDiagnostic } from '../../utils/healthDiagnostic';
+import { DEFAULT_YEARS, LIMITS, calculateHlv, formatInrExact, formatRupees, parseAmount, parseYears, validateHlvInputs, wasAmountRounded } from '../../utils/hlvCalculator';
 
 const PHONE_DISPLAY = '+91 73044 42171';
 const PHONE_TEL = 'tel:+917304442171';
@@ -26,7 +29,17 @@ const MENU = [
   { label: 'How does it work?', intent: 'process' },
   { label: 'Fees', intent: 'pricing' },
   { label: 'Book a free call', intent: 'book' },
+  { label: 'Financial Health Diagnostic', intent: 'diagnostic' },
+  { label: 'HLV Gap Calculator', intent: 'hlv' },
 ];
+
+// HLV gap calculator: one question per step, answers are kept in memory only.
+const HLV_STEPS = {
+  expenses: { field: 'monthlyExpenses', next: 'liabilities', ask: 'What are your family’s monthly expenses in ₹? For example 50000 or 1.5 lakh.', placeholder: 'Monthly expenses, e.g. 50000' },
+  liabilities: { field: 'liabilities', next: 'cover', ask: 'What is your total outstanding loans and liabilities in ₹? Enter 0 if none.', placeholder: 'Loans, e.g. 20 lakh or 0' },
+  cover: { field: 'existingCover', next: 'years', ask: 'How much life insurance cover do you already have in ₹? Enter 0 if none.', placeholder: 'Existing cover, e.g. 1 cr or 0' },
+  years: { field: 'years', next: null, ask: `For how many years should your family’s expenses be covered? Pick ${DEFAULT_YEARS} or type a number from ${LIMITS.minYears} to ${LIMITS.maxYears}.`, placeholder: `Years, ${LIMITS.minYears}-${LIMITS.maxYears}` },
+};
 
 const ANSWERS = {
   greet: {
@@ -118,6 +131,8 @@ const detect = (raw) => {
   const topic = TOPIC_RULES.find(([, re]) => re.test(t));
   const action = ACTION_RULES.find(([, re]) => re.test(t));
   if (action) return { intent: action[0], goal: topic?.[2] };
+  const tool = detectTool(raw);
+  if (tool) return { intent: tool };
   if (topic) return { intent: topic[0], goal: topic[2] };
   const generic = GENERIC_RULES.find(([, re]) => re.test(t));
   return { intent: generic ? generic[0] : 'fallback' };
@@ -134,6 +149,8 @@ export default function SolahanaChat() {
   const [typing, setTyping] = useState(false);
   const [input, setInput] = useState('');
   const [lead, setLead] = useState(null); // { step, goal, fullName, phone, email }
+  const [hlv, setHlv] = useState(null); // { step, values }, HLV calculator in progress
+  const [diag, setDiag] = useState(null); // { index, answers }, health diagnostic in progress
   const bodyRef = useRef(null);
   const inputRef = useRef(null);
   const started = useRef(false);
@@ -262,9 +279,103 @@ export default function SolahanaChat() {
     return undefined;
   };
 
+  /* ------------------------------ HLV gap calculator ------------------------------ */
+  const startHlv = () => {
+    setHlv({ step: 'expenses', values: {} });
+    pushBot({ text: 'Let’s estimate your life cover gap. I’ll ask four quick questions. Nothing is saved or sent anywhere.\n\n' + HLV_STEPS.expenses.ask, hint: 'hlv' });
+  };
+
+  const cancelHlv = () => {
+    setHlv(null);
+    pushBot({ text: 'No problem. Anything else I can help with?', chips: MENU });
+  };
+
+  const finishHlv = (values) => {
+    const r = calculateHlv(values);
+    setHlv(null);
+    const verdict = r.covered
+      ? 'Your existing cover meets this estimate, so there is no gap on these numbers.'
+      : `Estimated cover gap: ${formatInrExact(r.gap)}`;
+    pushBot({
+      text:
+        `${verdict}\n\n` +
+        `Cover needed: ${formatInrExact(r.need)}\n` +
+        `(${formatInrExact(r.monthlyExpenses)} a month x 12 x ${r.years} years + ${formatInrExact(r.liabilities)} liabilities)\n` +
+        `Existing cover: ${formatInrExact(r.existingCover)}\n\n` +
+        'Assumptions: a simple income-replacement estimate. It ignores inflation, investment returns, savings and taxes.\n' +
+        'This is for education only, not insurance or investment advice. A financial planner can work out the right figure for your family.',
+      chips: [{ label: 'Book a free call', intent: 'book', goal: 'Risk Management' }, { label: 'Recalculate', intent: 'hlv' }, { label: 'Main menu', intent: 'greet' }],
+    });
+  };
+
+  const handleHlvInput = (text) => {
+    const step = HLV_STEPS[hlv.step];
+    const isYears = step.field === 'years';
+    const value = isYears ? parseYears(text) : parseAmount(text);
+    if (Number.isNaN(value)) {
+      const message = isYears
+        ? `Please enter the years as a whole number using digits only, for example ${DEFAULT_YEARS}.`
+        : 'Please enter a number, for example 50000, 1.5 lakh or 2 cr.';
+      return pushBot({ text: message, hint: 'hlv', yearsChip: isYears }, 300);
+    }
+    const probe = { monthlyExpenses: 1, liabilities: 0, existingCover: 0, years: DEFAULT_YEARS, ...hlv.values, [step.field]: value };
+    const check = validateHlvInputs(probe);
+    if (!check.ok && check.errors[step.field]) {
+      return pushBot({ text: `${check.errors[step.field]} Please try again, for example ${step.field === 'years' ? DEFAULT_YEARS : '50000 or 1.5 lakh'}.`, hint: 'hlv', yearsChip: hlv.step === 'years' }, 300);
+    }
+    const values = { ...hlv.values, [step.field]: value };
+    if (!step.next) return finishHlv(values);
+    setHlv({ step: step.next, values });
+    // Tell the person when more than 2 decimal places were rounded, so the amount used is never a surprise.
+    const roundedNote = !isYears && wasAmountRounded(text) ? `Note: I rounded that to ${formatRupees(value)} (2 decimal places).\n\n` : '';
+    return pushBot({ text: roundedNote + HLV_STEPS[step.next].ask, hint: 'hlv', yearsChip: step.next === 'years' });
+  };
+
+  /* ------------------------------ financial health diagnostic ------------------------------ */
+  const askDiagnostic = (index) => {
+    const q = DIAGNOSTIC_QUESTIONS[index];
+    pushBot({ text: `Question ${index + 1} of ${DIAGNOSTIC_QUESTIONS.length}\n\n${q.text}`, hint: 'diag', diagQuestion: index });
+  };
+
+  const startDiagnostic = () => {
+    setDiag({ index: 0, answers: {} });
+    pushBot({ text: 'Here is a quick 3-question self-check of your financial health. Nothing is saved or sent anywhere, and you can stop any time.', hint: 'diag' });
+    window.setTimeout(() => askDiagnostic(0), 600);
+  };
+
+  const cancelDiagnostic = () => {
+    setDiag(null);
+    pushBot({ text: 'No problem. Anything else I can help with?', chips: MENU });
+  };
+
+  const finishDiagnostic = (answers) => {
+    const r = evaluateDiagnostic(answers);
+    setDiag(null);
+    const mark = { aligned: '✓ Looks aligned', review: '• Worth a closer look', na: '– Not applicable' };
+    const lines = r.items.map((i, n) => `${n + 1}. ${mark[i.status]}${i.note ? `\n${i.note}` : ''}`).join('\n\n');
+    const summary = r.review === 0
+      ? 'Based on your answers, nothing stands out in these three areas.'
+      : `Based on your answers, ${r.review} of 3 areas are worth a closer look.`;
+    pushBot({
+      text: `${summary}\n\n${lines}\n\n${DIAGNOSTIC_DISCLAIMER}`,
+      chips: [{ label: 'Book a free call', intent: 'book', goal: 'Financial Planning' }, { label: 'Retake', intent: 'diagnostic' }, { label: 'Main menu', intent: 'greet' }],
+    });
+  };
+
+  const onDiagAnswer = (option) => {
+    pushUser(option.label);
+    const q = DIAGNOSTIC_QUESTIONS[diag.index];
+    const answers = { ...diag.answers, [q.id]: option.value };
+    if (diag.index + 1 >= DIAGNOSTIC_QUESTIONS.length) return finishDiagnostic(answers);
+    setDiag({ index: diag.index + 1, answers });
+    return askDiagnostic(diag.index + 1);
+  };
+
   /* ------------------------------ routing ------------------------------ */
   const runIntent = (intent, extra = {}) => {
     if (intent === 'book') return startBooking(extra.goal);
+    if (intent === 'diagnostic') return startDiagnostic();
+    if (intent === 'hlv') return startHlv();
     return pushBot(ANSWERS[intent] || ANSWERS.fallback);
   };
 
@@ -290,6 +401,8 @@ export default function SolahanaChat() {
     setInput('');
     if (lead && lead.step === 'phone') pushUser(text.replace(/\d(?=\d{4})/g, '•'));
     else pushUser(text);
+    if (hlv) return handleHlvInput(text);
+    if (diag) return pushBot({ text: 'Please pick one of the options above.', hint: 'diag' }, 300);
     if (lead && ['name', 'phone', 'email'].includes(lead.step)) return handleLeadInput(text);
     if (lead && lead.step === 'time') {
       const slot = TIME_SLOTS.find((s) => s.toLowerCase().startsWith(text.toLowerCase().slice(0, 4)));
@@ -302,7 +415,11 @@ export default function SolahanaChat() {
 
   const lastBotId = [...messages].reverse().find((m) => m.from === 'bot')?.id;
   const inLead = Boolean(lead && lead.step !== 'sending');
-  const placeholder = !lead
+  const placeholder = diag
+    ? 'Choose an option above'
+    : hlv
+    ? HLV_STEPS[hlv.step].placeholder
+    : !lead
     ? 'Ask about SIPs, tax, fees…'
     : { name: 'Your full name', phone: '10-digit mobile number', email: 'you@example.com', time: 'Choose a time above' }[lead.step] || '';
 
@@ -378,7 +495,26 @@ export default function SolahanaChat() {
                           ))}
                         </div>
                       )}
-                      {m.id === lastBotId && !typing && !lead && m.chips && (
+                      {m.id === lastBotId && !typing && hlv?.step === 'years' && m.yearsChip && (
+                        <div className="flex flex-wrap gap-1.5">
+                          <button
+                            onClick={() => { pushUser(`${DEFAULT_YEARS} years`); handleHlvInput(String(DEFAULT_YEARS)); }}
+                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white border border-[#CBD6EE] text-xs font-semibold text-[#1A3170] hover:bg-[#1A3170] hover:text-white hover:border-[#1A3170] transition-colors"
+                          >
+                            Use {DEFAULT_YEARS} years
+                          </button>
+                        </div>
+                      )}
+                      {m.id === lastBotId && !typing && diag && m.diagQuestion === diag.index && (
+                        <div className="flex flex-col gap-1.5">
+                          {DIAGNOSTIC_QUESTIONS[diag.index].options.map((o) => (
+                            <button key={o.value} onClick={() => onDiagAnswer(o)} className="text-left px-3 py-2 rounded-xl bg-white border border-[#CBD6EE] text-xs font-semibold text-[#1A3170] hover:bg-[#EEF2FB] transition-colors">
+                              {o.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                      {m.id === lastBotId && !typing && !lead && !hlv && !diag && m.chips && (
                         <div className="flex flex-wrap gap-1.5">
                           {m.chips.map((c) => (
                             <button
@@ -417,14 +553,26 @@ export default function SolahanaChat() {
                   <button onClick={cancelBooking} className="font-semibold text-[#2F5BC7] hover:underline">Cancel</button>
                 </div>
               )}
+              {diag && (
+                <div className="flex items-center justify-between px-1 pb-2 text-[11px] text-[#5B6B84]">
+                  <span>Your answers stay in this chat only.</span>
+                  <button onClick={cancelDiagnostic} className="font-semibold text-[#2F5BC7] hover:underline">Cancel</button>
+                </div>
+              )}
+              {hlv && (
+                <div className="flex items-center justify-between px-1 pb-2 text-[11px] text-[#5B6B84]">
+                  <span>Your numbers stay in this chat only.</span>
+                  <button onClick={cancelHlv} className="font-semibold text-[#2F5BC7] hover:underline">Cancel</button>
+                </div>
+              )}
               <form onSubmit={onSend} className="flex items-center gap-2">
                 <input
                   ref={inputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder={placeholder}
-                  disabled={lead?.step === 'time' || lead?.step === 'sending'}
-                  inputMode={lead?.step === 'phone' ? 'tel' : lead?.step === 'email' ? 'email' : 'text'}
+                  disabled={lead?.step === 'time' || lead?.step === 'sending' || Boolean(diag)}
+                  inputMode={hlv ? 'decimal' : lead?.step === 'phone' ? 'tel' : lead?.step === 'email' ? 'email' : 'text'}
                   aria-label="Type your message"
                   className="flex-1 min-w-0 h-11 px-4 rounded-full bg-[#F7F8FB] border border-[#E4E8F0] text-sm text-[#0F1F45] placeholder-[#94A3B8] focus:outline-none focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 disabled:opacity-60"
                 />
