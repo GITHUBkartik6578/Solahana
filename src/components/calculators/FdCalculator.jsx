@@ -4,6 +4,8 @@ import { Building2, ShieldCheck, Sparkles, Percent } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import CalculatorLayout from './CalculatorLayout';
 import { calculateFD, formatINR } from '../../utils/calculatorEngine';
+import CalculatorDisclaimer from './CalculatorDisclaimer';
+import { FD_NOTE, RATE_LIMIT_NOTE } from '../../utils/calculatorCopy';
 
 export default function FdCalculator() {
   const location = useLocation();
@@ -47,7 +49,7 @@ export default function FdCalculator() {
   return (
     <CalculatorLayout
       title="Fixed Deposit (FD) Yield Calculator"
-      subtitle="Compute guaranteed maturity returns and interest payout across quarterly, monthly, or annual compounding."
+      subtitle="Estimate maturity value and interest across quarterly, monthly, half-yearly or annual compounding, assuming a fixed rate."
       icon={Building2}
       onReset={handleReset}
       getSavePayload={getSavePayload}
@@ -62,7 +64,7 @@ export default function FdCalculator() {
               <span>FD Deposit Parameters</span>
             </h3>
             <span className="text-[10px] uppercase font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/30">
-              Guaranteed Yield
+              Fixed-Rate Illustration
             </span>
           </div>
 
@@ -142,7 +144,7 @@ export default function FdCalculator() {
             <span className="text-xs uppercase font-mono tracking-widest text-[#5A7FD6]">TOTAL MATURITY VALUE</span>
             <div className="text-3xl sm:text-4xl font-bold font-mono text-[#0F1F45]">{formatINR(result.maturityAmount)}</div>
             <p className="text-xs text-[#5B6B84]/80">
-              Guaranteed maturity return after {durationYears} years with {frequency.toLowerCase()} compounding.
+              Estimated maturity value after {durationYears} years with {frequency.toLowerCase()} compounding, if the rate stays fixed.
             </p>
           </div>
 
@@ -177,6 +179,8 @@ export default function FdCalculator() {
               </ResponsiveContainer>
             </div>
           </div>
+
+          <CalculatorDisclaimer notes={[FD_NOTE, RATE_LIMIT_NOTE]} />
 
         </div>
 

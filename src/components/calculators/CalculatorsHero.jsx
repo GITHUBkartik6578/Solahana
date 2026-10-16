@@ -1,6 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Compass, Calculator, TrendingUp, Target, ShieldCheck, Sparkles, PieChart, Wallet } from 'lucide-react';
+import { sipSample, emiSample } from '../../utils/calculatorSamples';
+import { SAMPLE_FIGURES_NOTE } from '../../utils/calculatorCopy';
+
+const SIP = sipSample();
+const EMI = emiSample();
 
 export default function CalculatorsHero({ onExploreCalculators, onStartPlanning }) {
   return (
@@ -102,9 +107,9 @@ export default function CalculatorsHero({ onExploreCalculators, onStartPlanning 
               {/* Top Card: SIP Growth Visual */}
               <div className="p-4 rounded-2xl bg-[#FFFFFF]/80 border border-[#2F5BC7]/25 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] text-[#5B6B84] uppercase tracking-wider font-sora">SIP Growth Target</span>
-                  <p className="text-xl font-bold font-sora text-[#5A7FD6] mt-0.5">₹2,53,40,000</p>
-                  <span className="text-[10px] text-[#5B6B84]">15 Yrs • ₹50,000/mo @ 12%</span>
+                  <span className="text-[10px] text-[#5B6B84] uppercase tracking-wider font-sora">Illustrative SIP Value</span>
+                  <p className="text-xl font-bold font-sora text-[#5A7FD6] mt-0.5">{SIP.full}</p>
+                  <span className="text-[10px] text-[#5B6B84]">{SIP.detail}</span>
                 </div>
                 <div className="p-3 rounded-xl bg-[#2F5BC7]/15 text-[#5A7FD6]">
                   <TrendingUp className="w-5 h-5" />
@@ -117,21 +122,18 @@ export default function CalculatorsHero({ onExploreCalculators, onStartPlanning 
                 {/* EMI Summary */}
                 <div className="p-4 rounded-2xl bg-[#FFFFFF]/80 border border-[#2F5BC7]/20 space-y-2">
                   <span className="text-[11px] text-[#5B6B84]">Home Loan EMI</span>
-                  <p className="text-base font-bold text-[#0F1F45] font-sora">₹68,450 / mo</p>
+                  <p className="text-base font-bold text-[#0F1F45] font-sora">{EMI.text}</p>
                   <div className="w-full h-1.5 rounded-full bg-[#F7F8FB] overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-[#5A7FD6] to-[#1A3170] w-[65%]" />
                   </div>
-                  <span className="text-[10px] text-[#5B6B84]">₹75L Loan @ 8.5% 20 Yrs</span>
+                  <span className="text-[10px] text-[#5B6B84]">{EMI.detail}</span>
                 </div>
 
                 {/* Retirement Goal */}
                 <div className="p-4 rounded-2xl bg-[#FFFFFF]/80 border border-[#2F5BC7]/20 space-y-2">
                   <span className="text-[11px] text-[#5B6B84]">Retirement Corpus</span>
-                  <p className="text-base font-bold text-[#5A7FD6] font-sora">₹4.50 Cr Goal</p>
-                  <div className="w-full h-1.5 rounded-full bg-[#F7F8FB] overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#5A7FD6] to-[#1A3170] w-[78%]" />
-                  </div>
-                  <span className="text-[10px] text-emerald-400">Target FIRE Age: 48</span>
+                  <p className="text-base font-bold text-[#5A7FD6] font-sora">Your own inputs</p>
+                  <span className="text-[10px] text-[#5B6B84]">Age, spending, inflation and return</span>
                 </div>
 
               </div>
@@ -148,8 +150,8 @@ export default function CalculatorsHero({ onExploreCalculators, onStartPlanning 
 
                 <div className="grid grid-cols-2 gap-2 text-center text-[10px] font-sora">
                   <div className="p-2 rounded-lg bg-[#F7F8FB] border border-[#2F5BC7]/20">
-                    <p className="text-[#5B6B84]">Tax Saved / Yr</p>
-                    <p className="text-[#5A7FD6] font-bold mt-0.5">₹48,500</p>
+                    <p className="text-[#5B6B84]">Tax Estimator</p>
+                    <p className="text-[#5A7FD6] font-bold mt-0.5">Old vs New</p>
                   </div>
                   <div className="p-2 rounded-lg bg-[#F7F8FB] border border-[#2F5BC7]/20">
                     <p className="text-[#5B6B84]">Emergency Shield</p>
@@ -160,9 +162,10 @@ export default function CalculatorsHero({ onExploreCalculators, onStartPlanning 
 
               {/* Footer */}
               <div className="pt-3 border-t border-[#2F5BC7]/15 flex items-center justify-between text-[11px] text-[#5B6B84]">
-                <span>Accuracy: Mathematical Engine</span>
+                <span>Estimates based on your inputs</span>
                 <span className="text-[#5A7FD6] font-semibold font-sora">Inflation Adjusted</span>
               </div>
+              <p className="text-[10px] leading-relaxed text-[#5B6B84]">{SAMPLE_FIGURES_NOTE}</p>
 
             </div>
           </motion.div>
