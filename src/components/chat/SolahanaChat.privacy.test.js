@@ -109,8 +109,59 @@ describe('the booking guard, logging and confirmation', () => {
     expect(src).toContain('will call you on ${maskPhoneDisplay(data.phone)} in the');
     expect(src).not.toMatch(/call you on \$\{data\.phone\}/);
   });
-  it('keeps the WhatsApp text, which the visitor sends themselves with one tap, as it was', () => {
-    expect(src).toContain('`Name: ${d.fullName}\\nMobile: ${d.phone}\\nEmail: ${d.email}\\nInterested in: ${d.goal}\\nBest time to call: ${d.preferredTime}`');
+  describe('the WhatsApp message', () => {
+    const submit = between(src, '  const submitLead = async (data) => {', '  const handleLeadInput');
+    const [success, failure] = submit.split('    } catch (err) {');
+    const load = (name) => new Function('ADVISOR_FIRST', `${between(src, 'const bookingSummary', 'const TIME_SLOTS')}; return ${name};`)('Amit');
+    const booking = { fullName: 'Test Visitor', phone: '9000000001', email: 'test.visitor@example.com', goal: 'Financial Planning', preferredTime: 'Morning (9 AM - 12 PM)' };
+    it('leaves the mobile number out after a successful booking, and keeps every other line', () => {
+      const text = load('bookingSummary')(booking, false);
+      expect(text).toBe('Hi Amit, I just booked a free consultation on the Solahana website.\nName: Test Visitor\nEmail: test.visitor@example.com\nInterested in: Financial Planning\nBest time to call: Morning (9 AM - 12 PM)');
+      expect(text).not.toMatch(/Mobile|9000000001/);
+    });
+    it('still builds the full message, as before, when the mobile line is asked for (the failure bubble)', () => {
+      const text = load('bookingSummary')(booking);
+      expect(text).toBe('Hi Amit, I just booked a free consultation on the Solahana website.\nName: Test Visitor\nMobile: 9000000001\nEmail: test.visitor@example.com\nInterested in: Financial Planning\nBest time to call: Morning (9 AM - 12 PM)');
+      expect(load('bookingSummary')(booking, true)).toBe(text);
+    });
+    it('uses the message without the mobile on the success bubble only, and shows the notice there', () => {
+      expect(success).toContain('waText: bookingSummary(data, false),');
+      expect(success).toContain('waNotice: WA_SHARE_NOTICE,');
+      expect(success).not.toContain('bookingSummary(data),');
+      expect(count(src, 'bookingSummary(')).toBe(2); // called only for the success bubble and the failure bubble
+    });
+    it('leaves the failure bubble as it was, with the full message, and only adds its own notice', () => {
+      expect(failure).toContain('waText: bookingSummary(data),');
+      expect(failure).toContain('waNotice: WA_FAILURE_NOTICE,');
+      expect(failure).not.toContain('WA_SHARE_NOTICE');
+      expect(failure).toContain('Tap WhatsApp below: your details are already filled in, so ${ADVISOR} gets them straight away. Or call ${PHONE_DISPLAY}.');
+      expect(failure).toContain('actions: true,');
+      expect(failure).not.toContain('success: true');
+      expect(success).not.toContain('WA_FAILURE_NOTICE');
+    });
+    it('tells the visitor, after a failed booking, that the message includes the mobile number and email, and why', () => {
+      const notice = load('WA_FAILURE_NOTICE');
+      expect(notice).toBe('Because the booking did not go through, this message includes your mobile number and email so Amit can reach you.');
+      expect(notice).not.toMatch(/\d/);
+      expect(notice).not.toMatch(/never|always|guarantee|anonymous|private/i);
+    });
+    it('tells the visitor what the button shares, in plain words, without promising more than it can', () => {
+      const notice = load('WA_SHARE_NOTICE');
+      expect(notice).toMatch(/name, email, interest and preferred call time/);
+      expect(notice).toMatch(/mobile number is not typed into it/);
+      expect(notice).toMatch(/Amit will see the number you send it from/);
+      expect(notice).not.toMatch(/\d/);
+      expect(notice).not.toMatch(/never|always|guarantee|anonymous|private/i);
+    });
+    it('renders the notice under the call and WhatsApp buttons, in the existing muted text colour', () => {
+      expect(src).toContain('{m.waNotice && <p className="text-[11px] leading-snug text-[#5B6B84]">{m.waNotice}</p>}');
+      expect(src.indexOf('{m.waNotice &&')).toBeGreaterThan(src.indexOf('href={waLink(m.waText)}'));
+    });
+    it('keeps the confirmation text and the WhatsApp link builder as they were', () => {
+      expect(src).toContain('will call you on ${maskPhoneDisplay(data.phone)} in the');
+      expect(src).toContain('Want to reach him sooner? Send your details on WhatsApp in one tap.');
+      expect(src).toContain("const waLink = (text) => (text ? `${WHATSAPP}?text=${encodeURIComponent(text)}` : WHATSAPP);");
+    });
   });
   it('uses storage only for the greeting teaser flag', () => {
     expect(src).not.toContain('localStorage');

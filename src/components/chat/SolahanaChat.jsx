@@ -17,9 +17,12 @@ const ADVISOR_FIRST = 'Amit';
 
 // WhatsApp link with the message already typed, so a lead reaches the planner in one tap
 const waLink = (text) => (text ? `${WHATSAPP}?text=${encodeURIComponent(text)}` : WHATSAPP);
-const bookingSummary = (d) =>
+// The mobile line is left out once the booking has gone through: the planner already has it, and WhatsApp shows the sender's number.
+const bookingSummary = (d, withMobile = true) =>
   `Hi ${ADVISOR_FIRST}, I just booked a free consultation on the Solahana website.\n` +
-  `Name: ${d.fullName}\nMobile: ${d.phone}\nEmail: ${d.email}\nInterested in: ${d.goal}\nBest time to call: ${d.preferredTime}`;
+  `Name: ${d.fullName}\n${withMobile ? `Mobile: ${d.phone}\n` : ''}Email: ${d.email}\nInterested in: ${d.goal}\nBest time to call: ${d.preferredTime}`;
+const WA_SHARE_NOTICE = `The WhatsApp button opens a message with your name, email, interest and preferred call time. Your mobile number is not typed into it, but ${ADVISOR_FIRST} will see the number you send it from.`;
+const WA_FAILURE_NOTICE = `Because the booking did not go through, this message includes your mobile number and email so ${ADVISOR_FIRST} can reach you.`;
 const TIME_SLOTS = ['Morning (9 AM - 12 PM)', 'Afternoon (12 PM - 4 PM)', 'Evening (4 PM - 8 PM)'];
 
 /* ------------------------------------------------------------------ */
@@ -247,7 +250,8 @@ export default function SolahanaChat() {
           text: `You’re booked, ${data.fullName.split(' ')[0]}! ${ADVISOR} will call you on ${maskPhoneDisplay(data.phone)} in the ${data.preferredTime.split(' (')[0].toLowerCase()}.\n\nWant to reach him sooner? Send your details on WhatsApp in one tap.`,
           success: true,
           actions: true,
-          waText: bookingSummary(data),
+          waText: bookingSummary(data, false),
+          waNotice: WA_SHARE_NOTICE,
           chips: MENU,
         },
       ]);
@@ -263,6 +267,7 @@ export default function SolahanaChat() {
           text: `Sorry, I couldn’t send your booking just now. Tap WhatsApp below: your details are already filled in, so ${ADVISOR} gets them straight away. Or call ${PHONE_DISPLAY}.`,
           actions: true,
           waText: bookingSummary(data),
+          waNotice: WA_FAILURE_NOTICE,
         },
       ]);
     }
@@ -515,6 +520,7 @@ export default function SolahanaChat() {
                           </a>
                         </div>
                       )}
+                      {m.waNotice && <p className="text-[11px] leading-snug text-[#5B6B84]">{m.waNotice}</p>}
 
                       {/* Only the latest bot message keeps its buttons */}
                       {m.id === lastBotId && !typing && m.slots && lead?.step === 'time' && (
