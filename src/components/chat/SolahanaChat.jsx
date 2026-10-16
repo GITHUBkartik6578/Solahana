@@ -5,6 +5,7 @@ import { X, Send, Phone, MessageCircle, ArrowRight } from 'lucide-react';
 import avatar from '../../assets/solahana-bot-avatar.png';
 import consultationService from '../../services/consultationService';
 import { detectTool } from '../../utils/chatTools';
+import { HIDDEN_BUBBLE_TEXT, PRIVACY_HINT, fieldLimit, liveWarning, maskPhoneDisplay, rejectionMessage, safeErrorInfo, screenBookingFields, screenUserText } from '../../utils/chatPrivacy';
 import { DIAGNOSTIC_DISCLAIMER, DIAGNOSTIC_QUESTIONS, evaluateDiagnostic } from '../../utils/healthDiagnostic';
 import { DEFAULT_YEARS, LIMITS, calculateHlv, formatInrExact, formatRupees, parseAmount, parseYears, validateHlvInputs, wasAmountRounded } from '../../utils/hlvCalculator';
 
@@ -16,9 +17,12 @@ const ADVISOR_FIRST = 'Amit';
 
 // WhatsApp link with the message already typed, so a lead reaches the planner in one tap
 const waLink = (text) => (text ? `${WHATSAPP}?text=${encodeURIComponent(text)}` : WHATSAPP);
-const bookingSummary = (d) =>
+// The mobile line is left out once the booking has gone through: the planner already has it, and WhatsApp shows the sender's number.
+const bookingSummary = (d, withMobile = true) =>
   `Hi ${ADVISOR_FIRST}, I just booked a free consultation on the Solahana website.\n` +
-  `Name: ${d.fullName}\nMobile: ${d.phone}\nEmail: ${d.email}\nInterested in: ${d.goal}\nBest time to call: ${d.preferredTime}`;
+  `Name: ${d.fullName}\n${withMobile ? `Mobile: ${d.phone}\n` : ''}Email: ${d.email}\nInterested in: ${d.goal}\nBest time to call: ${d.preferredTime}`;
+const WA_SHARE_NOTICE = `The WhatsApp button opens a message with your name, email, interest and preferred call time. Your mobile number is not typed into it, but ${ADVISOR_FIRST} will see the number you send it from.`;
+const WA_FAILURE_NOTICE = `Because the booking did not go through, this message includes your mobile number and email so ${ADVISOR_FIRST} can reach you.`;
 const TIME_SLOTS = ['Morning (9 AM - 12 PM)', 'Afternoon (12 PM - 4 PM)', 'Evening (4 PM - 8 PM)'];
 
 /* ------------------------------------------------------------------ */
@@ -163,7 +167,7 @@ export default function SolahanaChat() {
     }, delay);
   }, []);
 
-  const pushUser = (text) => setMessages((m) => [...m, { id: mid(), from: 'user', text }]);
+  const pushUser = (text, extra) => setMessages((m) => [...m, { id: mid(), from: 'user', text, ...extra }]);
 
   /* first open: greet */
   useEffect(() => {
@@ -195,10 +199,14 @@ export default function SolahanaChat() {
     if (el) el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
   }, [messages, typing]);
 
-  /* Esc closes */
+  /* Esc closes (anything typed but not sent is cleared; the transcript stays) */
   useEffect(() => {
     if (!open) return undefined;
-    const onKey = (e) => e.key === 'Escape' && setOpen(false);
+    const onKey = (e) => {
+      if (e.key !== 'Escape') return;
+      setOpen(false);
+      setInput('');
+    };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [open]);
@@ -215,6 +223,11 @@ export default function SolahanaChat() {
   };
 
   const submitLead = async (data) => {
+    // Last check: nothing is sent unless the name, phone and email each pass the screening for their own field.
+    if (!screenBookingFields(data)) {
+      setLead({ step: 'name', goal: data.goal });
+      return pushBot({ text: 'Sorry, I couldn’t use those details. Let’s try again. What’s your name?', hint: 'lead' });
+    }
     setLead({ ...data, step: 'sending' });
     setTyping(true);
     try {
@@ -234,15 +247,16 @@ export default function SolahanaChat() {
         {
           id: mid(),
           from: 'bot',
-          text: `You’re booked, ${data.fullName.split(' ')[0]}! ${ADVISOR} will call you on ${data.phone} in the ${data.preferredTime.split(' (')[0].toLowerCase()}.\n\nWant to reach him sooner? Send your details on WhatsApp in one tap.`,
+          text: `You’re booked, ${data.fullName.split(' ')[0]}! ${ADVISOR} will call you on ${maskPhoneDisplay(data.phone)} in the ${data.preferredTime.split(' (')[0].toLowerCase()}.\n\nWant to reach him sooner? Send your details on WhatsApp in one tap.`,
           success: true,
           actions: true,
-          waText: bookingSummary(data),
+          waText: bookingSummary(data, false),
+          waNotice: WA_SHARE_NOTICE,
           chips: MENU,
         },
       ]);
     } catch (err) {
-      console.error('[Chat booking failed]:', err);
+      console.error('[Chat booking failed]', safeErrorInfo(err)); // never the error object: it carries the booking details
       setTyping(false);
       setLead(null);
       setMessages((m) => [
@@ -253,6 +267,7 @@ export default function SolahanaChat() {
           text: `Sorry, I couldn’t send your booking just now. Tap WhatsApp below: your details are already filled in, so ${ADVISOR} gets them straight away. Or call ${PHONE_DISPLAY}.`,
           actions: true,
           waText: bookingSummary(data),
+          waNotice: WA_FAILURE_NOTICE,
         },
       ]);
     }
@@ -394,13 +409,33 @@ export default function SolahanaChat() {
     submitLead({ ...lead, preferredTime: slot });
   };
 
+  /* The field the next typed message goes into. It decides which limits and rejection wording apply. */
+  const inputStep = () => {
+    if (hlv) return hlv.step;
+    if (lead && ['name', 'phone', 'email'].includes(lead.step)) return lead.step;
+    return 'chat';
+  };
+
   const onSend = (e) => {
     e?.preventDefault();
     const text = input.trim();
     if (!text) return;
+    // Every typed message is screened here, before anything else can see it.
+    const step = inputStep();
+    const screened = screenUserText(text, { step });
     setInput('');
-    if (lead && lead.step === 'phone') pushUser(text.replace(/\d(?=\d{4})/g, '•'));
-    else pushUser(text);
+    if (screened.blocked) {
+      // Blocked: only a fixed placeholder is shown. The text is not echoed (not even redacted), stored, routed or passed to any
+      // handler, and lead and HLV state are not touched, so the same question is asked again.
+      pushUser(HIDDEN_BUBBLE_TEXT, { hidden: true });
+      return pushBot({
+        text: rejectionMessage(screened, step),
+        hint: hlv ? 'hlv' : lead ? 'lead' : undefined,
+        yearsChip: hlv?.step === 'years',
+        chips: !lead && !hlv && !diag ? MENU : undefined,
+      }, 300);
+    }
+    pushUser(screened.display);
     if (hlv) return handleHlvInput(text);
     if (diag) return pushBot({ text: 'Please pick one of the options above.', hint: 'diag' }, 300);
     if (lead && ['name', 'phone', 'email'].includes(lead.step)) return handleLeadInput(text);
@@ -413,6 +448,7 @@ export default function SolahanaChat() {
     runIntent(intent, { goal });
   };
 
+  const liveText = liveWarning(input, { step: inputStep() });
   const lastBotId = [...messages].reverse().find((m) => m.from === 'bot')?.id;
   const inLead = Boolean(lead && lead.step !== 'sending');
   const placeholder = diag
@@ -449,7 +485,7 @@ export default function SolahanaChat() {
                 <p className="text-[11px] text-[#AEBBD3] leading-tight mt-0.5">Online · replies instantly</p>
               </div>
               <button
-                onClick={() => setOpen(false)}
+                onClick={() => { setOpen(false); setInput(''); }}
                 aria-label="Close chat"
                 className="w-9 h-9 rounded-full flex items-center justify-center text-[#AEBBD3] hover:text-white hover:bg-white/10 transition-colors"
               >
@@ -462,7 +498,7 @@ export default function SolahanaChat() {
               {messages.map((m) =>
                 m.from === 'user' ? (
                   <div key={m.id} className="flex justify-end">
-                    <p className="max-w-[80%] rounded-2xl rounded-br-md bg-[#1A3170] text-white text-sm px-3.5 py-2.5 leading-relaxed whitespace-pre-line">{m.text}</p>
+                    <p className={`max-w-[80%] rounded-2xl rounded-br-md bg-[#1A3170] text-white text-sm px-3.5 py-2.5 leading-relaxed whitespace-pre-line${m.hidden ? ' italic opacity-80' : ''}`}>{m.text}</p>
                   </div>
                 ) : (
                   <div key={m.id} className="flex items-end gap-2">
@@ -484,6 +520,7 @@ export default function SolahanaChat() {
                           </a>
                         </div>
                       )}
+                      {m.waNotice && <p className="text-[11px] leading-snug text-[#5B6B84]">{m.waNotice}</p>}
 
                       {/* Only the latest bot message keeps its buttons */}
                       {m.id === lastBotId && !typing && m.slots && lead?.step === 'time' && (
@@ -573,6 +610,14 @@ export default function SolahanaChat() {
                   placeholder={placeholder}
                   disabled={lead?.step === 'time' || lead?.step === 'sending' || Boolean(diag)}
                   inputMode={hlv ? 'decimal' : lead?.step === 'phone' ? 'tel' : lead?.step === 'email' ? 'email' : 'text'}
+                  maxLength={fieldLimit(inputStep())}
+                  autoComplete={lead?.step === 'name' ? 'name' : lead?.step === 'phone' ? 'tel' : lead?.step === 'email' ? 'email' : 'off'}
+                  autoCapitalize={lead?.step === 'name' ? 'words' : 'none'}
+                  autoCorrect="off"
+                  spellCheck={false}
+                  enterKeyHint="send"
+                  data-1p-ignore
+                  data-lpignore="true"
                   aria-label="Type your message"
                   className="flex-1 min-w-0 h-11 px-4 rounded-full bg-[#F7F8FB] border border-[#E4E8F0] text-sm text-[#0F1F45] placeholder-[#94A3B8] focus:outline-none focus:border-[#2F5BC7] focus:ring-2 focus:ring-[#2F5BC7]/15 disabled:opacity-60"
                 />
@@ -585,7 +630,9 @@ export default function SolahanaChat() {
                   <Send className="w-4 h-4" />
                 </button>
               </form>
+              {liveText && <p role="status" className="mt-1.5 px-2 text-[11px] font-semibold text-[#5B6B84]">{liveText}</p>}
               <p className="mt-2 text-center text-[10px] text-[#8A96AB]">General information only, not investment advice.</p>
+              <p className="mt-0.5 text-center text-[10px] text-[#8A96AB]">{PRIVACY_HINT}</p>
             </div>
           </motion.section>
         )}
@@ -615,7 +662,7 @@ export default function SolahanaChat() {
 
       {/* Launcher */}
       <button
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => { if (open) setInput(''); setOpen((o) => !o); }}
         aria-label={open ? 'Close chat' : 'Chat with Solahana'}
         aria-expanded={open}
         className="fixed z-[70] bottom-5 right-5 sm:right-6 w-16 h-16 rounded-full bg-[linear-gradient(135deg,#24408A_0%,#1A3170_50%,#122552_100%)] ring-2 ring-[#C9A04F]/70 shadow-[0_14px_34px_rgba(15,31,69,0.35)] flex items-center justify-center hover:scale-105 active:scale-95 transition-transform"
