@@ -39,7 +39,7 @@ export default function WhyTaxPlanningMatters() {
             Why Tax Planning Matters
           </h2>
           <p className="text-sm sm:text-base text-[#475569]">
-            Proactive tax planning ensures you pay only what is legally required while compounding net wealth faster.
+            Proactive tax planning helps you pay only what is legally required while compounding net wealth.
           </p>
         </div>
 

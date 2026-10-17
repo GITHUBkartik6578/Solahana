@@ -38,7 +38,7 @@ export default function GoalsCTA({ onStartPlanning, onBookConsultation }) {
 
           {/* Description */}
           <p className="text-base sm:text-xl text-[#5B6B84] font-inter max-w-2xl mx-auto leading-relaxed">
-            Start creating a financial roadmap built around the future you want. From home purchases to retirement, SOLAHANA ensures every rupee has a purpose.
+            Start creating a financial roadmap built around the future you want. From home purchases to retirement, SOLAHANA helps give every rupee a purpose.
           </p>
 
           {/* Action Buttons */}
@@ -67,7 +67,7 @@ export default function GoalsCTA({ onStartPlanning, onBookConsultation }) {
             </div>
             <span className="hidden sm:inline text-[#2F5BC7]/40">•</span>
             <div>
-              <span>SEBI-Registered Planning Standard</span>
+              <span>Goal-Based Financial Planning</span>
             </div>
             <span className="hidden sm:inline text-[#2F5BC7]/40">•</span>
             <div>

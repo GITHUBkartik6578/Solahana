@@ -12,12 +12,12 @@ export default function WhyChooseSolahanaEstate() {
     {
       icon: Heart,
       title: 'Family-Centric Wealth Planning',
-      desc: 'Empathetic fiduciary approach ensuring your spouse, children, and beneficiaries remain protected.',
+      desc: 'Empathetic fiduciary approach helping your spouse, children, and beneficiaries stay supported.',
     },
     {
       icon: Award,
       title: 'Transparent Planning Process',
-      desc: 'Legal & SEBI-aligned fiduciary model with 100% clarity, zero hidden fees, or distributor conflicts.',
+      desc: 'Client-first planning model with 100% clarity, zero hidden fees, or distributor conflicts.',
     },
     {
       icon: Sparkles,
@@ -39,7 +39,7 @@ export default function WhyChooseSolahanaEstate() {
             Why Choose SOLAHANA
           </h2>
           <p className="text-sm sm:text-base text-[#475569]">
-            Disciplined legacy architecture ensuring your multi-generational wealth is protected.
+            Disciplined legacy architecture to help protect your multi-generational wealth.
           </p>
         </div>
 

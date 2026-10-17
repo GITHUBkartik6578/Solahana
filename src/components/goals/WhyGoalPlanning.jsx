@@ -14,7 +14,7 @@ export default function WhyGoalPlanning() {
     {
       title: 'Better Savings Habits',
       subtitle: 'Automated step-up SIPs tailored to target corpus deadlines.',
-      description: 'When savings are anchored to real life ambitions (like buying a home or child education), staying disciplined month after month becomes effortless.',
+      description: 'When savings are anchored to real life ambitions (like buying a home or child education), staying disciplined month after month becomes easier.',
       icon: TrendingUp,
       tag: 'Discipline'
     },
@@ -28,7 +28,7 @@ export default function WhyGoalPlanning() {
     {
       title: 'Long-Term Wealth Creation',
       subtitle: 'Multi-decadal compounding engineered for true financial independence.',
-      description: 'Goal-aligned portfolios optimize tax harvesting and risk reduction, ensuring maximum net worth accumulation over your lifetime.',
+      description: 'Goal-aligned portfolios consider tax harvesting and risk reduction to help build net worth over your lifetime.',
       icon: ShieldCheck,
       tag: 'Compounding'
     }

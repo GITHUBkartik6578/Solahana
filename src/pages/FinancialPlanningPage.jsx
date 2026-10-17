@@ -151,17 +151,14 @@ function Hero() {
       src={heroBanner}
       alt="Solahana. Architecting Wealth. Preserving Legacy. Financial Planning and Family Office"
       ratio={1600 / 600}
-      maxVw={37.5}
-      fit={0.93}
-      minH={400}
-      hotspots={[
+            hotspots={[
         { label: 'Request a Private Consultation', onClick: book, style: { left: '4.7%', top: '67.3%', width: '19.6%', height: '7.7%' } },
         { label: 'Explore Our Family Office Services', onClick: scrollToFramework, style: { left: '25.4%', top: '67.3%', width: '18%', height: '7.7%' } },
       ]}
     />
 
     {/* Tablet / mobile: text hero with the new photo, so the copy stays readable */}
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px] lg:hidden">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px] sm:hidden any-pointer-fine:hidden">
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 top-10 h-[480px] w-[480px] rounded-full bg-[#C9922E]/15 blur-[120px]" />
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:min-h-[clamp(500px,calc(100svh-80px),680px)] lg:px-8">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:max-w-[50%] lg:py-12">

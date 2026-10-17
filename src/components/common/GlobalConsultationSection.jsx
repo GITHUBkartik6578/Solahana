@@ -149,7 +149,7 @@ export default function GlobalConsultationSection() {
   const FEATURES = [
     { title: 'Private & Confidential', desc: 'Your data and discussions are strictly protected under professional fiduciary standards. Used solely for your personalized session.', icon: Lock },
     { title: 'Tailored Strategic Blueprint', desc: 'Cash flows, tax efficiency, risk protection, and investment structuring, looked at comprehensively together.', icon: TrendingUp },
-    { title: 'Zero Product Bias', desc: 'Objective, transparent guidance rooted in CWM® and CFP® principles. No sales pressure, no forced product pushing.', icon: Users },
+    { title: 'Objective Guidance', desc: 'Objective, transparent guidance rooted in CWM® and CFP® principles. No sales pressure, no forced product pushing.', icon: Users },
   ];
 
   return (
