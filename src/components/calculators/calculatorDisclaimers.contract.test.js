@@ -168,8 +168,6 @@ describe('Phase 1b: unsupported claims are gone from the calculator and investme
     it(`${file} contains none of the removed claims`, () => {
       const src = read(file);
       banned.forEach(([name, re]) => {
-        // WhyUseCalculators.jsx (unrouted) still has "precision" wording; left for the owner's decision, so only that one pattern is skipped for it
-        if (name === 'accuracy claim' && file === './WhyUseCalculators.jsx') return;
         expect(re.test(src), `${file}: ${name}`).toBe(false);
       });
     });

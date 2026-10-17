@@ -31,7 +31,7 @@ export default function BottomCTA({ onOpenSearch }) {
 
           {/* Description */}
           <p className="text-base sm:text-lg text-[#5B6B84] font-inter max-w-xl mx-auto leading-relaxed">
-            A thoughtful financial strategy built around your life goals. Talk to a SEBI registered wealth advisor and organize your wealth with complete peace of mind.
+            A thoughtful financial strategy built around your life goals. Talk to a Solahana planner and organize your wealth around a clear plan.
           </p>
 
           {/* Golden Button */}
@@ -56,7 +56,7 @@ export default function BottomCTA({ onOpenSearch }) {
           {/* Security Subtext */}
           <div className="pt-6 border-t border-[#2F5BC7]/15 flex flex-wrap items-center justify-center gap-6 text-xs text-[#5B6B84]">
             <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" /> SEBI-Registered Fiduciary
+              <ShieldCheck className="w-4 h-4 text-emerald-400" /> Goal-Based Financial Planning
             </span>
             <span>•</span>
             <span className="flex items-center gap-1.5">

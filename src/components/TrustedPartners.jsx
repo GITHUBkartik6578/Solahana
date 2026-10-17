@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Award, Building2, Landmark, Lock, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Building2, Landmark, Lock, CheckCircle2 } from 'lucide-react';
 
 export default function TrustedPartners() {
   const partners = [
@@ -11,7 +11,6 @@ export default function TrustedPartners() {
     { name: 'CAMS', full: 'Computer Age Management', type: 'Registrar', icon: CheckCircle2 },
     { name: 'MCX', full: 'Multi Commodity Exchange', type: 'Exchange', icon: Landmark },
     { name: 'RBI', full: 'RBI Regulated Entities', type: 'Banking Gateway', icon: Landmark },
-    { name: 'SEBI', full: 'SEBI Registered Planning Standard', type: 'Compliance', icon: Award },
   ];
 
   // Duplicate for seamless infinite marquee loop
@@ -44,7 +43,7 @@ export default function TrustedPartners() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-sm sm:text-base text-[#475569] font-inter max-w-xl mx-auto"
         >
-          Supporting investors through trusted financial institutions, depositories, and SEBI compliance standards.
+          Supporting investors with clear information about financial institutions and depositories.
         </motion.p>
 
       </div>

@@ -7,7 +7,7 @@ export default function EstateSolutions({ onSelectSolution }) {
     {
       icon: Scroll,
       title: 'Will Planning',
-      desc: 'Legally binding Will drafting to ensure smooth asset distribution and zero family conflict.',
+      desc: 'Legally binding Will drafting to help support smooth asset distribution and reduce family disputes.',
     },
     {
       icon: Landmark,

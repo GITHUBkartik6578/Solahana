@@ -2,26 +2,29 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Compass, Calculator, TrendingUp, Target, ShieldCheck, Sparkles, PieChart, Wallet } from 'lucide-react';
 import { sipSample, emiSample } from '../../utils/calculatorSamples';
-import { SAMPLE_FIGURES_NOTE } from '../../utils/calculatorCopy';
+import { SAMPLE_FIGURES_NOTE } from '../../utils/calculatorCopy';
+import ScaledStage from '../common/ScaledStage';
 
 const SIP = sipSample();
 const EMI = emiSample();
 
 export default function CalculatorsHero({ onExploreCalculators, onStartPlanning }) {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#FFFFFF]">
+    <section className="relative overflow-hidden bg-[#FFFFFF] pt-20">
+<ScaledStage>
+<div className="relative pt-12 pb-20 @3xl:pt-20 @3xl:pb-28">
       {/* Golden Radial Background Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[500px] bg-gradient-to-br from-[#2F5BC7]/20 via-[#F7F8FB]/40 to-transparent blur-[140px] pointer-events-none rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="max-w-7xl mx-auto px-4 @2xl:px-6 @5xl:px-8 relative z-10">
+        <div className="grid grid-cols-1 @5xl:grid-cols-12 gap-12 @5xl:gap-8 items-center">
           
           {/* Left Column — Editorial Heading */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-7 space-y-6 text-left"
+            className="@5xl:col-span-7 space-y-6 text-left"
           >
             {/* Small Gold Pill */}
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#F7F8FB]/80 border border-[#2F5BC7]/40 text-[#5A7FD6] text-xs font-semibold uppercase tracking-widest font-sora shadow-[0_0_15px_rgba(26,49,112,0.2)]">
@@ -30,13 +33,13 @@ export default function CalculatorsHero({ onExploreCalculators, onStartPlanning 
             </div>
 
             {/* Main Editorial Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-luxury font-bold text-[#0F1F45] leading-[1.15] tracking-tight">
+            <h1 className="text-4xl @2xl:text-5xl @5xl:text-6xl font-serif-luxury font-bold text-[#0F1F45] leading-[1.15] tracking-tight">
               Plan Smarter With Every <br />
               <span className="text-gradient-gold">Calculation</span>.
             </h1>
 
             {/* Supporting Copy */}
-            <p className="text-lg sm:text-xl text-[#5B6B84] font-inter leading-relaxed max-w-2xl font-normal">
+            <p className="text-lg @2xl:text-xl text-[#5B6B84] font-inter leading-relaxed max-w-2xl font-normal">
               Explore simple financial calculators that help you estimate savings, investments, retirement goals, and monthly commitments with total mathematical clarity.
             </p>
 
@@ -44,7 +47,7 @@ export default function CalculatorsHero({ onExploreCalculators, onStartPlanning 
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <button
                 onClick={onExploreCalculators}
-                className="gold-glow-button px-8 py-4 rounded-full text-xs sm:text-sm font-bold tracking-wide flex items-center space-x-2.5 group"
+                className="gold-glow-button px-8 py-4 rounded-full text-xs @2xl:text-sm font-bold tracking-wide flex items-center space-x-2.5 group"
               >
                 <span>Explore Calculators</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -52,7 +55,7 @@ export default function CalculatorsHero({ onExploreCalculators, onStartPlanning 
 
               <button
                 onClick={onStartPlanning}
-                className="px-7 py-4 rounded-full text-xs sm:text-sm font-semibold text-[#0F1F45] hover:text-[#5A7FD6] bg-[#F7F8FB]/60 hover:bg-[#F7F8FB] border border-[#2F5BC7]/30 hover:border-[#2F5BC7]/60 transition-all flex items-center space-x-2"
+                className="px-7 py-4 rounded-full text-xs @2xl:text-sm font-semibold text-[#0F1F45] hover:text-[#5A7FD6] bg-[#F7F8FB]/60 hover:bg-[#F7F8FB] border border-[#2F5BC7]/30 hover:border-[#2F5BC7]/60 transition-all flex items-center space-x-2"
               >
                 <span>Start Financial Planning</span>
               </button>
@@ -80,10 +83,10 @@ export default function CalculatorsHero({ onExploreCalculators, onStartPlanning 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="lg:col-span-5 relative"
+            className="@5xl:col-span-5 relative"
           >
             {/* Dashboard Container Glass Card */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#F7F8FB]/95 via-[#F7F8FB]/70 to-[#F7F8FB]/95 border border-[#2F5BC7]/35 shadow-[0_20px_60px_rgba(2,11,45,0.9)] backdrop-blur-2xl text-left space-y-6">
+            <div className="p-6 @2xl:p-8 rounded-3xl bg-gradient-to-b from-[#F7F8FB]/95 via-[#F7F8FB]/70 to-[#F7F8FB]/95 border border-[#2F5BC7]/35 shadow-[0_20px_60px_rgba(2,11,45,0.9)] backdrop-blur-2xl text-left space-y-6">
               
               {/* Header Bar */}
               <div className="flex items-center justify-between pb-4 border-b border-[#2F5BC7]/15">
@@ -172,6 +175,8 @@ export default function CalculatorsHero({ onExploreCalculators, onStartPlanning 
 
         </div>
       </div>
-    </section>
+    </div>
+</ScaledStage>
+</section>
   );
 }

@@ -17,12 +17,12 @@ export default function WhyChooseSolahanaRisk() {
     {
       icon: Heart,
       title: 'Long-Term Family Security',
-      desc: 'Ensure your family’s core life goals—education, home ownership, and lifestyle—stay 100% on track.',
+      desc: 'Help keep your family’s core life goals—education, home ownership, and lifestyle—on track.',
     },
     {
       icon: Award,
       title: 'Transparent Planning Process',
-      desc: 'SEBI/IRDA aligned fiduciary advice with zero mis-selling, hidden commissions, or endowment drags.',
+      desc: 'Client-first insurance planning with zero mis-selling, hidden commissions, or endowment drags.',
     },
   ];
 

@@ -38,11 +38,11 @@ export default function FinancialGoals() {
     {
       title: 'Emergency Fund',
       category: 'Liquid Security Reserve',
-      desc: 'Ring-fence your family against unexpected life events with 6 to 12 months of liquid reserves in high-yield safe instruments.',
+      desc: 'Ring-fence your family against unexpected life events with 6 to 12 months of liquid reserves in lower-risk liquid instruments.',
       icon: ShieldAlert,
       progress: 100,
-      targetText: 'Reserve: ₹12.0L Fully Shielded',
-      status: '100% Secured',
+      targetText: 'Reserve target: ₹12.0L',
+      status: '100% Funded',
       color: 'from-blue-500/20 to-transparent',
     },
     {

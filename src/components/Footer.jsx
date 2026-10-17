@@ -1,4 +1,5 @@
 import React from 'react';
+import ScaledStage from './common/ScaledStage';
 import { IMPORTANT_INFORMATION } from '../data/legalPages';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -158,6 +159,9 @@ export default function Footer() {
 
   return (
     <footer className="relative z-20 overflow-hidden bg-gradient-to-b from-[#0C1C42] via-[#0A1836] to-[#07122B] text-white font-inter">
+      {/* laid out once at 1440px and scaled to the page width, so the footer keeps the same size at every zoom level */}
+      <ScaledStage>
+      <div className="relative">
       {/* gold hairline + logo-ring motif */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C9A04F]/60 to-transparent" />
       <svg className="absolute -top-40 -right-40 w-[560px] h-[560px] pointer-events-none" viewBox="0 0 560 560" fill="none" aria-hidden="true">
@@ -170,7 +174,7 @@ export default function Footer() {
       {/* Oversized brand wordmark: sits behind the footer content, so it adds depth without adding height */}
       <div aria-hidden="true" className="absolute inset-x-0 bottom-[2%] flex justify-center select-none pointer-events-none">
         <p
-          className="font-serif-luxury font-extrabold leading-[0.8] tracking-[-0.04em] text-[17vw] whitespace-nowrap bg-clip-text text-transparent [-webkit-background-clip:text] [mask-image:linear-gradient(to_bottom,transparent_0%,black_30%,black_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_30%,black_100%)]"
+          className="font-serif-luxury font-extrabold leading-[0.8] tracking-[-0.04em] text-[17cqw] whitespace-nowrap bg-clip-text text-transparent [-webkit-background-clip:text] [mask-image:linear-gradient(to_bottom,transparent_0%,black_30%,black_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_30%,black_100%)]"
           style={{
             // left half warm gold, right half light blue, meeting in a soft blend at the middle
             backgroundImage:
@@ -181,13 +185,13 @@ export default function Footer() {
         </p>
       </div>
 
-      <div className="relative z-10 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-7 sm:pt-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-[1.25fr_0.95fr_0.9fr_1.3fr_0.95fr] gap-10 xl:gap-0">
+      <div className="relative z-10 max-w-[1320px] mx-auto px-4 @2xl:px-6 @5xl:px-8 pt-7 @2xl:pt-8">
+        <div className="grid grid-cols-1 @2xl:grid-cols-2 @7xl:grid-cols-[1.25fr_0.95fr_0.9fr_1.3fr_0.95fr] gap-10 @7xl:gap-0">
           {/* Brand */}
-          <div className="sm:col-span-2 xl:col-span-1 xl:pr-8">
+          <div className="@2xl:col-span-2 @7xl:col-span-1 @7xl:pr-8">
             <button onClick={() => go('home')} className="group block cursor-pointer" title="SOLAHANA Home" aria-label="SOLAHANA Home">
               <span className="inline-block rounded-2xl bg-[#FEFDF9] px-3 py-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.3)] ring-1 ring-[#E2B24E]/40">
-                <img src={solahanaLogo} alt="SOLAHANA" className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-[1.02]" />
+                <img src={solahanaLogo} alt="SOLAHANA" className="h-8 @2xl:h-9 w-auto object-contain transition-transform group-hover:scale-[1.02]" />
               </span>
             </button>
             <p className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.3em] text-[#AEBBD3]">Family Office &amp; Wealth Platform</p>
@@ -220,20 +224,20 @@ export default function Footer() {
           </div>
 
           {/* Link columns, separated by a hairline on desktop */}
-          <div className="xl:border-l xl:border-white/15 xl:px-6">
+          <div className="@7xl:border-l @7xl:border-white/15 @7xl:px-6">
             <Column title="Our Planning Services" items={SERVICES} />
           </div>
-          <div className="xl:border-l xl:border-white/15 xl:px-6">
+          <div className="@7xl:border-l @7xl:border-white/15 @7xl:px-6">
             <Column title="Who We Serve" items={WHO} />
           </div>
-          <div className="xl:border-l xl:border-white/15 xl:px-6">
+          <div className="@7xl:border-l @7xl:border-white/15 @7xl:px-6">
             <Column title="Our Professional Network & Assets" items={NETWORK}>
               <p className="mt-3 text-[11px] leading-snug text-[#AEBBD3]">
                 We collaborate with trusted professionals and authorized institutional partners across asset classes and advisory segments, subject to their respective terms and conditions, to implement holistic family wealth solutions.
               </p>
             </Column>
           </div>
-          <div className="xl:border-l xl:border-white/15 xl:pl-6">
+          <div className="@7xl:border-l @7xl:border-white/15 @7xl:pl-6">
             <Column title="About Solahana" items={ABOUT}>
               <button
                 onClick={() => go('contact')}
@@ -258,7 +262,7 @@ export default function Footer() {
 
         {/* Important information strip */}
         <div className="mt-5 h-px bg-gradient-to-r from-transparent via-[#E2B24E]/50 to-transparent" />
-        <div className="py-3 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 items-center">
+        <div className="py-3 grid grid-cols-1 @5xl:grid-cols-[1fr_auto] gap-6 @5xl:gap-10 items-center">
           <div className="flex items-start gap-4">
             <Shield className="w-7 h-7 shrink-0 text-[#E2B24E]" strokeWidth={1.4} />
             <div>
@@ -270,7 +274,7 @@ export default function Footer() {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-4 lg:border-l lg:border-white/15 lg:pl-10">
+          <div className="flex items-center gap-4 @5xl:border-l @5xl:border-white/15 @5xl:pl-10">
             <Leaf className="w-7 h-7 shrink-0 text-[#E2B24E]" strokeWidth={1.4} />
             <p style={serif} className="text-[15px] leading-snug text-white">
               Professional Planning.
@@ -282,7 +286,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-        <div className="py-2.5 flex flex-col md:flex-row items-center justify-between gap-4 text-[12.5px] text-[#AEBBD3]">
+        <div className="py-2.5 flex flex-col @3xl:flex-row items-center justify-between gap-4 text-[12.5px] text-[#AEBBD3]">
           <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2" aria-label="Legal">
             {LEGAL.map((l, i) => (
               <React.Fragment key={l.name}>
@@ -297,6 +301,8 @@ export default function Footer() {
         </div>
       </div>
 
+      </div>
+      </ScaledStage>
     </footer>
   );
 }

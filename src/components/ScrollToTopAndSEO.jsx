@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { scrollToConsultation, CONSULT_HASH, CONSULT_SECTION_ID } from '../utils/consultation';
 
 const ROUTE_TITLES = {
-  '/': 'SOLAHANA — Fiduciary Wealth Management & Financial Planning',
+  '/': 'SOLAHANA — Financial Planning for Indian Families',
   '/about': 'About Us — SOLAHANA Financial Planning',
   '/who-we-serve': 'Who We Serve — SOLAHANA Financial Planning',
   '/our-experts': 'Our Experts — SOLAHANA Financial Planning',
@@ -25,7 +25,7 @@ const ROUTE_TITLES = {
   '/calculators/fd': 'FD Return Calculator — SOLAHANA',
   '/calculators/inflation': 'Inflation Impact Calculator — SOLAHANA',
   '/blogs': 'Financial Intelligence & Insights — SOLAHANA Blog',
-  '/contact': 'Schedule Fiduciary Consultation — SOLAHANA',
+  '/contact': 'Schedule a Planning Consultation — SOLAHANA',
   '/contact-us': 'Contact — SOLAHANA',
   '/privacy-policy': 'Privacy Policy — SOLAHANA',
   '/terms-of-use': 'Terms of Use — SOLAHANA',
@@ -57,7 +57,7 @@ export default function ScrollToTopAndSEO() {
       document.title = 'Admin Portal — SOLAHANA';
     } else if (!pathname.startsWith('/invest/')) {
       // /invest/* pages set their own, more specific title.
-      document.title = 'SOLAHANA — Fiduciary Financial Planning';
+      document.title = 'SOLAHANA — Financial Planning';
     }
 
     // "#book" (or the section id) means: take the visitor straight to the consultation form.

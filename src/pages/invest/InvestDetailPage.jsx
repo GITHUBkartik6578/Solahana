@@ -13,6 +13,7 @@ import {
 import { useNavigate, useParams } from 'react-router-dom';
 import { INVEST_OPTIONS } from '../../data/investData';
 import InvestHeroIllustration from '../../components/invest/InvestHeroIllustration';
+import ScaledStage from '../../components/common/ScaledStage';
 
 export default function InvestDetailPage({ optionKey }) {
   const navigate = useNavigate();
@@ -40,11 +41,13 @@ export default function InvestDetailPage({ optionKey }) {
       {/* ========================================================= */}
       {/* 1. HERO SECTION WITH HUMAN MINIATURE / ILLUSTRATION       */}
       {/* ========================================================= */}
-      <section className="relative pt-24 pb-14 lg:pt-32 lg:pb-20 overflow-hidden bg-gradient-to-b from-[#FFFFFF] via-[#F7F8FB] to-[#FFFFFF] border-b border-[#2F5BC7]/15">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#FFFFFF] via-[#F7F8FB] to-[#FFFFFF] border-b border-[#2F5BC7]/15 pt-20">
+<ScaledStage>
+<div className="relative pt-4 pb-14 @5xl:pt-12 @5xl:pb-20">
         {/* Glow backlight */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#2F5BC7]/10 rounded-full blur-[160px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 @2xl:px-6 @5xl:px-8 relative z-10">
           
           {/* Breadcrumbs */}
           <div className="flex items-center gap-2 text-xs font-semibold text-[#64748B] mb-6">
@@ -55,25 +58,25 @@ export default function InvestDetailPage({ optionKey }) {
             <span className="text-[#1A3170] font-bold">{data.title}</span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 @5xl:grid-cols-12 gap-10 @5xl:gap-12 items-center">
             
             {/* Left Content */}
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="lg:col-span-6 space-y-5 text-left"
+              className="@5xl:col-span-6 space-y-5 text-left"
             >
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EEF2FB] text-xs font-mono font-bold uppercase tracking-widest text-[#1A3170]">
                 <Sparkles className="w-3.5 h-3.5 text-[#C9A04F]" />
                 <span>{data.tag}</span>
               </div>
 
-              <h1 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0F1F45] leading-tight tracking-tight">
+              <h1 className="font-serif-luxury text-3xl @2xl:text-5xl @5xl:text-6xl font-bold text-[#0F1F45] leading-tight tracking-tight">
                 {data.headline}
               </h1>
 
-              <p className="text-base sm:text-lg text-[#475569] font-normal leading-relaxed max-w-xl line-clamp-2">
+              <p className="text-base @2xl:text-lg text-[#475569] font-normal leading-relaxed max-w-xl line-clamp-2">
                 {data.description}
               </p>
 
@@ -81,8 +84,8 @@ export default function InvestDetailPage({ optionKey }) {
               <div className="grid grid-cols-3 gap-4 pt-3 border-t border-[#E4E8F0]/60">
                 {data.keyStats.map((stat, idx) => (
                   <div key={idx} className="p-3.5 rounded-2xl bg-white border border-[#E4E8F0]/80 shadow-sm">
-                    <div className="text-base sm:text-xl font-bold font-mono text-[#1A3170]">{stat.value}</div>
-                    <div className="text-[11px] sm:text-xs text-[#64748B] mt-0.5">{stat.label}</div>
+                    <div className="text-base @2xl:text-xl font-bold font-mono text-[#1A3170]">{stat.value}</div>
+                    <div className="text-[11px] @2xl:text-xs text-[#64748B] mt-0.5">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -91,7 +94,7 @@ export default function InvestDetailPage({ optionKey }) {
               <div className="pt-3 flex flex-wrap items-center gap-4">
                 <button
                   onClick={scrollToConsultation}
-                  className="gold-glow-button px-8 py-4 rounded-full text-xs sm:text-sm font-bold text-white tracking-wide flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-xl transition-all"
+                  className="gold-glow-button px-8 py-4 rounded-full text-xs @2xl:text-sm font-bold text-white tracking-wide flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-xl transition-all"
                 >
                   <span>Get Started</span>
                   <ArrowRight className="w-4 h-4" />
@@ -99,7 +102,7 @@ export default function InvestDetailPage({ optionKey }) {
 
                 <button
                   onClick={() => navigate('/contact')}
-                  className="px-7 py-4 rounded-full border border-[#2F5BC7] text-xs sm:text-sm font-bold text-[#0F1F45] bg-white hover:bg-[#2F5BC7]/10 transition-all cursor-pointer flex items-center gap-2"
+                  className="px-7 py-4 rounded-full border border-[#2F5BC7] text-xs @2xl:text-sm font-bold text-[#0F1F45] bg-white hover:bg-[#2F5BC7]/10 transition-all cursor-pointer flex items-center gap-2"
                 >
                   <ShieldCheck className="w-4 h-4 text-[#2F5BC7]" />
                   <span>Talk to Fiduciary Advisor</span>
@@ -113,15 +116,17 @@ export default function InvestDetailPage({ optionKey }) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="lg:col-span-6 flex justify-center"
+              className="@5xl:col-span-6 flex justify-center"
             >
-              <div className="relative w-full max-w-[500px] sm:max-w-[560px] lg:max-w-[640px] p-6 rounded-3xl bg-white/80 border border-[#2F5BC7]/30 shadow-2xl backdrop-blur-xl overflow-hidden flex items-center justify-center">
+              <div className="relative w-full max-w-[500px] @2xl:max-w-[560px] @5xl:max-w-[640px] p-6 rounded-3xl bg-white/80 border border-[#2F5BC7]/30 shadow-2xl backdrop-blur-xl overflow-hidden flex items-center justify-center">
                 <InvestHeroIllustration type={data.slug} />
               </div>
             </motion.div>
 
           </div>
         </div>
+      </div>
+</ScaledStage>
       </section>
 
       {/* ========================================================= */}

@@ -12,8 +12,8 @@ const reasons = [
   {
     icon: Compass,
     title: 'Realistic Goal Setting',
-    description: 'Map out exact timeframes, inflation factors, and required monthly allocations for key milestones.',
-    metric: 'Precision Forecasting'
+    description: 'Map out estimated timeframes, inflation factors, and required monthly allocations for key milestones.',
+    metric: 'Goal Estimates'
   },
   {
     icon: Wallet,
@@ -70,7 +70,7 @@ export const WhyUseCalculators = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-[#5B6B84] text-base md:text-lg font-light leading-relaxed"
           >
-            Mathematical confidence eliminates ambiguity. Solahana’s precision calculators provide the exact clarity you need to craft an unshakeable wealth roadmap.
+            Calculators turn your assumptions into clear estimates. Use them to start building a wealth roadmap, and revisit them as your plans change.
           </motion.p>
         </div>
 

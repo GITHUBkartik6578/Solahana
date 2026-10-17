@@ -52,7 +52,7 @@ export default function InvestmentCategories() {
             Investment Planning Solutions
           </h2>
           <p className="text-sm sm:text-base text-[#475569]">
-            Diversify seamlessly across asset classes engineered for optimal risk-adjusted returns.
+            Diversify across asset classes to match your goals, time horizon and risk tolerance.
           </p>
         </div>
 

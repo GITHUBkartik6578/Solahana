@@ -126,7 +126,7 @@ export default function HeroDashboard() {
         {/* Dashboard Footer Badge */}
         <div className="mt-5 pt-3 border-t border-[#2F5BC7]/15 flex items-center justify-between text-[11px] text-[#5B6B84]">
           <span className="flex items-center gap-1">
-            <Lock className="w-3.5 h-3.5 text-[#2F5BC7]" /> 100% Inflation Protected
+            <Lock className="w-3.5 h-3.5 text-[#2F5BC7]" /> Inflation-Adjusted Planning
           </span>
           <span className="text-[#5A7FD6] font-semibold font-sora">
             Next Milestone: 2028

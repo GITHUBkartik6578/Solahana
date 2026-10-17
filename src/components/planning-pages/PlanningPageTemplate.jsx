@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 
 import { openConsultation } from '../../data/whoWeServe';
 import HeroBanner from '../common/HeroBanner';
+import ScaledStage from '../common/ScaledStage';
 
 // Photos cropped from the design mock-ups and upscaled: planning/<page>-<name>.webp
 const ART = import.meta.glob('../../assets/planning/*.webp', { eager: true, import: 'default' });
@@ -56,34 +57,32 @@ function Hero({ cfg }) {
   const b = cfg.banner;
   return (
     <>
-    {/* Optional full-width hero banner (desktop only); its two baked-in buttons get invisible click areas */}
+    {/* Optional full-width hero banner (tablet and up), scaled to the page width at every zoom level; its two baked-in buttons get invisible click areas */}
     {b && (
       <HeroBanner
         src={artFile(b.file)}
         alt={b.alt}
         ratio={b.ratio}
-        maxVw={b.maxVw}
-        fit={b.fit}
-        minH={b.minH}
-        capped={b.capped}
-        fadeBottom={b.fadeBottom}
         hotspots={[
           { label: cfg.primaryCta, onClick: goCalc, style: b.primary },
           { label: 'Request a Private Consultation', onClick: () => consult(cfg), style: b.secondary },
         ]}
       />
     )}
-    <section className={`relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]${b ? ' lg:hidden' : ''}`}>
+    <section className={`relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]${b ? ' sm:hidden any-pointer-fine:hidden' : ''}`}>
+      {/* laid out once at 1440px and scaled to the page width (tablet and up), so the hero looks the same at every zoom level */}
+      <ScaledStage>
+      <div className="relative">
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 top-10 h-[480px] w-[480px] rounded-full bg-[#C9922E]/15 blur-[120px]" />
-      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:min-h-[clamp(520px,calc(100svh-80px),700px)] lg:grid-cols-1 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:max-w-[52%] lg:py-12">
+      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 @2xl:px-6 @5xl:min-h-[640px] @5xl:grid-cols-1 @5xl:px-8">
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 @5xl:max-w-[52%] @5xl:py-12">
           <Eyebrow light>{cfg.eyebrow}</Eyebrow>
-          <h1 style={serif} className="[text-wrap:balance] mt-5 text-[34px] font-semibold leading-[1.1] tracking-[-0.01em] text-white sm:text-[44px] lg:text-[clamp(34px,3.5vw,50px)]">
+          <h1 style={serif} className="[text-wrap:balance] mt-5 text-[34px] font-semibold leading-[1.1] tracking-[-0.01em] text-white @2xl:text-[44px] @5xl:text-[50px]">
             <span className="text-[#E2B24E]"><Lines lines={cfg.titleGold} /></span>
             <Lines lines={cfg.titleWhite} />
           </h1>
-          <p className="[text-wrap:pretty] mt-5 max-w-[56ch] text-[15px] leading-relaxed text-slate-200 sm:text-[16.5px]">{cfg.text}</p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <p className="[text-wrap:pretty] mt-5 max-w-[56ch] text-[15px] leading-relaxed text-slate-200 @2xl:text-[16.5px]">{cfg.text}</p>
+          <div className="mt-7 flex flex-col gap-3 @2xl:flex-row @2xl:flex-wrap">
             <button
               type="button"
               onClick={goCalc}
@@ -100,7 +99,7 @@ function Hero({ cfg }) {
               Request a Private Consultation
             </button>
           </div>
-          <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <ul className="mt-8 grid grid-cols-1 gap-4 @2xl:grid-cols-3">
             {cfg.trust.map((t) => {
               const Icon = t.icon;
               return (
@@ -119,19 +118,29 @@ function Hero({ cfg }) {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className={`${cfg.heroClear ? '[container-type:size] ' : ''}relative mx-auto h-[360px] w-full max-w-[560px] overflow-hidden sm:h-[440px] lg:absolute lg:bottom-0 lg:right-0 lg:top-[80px] lg:h-auto lg:w-[50%] lg:self-stretch lg:max-w-none`}
+          className={`${cfg.heroClear ? '[container-type:size] ' : ''}relative mx-auto h-[360px] w-full max-w-[560px] overflow-hidden @2xl:h-[440px] @5xl:absolute @5xl:bottom-0 @5xl:right-0 @5xl:top-0 @5xl:h-auto @5xl:w-[50%] @5xl:self-stretch @5xl:max-w-none`}
         >
-          {/* soft copy of the photo fills the space beside it */}
-          <img src={heroSrc(cfg)} alt="" aria-hidden="true" draggable="false" className={`absolute inset-0 h-full w-full scale-125 object-cover blur-2xl ${cfg.heroClear ? 'opacity-40 [mask-image:linear-gradient(to_right,transparent,black_40%)]' : 'opacity-50'}`} />
           <div
-            style={cfg.heroClear ? { aspectRatio: cfg.heroAspect, width: `min(100cqw, ${cfg.heroAspect * 100}cqh)` } : { aspectRatio: cfg.heroAspect }}
-            className={`absolute right-0 max-w-none [mask-image:linear-gradient(to_right,transparent,black_22%)] ${cfg.heroClear ? 'bottom-0' : 'inset-y-0 h-full'}`}
+            style={
+              cfg.heroClear
+                ? {
+                    aspectRatio: cfg.heroAspect,
+                    width: `min(100cqw, ${cfg.heroAspect * 100}cqh)`,
+                    // the photo may be shorter than the panel: fade its top edge (as well as its left) into the navy, so no hard edge or blurred filler shows
+                    WebkitMaskImage: 'linear-gradient(to right, transparent, black 22%), linear-gradient(to bottom, transparent, black 12%)',
+                    maskImage: 'linear-gradient(to right, transparent, black 22%), linear-gradient(to bottom, transparent, black 12%)',
+                    WebkitMaskComposite: 'source-in',
+                    maskComposite: 'intersect',
+                  }
+                : { aspectRatio: cfg.heroAspect }
+            }
+            className={`absolute right-0 max-w-none ${cfg.heroClear ? 'bottom-0' : '[mask-image:linear-gradient(to_right,transparent,black_22%)] inset-y-0 h-full'}`}
           >
             <img src={heroSrc(cfg)} alt="Amit R. Pandey, Chartered Wealth Manager" draggable="false" className="h-full w-full" />
             {cfg.taglineBox && (
               <p
                 style={{ ...serif, left: `${cfg.taglineBox.x * 100}%`, top: `${cfg.taglineBox.y * 100}%`, width: `${cfg.taglineBox.w * 100}%`, textAlign: cfg.taglineBox.align }}
-                className="absolute hidden text-[19px] font-medium italic leading-snug text-[#F1D9A3] drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] sm:block lg:text-[23px]"
+                className="absolute hidden text-[19px] font-medium italic leading-snug text-[#F1D9A3] drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] @2xl:block @5xl:text-[23px]"
               >
                 {cfg.tagline.map((l) => (
                   <span key={l} className="block">{l}</span>
@@ -143,6 +152,8 @@ function Hero({ cfg }) {
           {!cfg.heroClear && <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0F1F45] via-transparent to-transparent" />}
         </motion.div>
       </div>
+      </div>
+      </ScaledStage>
     </section>
     </>
   );

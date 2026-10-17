@@ -197,7 +197,7 @@ export default function AIWealthAdvisor() {
                     </div>
                     <div className="text-[11px] text-[#5B6B84] flex items-center gap-1">
                       <ShieldCheck className="w-3 h-3 text-emerald-400" />
-                      <span>256-Bit Encrypted • SEBI Regulated</span>
+                      <span>256-Bit Encrypted</span>
                     </div>
                   </div>
                 </div>

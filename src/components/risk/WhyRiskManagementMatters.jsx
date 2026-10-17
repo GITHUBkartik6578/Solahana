@@ -7,7 +7,7 @@ export default function WhyRiskManagementMatters() {
     {
       icon: ShieldCheck,
       title: 'Family Protection',
-      description: 'Ensure your dependents maintain complete financial security and lifestyle continuity under any unforeseen life event.',
+      description: 'Plan to help your dependents maintain financial security and lifestyle continuity after an unforeseen life event.',
     },
     {
       icon: Wallet,

@@ -30,7 +30,7 @@ const AREAS = [
   },
   {
     title: 'Legacy & Inheritance Planning',
-    desc: 'Estate planning to ensure seamless asset transfer to beneficiaries.',
+    desc: 'Estate planning to help with a smoother transfer of assets to beneficiaries.',
     to: '/estate-planning',
   },
   {
