@@ -7,9 +7,9 @@ import HeroBanner from '../common/HeroBanner';
 import ScaledStage from '../common/ScaledStage';
 
 // Photos cropped from the design mock-ups and upscaled: planning/<page>-<name>.webp
-const ART = import.meta.glob('../../assets/planning/*.webp', { eager: true, import: 'default' });
+const ART = import.meta.glob('../../assets/planning/*.{webp,jpg}', { eager: true, import: 'default' });
 const art = (cfg, name) => ART[`../../assets/planning/${cfg.art}-${name}.webp`];
-const artFile = (file) => ART[`../../assets/planning/${file}.webp`];
+const artFile = (file) => ART[`../../assets/planning/${file}.webp`] ?? ART[`../../assets/planning/${file}.jpg`];
 const heroSrc = (cfg) => (cfg.heroFile ? artFile(cfg.heroFile) : art(cfg, 'hero'));
 const ctaSrc = (cfg) => (cfg.ctaFile ? artFile(cfg.ctaFile) : art(cfg, 'cta'));
 
@@ -47,6 +47,27 @@ function Lines({ lines }) {
   ));
 }
 
+/** The full-width banner picture of a page (cfg.banner) with invisible click areas over its two baked-in buttons. */
+function BannerHero({ cfg }) {
+  const b = cfg.banner;
+  const goCalc = () => {
+    const el = cfg.calculatorId && document.getElementById(cfg.calculatorId);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    else consult(cfg);
+  };
+  return (
+    <HeroBanner
+      src={artFile(b.file)}
+      alt={b.alt}
+      ratio={b.ratio}
+      hotspots={[
+        { label: cfg.primaryCta, onClick: goCalc, style: b.primary },
+        { label: 'Request a Private Consultation', onClick: () => consult(cfg), style: b.secondary },
+      ]}
+    />
+  );
+}
+
 /* ------------------------------------------------------------------ */
 function Hero({ cfg }) {
   const goCalc = () => {
@@ -58,17 +79,7 @@ function Hero({ cfg }) {
   return (
     <>
     {/* Optional full-width hero banner (tablet and up), scaled to the page width at every zoom level; its two baked-in buttons get invisible click areas */}
-    {b && (
-      <HeroBanner
-        src={artFile(b.file)}
-        alt={b.alt}
-        ratio={b.ratio}
-        hotspots={[
-          { label: cfg.primaryCta, onClick: goCalc, style: b.primary },
-          { label: 'Request a Private Consultation', onClick: () => consult(cfg), style: b.secondary },
-        ]}
-      />
-    )}
+    {b && <BannerHero cfg={cfg} />}
     <section className={`relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]${b ? ' sm:hidden any-pointer-fine:hidden' : ''}`}>
       {/* laid out once at 1440px and scaled to the page width (tablet and up), so the hero looks the same at every zoom level */}
       <ScaledStage>
@@ -373,7 +384,17 @@ function Cta({ cfg }) {
 export function PlanningTop({ config, pillarsId }) {
   return (
     <>
-      {config.HeroSection ? <config.HeroSection cfg={config} /> : <Hero cfg={config} />}
+      {config.HeroSection ? (
+        <>
+          {/* a page with its own hero may also have a banner picture for tablet and up; phones keep the live-text hero */}
+          {config.banner && <BannerHero cfg={config} />}
+          <div className={config.banner ? 'sm:hidden any-pointer-fine:hidden' : undefined}>
+            <config.HeroSection cfg={config} />
+          </div>
+        </>
+      ) : (
+        <Hero cfg={config} />
+      )}
       {config.PhilosophySection ? <config.PhilosophySection cfg={config} /> : <Philosophy cfg={config} />}
       {/* a page may bring its own versions of these two sections (config.PillarsSection / StewardshipSection) */}
       {config.PillarsSection ? <config.PillarsSection cfg={config} sectionId={pillarsId} /> : <Pillars cfg={config} sectionId={pillarsId} />}

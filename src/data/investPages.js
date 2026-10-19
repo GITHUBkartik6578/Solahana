@@ -315,6 +315,13 @@ export const EQUITY_PAGE = {
   ...COMMON,
   id: 'equities',
   heroAspect: 912 / 1096,
+  banner: {
+    file: 'eq-banner',
+    alt: 'Equities, International Investing and IPOs. Direct Equity and Global Architecture. High-Conviction Growth, Worldwide Reach.',
+    ratio: 1600 / 666,
+    primary: { left: '5.81%', top: '73.87%', width: '18.38%', height: '6.76%' },
+    secondary: { left: '25.69%', top: '73.87%', width: '17.19%', height: '6.76%' },
+  },
   art: 'eq',
   eyebrow: 'Equities, International Investing & IPOs',
   titleGold: ['Direct Equity &', 'Global Architecture.'],
