@@ -159,9 +159,9 @@ export function PhotoHero({ cfg }) {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="relative mx-auto h-[320px] w-full max-w-[560px] overflow-hidden @2xl:h-[420px] @5xl:mx-0 @5xl:h-auto @5xl:w-[calc(100%+max(0px,(100cqw-1320px)/2)+2rem)] @5xl:max-w-none [mask-image:linear-gradient(to_right,transparent,black_18%)]"
+          className="relative mx-auto h-[370px] w-full max-w-[560px] overflow-hidden @2xl:h-[420px] @5xl:mx-0 @5xl:h-auto @5xl:w-[calc(100%+max(0px,(100cqw-1320px)/2)+2rem)] @5xl:max-w-none [mask-image:linear-gradient(to_right,transparent,black_18%)]"
         >
-          <img src={art(cfg, 'hero')} alt={cfg.eyebrow} draggable="false" className="absolute inset-0 h-full w-full object-cover object-[50%_28%]" />
+          <img src={art(cfg, 'hero')} alt={cfg.eyebrow} draggable="false" className="absolute inset-0 h-full w-full object-cover object-[50%_0%] @2xl:object-[50%_28%]" />
         </motion.div>
       </div>
       </ScaledStage>

@@ -131,3 +131,37 @@ describe('investment page heroes are zoom-invariant', () => {
     expect(hero).not.toMatch(/(?:sm|md|lg|xl):/);
   });
 });
+
+describe('phone-only hero photo framing (Real Estate, PMS, Financial Planning, Equities)', () => {
+  const invest = read('../../data/investPages.js');
+  const pageSrc = (name) => invest.slice(invest.indexOf(`export const ${name}`), invest.indexOf('export const', invest.indexOf(`export const ${name}`) + 10));
+  const design = read('../invest/DesignSections.jsx');
+  const fpPage = read('../../pages/FinancialPlanningPage.jsx');
+
+  it('only Real Estate and PMS opt in to the whole-photo phone panel; the other pages keep their panels', () => {
+    expect(pageSrc('REAL_ESTATE_PAGE')).toContain('mobileFullPhoto: true');
+    expect(pageSrc('PMS_AIF_PAGE')).toContain('mobileFullPhoto: true');
+    ['MUTUAL_FUNDS_PAGE', 'BONDS_PAGE', 'EQUITY_PAGE'].forEach((n) => expect(pageSrc(n), n).not.toContain('mobileFullPhoto'));
+    expect(read('../../data/planningPages.js')).not.toContain('mobileFullPhoto');
+  });
+
+  it('the template gives an opted-in page a panel with the photo own aspect ratio on phones and restores the old sizes from the tablet container width up', () => {
+    expect(template).toContain("cfg.mobileFullPhoto ? 'aspect-(--hero-ar) @2xl:aspect-auto' : 'h-[360px]'");
+    expect(template).toContain("'--hero-ar': cfg.heroAspect");
+    expect(template).toContain('inset-0 h-full w-full @2xl:inset-auto @2xl:inset-y-0 @2xl:right-0 @2xl:w-auto');
+  });
+
+  it('Equities: 370px phone panel framed from the top, tablet framing unchanged', () => {
+    const photo = design.slice(design.indexOf('export function PhotoHero'), design.indexOf('export function IconPhilosophy'));
+    expect(photo).toContain('h-[370px]');
+    expect(photo).not.toContain('h-[320px]');
+    expect(photo).toContain('object-[50%_0%] @2xl:object-[50%_28%]');
+  });
+
+  it('Financial Planning: phones use the text-free fp-hero.webp, the desktop banner still uses fp-hero-banner.webp', () => {
+    expect(fpPage).toContain("import heroPhoto from '../assets/planning/fp-hero.webp'");
+    expect(fpPage).toContain("import heroBanner from '../assets/planning/fp-hero-banner.webp'");
+    expect(fpPage).toMatch(/src=\{heroPhoto\}[\s\S]{0,200}object-\[60%_40%\]/);
+    expect(fpPage).toMatch(/<HeroBanner[\s\S]{0,60}src=\{heroBanner\}/);
+  });
+});

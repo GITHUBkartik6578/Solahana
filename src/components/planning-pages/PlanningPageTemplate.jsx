@@ -129,7 +129,8 @@ function Hero({ cfg }) {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className={`${cfg.heroClear ? '[container-type:size] ' : ''}relative mx-auto h-[360px] w-full max-w-[560px] overflow-hidden @2xl:h-[440px] @5xl:absolute @5xl:bottom-0 @5xl:right-0 @5xl:top-0 @5xl:h-auto @5xl:w-[50%] @5xl:self-stretch @5xl:max-w-none`}
+          style={cfg.mobileFullPhoto ? { '--hero-ar': cfg.heroAspect } : undefined}
+          className={`${cfg.heroClear ? '[container-type:size] ' : ''}relative mx-auto ${cfg.mobileFullPhoto ? 'aspect-(--hero-ar) @2xl:aspect-auto' : 'h-[360px]'} w-full max-w-[560px] overflow-hidden @2xl:h-[440px] @5xl:absolute @5xl:bottom-0 @5xl:right-0 @5xl:top-0 @5xl:h-auto @5xl:w-[50%] @5xl:self-stretch @5xl:max-w-none`}
         >
           <div
             style={
@@ -145,7 +146,7 @@ function Hero({ cfg }) {
                   }
                 : { aspectRatio: cfg.heroAspect }
             }
-            className={`absolute right-0 max-w-none ${cfg.heroClear ? 'bottom-0' : '[mask-image:linear-gradient(to_right,transparent,black_22%)] inset-y-0 h-full'}`}
+            className={`absolute right-0 max-w-none ${cfg.heroClear ? 'bottom-0' : `[mask-image:linear-gradient(to_right,transparent,black_22%)] ${cfg.mobileFullPhoto ? 'inset-0 h-full w-full @2xl:inset-auto @2xl:inset-y-0 @2xl:right-0 @2xl:w-auto' : 'inset-y-0 h-full'}`}`}
           >
             <img src={heroSrc(cfg)} alt="Amit R. Pandey, Chartered Wealth Manager" draggable="false" className="h-full w-full" />
             {cfg.taglineBox && (

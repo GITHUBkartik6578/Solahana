@@ -95,6 +95,7 @@ export const PMS_AIF_PAGE = {
   ...COMMON,
   id: 'pms-aif-sif',
   heroAspect: 880 / 500,
+  mobileFullPhoto: true, // phones: show the whole photo instead of a right-anchored crop (the subject was cut off)
   banner: {
     file: 'pms-banner',
     alt: 'PMS, AIF and SIF. Alternative and Strategic Wealth Architecture. Beyond conventional horizons.',
@@ -169,6 +170,7 @@ export const REAL_ESTATE_PAGE = {
   ...COMMON,
   id: 'real-estate',
   heroAspect: 840 / 662,
+  mobileFullPhoto: true, // phones: show the whole photo instead of a right-anchored crop (the subject was cut off)
   banner: {
     file: 're-banner',
     alt: 'Real Estate, REITs and Fractional Ownership. Real Estate Architecture. Tangible assets, liquid yields.',

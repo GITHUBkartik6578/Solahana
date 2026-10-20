@@ -9,6 +9,7 @@ import {
 
 // Photos cropped from the owner's Financial Planning design and upscaled (src/assets/planning/fp-*.webp)
 import heroBanner from '../assets/planning/fp-hero-banner.webp';
+import heroPhoto from '../assets/planning/fp-hero.webp'; // phones: the text-free photo instead of the wide banner cropped to ~40%
 import archFinancial from '../assets/services/financial.webp';
 import archInvest from '../assets/services/investment.webp';
 import archRetire from '../assets/services/retirement.webp';
@@ -209,10 +210,10 @@ function Hero() {
           className="relative mx-auto h-[340px] w-full max-w-[560px] overflow-hidden sm:h-[440px] lg:absolute lg:bottom-0 lg:right-0 lg:top-[80px] lg:h-auto lg:w-[54%] lg:max-w-none [mask-image:linear-gradient(to_right,transparent,black_10%)]"
         >
           <img
-            src={heroBanner}
+            src={heroPhoto}
             alt="Chartered wealth manager at his desk"
             draggable="false"
-            className="absolute inset-0 h-full w-full object-cover object-[78%_40%]"
+            className="absolute inset-0 h-full w-full object-cover object-[60%_40%]"
           />
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-[#0F1F45] to-transparent lg:hidden" />
         </motion.div>
