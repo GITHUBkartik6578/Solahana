@@ -74,7 +74,7 @@ const SEGMENTS = [
 
 const DISTINCTIONS = [
   { icon: GraduationCap, title: 'Certified Expertise', desc: 'Strategic guidance rooted in rigorous CWM® and CFP® methodologies.' },
-  { icon: ShieldCheck, title: 'Independent Model', desc: 'Zero product pushing; your portfolio is built strictly on merit and your family’s best interests.' },
+  { icon: ShieldCheck, title: 'Independent Model', desc: 'Your portfolio is built around your goals and your family’s best interests.' },
   { icon: Landmark, title: 'Institutional Execution', desc: 'Safe and transparent routing through verified SEBI and AMFI-registered channel partners.' },
 ];
 
@@ -144,9 +144,7 @@ function Hero() {
       src={heroBanner}
       alt="Who We Serve. Tailored Wealth Architecture for Distinct Ambitions."
       ratio={1599 / 650}
-      fit={0.93}
-      minH={400}
-      overlay={<JourneysPanel />}
+            overlay={<JourneysPanel />}
       hotspots={[
         { label: 'Schedule Your Private Consultation', onClick: () => openConsultation(), style: { left: '3.9%', top: '86%', width: '26.7%', height: '9.2%' } },
         { label: 'Explore Our Approach', onClick: () => navigate('/our-process'), style: { left: '31.9%', top: '86%', width: '16.4%', height: '9.2%' } },
@@ -154,7 +152,7 @@ function Hero() {
     />
 
     {/* Tablet / mobile: live-text hero */}
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px] lg:hidden">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px] sm:hidden any-pointer-fine:hidden">
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 top-10 h-[480px] w-[480px] rounded-full bg-[#C9922E]/15 blur-[120px]" />
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:min-h-[clamp(520px,calc(100svh-80px),680px)] lg:px-8">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:max-w-[52%] lg:py-12">
@@ -269,7 +267,7 @@ function Fiduciary() {
         <motion.div {...fade} className="px-4 py-10 sm:px-8 lg:py-8 lg:pl-10 lg:pr-8">
           <Eyebrow>The Fiduciary Distinction</Eyebrow>
           <h2 style={serif} className="[text-wrap:balance] mt-3 text-[28px] font-semibold leading-[1.1] text-[#0F1F45] sm:text-[36px]">
-            Engineered for Absolute Clarity and Zero Bias
+            Built for Clarity and Objectivity
           </h2>
           <p className="[text-wrap:pretty] mt-3 max-w-[62ch] text-[14.5px] leading-relaxed text-[#475569]">
             Our advice is not driven by sales targets or proprietary products. It is driven solely by your goals, backed by professional expertise and executed through trusted institutions.

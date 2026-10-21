@@ -43,7 +43,7 @@ export const MUTUAL_FUNDS_PAGE = {
     text: 'Most retail investors hold 15-20 overlapping mutual funds with zero strategic direction. Our Family Office framework organizes your mutual fund holdings into distinct tactical buckets to optimize risk-adjusted compounding.',
     cards: [
       { icon: Target, title: 'Goal-Based Mapping', desc: 'Aligning every SIP directly to specific life milestones (retirement, children’s education, wealth creation).' },
-      { icon: Layers, title: 'Overlap & Style Analysis', desc: 'Eliminating fund duplication using institutional analytics tools to ensure true diversification across large, mid, and small caps.' },
+      { icon: Layers, title: 'Overlap & Style Analysis', desc: 'Eliminating fund duplication using institutional analytics tools to help improve diversification across large, mid, and small caps.' },
       { icon: BarChart3, title: 'Systematic Rebalancing', desc: 'Dynamic portfolio adjustments based on market cycles and valuation parameters.' },
     ],
   },
@@ -95,6 +95,7 @@ export const PMS_AIF_PAGE = {
   ...COMMON,
   id: 'pms-aif-sif',
   heroAspect: 880 / 500,
+  mobileFullPhoto: true, // phones: show the whole photo instead of a right-anchored crop (the subject was cut off)
   banner: {
     file: 'pms-banner',
     alt: 'PMS, AIF and SIF. Alternative and Strategic Wealth Architecture. Beyond conventional horizons.',
@@ -108,15 +109,15 @@ export const PMS_AIF_PAGE = {
   eyebrow: 'PMS, AIF & SIF',
   titleGold: ['Alternative & Strategic', 'Wealth Architecture.'],
   titleWhite: ['Beyond Conventional', 'Horizons.'],
-  text: 'For ultra-high-net-worth portfolios seeking superior alpha, conventional mutual funds are only part of the equation. Solahana structures bespoke Portfolio Management Services (PMS), Alternative Investment Funds (AIF), and Strategic Investment Funds (SIF) — bridging sophisticated capital with institutional-grade opportunities.',
+  text: 'For ultra-high-net-worth portfolios exploring options beyond conventional funds, mutual funds are only part of the equation. Solahana structures bespoke Portfolio Management Services (PMS), Alternative Investment Funds (AIF), and Strategic Investment Funds (SIF) — bridging sophisticated capital with institutional-grade opportunities.',
   primaryCta: 'Explore Alternative Strategies',
-  trust: [ALIGNED, { icon: BarChart3, label: 'High-Alpha Discretionary & Non-Discretionary Strategies' }, PARTNERS],
+  trust: [ALIGNED, { icon: BarChart3, label: 'Discretionary & Non-Discretionary Strategies' }, PARTNERS],
   philosophy: {
     eyebrow: 'The Alternative Philosophy',
     title: ['Elevating Your Portfolio', 'Beyond Retail Boundaries'],
     text: 'Ultra-HNI wealth requires sophisticated asset classes that operate outside standard market correlations. Our Family Office approach evaluates and integrates alternative vehicles to enhance long-term compounding and risk-adjusted returns.',
     cards: [
-      { icon: BarChart3, title: 'High-Conviction Alpha', desc: 'Accessing concentrated equity portfolios and specialized management expertise through elite PMS houses.' },
+      { icon: BarChart3, title: 'Concentrated Equity Strategies', desc: 'Accessing concentrated equity portfolios and specialized management expertise through elite PMS houses.' },
       { icon: Sprout, title: 'Private Market Access', desc: 'Participating in venture debt, private equity, and structured debt through SEBI-regulated Category I, II, and III AIFs.' },
       { icon: Search, title: 'Institutional Due Diligence', desc: 'Rigorous qualitative and quantitative filtering to select top-tier fund managers with proven historical track records.' },
     ],
@@ -152,13 +153,13 @@ export const PMS_AIF_PAGE = {
     ],
   },
   cta: {
-    eyebrow: 'Your Alpha. Our Expertise.',
-    title: ['Unlock Institutional-Grade', 'Alpha for Your Portfolio.'],
+    eyebrow: 'Your Goals. Our Expertise.',
+    title: ['Explore Institutional-Grade', 'Alternatives for Your Portfolio.'],
     text: 'Navigate the complex world of PMS and AIFs with objective, zero-fee consultative guidance.',
     button: 'Schedule Your Complimentary Alternative Strategy Audit',
     benefits: [
       { icon: Landmark, label: 'Institutional Access' },
-      { icon: Scale, label: 'Superior Risk-Adjusted Returns' },
+      { icon: Scale, label: 'Risk-Aware Portfolio Construction' },
       { icon: PieChart, label: 'Diversification Beyond Public Markets' },
       { icon: Sprout, label: 'Long-Term Wealth Creation' },
     ],
@@ -169,6 +170,7 @@ export const REAL_ESTATE_PAGE = {
   ...COMMON,
   id: 'real-estate',
   heroAspect: 840 / 662,
+  mobileFullPhoto: true, // phones: show the whole photo instead of a right-anchored crop (the subject was cut off)
   banner: {
     file: 're-banner',
     alt: 'Real Estate, REITs and Fractional Ownership. Real Estate Architecture. Tangible assets, liquid yields.',
@@ -207,7 +209,7 @@ export const REAL_ESTATE_PAGE = {
   },
   stewardship: {
     title: 'Comprehensive Property Stewardship',
-    text: 'Our ongoing stewardship ensures your real estate portfolio generates optimal yields, remains legally secure, and stays aligned with your long-term wealth goals.',
+    text: 'Our ongoing stewardship helps keep your real estate portfolio reviewed, legally organised, and aligned with your long-term wealth goals.',
     items: [
       { icon: Receipt, title: 'Capital Gains Reinvestment Strategies', desc: 'Structuring Section 54/54F exemptions to legally defer taxes on property sales.' },
       { icon: Search, title: 'Title Due Diligence & Legal Audit', desc: 'Working with top-tier legal counsels to verify clean titles and dispute-free acquisitions.' },
@@ -243,22 +245,12 @@ export const BONDS_PAGE = {
   ...COMMON,
   id: 'bonds',
   heroAspect: 785 / 745,
-  banner: {
-    file: 'bonds-banner',
-    alt: 'Bonds, NCDs and Fixed Income. Fixed Income Architecture. Unshakeable yields, capital preservation.',
-    ratio: 1600 / 900,
-    fit: 0.86,
-    capped: true,
-    minH: 400,
-    primary: { left: '4.75%', top: '72.9%', width: '21.8%', height: '7.4%' },
-    secondary: { left: '27.75%', top: '72.9%', width: '22.4%', height: '7.4%' },
-  },
   heroClear: true,
   art: 'bonds',
   eyebrow: 'Bonds, NCDs & Fixed Income',
   titleGold: ['Fixed Income', 'Architecture.'],
-  titleWhite: ['Unshakeable Yields,', 'Capital Preservation.'],
-  text: 'True wealth requires a secure anchor. Solahana structures institutional-grade fixed-income portfolios across tax-free bonds, high-yield corporate NCDs, government securities, and structured fixed deposits — optimizing regular cash flows with uncompromising safety.',
+  titleWhite: ['Understanding Yields,', 'Risks and Stability.'],
+  text: 'True wealth requires a secure anchor. Solahana structures institutional-grade fixed-income portfolios across tax-free bonds, high-yield corporate NCDs, government securities, and structured fixed deposits — to help plan regular cash flows. Credit, interest-rate and liquidity risks apply.',
   primaryCta: 'Explore Fixed Income Yields',
   trust: [ALIGNED, { icon: BarChart3, label: 'High-Yield Corporate & Tax-Free Bond Allocation' }, PARTNERS],
   philosophy: {
@@ -277,7 +269,7 @@ export const BONDS_PAGE = {
     items: [
       { icon: Landmark, title: 'Tax-Free Government & PSU Bonds', desc: 'Long-duration, AAA-rated secure bonds offering tax-free interest cash flows.' },
       { icon: Building2, title: 'High-Yield Corporate NCDs & Bonds', desc: 'Vetted corporate debt instruments offering enhanced risk-adjusted yields with strong underlying collateral.' },
-      { icon: ShieldCheck, title: 'Government Securities & Treasury Bills', desc: 'Sovereign-guaranteed risk-free assets anchoring the foundation of your fixed-income allocation.' },
+      { icon: ShieldCheck, title: 'Government Securities & Treasury Bills', desc: 'Securities issued by the government, often used as a lower-credit-risk anchor in a fixed-income allocation. Interest-rate risk still applies.' },
       { icon: Hourglass, title: 'Arbitrage & Short-Term Debt Instruments', desc: 'Liquid vehicles designed for tax-efficient parking of short-term business or personal capital reserves.' },
     ],
   },
@@ -325,13 +317,20 @@ export const EQUITY_PAGE = {
   ...COMMON,
   id: 'equities',
   heroAspect: 912 / 1096,
+  banner: {
+    file: 'eq-banner',
+    alt: 'Equities, International Investing and IPOs. Direct Equity and Global Architecture. High-Conviction Growth, Worldwide Reach.',
+    ratio: 1600 / 666,
+    primary: { left: '5.81%', top: '73.87%', width: '18.38%', height: '6.76%' },
+    secondary: { left: '25.69%', top: '73.87%', width: '17.19%', height: '6.76%' },
+  },
   art: 'eq',
   eyebrow: 'Equities, International Investing & IPOs',
   titleGold: ['Direct Equity &', 'Global Architecture.'],
   titleWhite: ['High-Conviction Growth,', 'Worldwide Reach.'],
-  text: 'True equity investing goes beyond market noise. Solahana structures direct domestic equity mandates, international market diversification, and primary market IPO allocations through trusted, authorized institutional partners — ensuring rigorous research and execution integrity.',
+  text: 'True equity investing goes beyond market noise. Solahana structures direct domestic equity mandates, international market diversification, and primary market IPO allocations through trusted, authorized institutional partners.',
   primaryCta: 'Explore Equity Strategies',
-  trust: [ALIGNED, { icon: Globe, label: 'Global Diversification & Domestic Alpha' }, { icon: Handshake, label: 'Seamless Execution via Authorized Institutional Partners' }],
+  trust: [ALIGNED, { icon: Globe, label: 'Global Diversification & Domestic Equity' }, { icon: Handshake, label: 'Seamless Execution via Authorized Institutional Partners' }],
   philosophy: {
     eyebrow: 'The Equity Philosophy',
     title: ['Moving Beyond Speculative', 'Trading to Long-Term Ownership'],
@@ -354,7 +353,7 @@ export const EQUITY_PAGE = {
   },
   stewardship: {
     title: 'Sophisticated Equity Stewardship',
-    text: 'Our ongoing stewardship ensures your equity portfolio stays well-researched, tax-efficient, and aligned with your long-term wealth goals.',
+    text: 'Our ongoing stewardship helps keep your equity portfolio reviewed, tax-aware, and aligned with your long-term wealth goals.',
     items: [
       { icon: Receipt, title: 'Tax-Loss Harvesting & Gain Management', desc: 'Structuring strategic equity sales to offset capital gains legally and efficiently.' },
       { icon: Handshake, title: 'Authorized Partner Execution', desc: 'Facilitating all trades and depository accounts strictly through leading SEBI-registered brokerages and institutional partners.' },

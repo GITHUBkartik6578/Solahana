@@ -165,7 +165,7 @@ export default function BlogDetailsPage() {
             Ready to Structure Your Financial Goals?
           </h3>
           <p className="text-sm text-[#475569] max-w-xl mx-auto font-inter">
-            Schedule a 1-on-1 private planning session with a SEBI Registered RIA advisor.
+            Schedule a 1-on-1 private planning session with a Solahana planner.
           </p>
           <button
             onClick={() => navigate('/contact')}

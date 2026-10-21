@@ -24,7 +24,7 @@ export default function EstateBenefits({ onStartEstatePlanning }) {
             ESTATE BENEFITS
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif-luxury font-bold text-[#0F1F45]">
-            Enduring Legacy &amp; Total Peace of Mind
+            Enduring Legacy &amp; Peace of Mind
           </h2>
           <p className="text-sm sm:text-base text-[#475569]">
             Discover how structured succession planning preserves your life's earnings for future generations.

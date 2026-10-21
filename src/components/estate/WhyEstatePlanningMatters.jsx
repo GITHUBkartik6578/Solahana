@@ -7,7 +7,7 @@ export default function WhyEstatePlanningMatters() {
     {
       icon: ShieldCheck,
       title: "Protect Your Family's Legacy",
-      description: 'Ensure your hard-earned wealth is passed down according to your precise wishes without legal disputes or ambiguity.',
+      description: 'Plan for your hard-earned wealth to be passed down according to your wishes, with less risk of legal disputes or ambiguity.',
     },
     {
       icon: Share2,
@@ -39,7 +39,7 @@ export default function WhyEstatePlanningMatters() {
             Why Estate Planning Matters
           </h2>
           <p className="text-sm sm:text-base text-[#475569]">
-            A structured estate plan guarantees that your lifelong wealth continues to nurture your family for generations.
+            A structured estate plan can help your lifelong wealth continue to support your family for generations.
           </p>
         </div>
 

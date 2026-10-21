@@ -2,7 +2,7 @@ import React from 'react';
 import AboutHero from '../components/about/AboutHero';
 import AboutMissionVision from '../components/about/AboutMissionVision';
 import FounderNote from '../components/about/FounderNote';
-import SolahanaStandard from '../components/about/SolahanaStandard';
+import AboutStandard from '../components/about/AboutStandard';
 import ProfessionalPedigree from '../components/about/ProfessionalPedigree';
 import AboutOfficeLocation from '../components/about/AboutOfficeLocation';
 
@@ -30,7 +30,7 @@ export default function AboutPage({ onOpenSearch }) {
       <FounderNote />
 
       {/* THE SOLAHANA STANDARD (replaces "How we think / Why SOLAHANA Exists") */}
-      <SolahanaStandard />
+      <AboutStandard />
 
       {/* PROFESSIONAL PEDIGREE & EXPERIENCE (replaces "Choose how to connect") */}
       <ProfessionalPedigree />

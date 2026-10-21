@@ -51,7 +51,7 @@ const STAGES = [
   {
     age: 'Age 41–50',
     title: 'Core Wealth & Portfolio Scaling',
-    focus: 'High-alpha allocations via PMS/AIF, business scaling support, and multi-asset diversification.',
+    focus: 'Allocations that may include PMS/AIF, business scaling support, and multi-asset diversification.',
     icon: Coins,
     photo: stage5,
     to: '/investments',

@@ -286,6 +286,7 @@ export const calculateGoal = (
     netTargetNeeded: Math.round(netTargetNeeded),
     requiredMonthlySIP: Math.round(requiredMonthlySIP),
     requiredLumpsumToday: Math.round(requiredLumpsumToday),
+    effectiveReturn: ret, // the yearly return actually used (typed value kept within 0.1%-30%)
     timelineData,
   };
 };

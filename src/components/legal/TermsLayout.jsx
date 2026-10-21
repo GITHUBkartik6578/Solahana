@@ -45,12 +45,12 @@ export default function TermsLayout({ page }) {
     <div className="relative z-10 bg-white">
       {/* banner */}
       {BANNERS[page.art] && (
-        <section aria-label={page.title} className="hidden bg-[#0A1836] pt-[80px] lg:block">
+        <section aria-label={page.title} className="hidden bg-[#0A1836] pt-[80px] sm:block any-pointer-fine:block">
           <h1 className="sr-only">{page.title}: {page.tagline}</h1>
           <img src={BANNERS[page.art].src} alt="" aria-hidden="true" width={BANNERS[page.art].w} height={BANNERS[page.art].h} fetchpriority="high" draggable="false" className="block h-auto w-full select-none" />
         </section>
       )}
-      <section className={`relative isolate overflow-hidden bg-[#0A1836] pt-[80px] ${BANNERS[page.art] ? 'lg:hidden' : ''}`}>
+      <section className={`relative isolate overflow-hidden bg-[#0A1836] pt-[80px] ${BANNERS[page.art] ? 'sm:hidden any-pointer-fine:hidden' : ''}`}>
         <div aria-hidden="true" className="absolute inset-0 -z-20 bg-[linear-gradient(100deg,#06122B_0%,#0A1B40_55%,#0E2350_100%)]" />
         {/* soft gold swoosh, top left */}
         <svg aria-hidden="true" viewBox="0 0 700 90" preserveAspectRatio="none" className="pointer-events-none absolute left-0 top-[80px] -z-10 hidden h-[60px] w-[52%] lg:block">
@@ -98,7 +98,7 @@ export default function TermsLayout({ page }) {
       </section>
 
       {page.effective && (
-      <section className={`relative overflow-hidden border-b border-[#EFE6D2] bg-gradient-to-r from-[#FBF6EA] via-[#FBF6EA] to-[#FBF6EA]/60 ${BANNERS[page.art] ? 'lg:hidden' : ''}`}>
+      <section className={`relative overflow-hidden border-b border-[#EFE6D2] bg-gradient-to-r from-[#FBF6EA] via-[#FBF6EA] to-[#FBF6EA]/60 ${BANNERS[page.art] ? 'sm:hidden any-pointer-fine:hidden' : ''}`}>
         <div className="mx-auto max-w-[1320px] px-4 py-4 sm:px-6 lg:px-8">
           <p className="text-[15.5px] text-[#0A1836]"><span className="font-bold">Effective Date:</span> {page.effective.date}</p>
           <p className="mt-0.5 text-[15.5px] text-[#0A1836]">{page.effective.entity}</p>

@@ -4,6 +4,8 @@ import { PieChart as PieIcon, TrendingUp, Sparkles, Calendar } from 'lucide-reac
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import CalculatorLayout from './CalculatorLayout';
 import { calculateLumpsum, formatINR } from '../../utils/calculatorEngine';
+import CalculatorDisclaimer from './CalculatorDisclaimer';
+import { MARKET_RISK_NOTE, RATE_LIMIT_NOTE } from '../../utils/calculatorCopy';
 
 export default function LumpsumCalculator() {
   const location = useLocation();
@@ -156,6 +158,8 @@ export default function LumpsumCalculator() {
               </ResponsiveContainer>
             </div>
           </div>
+
+          <CalculatorDisclaimer notes={[MARKET_RISK_NOTE, RATE_LIMIT_NOTE]} />
 
         </div>
 

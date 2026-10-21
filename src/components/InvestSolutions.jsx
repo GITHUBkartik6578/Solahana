@@ -23,7 +23,7 @@ const SOLUTIONS = [
   {
     title: ['PMS, AIF & SIF'],
     sub: '(Alternative & Strategic Funds)',
-    desc: 'High-alpha portfolio management services and institutional alternative funds.',
+    desc: 'Portfolio management services and institutional alternative funds.',
     art: art2,
     to: '/invest/pms-aif-sif',
   },

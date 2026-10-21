@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { openConsultation } from '../../data/whoWeServe';
+import ScaledStage from '../common/ScaledStage';
 
 // <page>-p0..p3 (pillar cards), <page>-s0..s2 (stewardship cards) and <page>-hero
 const ART = import.meta.glob('../../assets/planning/*.webp', { eager: true, import: 'default' });
@@ -115,15 +116,16 @@ export function PhotoHero({ cfg }) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]">
       <div aria-hidden="true" className="pointer-events-none absolute -left-24 top-24 h-[420px] w-[420px] rounded-full bg-[#C9922E]/10 blur-[120px]" />
-      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-stretch gap-0 px-4 sm:px-6 lg:min-h-[clamp(520px,calc(100svh-80px),660px)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 flex flex-col justify-center py-10 lg:py-12">
+      <ScaledStage>
+      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-stretch gap-0 px-4 @2xl:px-6 @5xl:min-h-[660px] @5xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] @5xl:px-8">
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 flex flex-col justify-center py-10 @5xl:py-12">
           <p className="font-sora text-[11.5px] font-bold uppercase tracking-[0.26em] text-[#E2B24E]">{cfg.eyebrow}</p>
-          <h1 style={serif} className="[text-wrap:balance] mt-5 text-[38px] font-medium leading-[1.06] text-white sm:text-[50px] lg:text-[clamp(42px,4.2vw,62px)]">
+          <h1 style={serif} className="[text-wrap:balance] mt-5 text-[38px] font-medium leading-[1.06] text-white @2xl:text-[50px] @5xl:text-[62px]">
             <span className="block text-[#E2B24E]">{cfg.titleGold.join(' ')}</span>
             {cfg.titleWhite.join(' ')}
           </h1>
-          <p className="[text-wrap:pretty] mt-5 max-w-[58ch] text-[15.5px] leading-relaxed text-slate-200 sm:text-[16.5px]">{cfg.text}</p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <p className="[text-wrap:pretty] mt-5 max-w-[58ch] text-[15.5px] leading-relaxed text-slate-200 @2xl:text-[16.5px]">{cfg.text}</p>
+          <div className="mt-7 flex flex-col gap-3 @2xl:flex-row @2xl:flex-wrap">
             <button
               type="button"
               onClick={goConsult}
@@ -140,7 +142,7 @@ export function PhotoHero({ cfg }) {
               Request a Private Consultation
             </button>
           </div>
-          <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <ul className="mt-8 grid grid-cols-1 gap-4 @2xl:grid-cols-3">
             {cfg.trust.map((t) => (
               <li key={t.label} className="flex items-center gap-3">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#E2B24E]/70 text-[#E2B24E]">
@@ -157,11 +159,12 @@ export function PhotoHero({ cfg }) {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="relative mx-auto h-[320px] w-full max-w-[560px] overflow-hidden sm:h-[420px] lg:mx-0 lg:h-auto lg:w-[calc(100%+max(0px,(100vw-1320px)/2)+2rem)] lg:max-w-none [mask-image:linear-gradient(to_right,transparent,black_18%)]"
+          className="relative mx-auto h-[370px] w-full max-w-[560px] overflow-hidden @2xl:h-[420px] @5xl:mx-0 @5xl:h-auto @5xl:w-[calc(100%+max(0px,(100cqw-1320px)/2)+2rem)] @5xl:max-w-none [mask-image:linear-gradient(to_right,transparent,black_18%)]"
         >
-          <img src={art(cfg, 'hero')} alt={cfg.eyebrow} draggable="false" className="absolute inset-0 h-full w-full object-cover object-[50%_28%]" />
+          <img src={art(cfg, 'hero')} alt={cfg.eyebrow} draggable="false" className="absolute inset-0 h-full w-full object-cover object-[50%_0%] @2xl:object-[50%_28%]" />
         </motion.div>
       </div>
+      </ScaledStage>
     </section>
   );
 }

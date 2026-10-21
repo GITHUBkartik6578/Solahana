@@ -47,7 +47,7 @@ export default function RetirementBenefits() {
             </div>
 
             <h3 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-[#0F1F45] leading-tight">
-              Maintain Your Lifestyle &amp; Beat Inflation Effortlessly
+              Plan Your Lifestyle &amp; the Effect of Inflation
             </h3>
 
             <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
@@ -88,7 +88,7 @@ export default function RetirementBenefits() {
             </h3>
 
             <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
-              Traditional fixed deposits subject your entire interest to full slab taxes. SOLAHANA structures Systematic Withdrawal Plans (SWP) in equity and hybrid funds, ensuring only capital gains are taxed at favorable rates while preserving principal.
+              Traditional fixed deposits subject your entire interest to full slab taxes. SOLAHANA structures Systematic Withdrawal Plans (SWP) in equity and hybrid funds, which can mean that only the gains portion of each withdrawal is taxed, at rates that depend on the fund type and current law.
             </p>
 
             <ul className="space-y-3">

@@ -6,13 +6,13 @@ import { serif } from './aboutStyles';
 const PILLARS = [
   {
     icon: Compass,
-    title: ['Uncompromised', 'Independence'],
-    text: 'Zero product bias; we do not manufacture any financial products, ensuring our strategic guidance is 100% aligned with your family’s goals.',
+    title: ['Client-Focused', 'Approach'],
+    text: 'We do not manufacture any financial products, and our guidance is built around your family’s goals.',
   },
   {
     icon: ShieldPlus,
-    title: ['Absolute', 'Transparency'],
-    text: 'Complete and unbiased disclosure of all material facts, strategies, and mechanisms so you can make confident decisions.',
+    title: ['Clear', 'Transparency'],
+    text: 'Clear disclosure of material facts, strategies, and mechanisms so you can make informed decisions.',
   },
   {
     icon: ChartColumnIncreasing,
@@ -21,8 +21,8 @@ const PILLARS = [
   },
   {
     icon: Users,
-    title: ['Seamless Institutional', 'Execution'],
-    text: 'All transactional execution routed through verified SEBI and AMFI-registered institutional channel partners for complete safety and compliance.',
+    title: ['Third-Party', 'Execution'],
+    text: 'Any transaction is carried out by third-party providers. Please check each provider’s registration with the regulator before you invest.',
   },
 ];
 

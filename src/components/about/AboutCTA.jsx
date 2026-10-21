@@ -51,12 +51,12 @@ export default function AboutCTA({ onStartPlanning, onBookConsultation }) {
           <div className="pt-6 border-t border-[#2F5BC7]/20 flex flex-wrap items-center justify-center gap-6 text-xs text-[#64748B] font-inter">
             <div className="flex items-center space-x-2">
               <ShieldCheck className="w-4 h-4 text-[#2F5BC7]" />
-              <span>100% Confidential & Secure</span>
+              <span>Confidential</span>
             </div>
             <span>•</span>
             <div>Zero Sales Pressure</div>
             <span>•</span>
-            <div>SEBI Registered RIA</div>
+            <div>Goal-Based Financial Planning</div>
           </div>
         </motion.div>
 

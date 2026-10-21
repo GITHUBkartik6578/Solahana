@@ -1,6 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { PieChart, TrendingUp, ShieldCheck, Target, Sparkles, Layers } from 'lucide-react';
+import { portfolioSample, SAMPLE_PORTFOLIO } from '../../utils/calculatorSamples';
+import { SAMPLE_FIGURES_NOTE } from '../../utils/calculatorCopy';
+
+const SAMPLE = portfolioSample();
 
 export default function PortfolioPreview() {
   return (
@@ -45,14 +49,14 @@ export default function PortfolioPreview() {
               </div>
               <div>
                 <h3 className="text-lg font-bold font-serif-luxury text-[#0F1F45]">SOLAHANA Multi-Asset Blueprint</h3>
-                <p className="text-xs text-[#5B6B84]">Zero-Commission Direct • Fiduciary Model</p>
+                <p className="text-xs text-[#5B6B84]">Illustrative projection, not advice</p>
               </div>
             </div>
 
             <div className="flex items-center space-x-3">
               <div className="px-3.5 py-1.5 rounded-full bg-[#FFFFFF] border border-[#2F5BC7]/30 text-[#5A7FD6] text-xs font-sora font-semibold flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Target CAGR: 12.4% Projected</span>
+                <span>Assumed return: {SAMPLE_PORTFOLIO.annualReturn}% a year (illustrative)</span>
               </div>
             </div>
           </div>
@@ -115,9 +119,9 @@ export default function PortfolioPreview() {
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-[#0F1F45] font-semibold flex items-center gap-1.5">
                     <TrendingUp className="w-4 h-4 text-[#2F5BC7]" />
-                    15-Year Projected Wealth Trajectory
+                    15-Year Illustrative Wealth Trajectory
                   </span>
-                  <span className="text-[#5A7FD6] font-sora font-bold">₹75,000/mo SIP (10% Step-Up)</span>
+                  <span className="text-[#5A7FD6] font-sora font-bold">{SAMPLE.heading}</span>
                 </div>
 
                 {/* SVG Curve Illustration */}
@@ -135,10 +139,9 @@ export default function PortfolioPreview() {
                   
                   {/* Timeline Points */}
                   <div className="flex justify-between text-[10px] text-[#5B6B84] font-sora mt-2">
-                    <span>Year 1: ₹9 Lakhs</span>
-                    <span>Year 5: ₹58 Lakhs</span>
-                    <span>Year 10: ₹1.45 Cr</span>
-                    <span className="text-[#5A7FD6] font-bold">Year 15: ₹2.50 Cr</span>
+                    {SAMPLE.points.map((p, i) => (
+                      <span key={p.year} className={i === SAMPLE.points.length - 1 ? 'text-[#5A7FD6] font-bold' : undefined}>Year {p.year}: {p.text}</span>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -149,18 +152,18 @@ export default function PortfolioPreview() {
                   <span className="text-[11px] text-[#5B6B84]">Risk Meter Alignment</span>
                   <p className="text-base font-bold text-[#0F1F45] font-sora flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                    Moderate Growth Shield
+                    Moderate Growth Profile
                   </p>
-                  <p className="text-[10px] text-[#5B6B84] pt-1">Stress-tested against 2008 & 2020 market crashes</p>
+                  <p className="text-[10px] text-[#5B6B84] pt-1">Market-linked: values can fall as well as rise</p>
                 </div>
 
                 <div className="p-4 rounded-2xl bg-[#FFFFFF]/85 border border-[#2F5BC7]/25 space-y-1">
-                  <span className="text-[11px] text-[#5B6B84]">Target FIRE Timeline</span>
+                  <span className="text-[11px] text-[#5B6B84]">Retirement Timeline</span>
                   <p className="text-base font-bold text-[#5A7FD6] font-sora flex items-center gap-2">
                     <Target className="w-4 h-4 text-[#2F5BC7]" />
-                    Retirement Age 48
+                    Set by your own inputs
                   </p>
-                  <p className="text-[10px] text-emerald-400 pt-1">Projected Passive Income: ₹1.80 Lakhs/mo</p>
+                  <p className="text-[10px] text-[#5B6B84] pt-1">Use the retirement calculator with your age, spending and return</p>
                 </div>
               </div>
 
@@ -168,10 +171,12 @@ export default function PortfolioPreview() {
 
           </div>
 
+          <p className="text-[11px] leading-relaxed text-[#64748B]">{SAMPLE_FIGURES_NOTE} Figures are before tax and costs; the curve is a schematic, not to scale.</p>
+
           {/* Footer Note */}
           <div className="pt-4 border-t border-[#2F5BC7]/15 flex items-center justify-between text-xs text-[#5B6B84]">
-            <span>Methodology: SEBI Registered Investment Planning</span>
-            <span className="text-[#5A7FD6] font-semibold font-sora">Annual Tax-Loss Harvesting Included</span>
+            <span>Method: standard SIP compounding at the assumed return</span>
+            <span className="text-[#5A7FD6] font-semibold font-sora">Before tax and costs</span>
           </div>
 
         </motion.div>

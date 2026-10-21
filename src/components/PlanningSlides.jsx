@@ -163,7 +163,7 @@ export function SceneArt({ slide }) {
   const [ex, ey] = arc ? pt(arc.to) : [0, 0];
   return (
     <div
-      className="@container relative w-full xl:w-auto xl:h-full"
+      className="@container relative w-full @7xl:w-auto @7xl:h-full"
       style={{ aspectRatio: `${w} / ${h}` }}
     >
       <img
@@ -230,19 +230,19 @@ const fadeSoft = {
 // One slide of the hero carousel; same frame and copy alignment as the main hero slide
 export function PlanningSlide({ slide }) {
   return (
-    <div className="relative flex flex-col xl:flex-row xl:items-center xl:h-[clamp(460px,calc(100svh-124px),620px)] bg-[#FEFCF8]">
+    <div className="relative flex flex-col @7xl:flex-row @7xl:items-center @7xl:h-[620px] bg-[#FEFCF8]">
       {/* Illustrations share one box (same size and spot, right edge in line with the navbar);
           scenic photos instead run full height to the right edge and melt into the slide on the left */}
       {slide.fit === 'scene' ? (
-        <div className="order-2 xl:order-none relative flex justify-center px-4 xl:px-0 xl:justify-end xl:absolute xl:h-[80%] xl:top-1/2 xl:-translate-y-1/2 xl:right-[max(2rem,calc((100vw-82.5rem)/2+2rem))]">
+        <div className="order-2 @7xl:order-none relative flex justify-center px-4 @7xl:px-0 @7xl:justify-end @7xl:absolute @7xl:h-[80%] @7xl:top-1/2 @7xl:-translate-y-1/2 @7xl:right-[max(2rem,calc((100cqw-82.5rem)/2+2rem))]">
           <SceneArt slide={slide} />
         </div>
       ) : (
       <div
-        className={`order-2 xl:order-none relative flex justify-center h-[230px] sm:h-[300px] xl:justify-end xl:absolute ${
+        className={`order-2 @7xl:order-none relative flex justify-center h-[230px] @2xl:h-[300px] @7xl:justify-end @7xl:absolute ${
           slide.fit === 'cover'
-            ? 'xl:right-0 xl:top-0 xl:h-full xl:w-[52%]'
-            : `${slide.longHeading ? 'xl:h-[76%]' : 'xl:h-[88%]'} xl:aspect-[1.2] xl:top-1/2 xl:-translate-y-1/2 xl:right-[max(2rem,calc((100vw-82.5rem)/2+2rem))]`
+            ? '@7xl:right-0 @7xl:top-0 @7xl:h-full @7xl:w-[52%]'
+            : `${slide.longHeading ? '@7xl:h-[76%]' : '@7xl:h-[88%]'} @7xl:aspect-[1.2] @7xl:top-1/2 @7xl:-translate-y-1/2 @7xl:right-[max(2rem,calc((100cqw-82.5rem)/2+2rem))]`
         }`}
       >
         <Link
@@ -255,7 +255,7 @@ export function PlanningSlide({ slide }) {
             alt={slide.alt}
             className={`select-none ${
               slide.fit === 'cover'
-                ? 'absolute inset-0 h-full w-full object-cover object-center xl:object-right'
+                ? 'absolute inset-0 h-full w-full object-cover object-center @7xl:object-right'
                 : 'h-full w-auto max-w-full'
             }`}
             style={slide.fit === 'cover' ? fadeLeft : fadeAll}
@@ -265,9 +265,9 @@ export function PlanningSlide({ slide }) {
       </div>
       )}
 
-      <div className="order-1 xl:order-none relative z-10 pointer-events-none max-w-[1320px] mx-auto w-full px-4 sm:px-6 lg:px-8 pt-8 pb-4 xl:py-0">
-        <div className={`@container pointer-events-auto w-full text-center xl:text-left ${slide.longHeading ? 'xl:w-[52%]' : 'xl:w-[42%]'}`}>
-          <p className="font-sora text-[11px] sm:text-sm font-semibold tracking-[0.14em] text-[#C58A1B] uppercase leading-relaxed">
+      <div className="order-1 @7xl:order-none relative z-10 pointer-events-none max-w-[1320px] mx-auto w-full px-4 @2xl:px-6 @5xl:px-8 pt-8 pb-4 @7xl:py-0">
+        <div className={`@container pointer-events-auto w-full text-center @7xl:text-left ${slide.longHeading ? '@7xl:w-[52%]' : '@7xl:w-[42%]'}`}>
+          <p className="font-sora text-[11px] @2xl/stage:text-sm font-semibold tracking-[0.14em] text-[#C58A1B] uppercase leading-relaxed">
             {slide.eyebrow || slide.label}
           </p>
           <h2
@@ -278,7 +278,7 @@ export function PlanningSlide({ slide }) {
             <span className="block whitespace-nowrap text-[#C9922E]">{slide.line2}</span>
           </h2>
           {slide.body && (
-            <p className="mt-4 max-w-[520px] mx-auto xl:mx-0 text-sm sm:text-[17px] text-[#55607A] font-inter leading-relaxed">
+            <p className="mt-4 max-w-[520px] mx-auto @7xl/stage:mx-0 text-sm @2xl/stage:text-[17px] text-[#55607A] font-inter leading-relaxed">
               {slide.body}
             </p>
           )}
@@ -290,13 +290,13 @@ export function PlanningSlide({ slide }) {
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
           </Link>
           {slide.pillars && (
-            <div className="mt-7 grid grid-cols-3 sm:grid-cols-6 gap-y-4 max-w-[560px] mx-auto xl:mx-0">
+            <div className="mt-7 grid grid-cols-3 @2xl/stage:grid-cols-6 gap-y-4 max-w-[560px] mx-auto @7xl/stage:mx-0">
               {slide.pillars.map(({ label, icon: Icon }, i) => (
                 <Link
                   key={label.join(' ')}
                   to={slide.pillarsTo || slide.route}
                   title={label.join(' ')}
-                  className={`group flex flex-col items-center text-center px-1 rounded-lg transition-colors hover:bg-[#C58A1B]/[0.07] ${i > 0 ? 'sm:border-l sm:border-[#C58A1B]/25' : ''}`}
+                  className={`group flex flex-col items-center text-center px-1 rounded-lg transition-colors hover:bg-[#C58A1B]/[0.07] ${i > 0 ? '@2xl/stage:border-l @2xl/stage:border-[#C58A1B]/25' : ''}`}
                 >
                   <Icon className="h-6 w-6 text-[#C58A1B] transition-transform duration-300 group-hover:-translate-y-0.5" strokeWidth={1.5} />
                   <span className="mt-1.5 text-[11px] leading-tight text-[#0F1F45] font-inter group-hover:text-[#C58A1B]">

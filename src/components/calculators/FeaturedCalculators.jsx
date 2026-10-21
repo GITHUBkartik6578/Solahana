@@ -1,6 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, Calculator, ShieldCheck, ArrowRight, Sparkles } from 'lucide-react';
+import { sipSample, emiSample } from '../../utils/calculatorSamples';
+import { SAMPLE_FIGURES_NOTE } from '../../utils/calculatorCopy';
+
+const SIP = sipSample();
+const EMI = emiSample();
 
 export default function FeaturedCalculators({ onTryCalculator }) {
   const featured = [
@@ -11,9 +16,9 @@ export default function FeaturedCalculators({ onTryCalculator }) {
       description: 'Model how monthly step-up contributions compound over 5 to 25 years into a multi-crore goal corpus.',
       icon: TrendingUp,
       preview: {
-        label: 'Projected 15-Yr Corpus',
-        value: '₹2.53 Cr',
-        detail: '₹50,000/mo @ 12% + 10% Step-up'
+        label: 'Illustrative 15-Yr Corpus',
+        value: SIP.compact,
+        detail: SIP.detail
       }
     },
     {
@@ -24,20 +29,20 @@ export default function FeaturedCalculators({ onTryCalculator }) {
       icon: Calculator,
       preview: {
         label: 'Monthly EMI Output',
-        value: '₹68,450 / mo',
-        detail: '₹75 Lakh Loan @ 8.5% 20 Yrs'
+        value: EMI.text,
+        detail: EMI.detail
       }
     },
     {
       id: 'retirement',
       title: 'FIRE Retirement Calculator',
       subtitle: 'Inflation-Indexed Freedom Engine',
-      description: 'Find your exact net worth retirement target and calculate passive income streams to retire early.',
+      description: 'Estimate the corpus you may need at retirement from your age, spending, inflation and return assumptions.',
       icon: ShieldCheck,
       preview: {
-        label: 'FIRE Corpus Target',
-        value: '₹4.50 Cr',
-        detail: 'Retirement Age 48 • Inflation 6%'
+        label: 'Your Retirement Corpus',
+        value: 'Your own inputs',
+        detail: 'Age, spending, inflation and return you choose'
       }
     }
   ];
@@ -61,7 +66,7 @@ export default function FeaturedCalculators({ onTryCalculator }) {
           </h2>
 
           <p className="text-base sm:text-lg text-[#5B6B84] font-inter">
-            The three core calculation engines relied on by thousands of families to structure their wealth.
+            Three core calculators for estimating your savings, your loan repayments and your retirement needs.
           </p>
         </div>
 
@@ -132,6 +137,8 @@ export default function FeaturedCalculators({ onTryCalculator }) {
             );
           })}
         </div>
+
+        <p className="mt-8 text-center text-[11px] text-[#5B6B84]">{SAMPLE_FIGURES_NOTE}</p>
 
       </div>
     </section>
