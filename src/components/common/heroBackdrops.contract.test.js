@@ -69,8 +69,17 @@ describe('live-text heroes are laid out once and scaled', () => {
     expect(hero).toContain('<ScaledStage>');
     expect(hero).toContain('</ScaledStage>');
     expect(hero).toContain('@5xl:');
-    expect(hero).not.toMatch(/\blg:|\bsm:(?!hidden)/);
+    // the only viewport breakpoint allowed in the hero is the Bonds (heroClear) desktop mask, which drops just the top fade
+    const withoutBondsMask = hero.replace(/lg:!\[(?:-webkit-)?mask-image:linear-gradient\(to_right,transparent,black_22%\)\]/g, '');
+    expect(withoutBondsMask).not.toMatch(/\blg:|\bsm:(?!hidden)/);
     expect(hero).not.toMatch(/100svh|vw,|clamp\(34px/);
+  });
+
+  it('Bonds (heroClear) keeps only its left fade from 1024px up, and keeps the top and left fades below that', () => {
+    const start = template.indexOf('function Hero({ cfg })');
+    const hero = template.slice(start, template.indexOf('function Philosophy({ cfg })'));
+    expect(hero).toContain("cfg.heroClear ? 'bottom-0 lg:![-webkit-mask-image:linear-gradient(to_right,transparent,black_22%)] lg:![mask-image:linear-gradient(to_right,transparent,black_22%)]'");
+    expect(hero).toContain('linear-gradient(to right, transparent, black 22%), linear-gradient(to bottom, transparent, black 12%)');
   });
 
   it('no hero picture is used as a blurred, enlarged backdrop', () => {

@@ -138,7 +138,8 @@ function Hero({ cfg }) {
                 ? {
                     aspectRatio: cfg.heroAspect,
                     width: `min(100cqw, ${cfg.heroAspect * 100}cqh)`,
-                    // the photo may be shorter than the panel: fade its top edge (as well as its left) into the navy, so no hard edge or blurred filler shows
+                    // the photo may be shorter than the panel: fade its top edge (as well as its left) into the navy, so no hard edge or blurred filler shows.
+                    // From a 1024px-wide viewport up (set in the className below) only the left fade is kept, so the skyline is not dimmed under the navbar.
                     WebkitMaskImage: 'linear-gradient(to right, transparent, black 22%), linear-gradient(to bottom, transparent, black 12%)',
                     maskImage: 'linear-gradient(to right, transparent, black 22%), linear-gradient(to bottom, transparent, black 12%)',
                     WebkitMaskComposite: 'source-in',
@@ -146,7 +147,7 @@ function Hero({ cfg }) {
                   }
                 : { aspectRatio: cfg.heroAspect }
             }
-            className={`absolute right-0 max-w-none ${cfg.heroClear ? 'bottom-0' : `[mask-image:linear-gradient(to_right,transparent,black_22%)] ${cfg.mobileFullPhoto ? 'inset-0 h-full w-full @2xl:inset-auto @2xl:inset-y-0 @2xl:right-0 @2xl:w-auto' : 'inset-y-0 h-full'}`}`}
+            className={`absolute right-0 max-w-none ${cfg.heroClear ? 'bottom-0 lg:![-webkit-mask-image:linear-gradient(to_right,transparent,black_22%)] lg:![mask-image:linear-gradient(to_right,transparent,black_22%)]' : `[mask-image:linear-gradient(to_right,transparent,black_22%)] ${cfg.mobileFullPhoto ? 'inset-0 h-full w-full @2xl:inset-auto @2xl:inset-y-0 @2xl:right-0 @2xl:w-auto' : 'inset-y-0 h-full'}`}`}
           >
             <img src={heroSrc(cfg)} alt="Amit R. Pandey, Chartered Wealth Manager" draggable="false" className="h-full w-full" />
             {cfg.taglineBox && (

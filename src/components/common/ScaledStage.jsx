@@ -2,8 +2,9 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 
 /**
  * Keeps a hero looking the same at every zoom level (like a banner picture does): its content is laid out once, at `designWidth`,
- * and the whole thing is scaled to the width it is given. Zooming in only makes the page narrower, so the hero shrinks with it
- * instead of switching to a different layout or leaving empty bands. Below `minWidth` (phones) nothing is scaled and the content
+ * and the whole thing is scaled down to the width it is given when that is narrower than `designWidth`. Zooming in only makes the page
+ * narrower, so the hero shrinks with it instead of switching to a different layout. At `designWidth` and wider it is not scaled at all,
+ * so it looks exactly like the normal fluid layout. Below `minWidth` (phones) nothing is scaled and the content
  * keeps its normal responsive layout. Any mouse / trackpad (even on a touch laptop) is never treated as a phone, so zooming a desktop browser to any level keeps the scaled layout.
  *
  * The content is wrapped in a CSS container, so inside it use container variants (`@2xl:`, `@5xl:`) instead of `sm:` / `lg:`.
@@ -20,7 +21,9 @@ export default function ScaledStage({ designWidth = 1440, minWidth = 640, classN
     const measure = () => {
       const width = el.clientWidth;
       const finePointer = typeof window !== 'undefined' && window.matchMedia?.('(any-pointer: fine)').matches;
-      if (width < minWidth && !finePointer) {
+      // Phones, and any page at least as wide as the design width, use the normal fluid layout (so wide screens look the
+      // same as the rest of the site); only widths between minWidth and designWidth are scaled down.
+      if ((width < minWidth && !finePointer) || width >= designWidth) {
         setView((v) => (v.height === null ? v : { scale: 1, height: null }));
         return;
       }
