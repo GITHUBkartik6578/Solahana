@@ -2,20 +2,14 @@ import apiClient from './apiClient';
 
 const healthCheckService = {
   /**
-   * Save the visitor's name + phone and open a health-check attempt
-   * POST /api/health-check  ->  { id, token }
+   * Ask for a callback after a Financial Health Check-up. `payload` must come from buildLeadPayload (contact details,
+   * consent and the score summary only; the amounts the person typed never reach this function).
+   * POST /api/health-check  ->  201 { id }
+   * Resolves only on HTTP 201; any other status or a network error rejects, so callers can never show a false success.
    */
-  async start({ fullName, phone }) {
-    const response = await apiClient.post('/api/health-check', { fullName, phone, source: 'home_health_check' });
-    return response.data?.data;
-  },
-
-  /**
-   * Attach the answers and the score to the attempt once the six questions are done
-   * PATCH /api/health-check/:id/complete
-   */
-  async complete({ id, token, answers }) {
-    const response = await apiClient.patch(`/api/health-check/${id}/complete`, { token, answers });
+  async submitCallback(payload) {
+    const response = await apiClient.post('/api/health-check', payload);
+    if (response.status !== 201) throw new Error('Callback request was not saved');
     return response.data?.data;
   },
 

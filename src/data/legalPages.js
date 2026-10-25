@@ -21,6 +21,7 @@ export const LEGAL_PAGES = {
     card: true,
     sections: [
       { heading: 'Information Collection', icons: ['file', 'number'], text: 'We collect personal information (Name, Phone Number, Email, City) and high-level financial goals strictly to provide tailored wealth diagnostic sessions, family office structuring, and communication.' },
+      { heading: 'Financial Health Check-up', icons: ['file', 'number'], text: 'You can complete the Check-up without sharing contact details; your answers are calculated in your browser and are not sent to us. If you request a callback, we store your name, mobile number, your score summary (category points, total and band), and a record of your consent, for up to 24 months, then delete them. We do not store the income, expense, savings or cover amounts you enter. You can ask us to delete your details earlier through the Contact page.' },
       { heading: 'Data Protection & Security', icons: ['shield', 'number'], text: 'Your personal and financial data is protected using enterprise-grade encryption and security protocols.' },
       { heading: 'Data Sharing', icons: ['share', 'number'], text: 'We never sell or trade your personal data to third parties. Data is shared with regulated institutional partners only upon your explicit consent for product execution purposes.' },
       { heading: 'Your Rights', icons: ['user', 'number'], text: 'You may request access, correction, or deletion of your personal data by contacting us at online@solahana.com.' },
