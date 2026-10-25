@@ -170,7 +170,7 @@ export default function Navbar() {
             <img 
               src={solahanaLogo} 
               alt="SOLAHANA" 
-              className="h-[50px] sm:h-[55px] lg:h-[57px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+              className="h-[46px] sm:h-[50px] lg:h-[40px] xl:h-[57px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
             />
           </button>
 

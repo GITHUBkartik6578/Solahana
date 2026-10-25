@@ -187,7 +187,7 @@ export default function Footer() {
           <div className="sm:col-span-2 xl:col-span-1 xl:pr-8">
             <button onClick={() => go('home')} className="group block cursor-pointer" title="SOLAHANA Home" aria-label="SOLAHANA Home">
               <span className="inline-block rounded-2xl bg-[#FEFDF9] px-3 py-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.3)] ring-1 ring-[#E2B24E]/40">
-                <img src={solahanaLogo} alt="SOLAHANA" className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-[1.02]" />
+                <img src={solahanaLogo} alt="SOLAHANA" className="h-9 sm:h-10 w-auto object-contain transition-transform group-hover:scale-[1.02]" />
               </span>
             </button>
             <p className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.3em] text-[#AEBBD3]">Family Office &amp; Wealth Platform</p>
