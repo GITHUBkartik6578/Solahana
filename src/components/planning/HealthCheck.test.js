@@ -9,6 +9,7 @@ import {
 } from '../../utils/financialHealthCheck';
 
 const source = readFileSync(new URL('./HealthCheck.jsx', import.meta.url), 'utf8');
+const partsSource = readFileSync(new URL('./healthCheckParts.jsx', import.meta.url), 'utf8');
 const base = {
   income: 10_000_000, expenses: 3_000_000, emi: 1_000_000, savings: 20_000_000,
   termCover: 1_300_000_000, healthCover: 100_000_000, investments: 2_000_000, overlap: 'yes', business: 'yes',
@@ -47,6 +48,70 @@ describe('HealthCheck component (source contract)', () => {
     expect(source).not.toMatch(/\bAna\b|coin|mascot|16 ?ana|₹ ?1 assessment/i);
     expect(source).not.toMatch(/PlanningSlides|HeroFintechIllustration/);
   });
+  it('stays inside the SOLAHANA palette: every colour is a site token (or the site error red)', () => {
+    const allowed = new Set([
+      '#0F1F45', '#1A3170', '#2F5BC7', '#EEF2FB', // navy, primary, royal, royal tint
+      '#C9A04F', '#E6C27A', '#A67C2E', // logo gold, gold light, gold dark
+      '#E4E8F0', '#F7F8FB', '#FEFDF9', '#EEF1F6', '#CBD6EE', // lines, page grey, cream, track, hover line
+      '#475569', '#5B6B84', '#8A96AB', // body, muted, subtle text
+      '#DC2626', '#B91C1C', // Tailwind red-600/700, the error red the site already uses (SVG strokes need a hex)
+    ]);
+    const found = [...new Set(((source + partsSource).match(/#[0-9a-fA-F]{6}\b/g) || []).map((c) => c.toUpperCase()))];
+    expect(found.filter((c) => !allowed.has(c))).toEqual([]);
+  });
+  it('uses the site button styles and keeps the page theme classes', () => {
+    expect(source).toContain('gold-glow-button');
+    expect(source).toContain('btn-luxury-outline');
+    expect(source).toContain('font-serif-luxury');
+    expect(source).not.toMatch(/font-family|@import|<style/);
+  });
+  it('is accessible: stepper, labelled fields, error wiring, live regions and focus management', () => {
+    expect(source).toContain("aria-current={state === 'current' ? 'step' : undefined}");
+    expect(source).toContain('aria-invalid=');
+    expect(source).toContain('aria-describedby=');
+    expect(source).toContain('role="alert"');
+    expect(source).toContain('role="status"');
+    expect(partsSource).toContain('aria-live="polite"');
+    expect(partsSource).toContain('role="status"');
+    expect(source).toContain('role="img" aria-label=');
+    expect(source).toContain('<fieldset');
+    expect(source).toContain('<legend');
+    expect(source).toContain('headingRef');
+    expect(source).toContain('tabIndex={-1}');
+    expect(source).toContain('focus-visible');
+    // focus only follows the entering view, never the leaving one
+    expect(source).toContain('definition?.opacity !== 1');
+  });
+  it('respects reduced motion and does not animate focus or the score when it is on', () => {
+    expect(source).toContain('useReducedMotion');
+    expect(source).toMatch(/if \(reduce\) return undefined;/);
+  });
+  it('only echoes what was typed and never feeds an amount into the lead payload', () => {
+    expect(source).toContain('amountEcho(values[field])');
+    const calls = source.match(/buildLeadPayload\(\{[^}]*\}\)/g) || [];
+    expect(calls).toHaveLength(1);
+    expect(calls[0]).not.toMatch(/values|echo|amount/i);
+  });
+  it('explains the off callback button without weakening consent or duplicating the error', () => {
+    expect(source).toContain('disabled={sending || !consent}'); // still off until consent is ticked
+    expect(source).toContain('const showConsentHint = !consent && !contactErrors.consent && !sending;');
+    expect(source).toContain('<ConsentHint visible={showConsentHint} />');
+    expect(source).toContain("aria-describedby={showConsentHint ? 'hc-consent-hint' : undefined}");
+    expect(source).toContain('if (!consent) next.consent = NEW_MICROCOPY.consentError;'); // the consent check itself is unchanged
+    expect(copy.NEW_MICROCOPY.consentHint).toBe('This button turns on once you tick the consent box above.');
+  });
+  it('keeps one live region in the page for the whole visit, outside the step views', () => {
+    expect(source.match(/<AmountAnnouncer /g)).toHaveLength(1);
+    expect(source.indexOf('<AmountAnnouncer ')).toBeLessThan(source.indexOf('<AnimatePresence'));
+    expect(source).toContain('announceAmount(field, e.target.value)');
+    expect(source).toContain('hc-${field}-echo'); // the field is described by its echo
+    expect(source).not.toMatch(/aria-live/); // the echo itself is no longer a live region
+  });
+  it('keeps one TextWithLink for the approved links instead of a copy in the page', () => {
+    expect(source).toContain('<RetentionNote />');
+    expect(source).not.toContain('function TextWithLink');
+    expect(source).not.toMatch(/to="\/(privacy-policy|contact-us)"/);
+  });
   it('keeps the consultation button separate from the callback form and the privacy note on the steps', () => {
     expect(source).toContain("import { scrollToConsultation } from '../../utils/consultation'");
     expect(source).toContain('onClick={() => scrollToConsultation()}');
@@ -63,7 +128,8 @@ describe('HealthCheck component (source contract)', () => {
     expect(source).not.toContain('PRIVACY_NOTE');
   });
   it('shows the exact consent text that the server version stands for', () => {
-    expect(source).toContain('CONSENT_TEXTS[CONSENT_VERSION]');
+    expect(source).toContain('<ConsentText />');
+    expect(partsSource).toContain('CONSENT_TEXTS[CONSENT_VERSION]');
     expect(CONSENT_TEXTS[CONSENT_VERSION]).toBe(CONSENT_TEXTS['hc-consent-v1']);
   });
 });
@@ -121,6 +187,6 @@ describe('copy module', () => {
     expect(copy.CHOICES.business.options.map((o) => o.label)).toEqual(['Yes', 'No or not sure', "Not applicable: I don't own a business"]);
   });
   it('lists the unapproved strings only under NEW_MICROCOPY', () => {
-    expect(Object.keys(copy.NEW_MICROCOPY).sort()).toEqual(['callbackButton', 'consentError', 'consultationButton', 'emiAboveIncome', 'notApplicablePoints', 'progressLabel', 'sending', 'stepPrivacyNote']);
+    expect(Object.keys(copy.NEW_MICROCOPY).sort()).toEqual(['amountEchoPrefix', 'breakdownLabel', 'callbackButton', 'consentError', 'consentHint', 'consultationButton', 'emiAboveIncome', 'notApplicablePoints', 'progressLabel', 'scoreRingLabel', 'sending', 'stepPrivacyNote']);
   });
 });

@@ -187,4 +187,10 @@ export const NEW_MICROCOPY = Object.freeze({
   notApplicablePoints: 'N/A',
   stepPrivacyNote: 'The income, expense, savings and cover amounts you enter stay in your browser. They are not sent to Solahana.',
   consultationButton: 'Get these fixed, free call',
+  // Small additions from the presentation pass: the echo of a typed amount and two screen-reader-only labels
+  amountEchoPrefix: '= ',
+  scoreRingLabel: 'Your score out of 100',
+  breakdownLabel: 'Score breakdown by category',
+  // Shown beside the callback button while it is off because the consent box is not ticked
+  consentHint: 'This button turns on once you tick the consent box above.',
 });
