@@ -318,11 +318,12 @@ export const EQUITY_PAGE = {
   id: 'equities',
   heroAspect: 912 / 1096,
   banner: {
-    file: 'eq-banner',
+    file: 'eq-banner-clean',
     alt: 'Equities, International Investing and IPOs. Direct Equity and Global Architecture. High-Conviction Growth, Worldwide Reach.',
-    ratio: 1600 / 666,
-    primary: { left: '5.81%', top: '73.87%', width: '18.38%', height: '6.76%' },
-    secondary: { left: '25.69%', top: '73.87%', width: '17.19%', height: '6.76%' },
+    ratio: 1600 / 883,
+    // click areas measured on the 1600 x 883 picture: gold button x 66-424, y 628-692; outlined button x 449-817, y 628-691 (2px margin each side)
+    primary: { left: '4%', top: '70.89%', width: '22.69%', height: '7.81%' },
+    secondary: { left: '27.94%', top: '70.89%', width: '23.31%', height: '7.59%' },
   },
   art: 'eq',
   eyebrow: 'Equities, International Investing & IPOs',
