@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { TrendingUp, RotateCcw, Bookmark, Sparkles, ShieldCheck } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { calculateSIP, formatINR } from '../../utils/calculatorEngine';
+import CalculatorDisclaimer from '../calculators/CalculatorDisclaimer';
+import { MARKET_RISK_NOTE, SIP_CONVENTION_NOTE } from '../../utils/calculatorCopy';
 
 export default function InvestmentCalculator() {
   const [monthlySIP, setMonthlySIP] = useState(25000);
@@ -218,7 +220,7 @@ export default function InvestmentCalculator() {
               <div className="p-5 rounded-2xl bg-white border border-emerald-500/30 shadow-sm space-y-1.5">
                 <span className="text-[10px] uppercase font-mono font-bold text-emerald-700">Estimated Returns</span>
                 <div className="text-xl sm:text-2xl font-bold font-mono text-emerald-800">{formatINR(result.estimatedReturns)}</div>
-                <div className="text-[10px] text-emerald-700/80 font-medium">Pure compound growth</div>
+                <div className="text-[10px] text-emerald-700/80 font-medium">Assumed growth, not guaranteed</div>
               </div>
             </div>
 
@@ -271,6 +273,8 @@ export default function InvestmentCalculator() {
                 </ResponsiveContainer>
               </div>
             </div>
+
+            <CalculatorDisclaimer notes={[MARKET_RISK_NOTE, SIP_CONVENTION_NOTE]} />
 
           </motion.div>
 

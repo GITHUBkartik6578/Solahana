@@ -13,7 +13,7 @@ const steps = [
     step: '02',
     icon: MessageSquare,
     title: 'Receive Your Personalized Planning Discussion',
-    description: 'Join a confidential 45-minute video or in-person session with a SEBI registered wealth advisor focused strictly on your objectives.'
+    description: 'Join a confidential 45-minute video or in-person session with a Solahana planner focused strictly on your objectives.'
   },
   {
     step: '03',

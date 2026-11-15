@@ -9,6 +9,7 @@ import {
 
 // Photos cropped from the owner's Financial Planning design and upscaled (src/assets/planning/fp-*.webp)
 import heroBanner from '../assets/planning/fp-hero-banner.webp';
+import heroPhoto from '../assets/planning/fp-hero.webp'; // phones: the text-free photo instead of the wide banner cropped to ~40%
 import archFinancial from '../assets/services/financial.webp';
 import archInvest from '../assets/services/investment.webp';
 import archRetire from '../assets/services/retirement.webp';
@@ -151,17 +152,14 @@ function Hero() {
       src={heroBanner}
       alt="Solahana. Architecting Wealth. Preserving Legacy. Financial Planning and Family Office"
       ratio={1600 / 600}
-      maxVw={37.5}
-      fit={0.93}
-      minH={400}
-      hotspots={[
+            hotspots={[
         { label: 'Request a Private Consultation', onClick: book, style: { left: '4.7%', top: '67.3%', width: '19.6%', height: '7.7%' } },
         { label: 'Explore Our Family Office Services', onClick: scrollToFramework, style: { left: '25.4%', top: '67.3%', width: '18%', height: '7.7%' } },
       ]}
     />
 
     {/* Tablet / mobile: text hero with the new photo, so the copy stays readable */}
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px] lg:hidden">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px] sm:hidden any-pointer-fine:hidden">
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 top-10 h-[480px] w-[480px] rounded-full bg-[#C9922E]/15 blur-[120px]" />
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:min-h-[clamp(500px,calc(100svh-80px),680px)] lg:px-8">
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:max-w-[50%] lg:py-12">
@@ -212,10 +210,10 @@ function Hero() {
           className="relative mx-auto h-[340px] w-full max-w-[560px] overflow-hidden sm:h-[440px] lg:absolute lg:bottom-0 lg:right-0 lg:top-[80px] lg:h-auto lg:w-[54%] lg:max-w-none [mask-image:linear-gradient(to_right,transparent,black_10%)]"
         >
           <img
-            src={heroBanner}
+            src={heroPhoto}
             alt="Chartered wealth manager at his desk"
             draggable="false"
-            className="absolute inset-0 h-full w-full object-cover object-[78%_40%]"
+            className="absolute inset-0 h-full w-full object-cover object-[60%_40%]"
           />
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-[#0F1F45] to-transparent lg:hidden" />
         </motion.div>

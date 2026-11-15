@@ -4,6 +4,8 @@ import { Target, Sparkles, Trophy, Calendar, TrendingUp } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import CalculatorLayout from './CalculatorLayout';
 import { calculateGoal, formatINR } from '../../utils/calculatorEngine';
+import CalculatorDisclaimer from './CalculatorDisclaimer';
+import { MARKET_RISK_NOTE, RATE_LIMIT_NOTE, goalAssumptionNote } from '../../utils/calculatorCopy';
 
 export default function GoalPlanner() {
   const location = useLocation();
@@ -134,10 +136,10 @@ export default function GoalPlanner() {
         <div className="lg:col-span-6 space-y-6">
           
           <div className="p-6 rounded-3xl bg-gradient-to-r from-[#F7F8FB] via-[#F7F8FB] to-[#F7F8FB] border border-[#2F5BC7]/50 shadow-2xl space-y-2">
-            <span className="text-xs uppercase font-mono tracking-widest text-[#5A7FD6]">RECOMMENDED MONTHLY SIP</span>
+            <span className="text-xs uppercase font-mono tracking-widest text-[#5A7FD6]">ESTIMATED MONTHLY SIP NEEDED</span>
             <div className="text-3xl sm:text-4xl font-bold font-mono text-[#0F1F45]">{formatINR(result.requiredMonthlySIP)}</div>
             <p className="text-xs text-[#5B6B84]/80">
-              Required monthly investment to guarantee {goalName} in {yearsRemaining} years.
+              Estimated monthly investment needed for {goalName} in {yearsRemaining} years if returns average {result.effectiveReturn}% a year. Returns are not guaranteed.
             </p>
           </div>
 
@@ -163,7 +165,7 @@ export default function GoalPlanner() {
             <div>
               <h4 className="text-xs font-bold text-[#5A7FD6] uppercase font-mono">Solahana Goal Roadmap</h4>
               <p className="text-xs text-[#5B6B84] leading-relaxed mt-0.5">
-                Starting a monthly SIP of <strong>{formatINR(result.requiredMonthlySIP)}</strong> today ensures you fulfill <strong>{goalName}</strong> without financial stress.
+                Starting a monthly SIP of <strong>{formatINR(result.requiredMonthlySIP)}</strong> today is the estimate needed for <strong>{goalName}</strong> if returns average {result.effectiveReturn}% a year. Actual returns will differ.
               </p>
             </div>
           </div>
@@ -185,6 +187,8 @@ export default function GoalPlanner() {
               </ResponsiveContainer>
             </div>
           </div>
+
+          <CalculatorDisclaimer notes={[goalAssumptionNote(result.effectiveReturn), MARKET_RISK_NOTE, RATE_LIMIT_NOTE]} />
 
         </div>
 

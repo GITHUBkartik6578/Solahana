@@ -27,10 +27,10 @@ export default function PremiumServices() {
     },
     {
       title: 'Bonds & Fixed Income',
-      description: 'Safe wealth capital preservation with AAA rated corporate bonds, Sovereign Gold Bonds (SGB), and capital-guaranteed debt yields.',
+      description: 'Options such as highly rated corporate bonds and Sovereign Gold Bonds (SGB) for stability-focused allocations. Credit and interest-rate risks apply.',
       icon: Wallet,
-      stat: 'Yield up to 10.5% p.a.',
-      badge: 'Fixed Yield',
+      stat: 'Fixed-income options',
+      badge: 'Fixed Income',
     },
     {
       title: 'NRI Wealth Planning',
@@ -88,7 +88,7 @@ export default function PremiumServices() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base sm:text-lg text-[#475569] font-inter leading-relaxed"
           >
-            AI-powered financial engineering combined with SEBI registered wealth planning for complete peace of mind.
+            AI-powered financial engineering combined with goal-based financial planning.
           </motion.p>
         </div>
 

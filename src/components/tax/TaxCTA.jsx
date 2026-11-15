@@ -24,7 +24,7 @@ export default function TaxCTA() {
           </h2>
 
           <p className="text-base sm:text-lg text-[#475569] font-inter max-w-2xl mx-auto leading-relaxed">
-            Schedule a 1-on-1 confidential tax strategy call with a SEBI Registered SOLAHANA Wealth Advisor.
+            Schedule a 1-on-1 confidential tax strategy call with a SOLAHANA planner.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -39,7 +39,7 @@ export default function TaxCTA() {
 
           <div className="pt-4 flex items-center justify-center gap-2 text-xs font-semibold text-[#2F5BC7]">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>Confidential • Zero Commission • SEBI Registered Fiduciary</span>
+            <span>Confidential • Zero Commission • Goal-Based Financial Planning</span>
           </div>
         </motion.div>
       </div>

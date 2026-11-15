@@ -273,7 +273,7 @@ export default function HeroPhones() {
 
           {/* Phone Footer CTA */}
           <div className="p-3 bg-[#F7F8FB] border-t border-[#2F5BC7]/20 flex items-center justify-between text-xs">
-            <span className="text-[10px] text-[#5B6B84]">SEBI-Registered Fiduciary</span>
+            <span className="text-[10px] text-[#5B6B84]">Goal-Based Financial Planning</span>
             <button className="px-3 py-1 rounded-full bg-[#1A3170] text-white font-bold text-[10px] hover:bg-[#5A7FD6] transition-colors">
               Invest Now
             </button>
@@ -349,7 +349,7 @@ export default function HeroPhones() {
             {/* Security Badge */}
             <div className="p-2 rounded-xl bg-[#FFFFFF] border border-[#2F5BC7]/20 flex items-center space-x-2 text-[10px] text-[#5B6B84]">
               <ShieldCheck className="w-4 h-4 text-[#2F5BC7]" />
-              <span>Zero commissions • Bank-grade AES 256</span>
+              <span>Zero commissions</span>
             </div>
           </div>
 

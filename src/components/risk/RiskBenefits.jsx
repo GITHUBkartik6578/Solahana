@@ -24,10 +24,10 @@ export default function RiskBenefits({ onStartRiskPlanning }) {
             PROTECTION BENEFITS
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif-luxury font-bold text-[#0F1F45]">
-            Complete Peace of Mind for Your Loved Ones
+            Planning Ahead for Your Loved Ones
           </h2>
           <p className="text-sm sm:text-base text-[#475569]">
-            A structured risk management blueprint guarantees that unforeseen medical or financial shocks never compromise your family’s future.
+            A structured risk management blueprint can help reduce the impact of unforeseen medical or financial shocks on your family’s future.
           </p>
         </div>
 
@@ -60,7 +60,7 @@ export default function RiskBenefits({ onStartRiskPlanning }) {
             </h3>
 
             <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
-              Human Life Value (HLV) modeling ensures your family receives adequate financial replacement so home loans, living standards, and child education goals stay 100% fulfilled.
+              Human Life Value (HLV) modeling helps estimate the financial replacement your family may need, so home loans, living standards, and child education goals can be taken into account.
             </p>
 
             <ul className="space-y-3">

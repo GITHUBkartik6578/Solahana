@@ -22,7 +22,7 @@ export default function WhyRetirementMatters() {
     {
       icon: ShieldCheck,
       title: 'Wealth Preservation',
-      description: 'Safeguard your accumulated principal while balancing equity-debt allocations to ensure your capital outlives retirement.',
+      description: 'Plan your accumulated principal and equity-debt allocations to help your capital last through retirement.',
     },
   ];
 
@@ -39,7 +39,7 @@ export default function WhyRetirementMatters() {
             Why Retirement Planning Matters
           </h2>
           <p className="text-sm sm:text-base text-[#475569]">
-            A structured retirement strategy ensures complete financial independence, medical security, and lifelong peace of mind.
+            A structured retirement strategy can help you plan for financial independence, medical costs, and peace of mind.
           </p>
         </div>
 

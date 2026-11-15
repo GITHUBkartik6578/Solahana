@@ -12,7 +12,7 @@ export default function WhyChooseSolahanaInvestment() {
     {
       icon: Award,
       title: 'Unbiased Fiduciary Planning',
-      desc: 'SEBI-registered fiduciary model with zero commission kickbacks, keeping advice strictly aligned with your interest.',
+      desc: 'Goal-based planning model with zero commission kickbacks, keeping advice strictly aligned with your interest.',
     },
     {
       icon: RefreshCw,

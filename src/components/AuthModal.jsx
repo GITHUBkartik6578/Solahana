@@ -308,9 +308,6 @@ export default function AuthModal() {
             </form>
           )}
 
-          <div className="mt-5 text-center text-[11px] text-[#5B6B84] border-t border-[#E4E8F0] pt-4">
-            Protected by 256-bit SSL encryption & SEBI Registered Standards.
-          </div>
         </motion.div>
       </div>
     </AnimatePresence>

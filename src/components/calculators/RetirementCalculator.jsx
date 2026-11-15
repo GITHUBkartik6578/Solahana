@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { ShieldCheck, Flame, RotateCcw, Bookmark, Sparkles, TrendingUp, Calendar, Wallet } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { calculateRetirement, formatINR } from '../../utils/calculatorEngine';
+import CalculatorDisclaimer from './CalculatorDisclaimer';
+import { RETIREMENT_NOTE } from '../../utils/calculatorCopy';
 
 import { PlanningTop, PlanningCta } from '../planning-pages/PlanningPageTemplate';
 import { RETIREMENT_PAGE } from '../../data/planningPages';
@@ -279,7 +281,7 @@ export default function RetirementCalculator() {
                     REQUIRED RETIREMENT CORPUS AT AGE {retirementAge}
                   </span>
                   <span className="px-2.5 py-1 rounded-full bg-[#F7F8FB] border border-[#2F5BC7]/40 text-[#2F5BC7] text-[10px] font-mono font-semibold">
-                    25+ Yrs Inflation Hedged
+                    Inflation-Adjusted Estimate
                   </span>
                 </div>
                 <div className="text-3xl sm:text-4xl font-bold font-mono text-[#0F1F45]">
@@ -369,6 +371,8 @@ export default function RetirementCalculator() {
                   </ResponsiveContainer>
                 </div>
               </div>
+
+              <CalculatorDisclaimer notes={[RETIREMENT_NOTE]} />
 
             </motion.div>
 

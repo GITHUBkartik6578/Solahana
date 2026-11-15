@@ -56,11 +56,11 @@ export default function FinalCTA({ onOpenSearch }) {
           {/* Security Subtext */}
           <div className="pt-6 border-t border-[#2F5BC7]/15 flex flex-wrap items-center justify-center gap-6 text-xs text-[#64748B]">
             <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-emerald-600" /> SEBI-Registered Fiduciary
+              <ShieldCheck className="w-4 h-4 text-emerald-600" /> Goal-Based Financial Planning
             </span>
             <span>•</span>
             <span className="flex items-center gap-1.5">
-              <Lock className="w-4 h-4 text-[#2F5BC7]" /> Bank-Grade 256-Bit SSL
+              <Lock className="w-4 h-4 text-[#2F5BC7]" /> 256-Bit SSL
             </span>
             <span>•</span>
             <span>Zero Sales Pressure</span>

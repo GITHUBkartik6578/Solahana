@@ -7,7 +7,7 @@ export default function ConsultationProcess() {
     {
       number: '01',
       title: 'Book Confidential Slot',
-      desc: 'Select your preferred date & time for a 1-on-1 discovery call with a SEBI Registered Advisor.',
+      desc: 'Select your preferred date & time for a 1-on-1 discovery call with a Solahana planner.',
       icon: Calendar,
     },
     {

@@ -13,7 +13,7 @@ export const LEGAL_PAGES = {
     slug: 'privacy-policy',
     path: '/privacy-policy',
     title: 'Privacy Policy',
-    tagline: 'Your information is safe with us.',
+    tagline: 'How we collect, use and protect your information.',
     eyebrow: 'Your data. Our responsibility',
     photo: 'mf',
     design: 'terms', // rendered by TermsLayout (banner + numbered rows)

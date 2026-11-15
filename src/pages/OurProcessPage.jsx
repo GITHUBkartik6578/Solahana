@@ -13,6 +13,7 @@ import step2 from '../assets/our-process-step2.webp';
 import step3 from '../assets/our-process-step3.webp';
 import step4 from '../assets/our-process-step4.webp';
 import ctaArt from '../assets/our-process-cta.webp';
+import ScaledStage from '../components/common/ScaledStage';
 
 const serif = { fontFamily: "'Cormorant Garamond', 'Playfair Display', Georgia, serif" };
 const BOOK = { goal: 'Financial Planning', message: 'I’d like to book the free first call.' };
@@ -53,7 +54,7 @@ const STEPS = [
   },
   {
     n: '03', title: ['Strategy &', 'Roadmap Architecture'], sub: '', photo: step3, alt: 'A financial plan being drawn on paper',
-    objIcon: BarChart3, objective: 'Designing a transparent, zero-bias master financial plan.',
+    objIcon: BarChart3, objective: 'Designing a transparent master financial plan.',
     doIcon: Lightbulb, what: 'We create a clear, actionable blueprint encompassing asset allocation, risk mitigation, and estate structuring—tailored specifically to your family’s long-term timeline without any product-pushing pressure.',
   },
   {
@@ -66,7 +67,7 @@ const STEPS = [
 const PRINCIPLES = [
   { icon: BookOpen, title: 'Plain Language', desc: 'Complex financial concepts translated into simple, easy-to-understand terms.' },
   { icon: Users, title: 'Free First Call', desc: 'Zero-obligation initial consultation to see if we are the right fit for your family.' },
-  { icon: Scale, title: 'Zero Product Bias', desc: 'Objective advice focused purely on what works best for your wealth.' },
+  { icon: Scale, title: 'Goal-Focused Planning', desc: 'Planning focused on what works best for your family’s goals.' },
 ];
 
 const OUTCOMES = [
@@ -112,16 +113,17 @@ function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#0A1836] via-[#0F1F45] to-[#142A5C] pt-[80px]">
       <div aria-hidden="true" className="pointer-events-none absolute -left-24 top-24 h-[420px] w-[420px] rounded-full bg-[#C9922E]/10 blur-[120px]" />
-      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-4 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 lg:py-14">
+      <ScaledStage>
+      <div className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-6 px-4 @2xl:px-6 @5xl:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] @5xl:gap-4 @5xl:px-8">
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 py-10 @5xl:py-14">
           <Eyebrow light>Our Process</Eyebrow>
-          <h1 style={serif} className="[text-wrap:balance] mt-5 text-[40px] font-semibold leading-[1.06] text-white sm:text-[52px] lg:text-[clamp(44px,4.4vw,64px)]">
-            A Structured Path to <span className="text-[#E2B24E]">Absolute Financial Clarity.</span>
+          <h1 style={serif} className="[text-wrap:balance] mt-5 text-[40px] font-semibold leading-[1.06] text-white @2xl:text-[52px] @5xl:text-[64px]">
+            A Structured Path to <span className="text-[#E2B24E]">Financial Clarity.</span>
           </h1>
-          <p className="[text-wrap:pretty] mt-5 max-w-[56ch] text-[15.5px] leading-relaxed text-slate-200 sm:text-[17px]">
+          <p className="[text-wrap:pretty] mt-5 max-w-[56ch] text-[15.5px] leading-relaxed text-slate-200 @2xl:text-[17px]">
             No complex jargon, no hidden agendas. Our 4-step consultative process is designed to understand your life goals, evaluate your current financial health, and build a resilient, multi-generational roadmap.
           </p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div className="mt-7 flex flex-col gap-3 @2xl:flex-row @2xl:flex-wrap">
             <GoldBtn onClick={() => openConsultation(BOOK)}>Start Your Journey</GoldBtn>
             <button
               type="button"
@@ -134,7 +136,7 @@ function Hero() {
               Watch How It Works
             </button>
           </div>
-          <ul className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <ul className="mt-9 grid grid-cols-1 gap-4 @2xl:grid-cols-3">
             {HERO_CHIPS.map((c) => (
               <li key={c.label[0]} className="flex items-center gap-3">
                 <RoundIcon icon={c.icon} size="h-12 w-12" iconSize="h-[22px] w-[22px]" />
@@ -151,7 +153,7 @@ function Hero() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="relative mx-auto w-full max-w-[560px] overflow-hidden [container-type:inline-size] lg:mx-0 lg:w-[calc(100%+max(0px,(100vw-1320px)/2)+2rem)] lg:max-w-none [mask-image:linear-gradient(to_right,transparent,black_16%)]"
+          className="relative mx-auto w-full max-w-[560px] overflow-hidden [container-type:inline-size] @5xl:mx-0 @5xl:w-[calc(100%+max(0px,(100cqw-1320px)/2)+2rem)] @5xl:max-w-none [mask-image:linear-gradient(to_right,transparent,black_16%)]"
           style={{ aspectRatio: '476 / 384' }}
         >
           <img src={heroArt} alt="A professional looking up a glowing path to the summit: understand your goals, protect your family, grow investments, secure retirement, generational wealth, financial freedom" draggable="false" className="absolute inset-0 block h-full w-full select-none" />
@@ -167,6 +169,7 @@ function Hero() {
           ))}
         </motion.div>
       </div>
+      </ScaledStage>
     </section>
   );
 }

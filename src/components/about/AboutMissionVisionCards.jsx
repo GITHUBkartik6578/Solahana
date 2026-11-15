@@ -103,7 +103,7 @@ export default function AboutMissionVisionCards() {
     <section aria-label="Mission and vision" className="bg-white py-6 sm:py-7">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-5 px-5 sm:px-8 lg:grid-cols-2 lg:gap-6 lg:px-10">
         <Card icon={Target} title="Our Mission" art={<MountainArt />}>
-          “To engineer absolute financial clarity and multi-generational prosperity for families by providing objective, zero-bias strategic guidance, completely free from the pressures of product-pushing and corporate sales quotas.”
+          “To engineer financial clarity and multi-generational prosperity for families by providing objective, goal-focused strategic guidance.”
         </Card>
         <Card icon={Eye} title="Our Vision" art={<SkylineArt />}>
           “To set the gold standard in independent Family Office architecture, where every client relationship is anchored on uncompromising integrity, institutional rigor, and long-term fiduciary dedication.”

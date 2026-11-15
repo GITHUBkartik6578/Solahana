@@ -9,7 +9,7 @@ export default function GoalStrategyTimeline() {
       title: 'Emergency & Buffer',
       goal: 'Emergency Shield & Liquidity',
       mix: '100% Liquid Debt & FDs',
-      description: 'Capital preservation and instant access. Zero equity volatility risk.',
+      description: 'Capital preservation and liquidity are the priority. No equity exposure, so no equity volatility; other risks still apply.',
       icon: ShieldAlert,
       tag: 'Short Horizon'
     },

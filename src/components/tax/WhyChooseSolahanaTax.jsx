@@ -12,7 +12,7 @@ export default function WhyChooseSolahanaTax() {
     {
       icon: ShieldCheck,
       title: 'Transparent Planning Process',
-      desc: 'SEBI-aligned fiduciary framework with zero hidden commissions or distributor kickbacks.',
+      desc: 'Client-first planning framework with zero hidden commissions or distributor kickbacks.',
     },
     {
       icon: TrendingUp,

@@ -199,7 +199,7 @@ export function ClientFirstBand() {
 const CONNECTED = [
   { icon: ChartColumnIncreasing, title: 'Invest', sub: 'Grow Your Wealth', to: '/investments' },
   { icon: ShieldPlus, title: 'Protect', sub: 'Manage Life’s Risks', to: '/risk-management' },
-  { icon: Armchair, title: 'Retire', sub: 'Ensure Income', to: '/calculators/retirement' },
+  { icon: Armchair, title: 'Retire', sub: 'Plan Income', to: '/calculators/retirement' },
   { icon: Percent, title: 'Tax', sub: 'Keep More of What You Earn', to: '/tax-planning' },
   { icon: Users, title: 'Estate', sub: 'Preserve for Generations', to: '/estate-planning' },
 ];

@@ -14,7 +14,7 @@ const CARDS = [
     icon: Target,
     scene: missionScene,
     sceneAlt: 'Sunlit mountain range',
-    text: '“To engineer absolute financial clarity and multi-generational prosperity for families by providing objective, zero-bias strategic guidance, completely free from the pressures of product-pushing and corporate sales quotas.”',
+    text: '“To engineer financial clarity and multi-generational prosperity for families by providing objective, goal-focused strategic guidance.”',
     tint: 'from-[#FFFBF6] via-[#FEFBF7] to-[#FBF3EA]',
   },
   {

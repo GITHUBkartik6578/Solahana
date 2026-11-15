@@ -312,7 +312,7 @@ export default function CalculatorLayout({ title, subtitle, icon: HeaderIcon, on
                     {currentCalc.badge || 'FINTECH PLANNING'}
                   </span>
                   <span className="text-[10px] uppercase font-mono tracking-widest text-emerald-400 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-1">
-                    <Sparkles className="w-3 h-3" /> Live Precision Engine
+                    <Sparkles className="w-3 h-3" /> Live Estimate
                   </span>
                 </div>
                 <h1 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#0F1F45] tracking-tight">
@@ -413,14 +413,14 @@ export default function CalculatorLayout({ title, subtitle, icon: HeaderIcon, on
               </button>
             )}
 
-            {/* SEBI Compliance Card */}
+            {/* Assumptions card */}
             <div className="p-4 rounded-2xl bg-gradient-to-b from-[#F7F8FB]/50 to-[#F7F8FB] border border-[#E4E8F0] text-left space-y-2">
               <div className="flex items-center gap-2 text-[#5A7FD6] text-[11px] font-semibold font-mono">
                 <ShieldCheck className="w-4 h-4" />
-                <span>SOLAHANA PRECISION</span>
+                <span>HOW THESE ARE CALCULATED</span>
               </div>
               <p className="text-[11px] text-[#5B6B84]/70 font-light leading-relaxed">
-                All projections account for compound interest formulas used by top Indian asset management companies and SEBI standards.
+                Projections use standard compound-interest formulas and the assumptions you enter. They are estimates, not guaranteed results.
               </p>
             </div>
           </aside>

@@ -92,7 +92,7 @@ export default function InvestHeroIllustration({ type = 'mutual-funds' }) {
           <rect x="110" y="154" width="140" height="8" rx="2" fill="#94A3B8" />
           {/* Coupon Rate Badge */}
           <rect x="110" y="190" width="180" height="60" rx="14" fill="#0F1F45" />
-          <text x="130" y="215" fill="#94A3B8" fontSize="10">Guaranteed Coupon</text>
+          <text x="130" y="215" fill="#94A3B8" fontSize="10">Illustrative Coupon</text>
           <text x="130" y="238" fill="#F59E0B" fontSize="20" fontWeight="bold">11.50% p.a.</text>
         </svg>
       );

@@ -16,7 +16,7 @@ export default function InvestmentFAQ() {
     },
     {
       q: 'Should I invest in separate funds for different goals?',
-      a: 'Yes! Segregating investments into goal-based buckets (e.g. Home Fund vs FIRE Retirement) ensures that a short-term market dip won’t force you to liquidate long-term compounding assets, maintaining clear risk alignment.'
+      a: 'Yes! Segregating investments into goal-based buckets (e.g. Home Fund vs FIRE Retirement) can help prevent a short-term market dip from forcing you to liquidate long-term compounding assets, maintaining clear risk alignment.'
     },
     {
       q: 'How does asset diversification protect my portfolio?',

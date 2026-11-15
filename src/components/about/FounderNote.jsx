@@ -16,7 +16,7 @@ export default function FounderNote() {
       >
         <img
           src={founderNote}
-          alt="Founder’s note and philosophy. Built on Trust. Backed by Decades of Rigor. “True wealth management is not about selling financial products; it is about standing shoulder-to-shoulder with families to protect their legacy and secure their future. With over 25 years of hands-on financial and banking experience, my commitment is simple: your best interests come first, always.” Amit R. Pandey, CWM®, Principal Officer and Wealth Architect."
+          alt="Founder’s note and philosophy. Built on Trust. Backed by Decades of Rigor. “True wealth management is not about selling financial products; it is about standing shoulder-to-shoulder with families to protect their legacy and secure their future. With over 25 years of hands-on financial and banking experience, my commitment is simple: your best interests come first, always.” Amit R. Pandey, CWM®, Founder."
           width="1600"
           height="600"
           loading="lazy"

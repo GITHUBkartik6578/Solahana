@@ -57,7 +57,7 @@ export default function AboutFounderNote() {
 
           <p style={script} className="mt-6 text-[48px] leading-none text-[#F3D9A4] sm:text-[56px]">Amit R. Pandey</p>
           <p style={serif} className="mt-3 text-[20px] font-semibold text-white">Amit R. Pandey, CWM<sup className="text-[0.55em]">®</sup></p>
-          <p className="text-[14.5px] text-white/90">Principal Officer &amp; Wealth Architect</p>
+          <p className="text-[14.5px] text-white/90">Founder</p>
         </motion.div>
 
         {/* books + framed plaque */}

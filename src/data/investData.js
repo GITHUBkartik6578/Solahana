@@ -44,7 +44,7 @@ export const INVEST_OPTIONS = {
     ],
     features: [
       { title: 'AAA Rated Corporate Bonds', desc: 'Top-tier corporate debt offering steady interest coupons above standard FD rates.' },
-      { title: 'Sovereign G-Secs & T-Bills', desc: '100% government-backed fixed income securities for maximum capital safety.' },
+      { title: 'Sovereign G-Secs & T-Bills', desc: 'Fixed income securities issued by the government, often used for lower credit risk. Interest-rate risk still applies.' },
       { title: 'Tax-Free Municipal Bonds', desc: 'Earn tax-exempt interest income ideal for high-bracket wealth investors.' },
       { title: 'Secondary Market Liquidity', desc: 'Liquidate or trade your bond holdings before maturity whenever needed.' },
     ],
@@ -59,7 +59,7 @@ export const INVEST_OPTIONS = {
     headline: 'Invest in India’s Premier Companies & Wealth Creators',
     description: 'Access curated Indian equity model portfolios and fundamental research to compound long-term wealth in India’s growth story.',
     keyStats: [
-      { label: 'Planning Focus', value: 'SEBI Fiduciary' },
+      { label: 'Planning Focus', value: 'Goal-Based Planning' },
       { label: 'Coverage Universe', value: '500+ Indian Stocks' },
       { label: 'Research Style', value: 'Fundamental Moats' },
     ],

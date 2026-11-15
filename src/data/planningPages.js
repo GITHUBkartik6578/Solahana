@@ -32,7 +32,7 @@ export const RETIREMENT_PAGE = {
   eyebrow: 'Retirement Planning',
   titleGold: ['Retirement', 'Architecture.'],
   titleWhite: ['Design Freedom,', 'Not Just a Corpus.'],
-  text: 'True retirement isn’t just about stopping work; it’s about ensuring your capital outlives you while sustaining your exact lifestyle. Solahana engineers inflation-adjusted retirement freedom and precise SWP frameworks — free from product-pushing.',
+  text: 'True retirement isn’t just about stopping work; it’s about helping your capital last while sustaining your lifestyle. Solahana engineers inflation-adjusted retirement freedom and precise SWP frameworks — free from product-pushing.',
   primaryCta: 'Calculate Your Retirement Corpus',
   tagline: ['A Richer Tomorrow', 'On Your Terms'],
   trust: [CLIENT_ALIGNED, { icon: Hourglass, label: 'Inflation-Resilient Corpus Planning' }, REGULATED],
@@ -42,7 +42,7 @@ export const RETIREMENT_PAGE = {
     text: 'Most retirees rely on ad-hoc fixed income or arbitrary savings targets that get decimated by inflation and medical costs. Our approach treats retirement as a multi-decade cash-flow engineering problem — with clarity, data and discipline.',
     cards: [
       { icon: Coins, title: 'Inflation Shielding', desc: 'Structuring assets to outpace healthcare and lifestyle inflation.' },
-      { icon: ShieldCheck, title: 'Longevity Risk Management', desc: 'Ensuring your wealth lasts through decades of post-work life.' },
+      { icon: ShieldCheck, title: 'Longevity Risk Management', desc: 'Planning for your wealth to last through decades of post-work life.' },
       { icon: TrendingUp, title: 'Dynamic Income Flow', desc: 'Transitioning from accumulation to a structured distribution and SWP framework.' },
     ],
   },
@@ -79,7 +79,7 @@ export const RETIREMENT_PAGE = {
   cta: {
     eyebrow: 'Next Chapter',
     title: ['Secure Your Financial', 'Independence Today.'],
-    text: 'Take the first step toward absolute peace of mind. No product pitching, no charges — just pure architectural clarity.',
+    text: 'Take the first step toward a clearer plan. No product pitching, no charges — just pure architectural clarity.',
     button: 'Schedule Your Complimentary Retirement Audit',
     benefits: [
       { icon: Sunrise, label: 'Freedom to Live Life on Your Terms' },
@@ -148,7 +148,7 @@ export const INVESTMENT_PAGE = {
     text: 'A disciplined and transparent process to build and manage your portfolio with clarity and confidence.',
     steps: [
       { icon: FileText, title: 'Risk Profiling & Audit', desc: 'Deep analysis of your existing investments, overlap checks and risk tolerance evaluation under CWM® standards.' },
-      { icon: PieChart, title: 'Blueprint Architecture', desc: 'Designing your custom multi-asset allocation matrix with zero product bias.' },
+      { icon: PieChart, title: 'Blueprint Architecture', desc: 'Designing your custom multi-asset allocation matrix around your goals and risk tolerance.' },
       { icon: Settings, title: 'Facilitated Execution', desc: 'Secure transaction routing through our SEBI and AMFI-registered institutional channel partners.' },
       { icon: BarChart3, title: 'Ongoing Stewardship', desc: 'Continuous tracking, performance reviews and disciplined rebalancing.' },
     ],
@@ -217,7 +217,7 @@ export const TAX_PAGE = {
     items: [
       { icon: Users, title: 'Family Income Splitting & Trusts', desc: 'Exploring legal frameworks like Private Family Trusts to optimize tax liabilities across generations.' },
       { icon: Home, title: 'Real Estate Tax Structuring', desc: 'Managing stamp duty, capital gains exemptions (Sec 54/54F) and holding structures for property assets.' },
-      { icon: CalendarCheck, title: 'Year-Round Compliance Tracking', desc: 'Continuous monitoring of tax law amendments to ensure your financial blueprint remains compliant and efficient.' },
+      { icon: CalendarCheck, title: 'Year-Round Compliance Tracking', desc: 'Continuous monitoring of tax law amendments to help keep your financial blueprint up to date.' },
     ],
   },
   lifecycle: {
@@ -249,16 +249,6 @@ export const RISK_PAGE = {
   id: 'risk',
   art: 'risk',
   heroAspect: 996 / 892,
-  banner: {
-    file: 'risk-banner',
-    ratio: 1600 / 900,
-    maxVw: 42.75,
-    fit: 0.69,
-    minH: 400,
-    alt: 'Risk Management. Comprehensive Risk Architecture. Shielding your wealth from the unforeseen.',
-    primary: { left: '3.5%', top: '75.7%', width: '20.6%', height: '7.4%' },
-    secondary: { left: '25.2%', top: '75.7%', width: '23.3%', height: '7.4%' },
-  },
   taglineBox: null,
   pillarBadge: true,
   goal: 'Risk Management',
@@ -266,10 +256,10 @@ export const RISK_PAGE = {
   eyebrow: 'Risk Management',
   titleGold: ['Comprehensive', 'Risk Architecture.'],
   titleWhite: ['Shielding Your Wealth', 'From the Unforeseen.'],
-  text: 'True wealth creation means nothing if a single medical shock or life uncertainty can dismantle your family’s financial future. Solahana engineers robust health, life, and liability shields — ensuring your master blueprint remains unshakeable.',
+  text: 'True wealth creation means nothing if a single medical shock or life uncertainty can dismantle your family’s financial future. Solahana engineers robust health, life, and liability shields — to help your plan hold up when life changes.',
   primaryCta: 'Audit My Risk Exposure',
   tagline: [],
-  trust: [CLIENT_ALIGNED, { icon: HeartPulse, label: 'Comprehensive Health & Liability Audits' }, REGULATED],
+  trust: [{ icon: Users, label: 'Goal-Based Planning Framework' }, { icon: HeartPulse, label: 'Comprehensive Health & Liability Audits' }, { icon: Handshake, label: 'Transactions via Third-Party Providers' }],
   philosophy: {
     eyebrow: 'The Bigger Picture',
     title: ['Moving Beyond Agent-Driven', 'Token Policies'],
@@ -292,7 +282,7 @@ export const RISK_PAGE = {
   },
   stewardship: {
     title: 'Sophisticated Risk Stewardship',
-    text: 'Our ongoing stewardship ensures your coverage keeps pace with your evolving wealth, family responsibilities and real-world risks.',
+    text: 'Our ongoing stewardship helps your coverage keep pace with your evolving wealth, family responsibilities and real-world risks.',
     items: [
       { icon: Search, title: 'Policy Audit & Overlap Analysis', desc: 'Reviewing existing legacy policies to eliminate redundant premiums and plug hidden coverage gaps.' },
       { icon: Scale, title: 'Trust-Protected Insurance Structuring', desc: 'Using legal frameworks like Married Women’s Property (MWP) Act or trusts to secure payouts for intended beneficiaries.' },
@@ -374,7 +364,7 @@ export const ESTATE_PAGE = {
   },
   stewardship: {
     title: 'Comprehensive Legacy Stewardship',
-    text: 'Our ongoing stewardship ensures your legacy adapts to changing family dynamics, business environments and evolving legal and tax frameworks.',
+    text: 'Our ongoing stewardship helps your legacy adapt to changing family dynamics, business environments and evolving legal and tax frameworks.',
     items: [
       { icon: Heart, title: 'Charitable & Philanthropic Structuring', desc: 'Setting up enduring trusts or endowments to institutionalize your family’s social impact and philanthropic goals.' },
       { icon: Globe, title: 'Cross-Border Asset Succession', desc: 'Managing legal and regulatory frameworks for families holding multi-jurisdictional assets or properties.' },
@@ -399,7 +389,7 @@ export const ESTATE_PAGE = {
     button: 'Schedule Your Complimentary Estate Audit',
     benefits: [
       { icon: Home, label: 'Preserve Family Wealth' },
-      { icon: UserCheck, label: 'Ensure Smooth Succession' },
+      { icon: UserCheck, label: 'Plan for Smooth Succession' },
       { icon: Gavel, label: 'Minimize Legal Disputes' },
       { icon: Telescope, label: 'Create a Lasting Legacy' },
     ],

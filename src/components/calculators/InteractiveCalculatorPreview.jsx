@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calculator, TrendingUp, Sparkles, PieChart, ShieldCheck } from 'lucide-react';
+import { calculateSIP } from '../../utils/calculatorEngine';
+import CalculatorDisclaimer from './CalculatorDisclaimer';
+import { MARKET_RISK_NOTE, SIP_CONVENTION_NOTE } from '../../utils/calculatorCopy';
 
 export default function InteractiveCalculatorPreview() {
   const [monthlySip, setMonthlySip] = useState(50000);
   const [years, setYears] = useState(15);
   const [returnRate, setReturnRate] = useState(12);
 
-  // Compound interest calculation formula
-  const months = years * 12;
-  const i = returnRate / 12 / 100;
-  const totalInvested = monthlySip * months;
-  const totalCorpus = Math.round(monthlySip * ((Math.pow(1 + i, months) - 1) / i) * (1 + i));
-  const estimatedReturns = Math.max(0, totalCorpus - totalInvested);
-  const returnsPercent = Math.round((estimatedReturns / totalCorpus) * 100);
+  // Same engine as the SIP calculator, so this preview cannot drift from it
+  const sip = calculateSIP(monthlySip, returnRate, years, 0);
+  const totalInvested = sip.totalInvested;
+  const totalCorpus = sip.futureValue;
+  const estimatedReturns = sip.estimatedReturns;
+  const returnsPercent = totalCorpus > 0 ? Math.round((estimatedReturns / totalCorpus) * 100) : 0;
 
   const formatCurrency = (val) => {
     if (val >= 10000000) {
@@ -162,7 +164,7 @@ export default function InteractiveCalculatorPreview() {
                   <p className="text-base font-bold font-sora text-emerald-400 mt-1">+{formatCurrency(estimatedReturns)}</p>
                 </div>
                 <div className="p-4 rounded-2xl bg-[#F7F8FB] border border-[#5A7FD6]/50 shadow-[0_0_20px_rgba(26,49,112,0.2)]">
-                  <span className="text-[10px] text-[#5A7FD6] font-bold uppercase">Total Target Corpus</span>
+                  <span className="text-[10px] text-[#5A7FD6] font-bold uppercase">Projected Corpus</span>
                   <p className="text-lg font-bold font-sora text-[#5A7FD6] mt-1">{formatCurrency(totalCorpus)}</p>
                 </div>
               </div>
@@ -192,9 +194,11 @@ export default function InteractiveCalculatorPreview() {
 
                 <div className="pt-2 border-t border-[#2F5BC7]/15 flex items-center justify-between text-[11px] text-[#5B6B84]">
                   <span>Formula: Goal-Based SIP Compound Model</span>
-                  <span className="text-[#5A7FD6] font-sora font-semibold">Zero Commission Direct</span>
+                  <span className="text-[#5A7FD6] font-sora font-semibold">Illustration only</span>
                 </div>
               </div>
+
+              <CalculatorDisclaimer notes={[MARKET_RISK_NOTE, SIP_CONVENTION_NOTE]} />
 
             </div>
 

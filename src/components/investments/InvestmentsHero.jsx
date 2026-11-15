@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, PhoneCall, ShieldCheck } from 'lucide-react';
-import { SceneArt, slides } from '../PlanningSlides';
+import { SceneArt, slides } from '../PlanningSlides';
+import ScaledStage from '../common/ScaledStage';
 
 const investSlide = slides.find((x) => x.id === 'investment');
 
@@ -25,30 +26,32 @@ export default function InvestmentsHero({ onStartPlanning, onRequestCallback }) 
   };
 
   return (
-    <section className="relative pt-28 pb-14 sm:pt-32 sm:pb-20 bg-white overflow-hidden">
-      <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+    <section className="relative overflow-hidden bg-white pt-20">
+<ScaledStage>
+<div className="relative pt-8 pb-14 @2xl:pt-12 @2xl:pb-20">
+      <div className="max-w-[1320px] mx-auto px-4 @2xl:px-6 @5xl:px-8 relative z-10">
+        <div className="grid grid-cols-1 @5xl:grid-cols-12 gap-12 @5xl:gap-8 items-center">
           
           {/* Left Column: Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-6 text-left space-y-6"
+            className="@5xl:col-span-6 text-left space-y-6"
           >
             {/* Page Title */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif-luxury font-bold text-[#0F1F45] leading-tight tracking-tight">
+            <h1 className="text-3xl @2xl:text-4xl @5xl:text-5xl font-serif-luxury font-bold text-[#0F1F45] leading-tight tracking-tight">
               Investment Planning
             </h1>
 
-            <h2 className="text-[22px] sm:text-[26px] lg:text-[30px] font-serif-luxury font-bold text-[#0F1F45] leading-[1.2] tracking-tight [text-wrap:balance]">
+            <h2 className="text-[22px] @2xl:text-[26px] @5xl:text-[30px] font-serif-luxury font-bold text-[#0F1F45] leading-[1.2] tracking-tight [text-wrap:balance]">
               See further.
               <br />
               <span className="gold-gradient-text" style={{ display: 'inline' }}>Invest smarter.</span>
             </h2>
 
             {/* Short 2-line Description */}
-            <p className="text-base sm:text-lg text-[#475569] leading-relaxed max-w-xl font-sans">
+            <p className="text-base @2xl:text-lg text-[#475569] leading-relaxed max-w-xl font-sans">
               One portfolio across every asset, built around your family’s goals.
             </p>
 
@@ -73,7 +76,7 @@ export default function InvestmentsHero({ onStartPlanning, onRequestCallback }) 
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+            <div className="flex flex-col @2xl:flex-row items-stretch @2xl:items-center gap-4 pt-4">
               <button
                 onClick={scrollToCalculator}
                 className="btn-gold px-7 py-3.5 rounded-full font-semibold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#2F5BC7]/20 hover:shadow-xl transition-all cursor-pointer"
@@ -94,7 +97,7 @@ export default function InvestmentsHero({ onStartPlanning, onRequestCallback }) 
             {/* Fiduciary Assurance Note */}
             <p className="text-xs text-[#64748B] flex items-center gap-1.5 pt-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              100% Direct Plans • SEBI registered fiduciary framework • Zero distributor markups
+              100% Direct Plans • Goal-based planning framework • Zero distributor markups
             </p>
           </motion.div>
 
@@ -103,15 +106,17 @@ export default function InvestmentsHero({ onStartPlanning, onRequestCallback }) 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-6 flex justify-center lg:justify-end"
+            className="@5xl:col-span-6 flex justify-center @5xl:justify-end"
           >
-            <div className="w-full max-w-[520px] lg:max-w-[600px]">
+            <div className="w-full max-w-[520px] @5xl:max-w-[600px]">
               <SceneArt slide={investSlide} />
             </div>
           </motion.div>
 
         </div>
       </div>
-    </section>
+    </div>
+</ScaledStage>
+</section>
   );
 }

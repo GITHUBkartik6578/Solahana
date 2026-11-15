@@ -4,6 +4,8 @@ import { TrendingUp, Sparkles } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import CalculatorLayout from './CalculatorLayout';
 import { calculateSIP, formatINR } from '../../utils/calculatorEngine';
+import CalculatorDisclaimer from './CalculatorDisclaimer';
+import { MARKET_RISK_NOTE, SIP_CONVENTION_NOTE } from '../../utils/calculatorCopy';
 
 export default function SipCalculator() {
   const location = useLocation();
@@ -185,7 +187,7 @@ export default function SipCalculator() {
               className="w-full accent-emerald-400 cursor-pointer h-1.5 bg-[#FFFFFF] rounded-lg"
             />
             <p className="text-[11px] text-[#5B6B84] leading-relaxed font-light">
-              Increasing your SIP by {stepUpPct}% each year accelerates retirement corpus by up to 2.4x.
+              Raising your SIP by {stepUpPct}% each year builds a larger corpus than a flat SIP. The size of the difference depends on the step-up, the return and the number of years.
             </p>
           </div>
 
@@ -262,6 +264,8 @@ export default function SipCalculator() {
               </ResponsiveContainer>
             </div>
           </div>
+
+          <CalculatorDisclaimer notes={[MARKET_RISK_NOTE, SIP_CONVENTION_NOTE]} />
 
         </div>
 

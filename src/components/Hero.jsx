@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import heroOrbit from '../assets/hero-orbit.webp';
 import heroMascot from '../assets/hero-mascot.webp';
+import ScaledStage from './common/ScaledStage';
 import { PlanningSlide, slides as planningSlides } from './PlanningSlides';
 
 const AUTOPLAY_MS = 4500;
@@ -87,15 +88,15 @@ function MainSlide() {
   return (
     <div className="bg-[#FEFDF9] overflow-hidden">
       {/* ONE container, ONE grid: left copy and right artwork are siblings, both centred on the same axis */}
-      <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-6 py-8 xl:grid-cols-2 xl:items-center xl:gap-10 xl:py-0 xl:h-[clamp(460px,calc(100svh-124px),620px)]">
-      <div className="@container w-full text-center xl:-translate-y-8 xl:text-left">
-        <p className="mb-4 flex items-center justify-center gap-4 font-sora font-medium uppercase leading-[1.5] tracking-[0.3em] text-[#9A7220] text-[length:clamp(10px,2.5cqw,19px)] xl:justify-start">
+      <div className="mx-auto max-w-[1320px] px-4 @2xl:px-6 @5xl:px-8 grid grid-cols-1 gap-6 py-8 @7xl:grid-cols-2 @7xl:items-center @7xl:gap-10 @7xl:py-0 @7xl:h-[620px]">
+      <div className="@container w-full text-center @7xl:-translate-y-8 @7xl:text-left">
+        <p className="mb-4 flex items-center justify-center gap-4 font-sora font-medium uppercase leading-[1.5] tracking-[0.3em] text-[#9A7220] text-[length:clamp(10px,2.5cqw,19px)] @7xl/stage:justify-start">
           <span>
             Welcome to
             <br />
             Solahana Wealth Architecture
           </span>
-          <span aria-hidden="true" className="hidden h-px w-[12%] shrink-0 bg-[#C9922E]/60 sm:block" />
+          <span aria-hidden="true" className="hidden h-px w-[12%] shrink-0 bg-[#C9922E]/60 @2xl/stage:block" />
         </p>
                   <h1
           style={serif}
@@ -104,7 +105,7 @@ function MainSlide() {
           <span className="block whitespace-nowrap">Your Money Deserves a Plan.</span>
           <span className="block whitespace-nowrap text-[#C9922E]">Not Just an Investment.</span>
         </h1>
-        <div className="mt-7 flex flex-wrap items-center justify-center xl:justify-start gap-3">
+        <div className="mt-7 flex flex-wrap items-center justify-center @7xl/stage:justify-start gap-3">
           <Link
             to="/contact"
             className="group inline-flex items-center gap-2.5 rounded-full bg-[#0F1F45] min-h-[46px] min-w-[189px] justify-center px-5 py-2 text-[13px] font-semibold text-white shadow-[0_10px_30px_rgba(15,31,69,0.3)] transition-all hover:shadow-[0_15px_40px_rgba(15,31,69,0.45)]"
@@ -114,15 +115,15 @@ function MainSlide() {
           </Link>
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center justify-center xl:justify-start gap-x-5 gap-y-3">
+        <div className="mt-6 flex flex-wrap items-center justify-center @7xl/stage:justify-start gap-x-5 gap-y-3">
           {trustPoints.map(({ icon: Icon, lines }, i) => (
             <React.Fragment key={lines[0]}>
-              {i > 0 && <span className="hidden sm:block h-8 w-px bg-[#C58A1B]/35" />}
+              {i > 0 && <span className="hidden @2xl/stage:block h-8 w-px bg-[#C58A1B]/35" />}
               <div className="flex items-center gap-2.5">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-b from-[#F3D58E] to-[#C08A2E] ring-2 ring-[#F6E3B4] shadow-[0_4px_12px_rgba(192,138,46,0.35)]">
                   <Icon className="h-4 w-4 text-white" strokeWidth={2} fill="rgba(255,255,255,0.25)" />
                 </span>
-                <span className="text-[13px] sm:text-sm font-medium leading-tight text-[#0F1F45] font-inter text-left">
+                <span className="text-[13px] @2xl/stage:text-sm font-medium leading-tight text-[#0F1F45] font-inter text-left">
                   {lines[0]}
                   <br />
                   {lines[1]}
@@ -133,8 +134,8 @@ function MainSlide() {
         </div>
       </div>
       {/* Right column: the artwork keeps its own aspect ratio inside its column */}
-      <div className="flex justify-center xl:h-full xl:items-center">
-        <div className="relative aspect-[710/782] w-full max-w-[460px] xl:h-[86%] xl:w-auto xl:max-w-none">
+      <div className="flex justify-center @7xl:h-full @7xl:items-center">
+        <div className="relative aspect-[710/782] w-full max-w-[460px] @7xl:h-[86%] @7xl:w-auto @7xl:max-w-none">
           <img
             src={heroOrbit}
             alt="Six planning areas around the Solahana mascot: financial, wealth, investment, tax, risk and estate planning"
@@ -183,10 +184,12 @@ export default function Hero() {
 
   return (
     <section
-      className="relative bg-white pt-20 pb-11"
+      className="relative bg-white pt-20"
       onPointerEnter={(e) => e.pointerType !== 'touch' && setPaused(true)}
       onPointerLeave={(e) => e.pointerType !== 'touch' && setPaused(false)}
     >
+      <ScaledStage>
+      <div className="relative pb-11">
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={active}
@@ -213,6 +216,8 @@ export default function Hero() {
           />
         ))}
       </div>
+      </div>
+      </ScaledStage>
     </section>
   );
 }

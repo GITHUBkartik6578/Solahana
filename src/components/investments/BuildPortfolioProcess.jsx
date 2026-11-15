@@ -16,7 +16,7 @@ export default function BuildPortfolioProcess() {
       num: '02',
       title: 'Assess Risk Profile',
       subtitle: 'Testing psychological & financial volatility tolerance',
-      description: 'We evaluate your capacity for market swings and liquidity needs to ensure you never panic-sell during market corrections.',
+      description: 'We evaluate your capacity for market swings and liquidity needs to help you avoid panic-selling during market corrections.',
       bullets: ['Drawdown tolerance test', 'Liquidity buffer audit', 'Cash flow stability check'],
       icon: ShieldCheck
     },

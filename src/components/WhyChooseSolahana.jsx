@@ -31,7 +31,7 @@ export default function WhyChooseSolahana() {
     },
     {
       title: 'Dedicated Financial Experts',
-      desc: 'SEBI registered wealth advisors providing zero-commission, transparent, and unbiased fiduciary guidance.',
+      desc: 'Solahana planners providing zero-commission, transparent, and unbiased fiduciary guidance.',
       icon: Award,
     },
     {
@@ -108,7 +108,7 @@ export default function WhyChooseSolahana() {
                   </div>
                   <div>
                     <div className="text-sm font-serif-luxury font-bold text-[#0F1F45]">Fiduciary Excellence</div>
-                    <div className="text-[10px] text-[#475569]">SEBI Registered Planning • Zero Conflict</div>
+                    <div className="text-[10px] text-[#475569]">Goal-Based Planning • Zero Conflict</div>
                   </div>
                 </div>
 
@@ -131,7 +131,7 @@ export default function WhyChooseSolahana() {
                   <CheckCircle2 className="w-4 h-4 text-[#2F5BC7] shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-[#0F1F45] block">Institutional Discipline</strong>
-                    Structuring your assets across direct mutual funds, bonds, PMS, and emergency reserves with bank-grade safety.
+                    Structuring your assets across direct mutual funds, bonds, PMS, and emergency reserves.
                   </div>
                 </div>
 
@@ -147,7 +147,7 @@ export default function WhyChooseSolahana() {
               {/* Trust Badge Bar */}
               <div className="pt-4 border-t border-[#E4E8F0] flex items-center justify-between text-xs text-[#475569] font-sora">
                 <span className="flex items-center gap-1.5 text-emerald-700 font-semibold">
-                  <ShieldCheck className="w-4 h-4" /> SEBI-Registered Fiduciary
+                  <ShieldCheck className="w-4 h-4" /> Goal-Based Financial Planning
                 </span>
                 <span className="text-[#2F5BC7] font-bold">50,000+ Families</span>
               </div>

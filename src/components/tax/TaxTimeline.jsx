@@ -38,7 +38,7 @@ export default function TaxTimeline() {
             Year-Round Tax Execution Timeline
           </h2>
           <p className="text-base text-[#475569] font-inter">
-            A systematic four-quarter framework ensuring maximum savings without stress.
+            A systematic four-quarter framework to help you plan tax savings in a structured way.
           </p>
         </div>
 

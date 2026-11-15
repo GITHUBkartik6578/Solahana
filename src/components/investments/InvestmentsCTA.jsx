@@ -63,7 +63,7 @@ export default function InvestmentsCTA({ onStartPlanning, onBookConsultation }) 
           <div className="pt-8 border-t border-[#2F5BC7]/15 flex flex-wrap items-center justify-center gap-6 text-xs text-[#5B6B84] font-inter">
             <div className="flex items-center space-x-2">
               <ShieldCheck className="w-4 h-4 text-[#2F5BC7]" />
-              <span>SEBI-Registered Fiduciary Standard</span>
+              <span>Goal-Based Financial Planning</span>
             </div>
             <span className="hidden sm:inline text-[#2F5BC7]/40">•</span>
             <div>
