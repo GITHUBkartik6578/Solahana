@@ -259,20 +259,24 @@ export const calculateGoal = (
   // One-time Lumpsum needed today
   const requiredLumpsumToday = netTargetNeeded / Math.pow(1 + ret / 100, years);
 
-  // Growth timeline
+  // Growth timeline. Same plan as the numbers above: existing savings compound once a year at the stated return
+  // (as in futureSavings), and each monthly SIP instalment compounds monthly at ret / 12 (as in requiredMonthlySIP).
+  // The unrounded requiredMonthlySIP is used, so the SIP line ends at futureTargetValue (or at futureSavings when no SIP is needed).
   const timelineData = [];
-  let accumSIP = savings;
+  let accumSIP = 0; // the monthly instalments only
+  let accumSavings = savings; // existing savings, compounded once a year
   let accumLumpsum = savings + requiredLumpsumToday;
 
   for (let yr = 1; yr <= years; yr++) {
     for (let m = 1; m <= 12; m++) {
       accumSIP = (accumSIP + requiredMonthlySIP) * (1 + r);
     }
+    accumSavings = accumSavings * (1 + ret / 100);
     accumLumpsum = accumLumpsum * (1 + ret / 100);
 
     timelineData.push({
       year: `Yr ${yr}`,
-      sipProgress: Math.round(accumSIP),
+      sipProgress: Math.round(accumSavings + accumSIP),
       lumpsumProgress: Math.round(accumLumpsum),
       targetLine: Math.round((futureTargetValue / years) * yr),
     });

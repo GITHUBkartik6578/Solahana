@@ -38,6 +38,18 @@ import adminService from '../services/adminService';
 import blogService from '../services/blogService';
 import newsletterService from '../services/newsletterService';
 import healthCheckService from '../services/healthCheckService';
+import {
+  LEGACY_LABEL,
+  NEW_LABEL,
+  SELF_REPORTED,
+  applicableText,
+  bandTitle,
+  buildCsv,
+  categoryRows,
+  consentText,
+  isCheckupLead,
+  scoreText,
+} from '../utils/healthCheckAdminView';
 
 const GOAL_OPTIONS = [
   'Dream Home',
@@ -358,21 +370,9 @@ export default function AdminDashboardPage() {
       alert('No health check leads to export.');
       return;
     }
-    const q = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
-    const headers = ['Name', 'Phone', 'Status', 'Score', 'Max Score', 'Percent', 'Result', 'Taken On'];
-    const rows = healthList.map((l) => [
-      q(l.fullName),
-      q(l.phone),
-      q(l.status),
-      q(l.score),
-      q(l.maxScore),
-      q(l.percent),
-      q(l.verdict),
-      q(l.createdAt ? new Date(l.createdAt).toLocaleString('en-IN') : ''),
-    ]);
-    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');
+    const csvContent = 'data:text/csv;charset=utf-8,' + encodeURIComponent(buildCsv(healthList));
     const link = document.createElement('a');
-    link.setAttribute('href', encodeURI(csvContent));
+    link.setAttribute('href', csvContent);
     link.setAttribute('download', `solahana_health_check_leads_${Date.now()}.csv`);
     document.body.appendChild(link);
     link.click();
@@ -1490,13 +1490,13 @@ export default function AdminDashboardPage() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-3xl bg-[#F7F8FB] border border-[#2F5BC7]/30">
               <div>
                 <span className="text-[10px] uppercase font-mono text-[#5A7FD6] tracking-widest px-3 py-1 rounded-full bg-[#EEF2FB]">
-                  MONEY HEALTH CHECK LEADS
+                  FINANCIAL HEALTH CHECK-UP LEADS
                 </span>
                 <h2 className="font-serif-luxury text-2xl font-bold text-[#0F1F45] mt-2">
                   Health Check Leads
                 </h2>
                 <p className="text-xs text-[#5B6B84] mt-1">
-                  See who took the “How healthy is your money?” check, their phone number, score and answers.
+                  Callback requests from the Financial Health Check-up, with score, consent and deletion date. Scores are self-reported, and income, expense and cover amounts are never collected. Older entries from the earlier 6-question check are labelled Legacy.
                 </p>
               </div>
 
@@ -1576,17 +1576,19 @@ export default function AdminDashboardPage() {
                       <tr>
                         <th className="py-4 px-4 font-bold">Name</th>
                         <th className="py-4 px-4 font-bold">Phone</th>
-                        <th className="py-4 px-4 font-bold">Status</th>
+                        <th className="py-4 px-4 font-bold">Type</th>
                         <th className="py-4 px-4 font-bold">Score</th>
                         <th className="py-4 px-4 font-bold">Result</th>
                         <th className="py-4 px-4 font-bold">Taken On</th>
-                        <th className="py-4 px-4 font-bold text-right">Answers</th>
+                        <th className="py-4 px-4 font-bold text-right">Details</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[#E4E8F0]">
                       {healthList.map((lead) => {
+                        const checkup = isCheckupLead(lead);
                         const done = lead.status === 'completed';
                         const open = expandedHealthId === lead._id;
+                        const hasDetails = checkup || (done && lead.answers?.length > 0);
                         return (
                           <React.Fragment key={lead._id}>
                             <tr className="hover:bg-[#EEF2FB] transition-colors">
@@ -1595,17 +1597,27 @@ export default function AdminDashboardPage() {
                                 <a href={`tel:+91${lead.phone}`} className="font-mono text-[#1A3170] hover:underline">{lead.phone}</a>
                               </td>
                               <td className="py-4 px-4">
-                                <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase font-mono border ${done ? 'bg-emerald-500/20 text-emerald-600 border-emerald-500/40' : 'bg-amber-500/20 text-amber-600 border-amber-500/40'}`}>
-                                  {done ? 'Completed' : 'Started'}
+                                <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase font-mono border ${checkup ? 'bg-emerald-500/20 text-emerald-600 border-emerald-500/40' : 'bg-slate-500/10 text-[#475569] border-slate-400/40'}`}>
+                                  {checkup ? NEW_LABEL : LEGACY_LABEL}
                                 </span>
                               </td>
-                              <td className="py-4 px-4 font-mono">{done ? `${lead.score}/${lead.maxScore} (${lead.percent}%)` : '—'}</td>
-                              <td className="py-4 px-4 text-[#475569]">{done ? lead.verdict : 'Did not finish'}</td>
+                              <td className="py-4 px-4 font-mono">
+                                {scoreText(lead)}
+                                {checkup && <span className="block text-[10px] text-[#64748B] font-sans">{applicableText(lead)}</span>}
+                              </td>
+                              <td className="py-4 px-4 text-[#475569]">
+                                {checkup ? (
+                                  <>
+                                    {bandTitle(lead.result.band)}
+                                    <span className="block text-[10px] text-[#64748B]">{SELF_REPORTED}</span>
+                                  </>
+                                ) : done ? lead.verdict : 'Did not finish'}
+                              </td>
                               <td className="py-4 px-4 text-[#5B6B84]">
                                 {lead.createdAt ? new Date(lead.createdAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) : 'N/A'}
                               </td>
                               <td className="py-4 px-4 text-right">
-                                {done && lead.answers?.length > 0 ? (
+                                {hasDetails ? (
                                   <button
                                     onClick={() => setExpandedHealthId(open ? null : lead._id)}
                                     className="px-3 py-1 rounded-lg border border-[#2F5BC7]/30 text-[#1A3170] font-semibold hover:bg-[#EEF2FB] cursor-pointer"
@@ -1617,7 +1629,26 @@ export default function AdminDashboardPage() {
                                 )}
                               </td>
                             </tr>
-                            {open && (
+                            {open && checkup && (
+                              <tr className="bg-[#FFFFFF]">
+                                <td colSpan={7} className="px-6 py-4">
+                                  <ul className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                    {categoryRows(lead).map((c) => (
+                                      <li key={c.id} className="rounded-xl border border-[#E4E8F0] bg-[#F7F8FB] p-3">
+                                        <p className="text-[10px] uppercase tracking-wider text-[#5A7FD6] font-mono">{c.label}</p>
+                                        <p className="mt-1 font-semibold text-[#0F1F45]">{c.applies ? `${c.points} / ${c.max}` : 'N/A'}</p>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                  <p className="mt-3 text-[#475569]">{consentText(lead)}</p>
+                                  <p className="mt-1 text-[#64748B]">
+                                    {lead.deleteAfter ? `Due for deletion after ${new Date(lead.deleteAfter).toLocaleDateString('en-IN', { dateStyle: 'medium' })}. ` : ''}
+                                    {SELF_REPORTED}: the score comes from the visitor&apos;s browser and cannot be checked against their real figures.
+                                  </p>
+                                </td>
+                              </tr>
+                            )}
+                            {open && !checkup && (
                               <tr className="bg-[#FFFFFF]">
                                 <td colSpan={7} className="px-6 py-4">
                                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">

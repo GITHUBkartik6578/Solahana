@@ -12,14 +12,17 @@ const promises = (text) => PROMISES.test(text.replace(NEGATIONS, ''));
 const GOAL_ARGS = ['Child Higher Education', 3500000, 10];
 const GOAL_SAVINGS = 300000;
 // Outputs captured from the engine before effectiveReturn was added: they must not change.
+// sip10 (the SIP line of the chart in year 10) was re-baselined when main's Goal Planner chart fix (PR #6) made that line compound the
+// existing savings once a year plus the monthly instalments, so it now ends exactly at futureTargetValue (6267967) at every rate; the old
+// values (6326329, 6267968, 7939657) overshot the target.
 const GOAL_BASELINE = {
-  12: { futureSavings: 931754, netTargetNeeded: 5336212, requiredMonthlySIP: 22967, requiredLumpsumToday: 1718118, sip10: 6326329 },
-  0: { futureSavings: 303014, netTargetNeeded: 5964953, requiredMonthlySIP: 49458, requiredLumpsumToday: 5905631, sip10: 6267968 },
-  '-5': { futureSavings: 303014, netTargetNeeded: 5964953, requiredMonthlySIP: 49458, requiredLumpsumToday: 5905631, sip10: 6267968 },
-  0.05: { futureSavings: 303014, netTargetNeeded: 5964953, requiredMonthlySIP: 49458, requiredLumpsumToday: 5905631, sip10: 6267968 },
-  30: { futureSavings: 4135755, netTargetNeeded: 2132212, requiredMonthlySIP: 2833, requiredLumpsumToday: 154667, sip10: 7939657 },
-  45: { futureSavings: 4135755, netTargetNeeded: 2132212, requiredMonthlySIP: 2833, requiredLumpsumToday: 154667, sip10: 7939657 },
-  100: { futureSavings: 4135755, netTargetNeeded: 2132212, requiredMonthlySIP: 2833, requiredLumpsumToday: 154667, sip10: 7939657 },
+  12: { futureSavings: 931754, netTargetNeeded: 5336212, requiredMonthlySIP: 22967, requiredLumpsumToday: 1718118, sip10: 6267967 },
+  0: { futureSavings: 303014, netTargetNeeded: 5964953, requiredMonthlySIP: 49458, requiredLumpsumToday: 5905631, sip10: 6267967 },
+  '-5': { futureSavings: 303014, netTargetNeeded: 5964953, requiredMonthlySIP: 49458, requiredLumpsumToday: 5905631, sip10: 6267967 },
+  0.05: { futureSavings: 303014, netTargetNeeded: 5964953, requiredMonthlySIP: 49458, requiredLumpsumToday: 5905631, sip10: 6267967 },
+  30: { futureSavings: 4135755, netTargetNeeded: 2132212, requiredMonthlySIP: 2833, requiredLumpsumToday: 154667, sip10: 6267967 },
+  45: { futureSavings: 4135755, netTargetNeeded: 2132212, requiredMonthlySIP: 2833, requiredLumpsumToday: 154667, sip10: 6267967 },
+  100: { futureSavings: 4135755, netTargetNeeded: 2132212, requiredMonthlySIP: 2833, requiredLumpsumToday: 154667, sip10: 6267967 },
 };
 
 describe('calculateGoal exposes the return rate it really used', () => {
