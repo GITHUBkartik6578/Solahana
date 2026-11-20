@@ -32,7 +32,8 @@ describe('the page renders', () => {
   it('starts on the intro with the privacy note and nothing pre-filled', () => {
     const html = text(render(<FinancialKundli />));
     expect(html).toContain('Your Financial Health Check-up');
-    expect(html).toContain('Your answers stay in this browser.');
+    expect(html).toContain('Your financial answers stay in this browser');
+    expect(html).toContain('We first ask for your name, mobile number and email');
     expect(html).not.toContain('Kundli');
   });
   it('every questionnaire screen renders for a full answer set', () => {

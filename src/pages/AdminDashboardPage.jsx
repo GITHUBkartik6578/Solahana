@@ -39,14 +39,15 @@ import blogService from '../services/blogService';
 import newsletterService from '../services/newsletterService';
 import healthCheckService from '../services/healthCheckService';
 import {
-  LEGACY_LABEL,
-  NEW_LABEL,
   SELF_REPORTED,
   applicableText,
   bandTitle,
   buildCsv,
   categoryRows,
   consentText,
+  isStartLead,
+  typeLabel,
+  CONTACT_ONLY,
   isCheckupLead,
   scoreText,
 } from '../utils/healthCheckAdminView';
@@ -1528,7 +1529,7 @@ export default function AdminDashboardPage() {
                   <Search className="w-4 h-4 text-[#5B6B84] absolute left-4 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
-                    placeholder="Search by name or phone..."
+                    placeholder="Search by name, phone or email..."
                     value={healthSearch}
                     onChange={(e) => setHealthSearch(e.target.value)}
                     className="w-full bg-[#FFFFFF] border border-[#E4E8F0] focus:border-[#2F5BC7] rounded-xl py-2.5 pl-11 pr-4 text-[#0F1F45] text-xs placeholder-[#94A3B8] focus:outline-none"
@@ -1588,17 +1589,21 @@ export default function AdminDashboardPage() {
                         const checkup = isCheckupLead(lead);
                         const done = lead.status === 'completed';
                         const open = expandedHealthId === lead._id;
-                        const hasDetails = checkup || (done && lead.answers?.length > 0);
+                        const started = isStartLead(lead);
+                        const hasDetails = checkup || started || (done && lead.answers?.length > 0);
                         return (
                           <React.Fragment key={lead._id}>
                             <tr className="hover:bg-[#EEF2FB] transition-colors">
                               <td className="py-4 px-4 font-semibold text-[#0F1F45]">{lead.fullName}</td>
                               <td className="py-4 px-4">
                                 <a href={`tel:+91${lead.phone}`} className="font-mono text-[#1A3170] hover:underline">{lead.phone}</a>
+                                {lead.email && (
+                                  <a href={`mailto:${lead.email}`} className="mt-1 block break-all text-[11px] text-[#2F5BC7] hover:underline">{lead.email}</a>
+                                )}
                               </td>
                               <td className="py-4 px-4">
-                                <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase font-mono border ${checkup ? 'bg-emerald-500/20 text-emerald-600 border-emerald-500/40' : 'bg-slate-500/10 text-[#475569] border-slate-400/40'}`}>
-                                  {checkup ? NEW_LABEL : LEGACY_LABEL}
+                                <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase font-mono border ${checkup ? 'bg-emerald-500/20 text-emerald-600 border-emerald-500/40' : started ? 'bg-amber-500/15 text-amber-700 border-amber-500/40' : 'bg-slate-500/10 text-[#475569] border-slate-400/40'}`}>
+                                  {typeLabel(lead)}
                                 </span>
                               </td>
                               <td className="py-4 px-4 font-mono">
@@ -1611,7 +1616,7 @@ export default function AdminDashboardPage() {
                                     {bandTitle(lead.result.band)}
                                     <span className="block text-[10px] text-[#64748B]">{SELF_REPORTED}</span>
                                   </>
-                                ) : done ? lead.verdict : 'Did not finish'}
+                                ) : started ? CONTACT_ONLY : done ? lead.verdict : 'Did not finish'}
                               </td>
                               <td className="py-4 px-4 text-[#5B6B84]">
                                 {lead.createdAt ? new Date(lead.createdAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) : 'N/A'}
@@ -1648,7 +1653,18 @@ export default function AdminDashboardPage() {
                                 </td>
                               </tr>
                             )}
-                            {open && !checkup && (
+                            {open && started && (
+                              <tr className="bg-[#FFFFFF]">
+                                <td colSpan={7} className="px-6 py-4">
+                                  <p className="text-[#475569]">{consentText(lead)}</p>
+                                  <p className="mt-1 text-[#64748B]">
+                                    {lead.deleteAfter ? `Due for deletion after ${new Date(lead.deleteAfter).toLocaleDateString('en-IN', { dateStyle: 'medium' })}. ` : ''}
+                                    Left on the contact screen when the visitor started the Financial Health Check-up. Their answers stay in their browser and are not stored.
+                                  </p>
+                                </td>
+                              </tr>
+                            )}
+                            {open && !checkup && !started && (
                               <tr className="bg-[#FFFFFF]">
                                 <td colSpan={7} className="px-6 py-4">
                                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">

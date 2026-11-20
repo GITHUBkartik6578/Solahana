@@ -205,7 +205,7 @@ describe('privacy guard: the Kundli never sends or stores anything', () => {
     (needle) => {
       // The one allowed exception: the optional callback form may use the callback service (checked below)
       files
-        .filter((f) => !(needle === '/services/' && f.endsWith('KundliCallback.jsx')))
+        .filter((f) => !(needle === '/services/' && (f.endsWith('KundliCallback.jsx') || f.endsWith('KundliContact.jsx'))))
         .forEach((f) => expect(readFileSync(f, 'utf8'), f).not.toContain(needle));
     },
   );

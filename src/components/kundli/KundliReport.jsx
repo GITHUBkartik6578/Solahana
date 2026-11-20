@@ -190,7 +190,7 @@ function ScoreCard({ score }) {
 }
 
 /** The full Financial Kundli report (screen and print). `report` comes from buildReport. */
-export default function KundliReport({ report, onStartOver, headingRef, progress, history = [], answers }) {
+export default function KundliReport({ report, onStartOver, headingRef, progress, history = [], answers, contact }) {
   const now = progress?.length ? progress[progress.length - 1] : null;
   const prev = progress?.length > 1 ? progress[progress.length - 2] : null;
   const { summary } = report;
@@ -283,7 +283,7 @@ export default function KundliReport({ report, onStartOver, headingRef, progress
 
       {report.score.status === 'complete' && (
         <div className="mt-6">
-          <KundliCallback result={report.score.result} />
+          <KundliCallback result={report.score.result} prefill={contact} />
         </div>
       )}
 
