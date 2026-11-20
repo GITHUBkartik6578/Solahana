@@ -1,0 +1,72 @@
+/*
+ * Financial Kundli: print layout. Every rule is scoped to a page that contains the Kundli report
+ * (body:has(.kundli-report)), so no other page of the site prints differently. The Navbar, footer, chat and
+ * consultation section are hidden only in print; their code is not touched.
+ */
+.kundli-print-only {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 14mm;
+  }
+
+  body:has(.kundli-report) {
+    background: #fff !important;
+  }
+
+  /* Hide everything around the report: app chrome outside <main>, and other sections inside it */
+  body:has(.kundli-report) #root > div > *:not(main),
+  body:has(.kundli-report) main > *:not(.kundli-page),
+  body:has(.kundli-report) .kundli-noprint {
+    display: none !important;
+  }
+
+  body:has(.kundli-report) .kundli-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  .kundli-report .kundli-print-only {
+    display: block;
+  }
+
+  .kundli-report .kundli-cover {
+    break-after: page;
+    padding-top: 30mm;
+  }
+
+  .kundli-report .kundli-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+
+  .kundli-report .kundli-break {
+    break-before: page;
+  }
+
+  /* Collapsed explanations print open */
+  .kundli-report .kundli-how {
+    display: block !important;
+  }
+
+  .kundli-report .kundli-print-footer {
+    margin-top: 8mm;
+    font-size: 10px;
+    color: #5b6b84;
+    text-align: center;
+  }
+
+  .kundli-report a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

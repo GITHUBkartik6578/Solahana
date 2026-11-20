@@ -5,10 +5,9 @@ import {
   ArrowRight, 
   Sparkles, 
   Search, 
-  CheckCircle2, 
 } from 'lucide-react';
 import { CALCULATOR_META } from '../../components/calculators/CalculatorLayout';
-import HealthCheck from '../../components/planning/HealthCheck';
+import KundliTeaser from '../../components/kundli/KundliTeaser';
 
 export default function CalculatorsLandingPage() {
   const navigate = useNavigate();
@@ -140,8 +139,8 @@ export default function CalculatorsLandingPage() {
       </div>
     </div>
 
-    {/* Money health check (the navbar's "Is your money healthy? Check now" button lands here) */}
-    <HealthCheck />
+    {/* The Solahana Financial Kundli takes the place the Financial Health Check-up had here */}
+    <KundliTeaser />
     </>
   );
 }

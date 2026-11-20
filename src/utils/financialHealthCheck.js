@@ -20,9 +20,13 @@ export const RETENTION_MONTHS = 24;
  * Never edit a published text in place: add a new version instead.
  */
 export const CONSENT_VERSION = 'hc-consent-v1';
+/** The consent version the Financial Kundli's callback form shows and sends (same lead record, its own wording). */
+export const KUNDLI_CONSENT_VERSION = 'kundli-consent-v1';
 export const CONSENT_TEXTS = Object.freeze({
   'hc-consent-v1':
     'I agree that Solahana may call me on the mobile number above about my Financial Health Check-up result, and that my name, number and score are stored for this purpose for up to 24 months. I have read the Privacy Policy.',
+  'kundli-consent-v1':
+    'I agree that Solahana may call me on the mobile number above about my Financial Kundli, and that my name, number and financial health score are stored for this purpose for up to 24 months. I have read the Privacy Policy.',
 });
 
 export const CATEGORY_IDS = Object.freeze(['emi', 'term', 'emergency', 'investment', 'health', 'overlap', 'shielding']);
