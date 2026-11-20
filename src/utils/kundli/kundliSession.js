@@ -5,7 +5,7 @@
  * This is NOT storage: nothing is written to any browser storage, cookie or server. The value lives in this
  * module only, so a refresh, a closed tab or "Start over" clears it, exactly as the intro's privacy note says.
  */
-let memory = { answers: null, sid: null, history: [] };
+let memory = { answers: null, sid: null, history: [], contact: null };
 
 export function readSession() {
   return memory;
@@ -20,6 +20,11 @@ export function writeHistory(history) {
   memory = { ...memory, history: Array.isArray(history) ? history : [] };
 }
 
+/** The contact details already saved for this visit (so the contact screen is not asked again in the same tab). */
+export function writeContact(contact) {
+  memory = { ...memory, contact: contact || null };
+}
+
 export function clearSession() {
-  memory = { answers: null, sid: null, history: [] };
+  memory = { answers: null, sid: null, history: [], contact: null };
 }

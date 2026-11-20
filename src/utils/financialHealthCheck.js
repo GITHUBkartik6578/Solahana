@@ -22,11 +22,15 @@ export const RETENTION_MONTHS = 24;
 export const CONSENT_VERSION = 'hc-consent-v1';
 /** The consent version the Financial Kundli's callback form shows and sends (same lead record, its own wording). */
 export const KUNDLI_CONSENT_VERSION = 'kundli-consent-v1';
+/** Consent shown on the contact screen before the Financial Health Check-up starts (name, mobile, email only). */
+export const START_CONSENT_VERSION = 'hc-start-consent-v1';
 export const CONSENT_TEXTS = Object.freeze({
   'hc-consent-v1':
     'I agree that Solahana may call me on the mobile number above about my Financial Health Check-up result, and that my name, number and score are stored for this purpose for up to 24 months. I have read the Privacy Policy.',
   'kundli-consent-v1':
     'I agree that Solahana may call me on the mobile number above about my Financial Kundli, and that my name, number and financial health score are stored for this purpose for up to 24 months. I have read the Privacy Policy.',
+  'hc-start-consent-v1':
+    'I agree that Solahana may contact me by phone, WhatsApp or email about my Financial Health Check-up, and that my name, mobile number and email address are stored for this purpose for up to 24 months. I have read the Privacy Policy.',
 });
 
 export const CATEGORY_IDS = Object.freeze(['emi', 'term', 'emergency', 'investment', 'health', 'overlap', 'shielding']);
@@ -235,6 +239,29 @@ export const normalizePhone = (value) =>
 
 /** A valid Indian mobile number is 10 digits starting with 6, 7, 8 or 9 (after normalizePhone). */
 export const isValidMobile = (value) => /^[6-9][0-9]{9}$/.test(normalizePhone(value));
+
+/** Email addresses are compared and stored trimmed and in lower case. */
+export const normalizeEmail = (value) => String(value ?? '').trim().toLowerCase();
+
+/** A plain, practical email check (something@domain.tld, no spaces, at most 120 characters). The browser and the server use it. */
+export const isValidEmail = (value) => {
+  const email = normalizeEmail(value);
+  return email.length <= 120 && /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[a-z]{2,}$/.test(email);
+};
+
+/**
+ * The contact-screen request sent when someone starts the Financial Health Check-up: contact details and the consent
+ * record only. It is built key by key, so nothing else (no answer and no amount) can end up in it.
+ */
+export function buildStartLeadPayload({ fullName, phone, email, source = 'financial_health_checkup_full' }) {
+  return {
+    fullName: clean(fullName),
+    phone: clean(phone),
+    email: normalizeEmail(email),
+    source,
+    consent: { contact: true, textVersion: START_CONSENT_VERSION },
+  };
+}
 
 /**
  * The only thing ever sent to the server: contact details, the consent record and the score summary. It is built key by

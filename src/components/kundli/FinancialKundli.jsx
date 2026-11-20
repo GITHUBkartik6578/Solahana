@@ -5,9 +5,10 @@ import { buildReport } from '../../utils/kundli/kundliReport';
 import { firstInvalidScreen, screenOrder, sectionOrder, SCREEN_SECTION, validateScreen } from '../../utils/kundli/kundliInputs';
 import { hasAnswers, initialState, kundliReducer } from '../../utils/kundli/kundliState';
 import { INTRO, NAV, SECTION_WHY, SECTIONS } from '../../utils/kundli/kundliCopy';
-import { readSession, writeHistory, writeSession } from '../../utils/kundli/kundliSession';
+import { readSession, writeContact, writeHistory, writeSession } from '../../utils/kundli/kundliSession';
 import { progressSeries } from '../../utils/kundli/kundliHistory';
 import { LoadKundliFile } from './KundliFiles';
+import KundliContact from './KundliContact';
 import KundliScreen from './KundliScreens';
 import { errorLabel, fid } from './kundliIds';
 import KundliReview from './KundliReview';
@@ -152,6 +153,11 @@ export default function FinancialKundli() {
   const [sid] = useState(() => readSession().sid || Math.random().toString(36).slice(2));
   // Earlier Kundlis from the customer's own file (memory only), for the growth charts
   const [history, setHistory] = useState(() => readSession().history || []);
+  // Name and mobile saved on the required contact screen (memory only); until then no question screen opens
+  const [contact, setContact] = useState(() => readSession().contact || null);
+  useEffect(() => {
+    writeContact(contact);
+  }, [contact]);
   useEffect(() => {
     writeHistory(history);
   }, [history]);
@@ -170,6 +176,8 @@ export default function FinancialKundli() {
   let screen = st && st.sid === sid ? st.screen : 'intro';
   if (!order.includes(screen)) screen = FALLBACK[screen] || 'intro';
   if (screen === 'review' || screen === 'report') screen = firstInvalidScreen(a) || screen;
+  // The contact screen is required: any question, review or report screen waits for it, then opens as asked
+  if (!contact && screen !== 'intro') screen = 'contact';
 
   const goTo = (next, opts = {}) => {
     setErrors({});
@@ -228,6 +236,7 @@ export default function FinancialKundli() {
     if (!window.confirm(NAV.startOverConfirm)) return;
     dispatch({ type: 'reset' });
     setHistory([]);
+    setContact(null);
     goTo('intro', { replace: true });
   };
 
@@ -239,6 +248,8 @@ export default function FinancialKundli() {
       <p className="sr-only" aria-live="polite">
         {section ? `Section ${sections.indexOf(section) + 1} of ${sections.length}: ${SECTIONS[section]}` : ''}
       </p>
+      {screen === 'contact' && <KundliContact saved={null} onSaved={setContact} onBack={() => goTo('intro')} headingRef={headingRef} />}
+
       {screen === 'intro' && (
         <Intro
           onStart={() => goTo('income')}
@@ -301,7 +312,7 @@ export default function FinancialKundli() {
         </div>
       )}
 
-      {screen === 'report' && report && <KundliReport report={report} progress={progress} history={history} answers={a} onStartOver={onStartOver} headingRef={headingRef} />}
+      {screen === 'report' && report && <KundliReport report={report} progress={progress} history={history} answers={a} contact={contact} onStartOver={onStartOver} headingRef={headingRef} />}
     </div>
   );
 }

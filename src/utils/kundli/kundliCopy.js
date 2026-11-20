@@ -16,7 +16,7 @@ export const INTRO = Object.freeze({
   body:
     'Answer questions about your income, spending, savings, what you own, what you owe, your goals and your retirement. You will get a report that shows where you stand today. This is an educational self-assessment, not financial advice.',
   privacy:
-    'Your answers stay in this browser. They are not sent to Solahana and are not saved. If you close or refresh this page, your answers will be lost.',
+    'We first ask for your name, mobile number and email so a Solahana planner can reach you. Your financial answers stay in this browser: they are not sent to Solahana and are not saved. If you close or refresh this page, your answers will be lost.',
   missing:
     "Many questions let you choose 'I have none' or 'Not sure'. We never treat a blank answer as zero. Anything missing is shown as missing in your report.",
   start: 'Start',
@@ -109,6 +109,25 @@ export const GROWTH = Object.freeze({
   loaded: (n, d) => `Found ${n} saved check-up${n === 1 ? '' : 's'}, the latest from ${d}. Your report will show your growth.`,
   useLatest: 'Start with my latest answers',
   startEmpty: 'Start with empty answers',
+});
+
+/** The contact screen shown after Start, before the first question (the details are required). */
+export const CONTACT = Object.freeze({
+  heading: 'Before we begin',
+  intro:
+    'Tell us how to reach you, so a Solahana planner can help you with your report. Only your name, mobile number and email are sent to Solahana. Your financial answers stay in this browser.',
+  nameLabel: 'Your name',
+  phoneLabel: 'Mobile number',
+  emailLabel: 'Email address',
+  nameError: 'Please enter your name.',
+  phoneError: 'Please enter a valid 10-digit mobile number.',
+  emailError: 'Please enter a valid email address.',
+  consentError: 'Please tick the consent box to continue.',
+  button: 'Continue to the check-up',
+  sending: 'Saving…',
+  failure: "We couldn't save your details just now. Please check your connection and try again.",
+  saved: (name) => `Thank you, ${name}. Your details are saved.`,
+  continue: 'Continue',
 });
 
 export const NAV = Object.freeze({

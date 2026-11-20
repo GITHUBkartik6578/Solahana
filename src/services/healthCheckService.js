@@ -36,6 +36,17 @@ const healthCheckService = {
   },
 
   /**
+   * Contact details left on the screen before the Financial Health Check-up starts. `payload` must come from
+   * buildStartLeadPayload (name, mobile, email and the contact consent only; never an answer or an amount).
+   * POST /api/health-check/start  ->  201 { id }. Resolves only on HTTP 201; anything else rejects.
+   */
+  async startCheckup(payload) {
+    const response = await apiClient.post('/api/health-check/start', payload);
+    if (response.status !== 201) throw new Error('Details were not saved');
+    return response.data?.data;
+  },
+
+  /**
    * Admin: list who took the health check
    * GET /api/health-check  ->  { total, totalPages, currentPage, entries }
    */

@@ -9,6 +9,14 @@ import { BANDS, CATEGORY_LABELS } from './financialHealthCheckCopy.js';
 export const LEGACY_LABEL = 'Legacy 6-question';
 export const NEW_LABEL = 'Check-up';
 export const SELF_REPORTED = 'Self-reported';
+export const STARTED_LABEL = 'Check-up started';
+export const CONTACT_ONLY = 'Contact details only';
+
+/** True for the contact details left when someone starts the Financial Health Check-up (schemaVersion 3, no score). */
+export const isStartLead = (lead) => Boolean(lead && lead.schemaVersion === 3);
+
+/** The Type label of any lead. */
+export const typeLabel = (lead) => (isStartLead(lead) ? STARTED_LABEL : isCheckupLead(lead) ? NEW_LABEL : LEGACY_LABEL);
 
 /** True for a Financial Health Check-up request, false for a legacy 6-question row. */
 export const isCheckupLead = (lead) => Boolean(lead && lead.schemaVersion === 2 && lead.result && typeof lead.result === 'object');
@@ -41,6 +49,7 @@ export const applicableText = (lead) => (isCheckupLead(lead) ? `${lead.result.ea
 export function consentText(lead) {
   const c = lead?.consent;
   if (!c || c.callback !== true) return 'No callback consent recorded';
+  if (isStartLead(lead)) return `Contact consent given ${formatDate(c.acceptedAt)} (wording ${c.textVersion})`;
   return `Callback consent given ${formatDate(c.acceptedAt)} (wording ${c.textVersion})`;
 }
 
@@ -56,6 +65,7 @@ export const CSV_HEADERS = Object.freeze([
   'Type',
   'Name',
   'Phone',
+  'Email',
   'Status',
   'Score',
   'Earned',
@@ -77,22 +87,25 @@ export const CSV_HEADERS = Object.freeze([
 /** One CSV row (array of quoted cells) in the order of CSV_HEADERS. */
 export function csvRow(lead) {
   const checkup = isCheckupLead(lead);
+  const started = isStartLead(lead);
   const r = checkup ? lead.result : null;
-  const legacyDone = !checkup && lead.status === 'completed';
+  const legacyDone = !checkup && !started && lead.status === 'completed';
+  const consentRow = checkup || started;
   const cells = [
-    checkup ? NEW_LABEL : LEGACY_LABEL,
+    typeLabel(lead),
     safeText(lead.fullName),
     lead.phone,
+    safeText(lead.email || ''),
     lead.status,
     checkup ? r.score : '',
     checkup ? r.earned : '',
     checkup ? r.applicable : '',
     checkup ? bandTitle(r.band) : '',
     ...CATEGORY_IDS.map((id) => (checkup ? (r.points?.[id] === null || r.points?.[id] === undefined ? 'N/A' : r.points[id]) : '')),
-    checkup ? (lead.consent?.callback === true ? 'Given' : 'Not recorded') : '',
-    checkup ? lead.consent?.textVersion : '',
-    checkup ? formatDate(lead.consent?.acceptedAt) : '',
-    checkup ? formatDate(lead.deleteAfter) : '',
+    consentRow ? (lead.consent?.callback === true ? 'Given' : 'Not recorded') : '',
+    consentRow ? lead.consent?.textVersion : '',
+    consentRow ? formatDate(lead.consent?.acceptedAt) : '',
+    consentRow ? formatDate(lead.deleteAfter) : '',
     checkup ? SELF_REPORTED : '',
     legacyDone ? lead.score : '',
     legacyDone ? lead.maxScore : '',

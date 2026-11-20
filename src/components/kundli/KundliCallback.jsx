@@ -13,8 +13,9 @@ import { inputBase } from './kundliStyles';
  * approved Health Check-up consent record (hc-consent-v1) and the hc-v1 score summary. The consent box is never pre-ticked, and success is shown only when
  * the server answers 201 (healthCheckService.submitCallback rejects on anything else).
  */
-export default function KundliCallback({ result }) {
-  const [contact, setContact] = useState({ fullName: '', phone: '' });
+export default function KundliCallback({ result, prefill }) {
+  // Filled from the contact screen when the visitor gave their details there (they can still change them)
+  const [contact, setContact] = useState({ fullName: prefill?.fullName || '', phone: prefill?.phone || '' });
   const [consent, setConsent] = useState(false); // never pre-ticked
   const [errors, setErrors] = useState({});
   const [state, setState] = useState('idle'); // idle | sending | sent | failed

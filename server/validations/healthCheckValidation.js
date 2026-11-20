@@ -1,7 +1,17 @@
 import { z } from 'zod';
 // The scoring rules, the allowed consent texts and the score-consistency check live in one shared pure module
 // (plain ESM, no imports besides a sibling helper), so the server cannot drift from what the browser calculated.
-import { CONSENT_TEXTS, SCORING_VERSION, BAND_IDS, checkLeadResult, isValidMobile, normalizePhone } from '../../src/utils/financialHealthCheck.js';
+import {
+  CONSENT_TEXTS,
+  SCORING_VERSION,
+  BAND_IDS,
+  START_CONSENT_VERSION,
+  checkLeadResult,
+  isValidEmail,
+  isValidMobile,
+  normalizeEmail,
+  normalizePhone,
+} from '../../src/utils/financialHealthCheck.js';
 
 const points = (message) => z.number({ error: message }).int({ error: message });
 
@@ -60,4 +70,32 @@ export const submitHealthCheckSchema = z.strictObject({
     .superRefine((value, ctx) => {
       checkLeadResult(value).forEach((message) => ctx.addIssue({ code: 'custom', message }));
     }),
+});
+
+/**
+ * Contact details given on the screen before the Financial Health Check-up starts. Strict: only name, mobile, email,
+ * source and the contact consent are accepted (no answer, amount or score), and only the start consent wording.
+ */
+export const startHealthCheckSchema = z.strictObject({
+  fullName: z
+    .string({ error: 'Please enter your name.' })
+    .trim()
+    .min(2, 'Please enter your name.')
+    .max(80, 'Name is too long.'),
+  phone: z
+    .string({ error: 'Please enter a valid 10-digit mobile number.' })
+    .transform(normalizePhone)
+    .refine(isValidMobile, 'Please enter a valid 10-digit mobile number.'),
+  email: z
+    .string({ error: 'Please enter a valid email address.' })
+    .transform(normalizeEmail)
+    .refine(isValidEmail, 'Please enter a valid email address.'),
+  source: z.string().trim().max(40).optional(),
+  consent: z.strictObject(
+    {
+      contact: z.literal(true, { error: 'Please tick the consent box to continue.' }),
+      textVersion: z.literal(START_CONSENT_VERSION, { error: 'Unknown consent text version.' }),
+    },
+    { error: 'Please tick the consent box to continue.' }
+  ),
 });
