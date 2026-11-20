@@ -99,7 +99,7 @@ describe('the questions, the consent and the lead payload are unchanged', () => 
   });
   it('the Health Check-up still uses its one approved consent version (the Kundli adds its own, never edits this one)', () => {
     expect(CONSENT_VERSION).toBe('hc-consent-v1');
-    expect(Object.keys(CONSENT_TEXTS)).toEqual(['hc-consent-v1', 'kundli-consent-v1']);
+    expect(Object.keys(CONSENT_TEXTS)).toEqual(['hc-consent-v1', 'kundli-consent-v1', 'hc-start-consent-v1']);
   });
   it('still sends exactly these keys and nothing from the insight engine', () => {
     expect(Object.keys(payload)).toEqual(['fullName', 'phone', 'source', 'consent', 'result']);

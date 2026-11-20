@@ -68,6 +68,36 @@ export const submitHealthCheck = asyncHandler(async (req, res) => {
 });
 
 /**
+ * The stored row for someone who starts the check-up: contact details and the contact consent (with the hash of the exact
+ * wording), status 'started', schemaVersion 3. Times are set on the server; nothing else is copied from the request.
+ */
+export const buildStartLeadDocument = (body, now = new Date()) => ({
+  fullName: body.fullName,
+  phone: body.phone,
+  email: body.email,
+  source: body.source || 'financial_health_checkup_full',
+  status: 'started',
+  schemaVersion: 3,
+  consent: {
+    callback: true,
+    textVersion: body.consent.textVersion,
+    textHash: hashConsentText(body.consent.textVersion),
+    acceptedAt: now,
+  },
+  deleteAfter: addMonthsUtc(now, RETENTION_MONTHS),
+});
+
+/**
+ * @desc    Save the contact details of someone starting the Financial Health Check-up (name, mobile, email, consent)
+ * @route   POST /api/health-check/start
+ * @access  Public
+ */
+export const startHealthCheck = asyncHandler(async (req, res) => {
+  const lead = await HealthCheckLead.create(buildStartLeadDocument(req.body));
+  res.status(201).json(new ApiResponse(201, { id: lead._id }, 'Details received'));
+});
+
+/**
  * @desc    List health-check entries
  * @route   GET /api/health-check
  * @access  Private/Admin
@@ -79,7 +109,7 @@ export const getHealthChecks = asyncHandler(async (req, res) => {
   if (status) query.status = String(status);
   if (search) {
     const rx = { $regex: escapeRegex(String(search)), $options: 'i' };
-    query.$or = [{ fullName: rx }, { phone: rx }];
+    query.$or = [{ fullName: rx }, { phone: rx }, { email: rx }];
   }
 
   const pageNum = Math.max(parseInt(page, 10) || 1, 1);

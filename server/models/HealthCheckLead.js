@@ -66,6 +66,8 @@ const healthCheckLeadSchema = new mongoose.Schema(
       match: [/^[6-9][0-9]{9}$/, 'Please enter a valid 10-digit Indian mobile number.'],
       index: true,
     },
+    // Given on the contact screen when the check-up starts (schemaVersion 3). Older rows have none.
+    email: { type: String, trim: true, lowercase: true, maxlength: 120, default: undefined },
     status: { type: String, enum: HEALTH_STATUS, default: 'started', index: true },
     source: { type: String, trim: true, default: 'home_health_check' },
     schemaVersion: { type: Number, default: 1 },
