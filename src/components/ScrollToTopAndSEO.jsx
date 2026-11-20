@@ -24,6 +24,7 @@ const ROUTE_TITLES = {
   '/calculators/lumpsum': 'Lumpsum Investment Calculator — SOLAHANA',
   '/calculators/fd': 'FD Return Calculator — SOLAHANA',
   '/calculators/inflation': 'Inflation Impact Calculator — SOLAHANA',
+  '/calculators/life': 'Life Cover (HLV) Calculator — SOLAHANA',
   '/financial-health-checkup': 'Financial Health Check-up — SOLAHANA',
   '/blogs': 'Financial Intelligence & Insights — SOLAHANA Blog',
   '/contact': 'Schedule a Planning Consultation — SOLAHANA',

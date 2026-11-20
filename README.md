@@ -74,6 +74,7 @@ Built on a robust MERN (MongoDB, Express.js, React 19, Node.js) stack, SOLAHANA 
 - [x] **Global Search Modal (`Cmd+K`)**: Instant search overlay to jump between calculators and planning services.
 - [x] **Client Advisory Portal**: Private dashboard tracking personal bookings and meeting links.
 - [x] **Admin Advisory Desk**: Fiduciary CRM dashboard with client search, status filters, and meeting assignment.
+- [x] **Mobile Polish**: on phones, the footer, carousel dots, calculator controls and login get larger text and tap targets, and no page scrolls sideways. The desktop layout is unchanged. See [`docs/mobile-responsiveness.md`](docs/mobile-responsiveness.md).
 
 ### 🛡️ Backend Engine & CRM APIs
 - [x] **JWT Authentication**: Secure user registration, password hashing (bcrypt 12 rounds), login, and session persistence.

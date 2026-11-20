@@ -143,7 +143,7 @@ function StageCard({ stage, index }) {
             {stage.title}
           </h3>
           <Icon className="mt-2 h-4 w-4 text-[#C9922E]" strokeWidth={1.7} />
-          <p className="mt-1.5 text-[10.5px] leading-[1.35] text-[#475569]">
+          <p className="mt-1.5 text-[12px] sm:text-[10.5px] leading-[1.35] text-[#475569]">
             <span className="font-bold text-[#0F1F45]">Focus: </span>
             {stage.focus}
           </p>

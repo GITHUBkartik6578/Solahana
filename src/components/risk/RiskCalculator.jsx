@@ -89,14 +89,14 @@ export default function RiskCalculator() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleReset}
-                  className="p-2 rounded-xl bg-[#F7F8FB] border border-[#E4E8F0] text-[#64748B] hover:text-[#0F1F45] hover:border-[#2F5BC7] transition-colors text-xs font-medium flex items-center gap-1 cursor-pointer"
+                  className="min-h-[40px] sm:min-h-0 p-2 rounded-xl bg-[#F7F8FB] border border-[#E4E8F0] text-[#64748B] hover:text-[#0F1F45] hover:border-[#2F5BC7] transition-colors text-xs font-medium flex items-center gap-1 cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Reset</span>
                 </button>
                 <button
                   onClick={handleSave}
-                  className="p-2 rounded-xl bg-[#F7F8FB] border border-[#E4E8F0] text-[#2F5BC7] hover:border-[#2F5BC7] transition-colors text-xs font-semibold flex items-center gap-1 cursor-pointer"
+                  className="min-h-[40px] sm:min-h-0 p-2 rounded-xl bg-[#F7F8FB] border border-[#E4E8F0] text-[#2F5BC7] hover:border-[#2F5BC7] transition-colors text-xs font-semibold flex items-center gap-1 cursor-pointer"
                 >
                   <Bookmark className="w-3.5 h-3.5 text-[#2F5BC7]" />
                   <span>{isSaved ? 'Saved!' : 'Save'}</span>

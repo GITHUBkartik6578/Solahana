@@ -148,7 +148,7 @@ function SegmentCarousel() {
             type="button"
             onClick={() => setI(k)}
             aria-label={`Show ${seg.title}`}
-            className={`h-2 rounded-full transition-all cursor-pointer ${k === i ? 'w-6 bg-[#1A3170]' : 'w-2 bg-[#CBD6EE] hover:bg-[#9AA9C7]'}`}
+            className={`relative before:absolute before:-inset-x-1.5 before:-inset-y-3 before:content-[''] h-2 rounded-full transition-all cursor-pointer ${k === i ? 'w-6 bg-[#1A3170]' : 'w-2 bg-[#CBD6EE] hover:bg-[#9AA9C7]'}`}
           />
         ))}
       </div>

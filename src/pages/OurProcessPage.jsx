@@ -161,7 +161,7 @@ function Hero() {
             <span
               key={m.lines[0]}
               className="absolute flex flex-col whitespace-nowrap font-sans font-medium leading-[1.22] text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.9),0_0_2px_rgba(0,0,0,0.8)]"
-              style={{ left: `${m.x}%`, top: `${m.y}%`, fontSize: 'max(9px, 2.5cqw)' }}
+              style={{ left: `${m.x}%`, top: `${m.y}%`, fontSize: 'max(10.5px, 2.5cqw)' }}
             >
               <span>{m.lines[0]}</span>
               <span>{m.lines[1]}</span>

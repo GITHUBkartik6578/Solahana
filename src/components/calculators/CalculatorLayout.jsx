@@ -282,7 +282,7 @@ export default function CalculatorLayout({ title, subtitle, icon: HeaderIcon, on
         <div className="flex items-center justify-between mb-6">
           <button
             onClick={() => navigate('/calculators')}
-            className="inline-flex items-center gap-2 text-xs font-medium text-[#5B6B84] hover:text-[#5A7FD6] transition-colors cursor-pointer"
+            className="inline-flex min-h-[44px] sm:min-h-0 items-center gap-2 text-[13px] sm:text-xs font-medium text-[#5B6B84] hover:text-[#5A7FD6] transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to All Calculators</span>
@@ -329,7 +329,7 @@ export default function CalculatorLayout({ title, subtitle, icon: HeaderIcon, on
               {onReset && (
                 <button
                   onClick={onReset}
-                  className="px-3.5 py-2 rounded-xl bg-[#F7F8FB] hover:bg-[#F7F8FB]/80 border border-[#E4E8F0] text-xs font-semibold text-[#0F1F45] hover:text-[#5A7FD6] transition-all flex items-center gap-1.5 cursor-pointer shadow"
+                  className="min-h-[40px] sm:min-h-0 px-3.5 py-2 rounded-xl bg-[#F7F8FB] hover:bg-[#F7F8FB]/80 border border-[#E4E8F0] text-xs font-semibold text-[#0F1F45] hover:text-[#5A7FD6] transition-all flex items-center gap-1.5 cursor-pointer shadow"
                   title="Reset inputs to defaults"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
@@ -349,7 +349,7 @@ export default function CalculatorLayout({ title, subtitle, icon: HeaderIcon, on
 
               <button
                 onClick={() => handleActionToast('Shareable link copied to clipboard')}
-                className="p-2 rounded-xl bg-[#F7F8FB] hover:bg-[#F7F8FB]/80 border border-[#E4E8F0] text-[#5B6B84] hover:text-[#2F5BC7] transition-all cursor-pointer shadow"
+                className="min-h-[40px] min-w-[40px] sm:min-h-0 sm:min-w-0 p-2 rounded-xl bg-[#F7F8FB] hover:bg-[#F7F8FB]/80 border border-[#E4E8F0] text-[#5B6B84] hover:text-[#2F5BC7] transition-all cursor-pointer shadow"
                 title="Share calculation"
               >
                 <Share2 className="w-4 h-4 text-[#5A7FD6]" />

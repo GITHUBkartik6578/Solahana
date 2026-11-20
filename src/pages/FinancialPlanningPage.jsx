@@ -258,7 +258,7 @@ function Problem() {
                 key={n.label}
                 to={n.to}
                 style={{ left: `${50 + 41 * Math.cos(a)}%`, top: `${50 + 41 * Math.sin(a)}%` }}
-                className="group absolute flex w-[96px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 rounded-2xl text-center outline-none focus-visible:ring-2 focus-visible:ring-[#C9922E] sm:w-[110px]"
+                className="group absolute flex w-[88px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 rounded-2xl text-center outline-none focus-visible:ring-2 focus-visible:ring-[#C9922E] sm:w-[110px]"
               >
                 <span className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-[#E4D2A6] bg-white text-[#B8862B] shadow-[0_8px_20px_rgba(15,31,69,0.12)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-[#C9922E] group-hover:bg-[#0F1F45] group-hover:text-[#E2B24E] group-hover:shadow-[0_14px_28px_rgba(201,146,46,0.35)] sm:h-14 sm:w-14">
                   <Icon className="h-5 w-5 sm:h-[22px] sm:w-[22px]" strokeWidth={1.6} />

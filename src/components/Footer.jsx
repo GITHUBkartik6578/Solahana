@@ -130,12 +130,12 @@ export default function Footer() {
         <Icon className="w-[18px] h-[18px] shrink-0 text-[#E2B24E]" strokeWidth={1.6} />
         <span>
           {item.name}
-          {item.sub && <span className="mt-0.5 block text-[11px] leading-snug text-[#AEBBD3]">{item.sub}</span>}
+          {item.sub && <span className="mt-0.5 block text-[12px] @2xl:text-[11px] leading-snug text-[#AEBBD3]">{item.sub}</span>}
         </span>
       </>
     );
     return item.key ? (
-      <button onClick={() => go(item.key)} className="flex items-start gap-2.5 text-left text-[13.5px] text-[#D4DCEC] hover:text-[#E2B24E] transition-colors cursor-pointer">
+      <button onClick={() => go(item.key)} className="flex items-start gap-2.5 py-1.5 @2xl:py-0 text-left text-[14px] @2xl:text-[13.5px] text-[#D4DCEC] hover:text-[#E2B24E] transition-colors cursor-pointer">
         {inner}
       </button>
     ) : (
@@ -194,7 +194,7 @@ export default function Footer() {
                 <img src={solahanaLogo} alt="SOLAHANA" className="h-9 @2xl:h-10 w-auto object-contain transition-transform group-hover:scale-[1.02]" />
               </span>
             </button>
-            <p className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.3em] text-[#AEBBD3]">Family Office &amp; Wealth Platform</p>
+            <p className="mt-1.5 text-[10.5px] @2xl:text-[9px] font-bold uppercase tracking-[0.3em] text-[#AEBBD3]">Family Office &amp; Wealth Platform</p>
 
             <p style={serif} className="mt-3 text-[20px] font-bold leading-[1.14] text-white">
               Plan with <span className="text-[#E2B24E]">Clarity.</span>
@@ -232,7 +232,7 @@ export default function Footer() {
           </div>
           <div className="@7xl:border-l @7xl:border-white/15 @7xl:px-6">
             <Column title="Our Professional Network & Assets" items={NETWORK}>
-              <p className="mt-3 text-[11px] leading-snug text-[#AEBBD3]">
+              <p className="mt-3 text-[12.5px] @2xl:text-[11px] leading-relaxed @2xl:leading-snug text-[#AEBBD3]">
                 We collaborate with trusted professionals and authorized institutional partners across asset classes and advisory segments, subject to their respective terms and conditions, to implement holistic family wealth solutions.
               </p>
             </Column>
@@ -286,12 +286,12 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-        <div className="py-2.5 flex flex-col @3xl:flex-row items-center justify-between gap-4 text-[12.5px] text-[#AEBBD3]">
+        <div className="pt-2.5 pb-24 @3xl:pb-2.5 flex flex-col @3xl:flex-row items-center justify-between gap-4 text-[12.5px] text-[#AEBBD3]">
           <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2" aria-label="Legal">
             {LEGAL.map((l, i) => (
               <React.Fragment key={l.name}>
                 {i > 0 && <span className="text-[#E2B24E]/50">|</span>}
-                <button onClick={() => go(l.key)} className="hover:text-[#E2B24E] transition-colors cursor-pointer">
+                <button onClick={() => go(l.key)} className="py-2 @3xl:py-0 hover:text-[#E2B24E] transition-colors cursor-pointer">
                   {l.name}
                 </button>
               </React.Fragment>

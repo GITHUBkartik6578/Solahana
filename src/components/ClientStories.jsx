@@ -278,7 +278,7 @@ export default function ClientStories() {
                   key={idx}
                   onClick={() => setActiveIndex(idx)}
                   aria-label={`Go to review slide ${idx + 1}`}
-                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                  className={`relative before:absolute before:-inset-x-1.5 before:-inset-y-3 before:content-[''] h-2.5 rounded-full transition-all duration-300 ${
                     activeIndex === idx
                       ? 'w-8 bg-[#1A3170]'
                       : 'w-2.5 bg-slate-300 hover:bg-slate-400'

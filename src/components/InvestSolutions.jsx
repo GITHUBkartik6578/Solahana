@@ -191,7 +191,7 @@ export default function InvestSolutions() {
                 onClick={() => setPage(i)}
                 aria-label={`Show slide ${i + 1}`}
                 aria-current={i === current}
-                className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${i === current ? 'w-7 bg-[#1A3170]' : 'w-2 bg-[#2F5BC7]/30 hover:bg-[#2F5BC7]/60'}`}
+                className={`relative before:absolute before:-inset-x-1.5 before:-inset-y-3 before:content-[''] h-2 rounded-full transition-all duration-500 cursor-pointer ${i === current ? 'w-7 bg-[#1A3170]' : 'w-2 bg-[#2F5BC7]/30 hover:bg-[#2F5BC7]/60'}`}
               />
             ))}
           </div>

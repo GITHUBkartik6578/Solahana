@@ -210,7 +210,7 @@ export default function Hero() {
             onClick={() => setActive(i)}
             aria-label={`Show ${label}`}
             aria-current={i === active}
-            className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${
+            className={`relative before:absolute before:-inset-x-1.5 before:-inset-y-3 before:content-[''] h-2 rounded-full transition-all duration-500 cursor-pointer ${
               i === active ? 'w-6 bg-[#1A3170]' : 'w-2 bg-[#2F5BC7]/30 hover:bg-[#2F5BC7]/60'
             }`}
           />
