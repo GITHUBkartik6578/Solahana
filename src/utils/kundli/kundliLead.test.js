@@ -15,11 +15,12 @@ const report = buildReport(
 );
 const lead = buildKundliLead({ fullName: '  Asha Rao ', phone: '+91 98765 43210', result: report.score.result });
 
-describe('Kundli callback lead', () => {
-  it('uses the Kundli source and consent version, and the existing server validation accepts it unchanged', () => {
+describe('Financial Health Check-up callback lead', () => {
+  it('uses its own source and the approved hc-consent-v1, and the existing server validation accepts it unchanged', () => {
     expect(lead.source).toBe(KUNDLI_LEAD_SOURCE);
-    expect(lead.consent).toEqual({ callback: true, textVersion: 'kundli-consent-v1' });
-    expect(CONSENT_TEXTS['kundli-consent-v1']).toContain('about my Financial Kundli');
+    expect(lead.source).toBe('financial_health_checkup_full');
+    expect(lead.consent).toEqual({ callback: true, textVersion: 'hc-consent-v1' });
+    expect(CONSENT_TEXTS['hc-consent-v1']).toContain('about my Financial Health Check-up result');
     const parsed = submitHealthCheckSchema.safeParse(lead);
     expect(parsed.success, JSON.stringify(parsed.error?.issues)).toBe(true);
     expect(parsed.data.phone).toBe('9876543210');

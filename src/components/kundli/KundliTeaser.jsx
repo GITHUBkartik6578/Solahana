@@ -4,7 +4,7 @@ import { ArrowRight, Landmark, PiggyBank, ShieldCheck, Target } from 'lucide-rea
 import { INTRO, TEASER } from '../../utils/kundli/kundliCopy';
 
 /**
- * The Financial Kundli entry on the Calculators page, in the place the Financial Health Check-up section had.
+ * The Financial Health Check-up entry on the Calculators page (it replaces the earlier 3-step check-up section).
  * The old "#health-check" anchor is kept on this section so existing links still land here.
  */
 export default function KundliTeaser() {
@@ -15,7 +15,7 @@ export default function KundliTeaser() {
     { Icon: Target, text: TEASER.points[3] },
   ];
   return (
-    <section id="financial-kundli" className="relative scroll-mt-[80px] overflow-hidden border-y border-[#E4E8F0] bg-[#F7F8FB] py-16 sm:py-20 lg:py-24">
+    <section id="financial-health-checkup" className="relative scroll-mt-[80px] overflow-hidden border-y border-[#E4E8F0] bg-[#F7F8FB] py-16 sm:py-20 lg:py-24">
       <span id="health-check" className="absolute -top-20" aria-hidden="true" />
       <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
@@ -25,7 +25,7 @@ export default function KundliTeaser() {
             <p className="mt-4 text-[15.5px] leading-relaxed text-[#475569]">{INTRO.body}</p>
             <p className="mt-3 text-[14px] leading-relaxed text-[#5B6B84]">{INTRO.privacy}</p>
             <Link
-              to="/financial-kundli"
+              to="/financial-health-checkup"
               className="mt-7 inline-flex min-h-[52px] items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,#24408A_0%,#1A3170_50%,#122552_100%)] px-8 text-[15px] font-bold text-white shadow-[0_10px_24px_rgba(26,49,112,0.28)] transition-transform hover:scale-[1.02]"
             >
               {TEASER.cta}

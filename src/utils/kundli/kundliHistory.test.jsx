@@ -4,14 +4,14 @@ import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import KundliReport from '../../components/kundli/KundliReport.jsx';
 import { buildReport } from './kundliReport.js';
-import { buildKundliFile, FILE_ERRORS, FILE_FORMAT, parseKundliFile, progressSeries, sanitizeAnswers, snapshotMetrics } from './kundliHistory.js';
+import { buildKundliFile, FILE_ERRORS, FILE_FORMAT, fileNameFor, parseKundliFile, progressSeries, sanitizeAnswers, snapshotMetrics } from './kundliHistory.js';
 import { emptyAnswers } from './kundliInputs.js';
 import { makeAnswers } from './kundliTestHelpers.js';
 
 const OLD = makeAnswers({ core: { income: '80000', expenses: '35000', emi: '15000', other: '12000', savings: '50000', investments: '5000', termCover: '0', healthCover: '500000' }, assets: { MF: '200000' }, liabilities: { LOAN: '300000' } });
 const NEW = makeAnswers({ core: { income: '90000', expenses: '35000', emi: '10000', other: '12000', savings: '300000', investments: '15000', termCover: '10000000', healthCover: '1000000' }, assets: { MF: '600000' }, liabilities: { LOAN: '100000' } });
 
-describe('the Kundli file', () => {
+describe('the check-up file', () => {
   it('round-trips: what is saved is what loads, oldest first, one entry per day', () => {
     const first = buildKundliFile([], OLD, new Date(2025, 10, 20));
     const loaded1 = parseKundliFile(first);
@@ -24,6 +24,13 @@ describe('the Kundli file', () => {
     const again = parseKundliFile(buildKundliFile(loaded2.history, OLD, new Date(2026, 10, 20)));
     expect(again.history).toHaveLength(2);
     expect(again.history[1].answers.fields.income.raw).toBe('80000');
+  });
+  it('files saved before the rename (format solahana-financial-kundli) still open; new files use the new format and name', () => {
+    const old = buildKundliFile([], OLD, new Date(2025, 10, 20)).replace('"solahana-financial-health-checkup"', '"solahana-financial-kundli"');
+    expect(old).toContain('solahana-financial-kundli');
+    expect(parseKundliFile(old).ok).toBe(true);
+    expect(JSON.parse(buildKundliFile([], OLD)).format).toBe('solahana-financial-health-checkup');
+    expect(fileNameFor(new Date(2026, 10, 20))).toBe('solahana-financial-health-checkup-2026-11-20.json');
   });
   it('holds answers only: no calculated figure is stored in the file', () => {
     const text = buildKundliFile([], NEW, new Date(2026, 10, 20));
@@ -111,7 +118,8 @@ describe('the report shows growth', () => {
     expect(text).toContain('Up ₹8,50,000'); // net worth: -₹50,000 then, ₹8,00,000 now
     expect(text).toContain('was 1.4 months (Issue)'); // ₹50,000 ÷ ₹35,000
     expect(text).toContain('Up 53 points since 20 Nov 2025'); // 30 then (EMI 20 + overlap 5 + shielding 5), 83 now
-    expect(text).toContain('Save my Kundli (file)');
+    expect(text).toContain('Save my check-up (file)');
+    expect(text).not.toContain('Kundli');
     expect(text).not.toContain('-₹');
     expect(text).not.toContain('NaN');
   });

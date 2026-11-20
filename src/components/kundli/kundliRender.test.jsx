@@ -31,9 +31,9 @@ const FULL = makeAnswers({
 describe('the page renders', () => {
   it('starts on the intro with the privacy note and nothing pre-filled', () => {
     const html = text(render(<FinancialKundli />));
-    expect(html).toContain('Your Financial Kundli');
+    expect(html).toContain('Your Financial Health Check-up');
     expect(html).toContain('Your answers stay in this browser.');
-    expect(html).not.toContain('Health Check-up');
+    expect(html).not.toContain('Kundli');
   });
   it('every questionnaire screen renders for a full answer set', () => {
     screenOrder(FULL)
@@ -69,7 +69,8 @@ describe('the report renders', () => {
     expect(html).toContain(DISCLOSURES.rounding);
     expect(html).toContain(DISCLOSURES.epf);
     expect(html).toContain('Yearly return: 10% a year (your assumption)');
-    expect(html).toContain('Report version kundli-v1');
+    expect(html).toContain('Report version fhc-report-v1');
+    expect(html).not.toContain('Kundli');
     expect(html).toContain(REPORT.printPrivacy);
   });
 });
@@ -117,20 +118,28 @@ describe('answers survive a trip to another page in the same tab (memory only)',
   });
 });
 
-describe("the Kundli takes the Health Check-up's place", () => {
-  it('the Calculators page section links to /financial-kundli and keeps the old #health-check anchor', () => {
+describe('the Financial Health Check-up entry points', () => {
+  it('the Calculators page section links to /financial-health-checkup and keeps the old #health-check anchor', () => {
     const html = render(<KundliTeaser />);
-    expect(html).toContain('href="/financial-kundli"');
+    expect(html).toContain('href="/financial-health-checkup"');
     expect(html).toContain('id="health-check"');
-    expect(text(html)).toContain('Start my Financial Kundli');
+    expect(text(html)).toContain('Start my Financial Health Check-up');
+    expect(html).not.toContain('Kundli');
   });
-  it('the Calculators page and the Navbar no longer open the Health Check-up', async () => {
+  it('the old /financial-kundli address redirects to /financial-health-checkup', async () => {
+    const { readFileSync } = await import('node:fs');
+    const app = readFileSync('src/App.jsx', 'utf8');
+    expect(app).toContain('<Route path="/financial-health-checkup" element={<FinancialKundliPage />} />');
+    expect(app).toContain('<Route path="/financial-kundli" element={<Navigate to="/financial-health-checkup" replace />} />');
+  });
+  it('the Calculators page and the Navbar open the new check-up, not the old 3-step one', async () => {
     const { readFileSync } = await import('node:fs');
     const calc = readFileSync('src/pages/calculators/CalculatorsLandingPage.jsx', 'utf8');
     expect(calc).not.toContain("from '../../components/planning/HealthCheck'");
     expect(calc).toContain('<KundliTeaser />');
     const nav = readFileSync('src/components/Navbar.jsx', 'utf8');
-    expect(nav).toContain("navigate('/financial-kundli')");
-    expect(nav).not.toContain('Check Your Financial Health');
+    expect(nav).toContain("navigate('/financial-health-checkup')");
+    expect(nav).toContain('Check Your Financial Health');
+    expect(nav).not.toMatch(/>[^<]*Kundli/);
   });
 });

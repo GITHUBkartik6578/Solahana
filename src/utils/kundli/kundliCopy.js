@@ -1,5 +1,5 @@
 /**
- * All customer-facing wording of the Solahana Financial Kundli, in one place so it can be reviewed and tested without
+ * All customer-facing wording of the Solahana Financial Health Check-up (built as the "Kundli" module in code), in one place so it can be reviewed and tested without
  * rendering anything. The nine Health Check-up questions reuse that tool's approved labels and help texts verbatim
  * (FIELDS and CHOICES from financialHealthCheckCopy.js), so the two tools ask the same questions in the same words.
  *
@@ -7,12 +7,12 @@
  */
 import { CHOICES, FIELDS } from '../financialHealthCheckCopy.js';
 
-export const KUNDLI_VERSION = 'kundli-v1';
-export const CALC_SPEC_VERSION = 'kundli-calc-v1';
+export const KUNDLI_VERSION = 'fhc-report-v1';
+export const CALC_SPEC_VERSION = 'fhc-calc-v1';
 
 export const INTRO = Object.freeze({
   eyebrow: 'Free · About 10 to 15 minutes',
-  title: 'Your Financial Kundli',
+  title: 'Your Financial Health Check-up',
   body:
     'Answer questions about your income, spending, savings, what you own, what you owe, your goals and your retirement. You will get a report that shows where you stand today. This is an educational self-assessment, not financial advice.',
   privacy:
@@ -24,10 +24,10 @@ export const INTRO = Object.freeze({
   resumeNote: 'Your earlier answers are still on this page. They stay only until you close or refresh it.',
 });
 
-/** The Kundli entry on the Calculators page (it takes the Financial Health Check-up's place there). */
+/** The entry on the Calculators page (it replaces the earlier 3-step Health Check-up section there). */
 export const TEASER = Object.freeze({
-  title: 'Solahana Financial Kundli',
-  cta: 'Start my Financial Kundli',
+  title: 'Solahana Financial Health Check-up',
+  cta: 'Start my Financial Health Check-up',
   points: [
     'Savings, monthly cash flow and emergency fund',
     'Net worth: what you own and what you owe',
@@ -38,7 +38,7 @@ export const TEASER = Object.freeze({
 
 /** The callback form under the score (the Health Check-up's approved labels and messages are reused where they fit). */
 export const CALLBACK_KUNDLI = Object.freeze({
-  heading: 'Want a free callback about your Financial Kundli?',
+  heading: 'Want a free callback about your Financial Health Check-up?',
   intro: 'A Solahana planner can walk you through your report. Only your name, mobile number and financial health score are sent; your amounts, goals and answers never leave this page.',
   button: 'Request a free callback',
   sending: 'Sending…',
@@ -78,7 +78,7 @@ export const CHARTS = Object.freeze({
   retCoveredNote: (left, end) => `Your retirement savings alone cover the spending you planned; about ${left} would be left at age ${end}.`,
 });
 
-/** Growth over time: the customer's own Kundli file, the At-a-glance tiles and the progress charts. */
+/** Growth over time: the customer's own check-up file, the At-a-glance tiles and the progress charts. */
 export const GROWTH = Object.freeze({
   glanceTitle: 'At a glance',
   score: 'Financial health score',
@@ -93,7 +93,7 @@ export const GROWTH = Object.freeze({
   since: (d) => `since ${d}`,
   points: (n) => `${n} ${Math.abs(n) === 1 ? 'point' : 'points'}`,
   progressTitle: 'Your progress',
-  progressNote: (n, first) => `Compared with ${n} earlier Kundli${n === 1 ? '' : 's'} from your own file, the first on ${first}. Every Kundli is recalculated with today's rules, so they compare like for like.`,
+  progressNote: (n, first) => `Compared with ${n} earlier check-up${n === 1 ? '' : 's'} from your own file, the first on ${first}. Every check-up is recalculated with today's rules, so they compare like for like.`,
   scoreTrend: 'Financial health score over time',
   moneyTrend: 'What you own and owe over time',
   seriesScore: 'Financial health score',
@@ -101,12 +101,12 @@ export const GROWTH = Object.freeze({
   seriesLiabilities: 'Known liabilities',
   seriesNetWorth: 'Net worth',
   was: (display, status) => `was ${display} (${status})`,
-  save: 'Save my Kundli (file)',
+  save: 'Save my check-up (file)',
   saveNote: 'The file is saved only on your device, not with Solahana. Load it next time to see your growth. It contains your amounts, so keep it safe.',
-  saved: 'Saved. Keep the file and load it at your next Kundli.',
-  load: 'Load my previous Kundli',
-  loadNote: 'Saved a Kundli before? Choose that file to see your growth. It is read only in this browser.',
-  loaded: (n, d) => `Found ${n} saved Kundli${n === 1 ? '' : 's'}, the latest from ${d}. Your report will show your growth.`,
+  saved: 'Saved. Keep the file and load it at your next check-up.',
+  load: 'Load my previous check-up',
+  loadNote: 'Saved a check-up before? Choose that file to see your growth. It is read only in this browser.',
+  loaded: (n, d) => `Found ${n} saved check-up${n === 1 ? '' : 's'}, the latest from ${d}. Your report will show your growth.`,
   useLatest: 'Start with my latest answers',
   startEmpty: 'Start with empty answers',
 });
@@ -115,13 +115,13 @@ export const NAV = Object.freeze({
   next: 'Continue',
   back: 'Back',
   review: 'Review my answers',
-  create: 'Create my Financial Kundli',
+  create: 'Create my Financial Health Check-up',
   edit: 'Edit',
   backToReview: 'Back to review',
   print: 'Print or save as PDF',
   startOver: 'Start over',
   startOverConfirm: 'Start over? All your answers will be cleared from this page.',
-  progressLabel: 'Financial Kundli progress',
+  progressLabel: 'Financial Health Check-up progress',
   errorSummary: (n) => (n === 1 ? '1 answer needs attention:' : `${n} answers need attention:`),
 });
 
@@ -362,7 +362,7 @@ export const STATUS = Object.freeze({
 export const SEVERITY_LABELS = Object.freeze({ high: 'Priority', medium: 'Worth Reviewing', low: 'Good Practice' });
 
 export const REPORT = Object.freeze({
-  title: 'Your Financial Kundli',
+  title: 'Your Financial Health Check-up',
   subtitle: 'Prepared from your answers. Information only.',
   dateLabel: 'Prepared on',
   summary: (x, y) => `${x} of ${y} chosen sections complete`,
@@ -394,9 +394,9 @@ export const REPORT = Object.freeze({
   disclosuresHeading: 'How the projections work',
   versionLine: (date) => `Report version ${KUNDLI_VERSION} · Calculation version ${CALC_SPEC_VERSION} · ${date}. The yearly rates used are the ones you entered.`,
   printPrivacy: 'This report contains your personal financial details. Store or share it carefully.',
-  printFooter: 'SOLAHANA Financial Kundli · Information only',
+  printFooter: 'SOLAHANA Financial Health Check-up · Information only',
   disclaimer:
-    'This Financial Kundli is an educational self-assessment based only on the numbers you enter. The reference levels are general rules of thumb, and the projections use the yearly rates you chose; neither is a promise of any outcome. It does not suggest any product. For guidance that fits your situation, speak to a qualified planner.',
+    'This Financial Health Check-up is an educational self-assessment based only on the numbers you enter. The reference levels are general rules of thumb, and the projections use the yearly rates you chose; neither is a promise of any outcome. It does not suggest any product. For guidance that fits your situation, speak to a qualified planner.',
 });
 
 // Figure labels and module messages (Step 3)
@@ -492,5 +492,5 @@ export const HOW = Object.freeze({
     'Your monthly spending is grown at your yearly price rise until you retire. The amount needed at retirement pays that spending, rising with prices, every year until the age you chose, while the rest stays invested at your yearly return. Your EPF, PPF and NPS balance grows once a year until you retire.',
 });
 
-/** Words that must never appear in the Kundli's customer copy (checked by tests). */
+/** Words that must never appear in the customer copy (checked by tests). */
 export const FORBIDDEN_WORDS = Object.freeze(['guaranteed', 'guarantee', 'ideal', 'recommended', 'verified', 'forecast', 'risk-free']);

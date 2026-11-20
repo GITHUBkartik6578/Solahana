@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Check, Info, Loader2, Phone, User } from 'lucide-react';
 import healthCheckService from '../../services/healthCheckService';
-import { CONSENT_TEXTS, KUNDLI_CONSENT_VERSION, isValidMobile } from '../../utils/financialHealthCheck';
+import { CONSENT_TEXTS, CONSENT_VERSION, isValidMobile } from '../../utils/financialHealthCheck';
 import { CALLBACK } from '../../utils/financialHealthCheckCopy';
 import { CALLBACK_KUNDLI } from '../../utils/kundli/kundliCopy';
 import { buildKundliLead } from '../../utils/kundli/kundliLead';
@@ -10,7 +10,7 @@ import { inputBase } from './kundliStyles';
 
 /**
  * Optional callback request under the Kundli report. Sends ONLY what buildKundliLead builds: name, mobile number, the
- * Kundli consent record and the hc-v1 score summary. The consent box is never pre-ticked, and success is shown only when
+ * approved Health Check-up consent record (hc-consent-v1) and the hc-v1 score summary. The consent box is never pre-ticked, and success is shown only when
  * the server answers 201 (healthCheckService.submitCallback rejects on anything else).
  */
 export default function KundliCallback({ result }) {
@@ -96,7 +96,7 @@ export default function KundliCallback({ result }) {
               className="mt-1 h-4 w-4 shrink-0 accent-[#1A3170]"
             />
             <span>
-              <TextWithLink text={CONSENT_TEXTS[KUNDLI_CONSENT_VERSION]} linkText="Privacy Policy" to="/privacy-policy" />
+              <TextWithLink text={CONSENT_TEXTS[CONSENT_VERSION]} linkText="Privacy Policy" to="/privacy-policy" />
             </span>
           </label>
           {errors.consent && (
