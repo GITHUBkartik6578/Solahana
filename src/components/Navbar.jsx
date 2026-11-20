@@ -59,11 +59,9 @@ export default function Navbar() {
     setMobileMenuOpen(false);
     setActiveDropdown(null);
 
-    // Money health check lives on the Calculators page: scroll to it, or go there first
-    if (targetPath === 'health-check') {
-      const el = pathname === '/calculators' && document.getElementById('health-check');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      else navigate('/calculators#health-check');
+    // Primary CTA: the Solahana Financial Kundli (it replaces the Financial Health Check-up here)
+    if (targetPath === 'financial-kundli') {
+      navigate('/financial-kundli');
       return;
     }
 
@@ -403,15 +401,15 @@ export default function Navbar() {
                   </button>
                 )}
 
-                {/* Primary CTA: free money health check */}
+                {/* Primary CTA: the free Solahana Financial Kundli */}
                 <button
-                  onClick={(e) => handleNavClick(e, 'health-check')}
+                  onClick={(e) => handleNavClick(e, 'financial-kundli')}
                   className="ml-5 lg:ml-5.5 xl:ml-6 group flex items-center gap-3 rounded-full bg-[#0F1F45] pl-4 pr-4 py-2 text-left text-white shadow-[0_8px_22px_rgba(15,31,69,0.3)] whitespace-nowrap shrink-0 cursor-pointer transition-transform hover:scale-[1.03]"
                 >
                   <Heart className="w-[18px] h-[18px] shrink-0 text-white/90" strokeWidth={1.7} />
                   <span className="flex flex-col text-[13px] font-semibold leading-[1.15]">
-                    <span>Check Your</span>
-                    <span>Financial Health</span>
+                    <span>Your Financial</span>
+                    <span>Kundli</span>
                   </span>
                   <ArrowRight className="w-4 h-4 shrink-0 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -593,11 +591,11 @@ export default function Navbar() {
                 )}
 
                 <button
-                  onClick={(e) => handleNavClick(e, 'health-check')}
+                  onClick={(e) => handleNavClick(e, 'financial-kundli')}
                   className="w-full rounded-full bg-[#0F1F45] py-3 px-4 text-white flex items-center justify-center gap-3 shadow-md cursor-pointer"
                 >
                   <Heart className="w-5 h-5 shrink-0" strokeWidth={1.7} />
-                  <span className="text-[14px] font-semibold">Check Your Financial Health</span>
+                  <span className="text-[14px] font-semibold">Your Financial Kundli</span>
                   <ArrowRight className="w-4 h-4 shrink-0" />
                 </button>
               </div>

@@ -19,6 +19,7 @@ import EstatePlanningPage from './pages/EstatePlanningPage';
 import WhoWeServePage from './pages/WhoWeServePage';
 import OurProcessPage from './pages/OurProcessPage';
 import LegalPage from './components/legal/LegalPage';
+import FinancialKundliPage from './pages/FinancialKundliPage';
 import HomeSections, { PersonalWelcome, WealthArchitecture } from './components/home/HomeSections';
 import TrustStrip from './components/TrustStrip';
 import LifeStagesSection from './components/LifeStagesSection';
@@ -142,6 +143,7 @@ function AppContent() {
           <Route path="/calculators/fd" element={<FdCalculator />} />
           <Route path="/calculators/inflation" element={<InflationCalculator />} />
           <Route path="/calculators/life" element={<LifeCalculator />} />
+          <Route path="/financial-kundli" element={<FinancialKundliPage />} />
 
           {/* Financial Blog CMS Routes */}
           <Route path="/blogs" element={<BlogsLandingPage />} />

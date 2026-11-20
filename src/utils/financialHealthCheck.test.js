@@ -379,7 +379,7 @@ describe('consent texts', () => {
   // "hc-consent-v1" was edited: restore it and add a new version (for example hc-consent-v2) instead.
   it('hc-consent-v1 is pinned: exact wording and exact SHA-256', () => {
     expect(CONSENT_VERSION).toBe('hc-consent-v1');
-    expect(Object.keys(CONSENT_TEXTS)).toEqual(['hc-consent-v1']);
+    expect(Object.keys(CONSENT_TEXTS)).toEqual(['hc-consent-v1', 'kundli-consent-v1']);
     const text = CONSENT_TEXTS['hc-consent-v1'];
     expect(text).toBe(
       'I agree that Solahana may call me on the mobile number above about my Financial Health Check-up result, and that my name, number and score are stored for this purpose for up to 24 months. I have read the Privacy Policy.'
