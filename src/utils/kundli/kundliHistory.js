@@ -1,5 +1,5 @@
 /**
- * "My Kundli file": the customer's own record of past Kundlis, so the report can show growth over time.
+ * "My check-up file": the customer's own record of past check-ups (the Kundli module in code), so the report can show growth over time.
  *
  * The file is created in the browser and downloaded to the customer's device; loading it reads it back in the browser.
  * Solahana never receives or stores it, and nothing is written to browser storage. A loaded file is UNTRUSTED input: it is
@@ -12,7 +12,9 @@ import { ASSET_KEYS, GOALS, LIABILITY_KEYS } from './kundliCopy.js';
 import { blankGoal, emptyAnswers } from './kundliInputs.js';
 import { buildReport } from './kundliReport.js';
 
-export const FILE_FORMAT = 'solahana-financial-kundli';
+export const FILE_FORMAT = 'solahana-financial-health-checkup';
+/** Files saved before the rename carry this format id and still open. */
+export const LEGACY_FILE_FORMATS = Object.freeze(['solahana-financial-kundli']);
 export const FILE_VERSION = 1;
 export const MAX_FILE_BYTES = 1_000_000;
 export const MAX_HISTORY = 24;
@@ -83,7 +85,8 @@ export function parseKundliFile(text) {
   } catch {
     return { ok: false, error: FILE_ERRORS.notKundli };
   }
-  if (!data || data.format !== FILE_FORMAT || !Array.isArray(data.history)) return { ok: false, error: FILE_ERRORS.notKundli };
+  const knownFormat = data && (data.format === FILE_FORMAT || LEGACY_FILE_FORMATS.includes(data.format));
+  if (!knownFormat || !Array.isArray(data.history)) return { ok: false, error: FILE_ERRORS.notKundli };
   if (data.version !== FILE_VERSION) return { ok: false, error: FILE_ERRORS.version };
   const history = data.history
     .filter((h) => h && isDay(h.date) && h.answers && typeof h.answers === 'object')
@@ -102,14 +105,14 @@ export function buildKundliFile(history, answers, now = new Date()) {
   return JSON.stringify({ format: FILE_FORMAT, version: FILE_VERSION, savedOn: today, history: all }, null, 1);
 }
 
-export const fileNameFor = (now = new Date()) => `solahana-financial-kundli-${dayOf(now)}.json`;
+export const fileNameFor = (now = new Date()) => `solahana-financial-health-checkup-${dayOf(now)}.json`;
 
 export const FILE_ERRORS = Object.freeze({
   empty: 'This file is empty.',
-  tooBig: 'This file is too large to be a Financial Kundli file.',
-  notKundli: 'This is not a Solahana Financial Kundli file. Please choose the file you saved from your report.',
-  version: 'This Financial Kundli file was made by a different version and cannot be opened here.',
-  noEntries: 'This Financial Kundli file has no saved Kundli in it.',
+  tooBig: 'This file is too large to be a Financial Health Check-up file.',
+  notKundli: 'This is not a Solahana Financial Health Check-up file. Please choose the file you saved from your report.',
+  version: 'This Financial Health Check-up file was made by a different version and cannot be opened here.',
+  noEntries: 'This Financial Health Check-up file has no saved check-up in it.',
 });
 
 /** The figures compared over time, recalculated from one Kundli's answers. Unknown figures are null, never 0. */

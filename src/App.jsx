@@ -143,7 +143,9 @@ function AppContent() {
           <Route path="/calculators/fd" element={<FdCalculator />} />
           <Route path="/calculators/inflation" element={<InflationCalculator />} />
           <Route path="/calculators/life" element={<LifeCalculator />} />
-          <Route path="/financial-kundli" element={<FinancialKundliPage />} />
+          <Route path="/financial-health-checkup" element={<FinancialKundliPage />} />
+          {/* The page's earlier address keeps working */}
+          <Route path="/financial-kundli" element={<Navigate to="/financial-health-checkup" replace />} />
 
           {/* Financial Blog CMS Routes */}
           <Route path="/blogs" element={<BlogsLandingPage />} />

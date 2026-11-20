@@ -77,7 +77,7 @@ export function ProgressCharts({ series }) {
       <div className="grid gap-x-8 lg:grid-cols-2">
         <LineChart
           title={GROWTH.scoreTrend}
-          xLabel="Kundli date"
+          xLabel="Check-up date"
           xFormat={fmt}
           xs={xs}
           yTop={100}
@@ -90,7 +90,7 @@ export function ProgressCharts({ series }) {
         {anyMoney && (
           <LineChart
             title={GROWTH.moneyTrend}
-            xLabel="Kundli date"
+            xLabel="Check-up date"
             xFormat={fmt}
             xs={xs}
             height={230}
