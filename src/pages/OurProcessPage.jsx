@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
   ArrowRight, Play, Users, BarChart3, ShieldCheck, Target, FileText, Settings, Cog, Search, Lightbulb,
-  BookOpen, Scale, CircleCheck, CirclePlus, ChevronRight,
+  BookOpen, Scale, CircleCheck, CirclePlus,
 } from 'lucide-react';
 import { openConsultation } from '../data/whoWeServe';
 
@@ -228,13 +228,6 @@ function Journey() {
                   <p className="mt-1 text-[13.5px] leading-relaxed text-[#475569]">{s.what}</p>
                 </div>
               </div>
-
-              {/* arrow to the next step */}
-              {i < STEPS.length - 1 && (
-                <span aria-hidden="true" className="absolute -right-3 top-[232px] z-10 hidden h-6 w-6 items-center justify-center text-[#C9922E] xl:flex">
-                  <ChevronRight className="h-6 w-6" strokeWidth={2.4} />
-                </span>
-              )}
             </motion.li>
           ))}
         </ol>
