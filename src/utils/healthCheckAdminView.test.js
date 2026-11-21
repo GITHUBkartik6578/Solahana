@@ -13,7 +13,8 @@ import {
   isCheckupLead,
   scoreText,
 } from './healthCheckAdminView';
-import { LEGAL_PAGES } from '../data/legalPages';
+import { CONTACT_EMAIL, LEGAL_PAGES } from '../data/legalPages';
+import { CONSENT_TEXTS, RETENTION_MONTHS, START_CONSENT_VERSION } from './financialHealthCheck';
 
 const checkup = (over = {}) => ({
   _id: 'a1', fullName: 'Asha Rao', phone: '9876543210', status: 'completed', schemaVersion: 2,
@@ -130,8 +131,44 @@ describe('privacy policy section', () => {
     const i = sections.findIndex((s) => s.heading === 'Information Collection');
     expect(sections[i + 1].heading).toBe('Financial Health Check-up');
     expect(sections[i + 1].text).toBe(
-      'You can complete the Check-up without sharing contact details; your answers are calculated in your browser and are not sent to us. If you request a callback, we store your name, mobile number, your score summary (category points, total and band), and a record of your consent, for up to 24 months, then delete them. We do not store the income, expense, savings or cover amounts you enter. You can ask us to delete your details earlier through the Contact page.'
+      'To start the Financial Health Check-up, you give your name, mobile number and email address and tick a consent box. We use these details so that a Solahana planner can contact you by phone, WhatsApp or email about your Check-up. We store them, with a record of your consent, for up to 24 months and then delete them automatically. The financial answers you enter (such as your income, spending, savings, what you own and owe, your goals, your retirement plans and your insurance cover) are calculated in your browser. They are not sent to us and we do not store them. If you also ask for a callback after you see your result, we additionally store your score summary (category points, total and band). If you save your Check-up as a file, the file stays only on your own device. You can ask us to delete your details earlier through the Contact page or at online@solahana.com.'
     );
     expect(sections.map((s) => s.heading)).toEqual(['Information Collection', 'Financial Health Check-up', 'Data Protection & Security', 'Data Sharing', 'Your Rights']);
+  });
+});
+
+describe('the privacy policy matches what the Financial Health Check-up really does', () => {
+  const policy = LEGAL_PAGES.privacy.sections.find((s) => s.heading === 'Financial Health Check-up').text;
+  const consent = CONSENT_TEXTS[START_CONSENT_VERSION];
+
+  it('says the contact details are required, not optional (the old "without sharing contact details" line is gone)', () => {
+    expect(policy).not.toMatch(/without sharing contact details/i);
+    expect(policy).toMatch(/To start the Financial Health Check-up, you give your name, mobile number and email address/);
+  });
+  it('names every contact channel and every field that the start consent names', () => {
+    ['phone', 'WhatsApp', 'email'].forEach((word) => {
+      expect(consent, `consent: ${word}`).toContain(word);
+      expect(policy, `policy: ${word}`).toContain(word);
+    });
+    ['name', 'mobile number', 'email address'].forEach((word) => {
+      expect(consent, `consent: ${word}`).toContain(word);
+      expect(policy, `policy: ${word}`).toContain(word);
+    });
+  });
+  it('uses the same retention period as the code (and as the consent wording)', () => {
+    expect(policy).toContain(`${RETENTION_MONTHS} months`);
+    expect(consent).toContain(`${RETENTION_MONTHS} months`);
+  });
+  it('keeps the promise that the financial answers never reach Solahana, and says where a saved file stays', () => {
+    expect(policy).toMatch(/calculated in your browser\. They are not sent to us and we do not store them/);
+    expect(policy).toMatch(/file stays only on your own device/);
+  });
+  it('says how to get the details deleted earlier, with the real contact address', () => {
+    expect(policy).toContain('Contact page');
+    expect(policy).toContain(CONTACT_EMAIL);
+  });
+  it('the consent text links to a policy section that exists', () => {
+    expect(consent).toContain('Privacy Policy');
+    expect(LEGAL_PAGES.privacy.path).toBe('/privacy-policy');
   });
 });
