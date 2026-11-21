@@ -362,9 +362,10 @@ function FamilyAndProcessLive() {
         </motion.div>
 
         <motion.div {...fade} className="@container relative isolate overflow-hidden rounded-xl bg-[#0A1836] shadow-[0_16px_40px_rgba(15,31,69,0.28)]">
-          {/* founder portrait, bottom-right, fading into the navy */}
+          {/* founder portrait, bottom-right, fading into the navy. Its height is the card's height, so the head is never
+              cut off at the top (before, its height followed the card's WIDTH and could be taller than the card). */}
           <div
-            className="absolute bottom-0 right-0 -z-10 hidden w-[42%] sm:block"
+            className="absolute bottom-0 right-0 -z-10 hidden h-full max-w-[44%] sm:block"
             style={{
               aspectRatio: '726 / 708',
               WebkitMaskImage: 'linear-gradient(to right, transparent, black 16%), linear-gradient(to bottom, transparent, black 8%)',
@@ -384,8 +385,19 @@ function FamilyAndProcessLive() {
                 “My role is not to add more products to your financial life. It is to bring <span className="text-[#F3C95F]">clarity</span> to <span className="text-[#F3C95F]">the decisions</span> that matter.”
               </blockquote>
               <span className="mt-3 block h-px w-20 bg-[#E2B24E]/60" />
-              <p style={{ ...serif, fontSize: 'clamp(17px, 3cqw, 21px)' }} className="mt-4 font-semibold text-white">Amit R. Pandey, CWM<sup className="text-[0.55em] leading-none">®</sup></p>
-              <p style={{ fontSize: 'clamp(10.5px, 1.9cqw, 13px)' }} className="mt-1 text-white/90">MBA <span className="mx-1 text-white/60">|</span> Ex-Banker <span className="mx-1 text-white/60">|</span> 25+ Years in Financial Services</p>
+              <div className="mt-4 flex items-center gap-3.5 sm:mt-0 sm:block">
+                <img
+                  src={founderPhoto}
+                  alt="Amit R. Pandey, Chartered Wealth Manager"
+                  loading="lazy"
+                  draggable="false"
+                  className="h-[84px] w-[84px] shrink-0 rounded-full object-cover object-[60%_8%] ring-2 ring-[#E2B24E]/70 sm:hidden"
+                />
+                <div className="min-w-0">
+                  <p style={{ ...serif, fontSize: 'clamp(17px, 3cqw, 21px)' }} className="font-semibold text-white sm:mt-4">Amit R. Pandey, CWM<sup className="text-[0.55em] leading-none">®</sup></p>
+                  <p style={{ fontSize: 'clamp(10.5px, 1.9cqw, 13px)' }} className="mt-1 text-white/90">MBA <span className="mx-1 text-white/60">|</span> Ex-Banker <span className="mx-1 text-white/60">|</span> 25+ Years in Financial Services</p>
+                </div>
+              </div>
             </div>
             <button
               type="button"
