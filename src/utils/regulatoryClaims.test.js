@@ -241,13 +241,35 @@ describe('absolute safety, security and return promises are not used', () => {
 describe('the three live issues from the Stage 1 review stay fixed', () => {
   const sha = (file) => createHash('sha256').update(readFileSync(`${root}${file}`)).digest('hex');
 
-  it('the bonds hero no longer uses the baked-text banner picture (the original file is kept, unreferenced)', () => {
+  it('the bonds hero uses the new banner picture; its baked-in text is the approved live text, and the old baked-text banner stays unreferenced', () => {
     const invest = read(`${root}src/data/investPages.js`);
     const bonds = invest.slice(invest.indexOf('export const BONDS_PAGE'), invest.indexOf('export const', invest.indexOf('export const BONDS_PAGE') + 10));
+    // the old banner (reviewed and retired) is never used again and its file is kept
     expect(bonds).not.toMatch(/banner:\s*\{[^}]*file:\s*'bonds-banner'/);
     expect(invest).not.toContain("file: 'bonds-banner'");
     expect(existsSync(`${root}src/assets/planning/bonds-banner.webp`)).toBe(true); // originals are never deleted
+    // the new banner: this file, pinned by hash so a different picture (with different baked-in words) needs a new review
+    expect(bonds).toMatch(/banner:\s*\{[^}]*file:\s*'bonds-hero-banner'/);
+    expect(sha('src/assets/planning/bonds-hero-banner.webp')).toBe('8866e39998aca55e42bcb52faa65f1324a54c88cee484e36e12155982c193541');
+    // the words drawn inside the picture are exactly the live text (which phones show), including the risk sentence
+    expect(bonds).toContain("eyebrow: 'Bonds, NCDs & Fixed Income'");
+    expect(bonds).toContain("titleGold: ['Fixed Income', 'Architecture.']");
     expect(bonds).toContain("titleWhite: ['Understanding Yields,', 'Risks and Stability.']");
+    expect(bonds).toContain('Credit, interest-rate and liquidity risks apply.');
+    expect(bonds).toContain("primaryCta: 'Explore Fixed Income Yields'");
+    expect(bonds).toContain("label: 'High-Yield Corporate & Tax-Free Bond Allocation'");
+    expect(invest).toContain("label: '100% Client-Aligned Advisory (Zero-Fee Diagnostics)'");
+    expect(invest).toContain("label: 'Seamless Execution via Regulated Institutional Partners'");
+    // the two click areas lie inside the picture
+    const box = (name) => {
+      const m = bonds.match(new RegExp(`${name}: \\{ left: '([\\d.]+)%', top: '([\\d.]+)%', width: '([\\d.]+)%', height: '([\\d.]+)%' \\}`));
+      expect(m, name).not.toBeNull();
+      const [l, tp, w, h] = m.slice(1).map(Number);
+      expect(l + w).toBeLessThanOrEqual(100);
+      expect(tp + h).toBeLessThanOrEqual(100);
+    };
+    box('primary');
+    box('secondary');
   });
 
   it('the sign-in dialog makes no encryption or security-level claim', () => {

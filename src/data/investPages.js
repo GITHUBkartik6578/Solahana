@@ -246,6 +246,15 @@ export const BONDS_PAGE = {
   id: 'bonds',
   heroAspect: 785 / 745,
   heroClear: true,
+  // Tablets and desktops show this full banner picture; phones keep the live-text hero below. The text inside the picture is the same as the
+  // live text of this page (eyebrow, title, paragraph, buttons and the three trust lines), so if that text changes the picture must be made again.
+  banner: {
+    file: 'bonds-hero-banner',
+    alt: 'Bonds, NCDs and Fixed Income. Fixed Income Architecture. Understanding Yields, Risks and Stability.',
+    ratio: 1600 / 700,
+    primary: { left: '2.25%', top: '68.29%', width: '17.75%', height: '8.29%' },
+    secondary: { left: '20.88%', top: '68.14%', width: '17.38%', height: '8.43%' },
+  },
   art: 'bonds',
   eyebrow: 'Bonds, NCDs & Fixed Income',
   titleGold: ['Fixed Income', 'Architecture.'],
